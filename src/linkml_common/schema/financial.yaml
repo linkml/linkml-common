@@ -1,0 +1,45 @@
+id: https://w3id.org/linkml-common/financial
+name: linkml-common-financial
+title: linkml-common-financial
+description: |-
+  Common Data Model Elements
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  fhir: http://hl7.org/fhir/
+  fibo: https://spec.edmcouncil.org/fibo/ontology/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - quantities
+
+classes:
+
+  MoneyQuantity:
+    description: >-
+      A quantity of money
+    class_uri: fhir:MoneyQuantity
+    is_a: Quantity
+    attributes:
+      value:
+        range: float
+        description: The value of the quantity
+      unit:
+        role: currency
+        range: CurrencyConcept
+        description: The currency of the quantity
+
+  CurrencyConcept:
+    description: >-
+      A currency
+    is_a: Concept
+

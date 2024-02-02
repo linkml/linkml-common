@@ -1,0 +1,1655 @@
+@prefix PATO: <http://purl.obolibrary.org/obo/PATO_> .
+@prefix biolink: <https://w3id.org/biolink/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix linkml_common: <https://w3id.org/linkml-common/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+linkml_common:EnvironmentalProcess a owl:Class ;
+    rdfs:label "EnvironmentalProcess" ;
+    rdfs:subClassOf linkml:ClassDefinition ;
+    skos:inScheme linkml_common:environmental ;
+    skos:note "TODO" .
+
+linkml_common:Relationship a owl:Class ;
+    rdfs:label "Relationship" ;
+    rdfs:subClassOf linkml:ClassDefinition ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:UnitConversionOperation a owl:Class ;
+    rdfs:label "UnitConversionOperation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Quantity ;
+            owl:onProperty linkml_common:inputs ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:inputs ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:outputs ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Quantity ;
+            owl:onProperty linkml_common:outputs ],
+        linkml_common:MathematicalOperation ;
+    skos:definition "A unit conversion operation" ;
+    skos:inScheme linkml_common:quantities .
+
+linkml_common:object a owl:ObjectProperty ;
+    rdfs:label "object" ;
+    rdfs:range linkml_common:Any ;
+    skos:definition "The object of a relationship" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:subject a owl:ObjectProperty ;
+    rdfs:label "subject" ;
+    rdfs:range linkml_common:Any ;
+    skos:definition "The subject of a relationship" ;
+    skos:inScheme linkml_common:core .
+
+linkml:linkml-common a owl:Ontology ;
+    rdfs:label "linkml-common" ;
+    dcterms:license "MIT" ;
+    dcterms:title "linkml-common" ;
+    rdfs:seeAlso <https://linkml.github.io/linkml-common> ;
+    skos:definition "Common Data Model Elements" .
+
+linkml_common:HealthcareProvider a owl:Class ;
+    rdfs:label "HealthcareProvider" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:speciality ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Concept ;
+            owl:onProperty linkml_common:speciality ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:HealthcareSite ;
+            owl:onProperty linkml_common:care_site ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:care_site ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:speciality ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:care_site ],
+        linkml_common:HealthcareRole ;
+    skos:inScheme linkml_common:healthcare .
+
+linkml_common:Location a owl:Class ;
+    rdfs:label "Location" ;
+    rdfs:subClassOf linkml:ClassDefinition ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:PointLocation a owl:Class ;
+    rdfs:label "PointLocation" ;
+    rdfs:subClassOf linkml_common:Location ;
+    skos:inScheme linkml_common:core .
+
+PATO:0001421 a owl:Class ;
+    rdfs:label "ALIVE" ;
+    rdfs:subClassOf linkml_common:PersonStatus,
+        linkml:PermissibleValue .
+
+PATO:0001422 a owl:Class ;
+    rdfs:label "DEAD" ;
+    rdfs:subClassOf linkml_common:PersonStatus,
+        linkml:PermissibleValue .
+
+linkml_common:BasicFoodType a owl:Class ;
+    rdfs:label "BasicFoodType" ;
+    rdfs:subClassOf linkml_common:FoodTypeConcept ;
+    skos:inScheme linkml_common:foods .
+
+linkml_common:ClinicalCohortEnrollment a owl:Class ;
+    rdfs:label "ClinicalCohortEnrollment" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:cohort ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Patient ;
+            owl:onProperty linkml_common:patient ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:ClinicalCohort ;
+            owl:onProperty linkml_common:cohort ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:patient ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:patient ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:cohort ],
+        linkml_common:Event ;
+    skos:exactMatch <http://example.org/omop/COHORT> ;
+    skos:inScheme linkml_common:clinicalresearch .
+
+linkml_common:Collection a owl:Class ;
+    rdfs:label "Collection" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Entity ;
+            owl:onProperty linkml_common:members ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:members ],
+        linkml_common:Intangible ;
+    skos:definition "A group of things. The collection may be heterogeneous or homogeneous." ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:CompositeFoodType a owl:Class ;
+    rdfs:label "CompositeFoodType" ;
+    rdfs:subClassOf linkml_common:FoodTypeConcept ;
+    skos:inScheme linkml_common:foods .
+
+linkml_common:DataGenerationFromSample a owl:Class ;
+    rdfs:label "DataGenerationFromSample" ;
+    rdfs:subClassOf linkml_common:InvestigativeProcess ;
+    skos:inScheme linkml_common:investigations .
+
+linkml_common:DataStructure a owl:Class ;
+    rdfs:label "DataStructure" ;
+    rdfs:subClassOf linkml_common:Intangible ;
+    skos:inScheme linkml_common:computational .
+
+linkml_common:EngineeringMaterialProcessing a owl:Class ;
+    rdfs:label "EngineeringMaterialProcessing" ;
+    rdfs:subClassOf linkml_common:MaterialProcessing ;
+    skos:inScheme linkml_common:engineering .
+
+linkml_common:FoodRecipe a owl:Class ;
+    rdfs:label "FoodRecipe" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:FoodProcessing ;
+            owl:onProperty linkml_common:steps ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:FoodIngredient ;
+            owl:onProperty linkml_common:ingredients ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:ingredients ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:steps ],
+        linkml_common:Procedure ;
+    skos:inScheme linkml_common:foods .
+
+linkml_common:GeoPointLocation a owl:Class ;
+    rdfs:label "GeoPointLocation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:altitude ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:longitude ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:longitude ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:decimal ;
+            owl:onProperty linkml_common:latitude ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:altitude ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:decimal ;
+            owl:onProperty linkml_common:longitude ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:latitude ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:decimal ;
+            owl:onProperty linkml_common:altitude ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:latitude ],
+        linkml_common:PointLocation ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:HealthcareConditionOccurrence a owl:Class ;
+    rdfs:label "HealthcareConditionOccurrence" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Patient ;
+            owl:onProperty linkml_common:patient ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:patient ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:observed_during ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:HealthcareEncounter ;
+            owl:onProperty linkml_common:observed_during ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:observed_during ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:patient ],
+        linkml_common:Event ;
+    skos:exactMatch <http://example.org/omop/CONDITION_OCCURRENCE> ;
+    skos:inScheme linkml_common:healthcare .
+
+<https://w3id.org/linkml-common/HealthcareEncounterClassification#Ambulance+Visit> a owl:Class ;
+    rdfs:label "Ambulance Visit" ;
+    rdfs:subClassOf linkml_common:HealthcareEncounterClassification,
+        linkml:PermissibleValue .
+
+<https://w3id.org/linkml-common/HealthcareEncounterClassification#Case+Management+Visit> a owl:Class ;
+    rdfs:label "Case Management Visit" ;
+    rdfs:subClassOf linkml_common:HealthcareEncounterClassification,
+        linkml:PermissibleValue .
+
+<https://w3id.org/linkml-common/HealthcareEncounterClassification#Emergency+Room+Visit> a owl:Class ;
+    rdfs:label "Emergency Room Visit" ;
+    rdfs:subClassOf linkml_common:HealthcareEncounterClassification,
+        linkml:PermissibleValue .
+
+<https://w3id.org/linkml-common/HealthcareEncounterClassification#Emergency+Room+and+Inpatient+Visit> a owl:Class ;
+    rdfs:label "Emergency Room and Inpatient Visit" ;
+    rdfs:subClassOf linkml_common:HealthcareEncounterClassification,
+        linkml:PermissibleValue .
+
+<https://w3id.org/linkml-common/HealthcareEncounterClassification#Home+Visit> a owl:Class ;
+    rdfs:label "Home Visit" ;
+    rdfs:subClassOf linkml_common:HealthcareEncounterClassification,
+        linkml:PermissibleValue .
+
+<https://w3id.org/linkml-common/HealthcareEncounterClassification#Inpatient+Visit> a owl:Class ;
+    rdfs:label "Inpatient Visit" ;
+    rdfs:subClassOf linkml_common:HealthcareEncounterClassification,
+        linkml:PermissibleValue .
+
+<https://w3id.org/linkml-common/HealthcareEncounterClassification#Laboratory+Visit> a owl:Class ;
+    rdfs:label "Laboratory Visit" ;
+    rdfs:subClassOf linkml_common:HealthcareEncounterClassification,
+        linkml:PermissibleValue .
+
+<https://w3id.org/linkml-common/HealthcareEncounterClassification#Non-hospital+institution+Visit> a owl:Class ;
+    rdfs:label "Non-hospital institution Visit" ;
+    rdfs:subClassOf linkml_common:HealthcareEncounterClassification,
+        linkml:PermissibleValue .
+
+<https://w3id.org/linkml-common/HealthcareEncounterClassification#Outpatient+Visit> a owl:Class ;
+    rdfs:label "Outpatient Visit" ;
+    rdfs:subClassOf linkml_common:HealthcareEncounterClassification,
+        linkml:PermissibleValue .
+
+<https://w3id.org/linkml-common/HealthcareEncounterClassification#Pharmacy+Visit> a owl:Class ;
+    rdfs:label "Pharmacy Visit" ;
+    rdfs:subClassOf linkml_common:HealthcareEncounterClassification,
+        linkml:PermissibleValue .
+
+<https://w3id.org/linkml-common/HealthcareEncounterClassification#Telehealth+Visit> a owl:Class ;
+    rdfs:label "Telehealth Visit" ;
+    rdfs:subClassOf linkml_common:HealthcareEncounterClassification,
+        linkml:PermissibleValue .
+
+linkml_common:HealthcareOrganization a owl:Class ;
+    rdfs:label "HealthcareOrganization" ;
+    rdfs:subClassOf linkml_common:Organization ;
+    skos:inScheme linkml_common:healthcare .
+
+linkml_common:HealthcareRole a owl:Class ;
+    rdfs:label "HealthcareRole" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Person ;
+            owl:onProperty linkml_common:is_person ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:is_person ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:is_person ],
+        linkml:ClassDefinition ;
+    skos:inScheme linkml_common:healthcare .
+
+linkml_common:InformationEntity a owl:Class ;
+    rdfs:label "InformationEntity" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:describes ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:describes ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Any ;
+            owl:onProperty linkml_common:describes ],
+        linkml_common:NamedThing ;
+    skos:definition "An entity that describes some information" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:Landform a owl:Class ;
+    rdfs:label "Landform" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty linkml_common:geolocation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom owl:Thing ;
+            owl:onProperty linkml_common:geolocation ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:geolocation ],
+        linkml_common:Place ;
+    skos:definition "A natural feature of the solid surface of the Earth or other planetary body" ;
+    skos:exactMatch <http://hl7.org/fhir/Location>,
+        <http://purl.obolibrary.org/obo/ENVO_00000083> ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:LifeEvent a owl:Class ;
+    rdfs:label "LifeEvent" ;
+    rdfs:subClassOf linkml_common:Event ;
+    skos:inScheme linkml_common:social .
+
+linkml_common:MaterialCollection a owl:Class ;
+    rdfs:label "MaterialCollection" ;
+    rdfs:subClassOf linkml_common:PlannedProcess ;
+    skos:inScheme linkml_common:plannedprocess .
+
+linkml_common:Measurement a owl:Class ;
+    rdfs:label "Measurement" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Quantity ;
+            owl:onProperty linkml_common:quantity_measured ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Variable ;
+            owl:onProperty linkml_common:variable_measured ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:variable_measured ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:variable_measured ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:quantity_measured ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:quantity_measured ],
+        linkml_common:Observation ;
+    skos:inScheme linkml_common:meaurements .
+
+linkml_common:MoneyQuantity a owl:Class ;
+    rdfs:label "MoneyQuantity" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:unit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:unit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty linkml_common:value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:CurrencyConcept ;
+            owl:onProperty linkml_common:unit ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:value ],
+        linkml_common:Quantity ;
+    skos:definition "A quantity of money" ;
+    skos:exactMatch <http://hl7.org/fhir/MoneyQuantity> ;
+    skos:inScheme linkml_common:financial .
+
+<https://w3id.org/linkml-common/PersonStatus#UNKNOWN> a owl:Class ;
+    rdfs:label "UNKNOWN" ;
+    rdfs:subClassOf linkml_common:PersonStatus,
+        linkml:PermissibleValue .
+
+linkml_common:Publication a owl:Class ;
+    rdfs:label "Publication" ;
+    rdfs:subClassOf linkml_common:NamedThing ;
+    skos:inScheme linkml_common:financial .
+
+linkml_common:QuantityRange a owl:Class ;
+    rdfs:label "QuantityRange" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Quantity ;
+            owl:onProperty linkml_common:upper_bound ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:lower_bound ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:lower_bound ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Quantity ;
+            owl:onProperty linkml_common:lower_bound ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:upper_bound ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:upper_bound ],
+        linkml_common:Intangible ;
+    skos:definition "A quantity range is a property that can be measured or counted" ;
+    skos:exactMatch <http://hl7.org/fhir/Range> ;
+    skos:inScheme linkml_common:quantities .
+
+linkml_common:Ratio a owl:Class ;
+    rdfs:label "Ratio" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:numerator ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:denominator ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:numerator ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Quantity ;
+            owl:onProperty linkml_common:numerator ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Quantity ;
+            owl:onProperty linkml_common:denominator ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:denominator ],
+        linkml_common:Quantity ;
+    skos:definition "A tuple of two quantities" ;
+    skos:exactMatch <http://hl7.org/fhir/Ratio> ;
+    skos:inScheme linkml_common:quantities .
+
+linkml_common:RawMaterial a owl:Class ;
+    rdfs:label "RawMaterial" ;
+    rdfs:subClassOf linkml_common:NamedThing ;
+    skos:inScheme linkml_common:engineering .
+
+linkml_common:SampleCollectionProcess a owl:Class ;
+    rdfs:label "SampleCollectionProcess" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:material_collected ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:material_collected ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:collected_from ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:SampleMaterial ;
+            owl:onProperty linkml_common:material_collected ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:collected_from ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:NamedThing ;
+            owl:onProperty linkml_common:collected_from ],
+        linkml_common:InvestigativeProcess ;
+    skos:exactMatch <nmdcschema:CollectingBiosamplesFromSite> ;
+    skos:inScheme linkml_common:investigations .
+
+linkml_common:SampleProcessing a owl:Class ;
+    rdfs:label "SampleProcessing" ;
+    rdfs:subClassOf linkml_common:MaterialProcessing ;
+    skos:inScheme linkml_common:investigations .
+
+linkml_common:SimpleQuantity a owl:Class ;
+    rdfs:label "SimpleQuantity" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:unit ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:float ;
+            owl:onProperty linkml_common:value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:UnitConcept ;
+            owl:onProperty linkml_common:unit ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:unit ],
+        linkml_common:Quantity ;
+    skos:definition "A quantity is a property that can be measured or counted" ;
+    skos:exactMatch <http://hl7.org/fhir/SimpleQuantity> ;
+    skos:inScheme linkml_common:quantities .
+
+linkml_common:XProcess a owl:Class ;
+    rdfs:label "XProcess" ;
+    rdfs:subClassOf linkml_common:Entity ;
+    skos:definition "A series of actions or steps taken in order to achieve a particular end" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:allowed_units a owl:ObjectProperty ;
+    rdfs:label "allowed_units" ;
+    skos:definition "The units that are allowed for this variable" ;
+    skos:inScheme linkml_common:meaurements .
+
+linkml_common:immediate_preceding_steps a owl:ObjectProperty ;
+    rdfs:label "immediate_preceding_steps" ;
+    skos:definition "The steps that immediately precede this step" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:ingredients a owl:ObjectProperty ;
+    rdfs:label "ingredients" ;
+    skos:inScheme linkml_common:foods .
+
+linkml_common:members a owl:ObjectProperty ;
+    rdfs:label "members" ;
+    skos:definition "The members of the collection" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:ontology_types a owl:ObjectProperty ;
+    rdfs:label "ontology_types" ;
+    rdfs:range linkml_common:Concept ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:parts a owl:ObjectProperty ;
+    rdfs:label "parts" ;
+    skos:definition "The parts of the process" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:steps a owl:ObjectProperty ;
+    rdfs:label "steps" ;
+    skos:inScheme linkml_common:foods .
+
+linkml_common:ClinicalCohort a owl:Class ;
+    rdfs:label "ClinicalCohort" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:definition ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:ClinicalCohortDefinition ;
+            owl:onProperty linkml_common:definition ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:definition ],
+        linkml_common:NamedThing ;
+    skos:inScheme linkml_common:clinicalresearch .
+
+linkml_common:ClinicalCohortDefinition a owl:Class ;
+    rdfs:label "ClinicalCohortDefinition" ;
+    rdfs:subClassOf linkml_common:NamedThing ;
+    skos:exactMatch <http://example.org/omop/COHORT_DEFINITION> ;
+    skos:inScheme linkml_common:clinicalresearch .
+
+linkml_common:CurrencyConcept a owl:Class ;
+    rdfs:label "CurrencyConcept" ;
+    rdfs:subClassOf linkml_common:Concept ;
+    skos:definition "A currency" ;
+    skos:inScheme linkml_common:financial .
+
+linkml_common:EngineeringProcess a owl:Class ;
+    rdfs:label "EngineeringProcess" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:part_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:part_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:follows_procedure ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:EngineeringSpecification ;
+            owl:onProperty linkml_common:follows_procedure ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:follows_procedure ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:EngineeringProcess ;
+            owl:onProperty linkml_common:part_of ],
+        linkml_common:Event ;
+    skos:inScheme linkml_common:engineering .
+
+linkml_common:EngineeringSpecification a owl:Class ;
+    rdfs:label "EngineeringSpecification" ;
+    rdfs:subClassOf linkml_common:Procedure ;
+    skos:inScheme linkml_common:engineering .
+
+linkml_common:FoodIngredient a owl:Class ;
+    rdfs:label "FoodIngredient" ;
+    rdfs:subClassOf linkml_common:Quantity ;
+    skos:inScheme linkml_common:foods .
+
+linkml_common:FoodProcessing a owl:Class ;
+    rdfs:label "FoodProcessing" ;
+    rdfs:subClassOf linkml_common:MaterialProcessing ;
+    skos:inScheme linkml_common:foods .
+
+linkml_common:HealthcareEncounter a owl:Class ;
+    rdfs:label "HealthcareEncounter" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:HealthcareProvider ;
+            owl:onProperty linkml_common:provider ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:HealthcareEncounterClassification ;
+            owl:onProperty linkml_common:subtype ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:provider ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:patient ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:provider ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Patient ;
+            owl:onProperty linkml_common:patient ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:subtype ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:subtype ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:patient ],
+        linkml_common:Event ;
+    skos:exactMatch <http://example.org/omop/VISIT_OCCURRENCE> ;
+    skos:inScheme linkml_common:healthcare .
+
+linkml_common:HealthcareSite a owl:Class ;
+    rdfs:label "HealthcareSite" ;
+    rdfs:subClassOf linkml_common:Place ;
+    skos:exactMatch <http://example.org/omop/CARE_SITE> ;
+    skos:inScheme linkml_common:healthcare .
+
+linkml_common:Investigation a owl:Class ;
+    rdfs:label "Investigation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:objectives ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty linkml_common:objectives ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:objectives ],
+        linkml_common:NamedThing ;
+    skos:inScheme linkml_common:investigations .
+
+linkml_common:InvestigativeProtocol a owl:Class ;
+    rdfs:label "InvestigativeProtocol" ;
+    rdfs:subClassOf linkml_common:Procedure ;
+    skos:inScheme linkml_common:investigations .
+
+linkml_common:MathematicalOperation a owl:Class ;
+    rdfs:label "MathematicalOperation" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:MathematicalOperation ;
+            owl:onProperty linkml_common:immediate_preceding_steps ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:MathematicalOperation ;
+            owl:onProperty linkml_common:parts ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:parts ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:immediate_preceding_steps ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Any ;
+            owl:onProperty linkml_common:inputs ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:inputs ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Any ;
+            owl:onProperty linkml_common:outputs ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:outputs ],
+        linkml:ClassDefinition ;
+    skos:definition "Application of a mathematical operation to one or more inputs to produce one or more outputs" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:Observation a owl:Class ;
+    rdfs:label "Observation" ;
+    rdfs:subClassOf linkml_common:Entity ;
+    skos:definition "A statement about the state of something" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:Organization a owl:Class ;
+    rdfs:label "Organization" ;
+    rdfs:subClassOf linkml_common:NamedThing ;
+    skos:definition "Represents an Organization" ;
+    skos:inScheme linkml_common:social .
+
+linkml_common:Patient a owl:Class ;
+    rdfs:label "Patient" ;
+    rdfs:subClassOf linkml_common:HealthcareRole ;
+    skos:inScheme linkml_common:healthcare .
+
+linkml_common:Person a owl:Class ;
+    rdfs:label "Person" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:birth_date ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:age_in_years ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:primary_email ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:PersonStatus ;
+            owl:onProperty linkml_common:vital_status ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:birth_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty linkml_common:age_in_years ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:primary_email ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty linkml_common:birth_date ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^\\S+@[\\S+\\.]+\\S+" ] ) ] ;
+            owl:onProperty linkml_common:primary_email ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:age_in_years ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:vital_status ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:vital_status ],
+        linkml_common:NamedThing ;
+    skos:definition "Represents a Person" ;
+    skos:inScheme linkml_common:social .
+
+linkml_common:PhysicalDevice a owl:Class ;
+    rdfs:label "PhysicalDevice" ;
+    rdfs:subClassOf linkml_common:NamedThing ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:SampleMaterial a owl:Class ;
+    rdfs:label "SampleMaterial" ;
+    rdfs:subClassOf linkml_common:NamedThing ;
+    skos:inScheme linkml_common:investigations .
+
+linkml_common:Variable a owl:Class ;
+    rdfs:label "Variable" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:allowed_units ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:UnitConcept ;
+            owl:onProperty linkml_common:allowed_units ],
+        linkml_common:Entity ;
+    skos:inScheme linkml_common:meaurements .
+
+linkml_common:address a owl:ObjectProperty ;
+    rdfs:label "address" ;
+    rdfs:range linkml_common:PostalAddress ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:age_in_years a owl:DatatypeProperty ;
+    rdfs:label "age_in_years" ;
+    rdfs:range xsd:integer ;
+    skos:definition "Number of years since birth" ;
+    skos:inScheme linkml_common:social .
+
+linkml_common:altitude a owl:DatatypeProperty ;
+    rdfs:label "altitude" ;
+    skos:definition "The altitude of the location" ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:birth_date a owl:DatatypeProperty ;
+    rdfs:label "birth_date" ;
+    rdfs:range xsd:date ;
+    skos:definition "Date on which a person is born" ;
+    skos:inScheme linkml_common:social .
+
+linkml_common:care_site a owl:ObjectProperty ;
+    rdfs:label "care_site" ;
+    skos:inScheme linkml_common:healthcare .
+
+linkml_common:city a owl:DatatypeProperty ;
+    rdfs:label "city" ;
+    skos:definition "The city" ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:cohort a owl:ObjectProperty ;
+    rdfs:label "cohort" ;
+    skos:inScheme linkml_common:clinicalresearch .
+
+linkml_common:collected_from a owl:ObjectProperty ;
+    rdfs:label "collected_from" ;
+    skos:inScheme linkml_common:investigations .
+
+linkml_common:country a owl:DatatypeProperty ;
+    rdfs:label "country" ;
+    skos:definition "The country" ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:date_value a owl:DatatypeProperty ;
+    rdfs:label "date_value" ;
+    rdfs:range xsd:date ;
+    skos:inScheme linkml_common:time .
+
+linkml_common:datetime_value a owl:DatatypeProperty ;
+    rdfs:label "datetime_value" ;
+    rdfs:range xsd:dateTime ;
+    skos:inScheme linkml_common:time .
+
+linkml_common:definition a owl:ObjectProperty ;
+    rdfs:label "definition" ;
+    skos:inScheme linkml_common:clinicalresearch .
+
+linkml_common:denominator a owl:ObjectProperty ;
+    rdfs:label "denominator" ;
+    skos:definition "The denominator of the ratio" ;
+    skos:inScheme linkml_common:quantities .
+
+linkml_common:describes a owl:ObjectProperty ;
+    rdfs:label "describes" ;
+    rdfs:range linkml_common:Any ;
+    skos:definition "The thing that is being described" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:ends_at a owl:ObjectProperty ;
+    rdfs:label "ends_at" ;
+    rdfs:range linkml_common:TimePoint ;
+    skos:inScheme linkml_common:time .
+
+linkml_common:id a owl:DatatypeProperty ;
+    rdfs:label "id" ;
+    rdfs:range xsd:anyURI ;
+    skos:definition "A unique identifier for a thing" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:is_person a owl:ObjectProperty ;
+    rdfs:label "is_person" ;
+    skos:inScheme linkml_common:healthcare .
+
+linkml_common:latitude a owl:DatatypeProperty ;
+    rdfs:label "latitude" ;
+    skos:definition "The latitude of the location" ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:longitude a owl:DatatypeProperty ;
+    rdfs:label "longitude" ;
+    skos:definition "The longitude of the location" ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:lower_bound a owl:ObjectProperty ;
+    rdfs:label "lower_bound" ;
+    skos:definition "The lower bound of the range" ;
+    skos:inScheme linkml_common:quantities .
+
+linkml_common:marker_event a owl:ObjectProperty ;
+    rdfs:label "marker_event" ;
+    rdfs:range linkml_common:Event ;
+    skos:inScheme linkml_common:time .
+
+linkml_common:material_collected a owl:ObjectProperty ;
+    rdfs:label "material_collected" ;
+    skos:inScheme linkml_common:investigations .
+
+linkml_common:name a owl:DatatypeProperty ;
+    rdfs:label "name" ;
+    skos:definition "A human-readable name for a thing" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:numerator a owl:ObjectProperty ;
+    rdfs:label "numerator" ;
+    skos:definition "The numerator of the ratio" ;
+    skos:inScheme linkml_common:quantities .
+
+linkml_common:objectives a owl:DatatypeProperty ;
+    rdfs:label "objectives" ;
+    skos:inScheme linkml_common:investigations .
+
+linkml_common:observed_during a owl:ObjectProperty ;
+    rdfs:label "observed_during" ;
+    skos:exactMatch <http://example.org/omop/vist_occurrence_id> ;
+    skos:inScheme linkml_common:healthcare .
+
+linkml_common:postal_code a owl:DatatypeProperty ;
+    rdfs:label "postal_code" ;
+    skos:definition "The postal code or zip code" ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:primary_email a owl:DatatypeProperty ;
+    rdfs:label "primary_email" ;
+    skos:definition "The main email address of a person" ;
+    skos:inScheme linkml_common:social .
+
+linkml_common:provider a owl:ObjectProperty ;
+    rdfs:label "provider" ;
+    skos:inScheme linkml_common:healthcare .
+
+linkml_common:quantity_measured a owl:ObjectProperty ;
+    rdfs:label "quantity_measured" ;
+    skos:definition "The quantity being measured" ;
+    skos:inScheme linkml_common:meaurements .
+
+linkml_common:speciality a owl:ObjectProperty ;
+    rdfs:label "speciality" ;
+    skos:inScheme linkml_common:healthcare .
+
+linkml_common:starts_at a owl:ObjectProperty ;
+    rdfs:label "starts_at" ;
+    rdfs:range linkml_common:TimePoint ;
+    skos:inScheme linkml_common:time .
+
+linkml_common:state a owl:DatatypeProperty ;
+    rdfs:label "state" ;
+    skos:definition "The state" ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:street_address a owl:DatatypeProperty ;
+    rdfs:label "street_address" ;
+    skos:definition "The street address" ;
+    skos:exactMatch <http://example.org/omop/address_1> ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:street_address_additional a owl:DatatypeProperty ;
+    rdfs:label "street_address_additional" ;
+    skos:exactMatch <http://example.org/omop/address_2> ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:time_value a owl:DatatypeProperty ;
+    rdfs:label "time_value" ;
+    rdfs:range xsd:time ;
+    skos:inScheme linkml_common:time .
+
+linkml_common:upper_bound a owl:ObjectProperty ;
+    rdfs:label "upper_bound" ;
+    skos:definition "The upper bound of the range" ;
+    skos:inScheme linkml_common:quantities .
+
+linkml_common:uses_physical_device a owl:ObjectProperty ;
+    rdfs:label "uses_physical_device" ;
+    skos:inScheme linkml_common:plannedprocess .
+
+linkml_common:variable_measured a owl:ObjectProperty ;
+    rdfs:label "variable_measured" ;
+    skos:definition "The variable being measured" ;
+    skos:inScheme linkml_common:meaurements .
+
+linkml_common:vital_status a owl:ObjectProperty ;
+    rdfs:label "vital_status" ;
+    rdfs:range linkml_common:PersonStatus ;
+    skos:definition "living or dead status" ;
+    skos:inScheme linkml_common:social .
+
+linkml_common:FoodTypeConcept a owl:Class ;
+    rdfs:label "FoodTypeConcept" ;
+    rdfs:subClassOf linkml_common:Concept ;
+    skos:inScheme linkml_common:foods .
+
+linkml_common:InvestigativeProcess a owl:Class ;
+    rdfs:label "InvestigativeProcess" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:part_of ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:InvestigativeProtocol ;
+            owl:onProperty linkml_common:follows_procedure ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Investigation ;
+            owl:onProperty linkml_common:part_of ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:follows_procedure ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:follows_procedure ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:part_of ],
+        linkml_common:PlannedProcess ;
+    skos:inScheme linkml_common:investigations .
+
+linkml_common:Place a owl:Class ;
+    rdfs:label "Place" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:address ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:PostalAddress ;
+            owl:onProperty linkml_common:address ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:address ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:geolocation ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:geolocation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:GeoPointLocation ;
+            owl:onProperty linkml_common:geolocation ],
+        linkml_common:NamedThing ;
+    skos:definition "Entities that have a somewhat fixed, physical extension." ;
+    skos:exactMatch schema1:Place ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:PostalAddress a owl:Class ;
+    rdfs:label "PostalAddress" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:state ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty linkml_common:country ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:street_address_additional ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty linkml_common:street_address_additional ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:street_address ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty linkml_common:postal_code ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:city ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:city ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty linkml_common:street_address ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:postal_code ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:country ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:street_address_additional ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:country ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:street_address ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty linkml_common:city ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:state ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:postal_code ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty linkml_common:state ],
+        linkml_common:Entity ;
+    skos:definition "Represents an Address" ;
+    skos:exactMatch <http://example.org/omop/CARE_SITE>,
+        schema1:PostalAddress ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:TimePoint a owl:Class ;
+    rdfs:label "TimePoint" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:time_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:marker_event ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:dateTime ;
+            owl:onProperty linkml_common:datetime_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:time_value ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Event ;
+            owl:onProperty linkml_common:marker_event ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty linkml_common:date_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:datetime_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:date_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:marker_event ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty linkml_common:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:time ;
+            owl:onProperty linkml_common:time_value ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:datetime_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:date_value ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:description ],
+        linkml:ClassDefinition ;
+    skos:inScheme linkml_common:time .
+
+linkml_common:UnitConcept a owl:Class ;
+    rdfs:label "UnitConcept" ;
+    rdfs:subClassOf linkml_common:Concept ;
+    skos:inScheme linkml_common:quantities .
+
+linkml_common:inputs a owl:ObjectProperty ;
+    rdfs:label "inputs" ;
+    skos:definition "The inputs to the operation" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:outputs a owl:ObjectProperty ;
+    rdfs:label "outputs" ;
+    skos:definition "The outputs of the operation" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:MaterialProcessing a owl:Class ;
+    rdfs:label "MaterialProcessing" ;
+    rdfs:subClassOf linkml_common:PlannedProcess ;
+    skos:inScheme linkml_common:plannedprocess .
+
+linkml_common:PersonStatus a owl:Class ;
+    rdfs:subClassOf linkml:EnumDefinition ;
+    owl:unionOf ( PATO:0001421 PATO:0001422 <https://w3id.org/linkml-common/PersonStatus#UNKNOWN> ) ;
+    linkml:permissible_values PATO:0001421,
+        PATO:0001422,
+        <https://w3id.org/linkml-common/PersonStatus#UNKNOWN> .
+
+linkml_common:PlannedProcess a owl:Class ;
+    rdfs:label "PlannedProcess" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Procedure ;
+            owl:onProperty linkml_common:follows_procedure ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:uses_physical_device ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:PhysicalDevice ;
+            owl:onProperty linkml_common:uses_physical_device ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:uses_physical_device ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:follows_procedure ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:follows_procedure ],
+        linkml_common:Event ;
+    skos:inScheme linkml_common:plannedprocess .
+
+linkml_common:Any a owl:Class ;
+    rdfs:label "Any" ;
+    rdfs:subClassOf linkml:ClassDefinition ;
+    skos:exactMatch linkml:Any ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:Intangible a owl:Class ;
+    rdfs:label "Intangible" ;
+    rdfs:subClassOf linkml_common:Entity ;
+    skos:definition "An entity that is not a physical object, process, or information" ;
+    skos:exactMatch schema1:Intangible ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:Procedure a owl:Class ;
+    rdfs:label "Procedure" ;
+    rdfs:subClassOf linkml_common:NamedThing ;
+    skos:definition "A canonical series of actions conducted in a certain order or manner" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:description a owl:DatatypeProperty ;
+    rdfs:label "description" ;
+    skos:definition "A human-readable description for a thing" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:geolocation a owl:ObjectProperty ;
+    rdfs:label "geolocation" ;
+    rdfs:range linkml_common:GeoPointLocation ;
+    skos:definition "The geolocation of the place" ;
+    skos:inScheme linkml_common:geography .
+
+linkml_common:part_of a owl:ObjectProperty .
+
+linkml_common:subtype a owl:DatatypeProperty ;
+    rdfs:label "subtype" ;
+    rdfs:range xsd:string ;
+    skos:definition "An enum with a more specific type" ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:unit a owl:ObjectProperty .
+
+linkml_common:value a owl:DatatypeProperty .
+
+linkml_common:Concept a owl:Class ;
+    rdfs:label "Concept" ;
+    rdfs:subClassOf linkml_common:NamedThing ;
+    skos:exactMatch <http://hl7.org/fhir/CodableConcept>,
+        biolink:OntologyClass ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:Entity a owl:Class ;
+    rdfs:label "Entity" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty linkml_common:type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:type ],
+        linkml:ClassDefinition ;
+    skos:definition "A physical, digital, conceptual, or other kind of thing with some common characteristics" ;
+    skos:exactMatch schema1:Thing ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:follows_procedure a owl:ObjectProperty .
+
+linkml_common:patient a owl:ObjectProperty .
+
+linkml_common:Event a owl:Class ;
+    rdfs:label "Event" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:starts_at ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:ends_at ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:ends_at ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:TimePoint ;
+            owl:onProperty linkml_common:ends_at ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:TimePoint ;
+            owl:onProperty linkml_common:starts_at ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:starts_at ],
+        linkml_common:NamedThing ;
+    skos:definition "A thing that happens" ;
+    skos:inScheme linkml_common:time .
+
+linkml_common:HealthcareEncounterClassification a owl:Class ;
+    rdfs:subClassOf linkml:EnumDefinition ;
+    owl:unionOf ( <https://w3id.org/linkml-common/HealthcareEncounterClassification#Inpatient+Visit> <https://w3id.org/linkml-common/HealthcareEncounterClassification#Emergency+Room+Visit> <https://w3id.org/linkml-common/HealthcareEncounterClassification#Emergency+Room+and+Inpatient+Visit> <https://w3id.org/linkml-common/HealthcareEncounterClassification#Non-hospital+institution+Visit> <https://w3id.org/linkml-common/HealthcareEncounterClassification#Outpatient+Visit> <https://w3id.org/linkml-common/HealthcareEncounterClassification#Home+Visit> <https://w3id.org/linkml-common/HealthcareEncounterClassification#Telehealth+Visit> <https://w3id.org/linkml-common/HealthcareEncounterClassification#Pharmacy+Visit> <https://w3id.org/linkml-common/HealthcareEncounterClassification#Laboratory+Visit> <https://w3id.org/linkml-common/HealthcareEncounterClassification#Ambulance+Visit> <https://w3id.org/linkml-common/HealthcareEncounterClassification#Case+Management+Visit> ) ;
+    linkml:permissible_values <https://w3id.org/linkml-common/HealthcareEncounterClassification#Ambulance+Visit>,
+        <https://w3id.org/linkml-common/HealthcareEncounterClassification#Case+Management+Visit>,
+        <https://w3id.org/linkml-common/HealthcareEncounterClassification#Emergency+Room+Visit>,
+        <https://w3id.org/linkml-common/HealthcareEncounterClassification#Emergency+Room+and+Inpatient+Visit>,
+        <https://w3id.org/linkml-common/HealthcareEncounterClassification#Home+Visit>,
+        <https://w3id.org/linkml-common/HealthcareEncounterClassification#Inpatient+Visit>,
+        <https://w3id.org/linkml-common/HealthcareEncounterClassification#Laboratory+Visit>,
+        <https://w3id.org/linkml-common/HealthcareEncounterClassification#Non-hospital+institution+Visit>,
+        <https://w3id.org/linkml-common/HealthcareEncounterClassification#Outpatient+Visit>,
+        <https://w3id.org/linkml-common/HealthcareEncounterClassification#Pharmacy+Visit>,
+        <https://w3id.org/linkml-common/HealthcareEncounterClassification#Telehealth+Visit> .
+
+linkml_common:Quantity a owl:Class ;
+    rdfs:label "Quantity" ;
+    rdfs:subClassOf linkml_common:Intangible ;
+    skos:exactMatch <http://hl7.org/fhir/Quantity> ;
+    skos:inScheme linkml_common:quantities .
+
+linkml_common:NamedThing a owl:Class ;
+    rdfs:label "NamedThing" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml_common:Concept ;
+            owl:onProperty linkml_common:ontology_types ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty linkml_common:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty linkml_common:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:ontology_types ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty linkml_common:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty linkml_common:subtype ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:subtype ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty linkml_common:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty linkml_common:type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty linkml_common:subtype ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty linkml_common:description ],
+        linkml_common:Entity ;
+    skos:inScheme linkml_common:core .
+
+linkml_common:type a owl:DatatypeProperty ;
+    rdfs:label "type" ;
+    rdfs:range xsd:string ;
+    skos:definition "A type for a thing" ;
+    skos:inScheme linkml_common:core .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:CompositeFoodType ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:CompositeFoodType .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Ratio ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Ratio .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:LifeEvent ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:LifeEvent .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:EngineeringProcess ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:EngineeringProcess .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:MoneyQuantity ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:MoneyQuantity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Organization ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Organization .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:ClinicalCohort ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:ClinicalCohort .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Landform ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Landform .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:EngineeringMaterialProcessing ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:EngineeringMaterialProcessing .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:MaterialCollection ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:MaterialCollection .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:NamedThing ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:NamedThing .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:SampleProcessing ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:SampleProcessing .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Event ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Event .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:PostalAddress ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:PostalAddress .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Measurement ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Measurement .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:QuantityRange ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:QuantityRange .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:FoodRecipe ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:FoodRecipe .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:SampleCollectionProcess ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:SampleCollectionProcess .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:DataStructure ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:DataStructure .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Observation ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Observation .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:SampleMaterial ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:SampleMaterial .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Quantity ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Quantity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:InformationEntity ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:InformationEntity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:SimpleQuantity ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:SimpleQuantity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:BasicFoodType ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:BasicFoodType .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:UnitConcept ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:UnitConcept .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:RawMaterial ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:RawMaterial .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:FoodIngredient ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:FoodIngredient .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:EngineeringSpecification ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:EngineeringSpecification .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:FoodTypeConcept ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:FoodTypeConcept .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:HealthcareConditionOccurrence ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:HealthcareConditionOccurrence .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Investigation ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Investigation .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Person ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Person .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:MaterialProcessing ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:MaterialProcessing .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Concept ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Concept .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Entity ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Entity .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Intangible ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Intangible .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Procedure ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Procedure .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Publication ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Publication .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Collection ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Collection .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:ClinicalCohortEnrollment ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:ClinicalCohortEnrollment .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:CurrencyConcept ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:CurrencyConcept .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:HealthcareSite ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:HealthcareSite .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:ClinicalCohortDefinition ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:ClinicalCohortDefinition .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:XProcess ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:XProcess .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:InvestigativeProcess ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:InvestigativeProcess .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Place ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Place .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:Variable ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:Variable .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:DataGenerationFromSample ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:DataGenerationFromSample .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:FoodProcessing ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:FoodProcessing .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:HealthcareOrganization ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:HealthcareOrganization .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:PhysicalDevice ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:PhysicalDevice .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:InvestigativeProtocol ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:InvestigativeProtocol .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:PlannedProcess ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:PlannedProcess .
+
+[] a owl:Restriction ;
+    rdfs:subClassOf linkml_common:HealthcareEncounter ;
+    owl:onProperty linkml_common:type ;
+    owl:someValuesFrom linkml_common:HealthcareEncounter .
+

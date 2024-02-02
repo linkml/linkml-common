@@ -1,0 +1,160 @@
+id: https://w3id.org/linkml-common/core
+name: linkml-common-core
+title: linkml-common-core
+description: |-
+  Common Data Model Elements: Core
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  BFO: http://purl.obolibrary.org/obo/BFO_
+  fhir: http://hl7.org/fhir/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+
+  Entity:
+    abstract: true
+    description: >-
+      A physical, digital, conceptual, or other kind of thing with some
+      common characteristics
+    class_uri: schema:Thing
+    slots:
+      - type
+
+  NamedThing:
+    is_a: Entity
+    slots:
+      - id
+      - name
+      - type
+      - subtype
+      - ontology_types
+      - description
+
+  Concept:
+    is_a: NamedThing
+    exact_mappings:
+      - biolink:OntologyClass
+      - fhir:CodableConcept
+
+  InformationEntity:
+    description: >-
+      An entity that describes some information
+    is_a: NamedThing
+    slots:
+      - describes
+
+  PhysicalDevice:
+    is_a: NamedThing
+
+  Intangible:
+    description: >-
+      An entity that is not a physical object, process, or information
+    class_uri: schema:Intangible
+    is_a: Entity
+
+  Relationship:
+    abstract: true
+
+
+  Location:
+    abstract: true
+
+  PointLocation:
+    is_a: Location
+
+  Observation:
+    description: >-
+      A statement about the state of something
+    is_a: Entity
+
+  Procedure:
+    description: >-
+      A canonical series of actions conducted in a certain order or manner
+    is_a: NamedThing
+
+  MathematicalOperation:
+    description: >-
+      Application of a mathematical operation to one or more inputs to produce one or more outputs
+    # is_a: Process
+    attributes:
+      inputs:
+        range: Any
+        multivalued: true
+        description: The inputs to the operation
+      outputs:
+        range: Any
+        multivalued: true
+        description: The outputs of the operation
+      parts:
+        range: MathematicalOperation
+        multivalued: true
+        description: The parts of the process
+      immediate_preceding_steps:
+        range: MathematicalOperation
+        multivalued: true
+        description: The steps that immediately precede this step
+
+  Collection:
+    description: >-
+      A group of things. The collection may be heterogeneous or homogeneous.
+    is_a: Intangible
+    attributes:
+      members:
+        range: Entity
+        multivalued: true
+        description: The members of the collection
+        inlined_as_list: true
+
+
+
+  Any:
+    class_uri: linkml:Any
+
+slots:
+  id:
+    identifier: true
+    slot_uri: schema:identifier
+    range: uriorcurie
+    description: A unique identifier for a thing
+  name:
+    slot_uri: schema:name
+    description: A human-readable name for a thing
+  description:
+    slot_uri: schema:description
+    description: A human-readable description for a thing
+  type:
+    range: string
+    designates_type: true
+    description: A type for a thing
+  subtype:
+    range: string
+    description: An enum with a more specific type
+  ontology_types:
+    range: Concept
+    multivalued: true
+  describes:
+    slot_uri: schema:describes
+    range: Any
+    description: >-
+      The thing that is being described
+  subject:
+    slot_uri: rdf:subject
+    range: Any
+    description: >-
+      The subject of a relationship
+  object:
+    slot_uri: rdf:object
+    range: Any
+    description: >-
+      The object of a relationship

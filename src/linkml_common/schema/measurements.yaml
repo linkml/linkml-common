@@ -1,0 +1,44 @@
+id: https://w3id.org/linkml-common/meaurements
+name: linkml-common-meaurements
+title: linkml-common-meaurements
+description: |-
+  Common Data Model Elements
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  OBI: http://purl.obolibrary.org/obo/OBI_
+  fhir: http://hl7.org/fhir/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - quantities
+
+classes:
+
+  Measurement:
+    is_a: Observation
+    attributes:
+      quantity_measured:
+        range: Quantity
+        description: The quantity being measured
+      variable_measured:
+        range: Variable
+        description: The variable being measured
+
+  Variable:
+    is_a: Entity
+    attributes:
+      allowed_units:
+        description: The units that are allowed for this variable
+        range: UnitConcept
+        multivalued: true
+
+

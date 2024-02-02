@@ -1,0 +1,657 @@
+BASE <https://w3id.org/linkml-common/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX schema1: <http://schema.org/>
+PREFIX fhir: <http://hl7.org/fhir/>
+
+
+linkml:String xsd:string
+
+linkml:Integer xsd:integer
+
+linkml:Boolean xsd:boolean
+
+linkml:Float xsd:float
+
+linkml:Double xsd:double
+
+linkml:Decimal xsd:decimal
+
+linkml:Time xsd:time
+
+linkml:Date xsd:date
+
+linkml:Datetime xsd:dateTime
+
+linkml:DateOrDatetime linkml:DateOrDatetime
+
+linkml:Uriorcurie IRI
+
+linkml:Curie xsd:string
+
+linkml:Uri IRI
+
+linkml:Ncname xsd:string
+
+linkml:Objectidentifier IRI
+
+linkml:Nodeidentifier NONLITERAL
+
+linkml:Jsonpointer xsd:string
+
+linkml:Jsonpath xsd:string
+
+linkml:Sparqlpath xsd:string
+
+<Any> CLOSED {
+    (  $<Any_tes> rdf:type . * ;
+       rdf:type [ linkml:Any ] ?
+    )
+}
+
+<BasicFoodType> CLOSED {
+    (  $<BasicFoodType_tes> (  &<FoodTypeConcept_tes> ;
+          rdf:type [ <FoodTypeConcept> ] ?
+       ) ;
+       rdf:type [ <BasicFoodType> ]
+    )
+}
+
+<ClinicalCohort> CLOSED {
+    (  $<ClinicalCohort_tes> (  &<NamedThing_tes> ;
+          rdf:type [ <NamedThing> ] ? ;
+          <definition> @<ClinicalCohortDefinition> ?
+       ) ;
+       rdf:type [ <ClinicalCohort> ]
+    )
+}
+
+<ClinicalCohortDefinition> CLOSED {
+    (  $<ClinicalCohortDefinition_tes> (  &<NamedThing_tes> ;
+          rdf:type [ <NamedThing> ] ?
+       ) ;
+       rdf:type [ <ClinicalCohortDefinition> ]
+    )
+}
+
+<ClinicalCohortEnrollment> CLOSED {
+    (  $<ClinicalCohortEnrollment_tes> (  &<Event_tes> ;
+          rdf:type [ <Event> ] ? ;
+          <patient> @<Patient> ? ;
+          <cohort> @<ClinicalCohort> ?
+       ) ;
+       rdf:type [ <ClinicalCohortEnrollment> ]
+    )
+}
+
+<Collection> CLOSED {
+    (  $<Collection_tes> (  &<Intangible_tes> ;
+          rdf:type [ schema1:Intangible ] ? ;
+          <members> @<Entity> *
+       ) ;
+       rdf:type [ <Collection> ] ?
+    )
+}
+
+<CompositeFoodType> CLOSED {
+    (  $<CompositeFoodType_tes> (  &<FoodTypeConcept_tes> ;
+          rdf:type [ <FoodTypeConcept> ] ?
+       ) ;
+       rdf:type [ <CompositeFoodType> ]
+    )
+}
+
+<Concept>  (
+    CLOSED {
+       (  $<Concept_tes> (  &<NamedThing_tes> ;
+             rdf:type [ <NamedThing> ] ?
+          ) ;
+          rdf:type [ <Concept> ]
+       )
+    } OR @<FoodTypeConcept> OR @<UnitConcept>
+)
+
+<DataGenerationFromSample> CLOSED {
+    (  $<DataGenerationFromSample_tes> (  &<InvestigativeProcess_tes> ;
+          rdf:type [ <InvestigativeProcess> ] ?
+       ) ;
+       rdf:type [ <DataGenerationFromSample> ]
+    )
+}
+
+<DataStructure> CLOSED {
+    (  $<DataStructure_tes> (  &<Intangible_tes> ;
+          rdf:type [ schema1:Intangible ] ?
+       ) ;
+       rdf:type [ <DataStructure> ] ?
+    )
+}
+
+<EngineeringMaterialProcessing> CLOSED {
+    (  $<EngineeringMaterialProcessing_tes> (  &<MaterialProcessing_tes> ;
+          rdf:type [ <MaterialProcessing> ] ?
+       ) ;
+       rdf:type [ <EngineeringMaterialProcessing> ]
+    )
+}
+
+<EngineeringProcess> CLOSED {
+    (  $<EngineeringProcess_tes> (  &<Event_tes> ;
+          rdf:type [ <Event> ] ? ;
+          <follows_procedure> @<EngineeringSpecification> ? ;
+          <part_of> @<EngineeringProcess> ?
+       ) ;
+       rdf:type [ <EngineeringProcess> ]
+    )
+}
+
+<EngineeringSpecification> CLOSED {
+    (  $<EngineeringSpecification_tes> (  &<Procedure_tes> ;
+          rdf:type [ <Procedure> ] ?
+       ) ;
+       rdf:type [ <EngineeringSpecification> ]
+    )
+}
+
+<Entity>  (
+    @<Intangible> OR @<NamedThing> OR @<Observation> OR @<PostalAddress> OR @<Variable> OR @<XProcess>
+)
+
+<Entity_struct> {
+    (  $<Entity_tes> <type> @linkml:String ? ;
+       rdf:type [ schema1:Thing ] ?
+    )
+}
+
+<EnvironmentalProcess> CLOSED {
+    (  $<EnvironmentalProcess_tes> rdf:type . * ;
+       rdf:type [ <EnvironmentalProcess> ] ?
+    )
+}
+
+<Event>  (
+    CLOSED {
+       (  $<Event_tes> (  &<NamedThing_tes> ;
+             rdf:type [ <NamedThing> ] ? ;
+             <starts_at> @<TimePoint> ? ;
+             <ends_at> @<TimePoint> ?
+          ) ;
+          rdf:type [ <Event> ]
+       )
+    } OR @<ClinicalCohortEnrollment> OR @<EngineeringProcess> OR @<HealthcareConditionOccurrence> OR @<HealthcareEncounter> OR
+    @<LifeEvent> OR @<PlannedProcess>
+)
+
+<FoodIngredient> CLOSED {
+    (  $<FoodIngredient_tes> (  &<Quantity_tes> ;
+          rdf:type [ fhir:Quantity ] ?
+       ) ;
+       rdf:type [ <FoodIngredient> ] ?
+    )
+}
+
+<FoodProcessing> CLOSED {
+    (  $<FoodProcessing_tes> (  &<MaterialProcessing_tes> ;
+          rdf:type [ <MaterialProcessing> ] ?
+       ) ;
+       rdf:type [ <FoodProcessing> ]
+    )
+}
+
+<FoodRecipe> CLOSED {
+    (  $<FoodRecipe_tes> (  &<Procedure_tes> ;
+          rdf:type [ <Procedure> ] ? ;
+          <ingredients> @<FoodIngredient> * ;
+          <steps> @<FoodProcessing> *
+       ) ;
+       rdf:type [ <FoodRecipe> ]
+    )
+}
+
+<FoodTypeConcept>  (
+    CLOSED {
+       (  $<FoodTypeConcept_tes> (  &<Concept_tes> ;
+             rdf:type [ <Concept> ] ?
+          ) ;
+          rdf:type [ <FoodTypeConcept> ]
+       )
+    } OR @<BasicFoodType> OR @<CompositeFoodType>
+)
+
+<GeoPointLocation> CLOSED {
+    (  $<GeoPointLocation_tes> (  &<PointLocation_tes> ;
+          rdf:type [ <PointLocation> ] ? ;
+          <latitude> @linkml:Decimal ? ;
+          <longitude> @linkml:Decimal ? ;
+          <altitude> @linkml:Decimal ?
+       ) ;
+       rdf:type [ <GeoPointLocation> ] ?
+    )
+}
+
+<HealthcareConditionOccurrence> CLOSED {
+    (  $<HealthcareConditionOccurrence_tes> (  &<Event_tes> ;
+          rdf:type [ <Event> ] ? ;
+          <patient> @<Patient> ? ;
+          <observed_during> @<HealthcareEncounter> ?
+       ) ;
+       rdf:type [ <HealthcareConditionOccurrence> ]
+    )
+}
+
+<HealthcareEncounter> CLOSED {
+    (  $<HealthcareEncounter_tes> (  &<Event_tes> ;
+          rdf:type [ <Event> ] ? ;
+          <patient> @<Patient> ? ;
+          <provider> @<HealthcareProvider> ? ;
+          <subtype> @<HealthcareEncounterClassification> ?
+       ) ;
+       rdf:type [ <HealthcareEncounter> ]
+    )
+}
+
+<HealthcareOrganization> CLOSED {
+    (  $<HealthcareOrganization_tes> (  &<Organization_tes> ;
+          rdf:type [ <Organization> ] ?
+       ) ;
+       rdf:type [ <HealthcareOrganization> ]
+    )
+}
+
+<HealthcareProvider> CLOSED {
+    (  $<HealthcareProvider_tes> (  &<HealthcareRole_tes> ;
+          rdf:type [ <HealthcareRole> ] ? ;
+          <speciality> @<Concept> ? ;
+          <care_site> @<HealthcareSite> ?
+       ) ;
+       rdf:type [ <HealthcareProvider> ] ?
+    )
+}
+
+<HealthcareRole>  (
+    CLOSED {
+       (  $<HealthcareRole_tes> <is_person> @<Person> ? ;
+          rdf:type [ <HealthcareRole> ] ?
+       )
+    } OR @<HealthcareProvider> OR @<Patient>
+)
+
+<HealthcareSite> CLOSED {
+    (  $<HealthcareSite_tes> (  &<Place_tes> ;
+          rdf:type [ schema1:Place ] ?
+       ) ;
+       rdf:type [ <HealthcareSite> ]
+    )
+}
+
+<InformationEntity> CLOSED {
+    (  $<InformationEntity_tes> (  &<NamedThing_tes> ;
+          rdf:type [ <NamedThing> ] ? ;
+          schema1:describes @<Any> ?
+       ) ;
+       rdf:type [ <InformationEntity> ]
+    )
+}
+
+<Intangible>  (
+    CLOSED {
+       (  $<Intangible_tes> (  &<Entity_tes> ;
+             rdf:type [ schema1:Thing ] ?
+          ) ;
+          rdf:type [ schema1:Intangible ] ?
+       )
+    } OR @<Collection> OR @<DataStructure> OR @<Quantity> OR @<QuantityRange>
+)
+
+<Investigation> CLOSED {
+    (  $<Investigation_tes> (  &<NamedThing_tes> ;
+          rdf:type [ <NamedThing> ] ? ;
+          <objectives> @linkml:String ?
+       ) ;
+       rdf:type [ <Investigation> ]
+    )
+}
+
+<InvestigativeProcess>  (
+    CLOSED {
+       (  $<InvestigativeProcess_tes> (  &<PlannedProcess_tes> ;
+             rdf:type [ <PlannedProcess> ] ? ;
+             <follows_procedure> @<InvestigativeProtocol> ? ;
+             <part_of> @<Investigation> ?
+          ) ;
+          rdf:type [ <InvestigativeProcess> ]
+       )
+    } OR @<DataGenerationFromSample> OR @<SampleCollectionProcess>
+)
+
+<InvestigativeProtocol> CLOSED {
+    (  $<InvestigativeProtocol_tes> (  &<Procedure_tes> ;
+          rdf:type [ <Procedure> ] ?
+       ) ;
+       rdf:type [ <InvestigativeProtocol> ]
+    )
+}
+
+<Landform> CLOSED {
+    (  $<Landform_tes> (  &<Place_tes> ;
+          rdf:type [ schema1:Place ] ? ;
+          <geolocation> @<GeoPointLocation>
+       ) ;
+       rdf:type [ <Landform> ]
+    )
+}
+
+<LifeEvent> CLOSED {
+    (  $<LifeEvent_tes> (  &<Event_tes> ;
+          rdf:type [ <Event> ] ?
+       ) ;
+       rdf:type [ <LifeEvent> ]
+    )
+}
+
+<Location>  (
+    {
+       (  $<Location_tes> rdf:type . * ;
+          rdf:type [ <Location> ] ?
+       )
+    } OR @<PointLocation>
+)
+
+<MaterialCollection> CLOSED {
+    (  $<MaterialCollection_tes> (  &<PlannedProcess_tes> ;
+          rdf:type [ <PlannedProcess> ] ?
+       ) ;
+       rdf:type [ <MaterialCollection> ]
+    )
+}
+
+<MaterialProcessing>  (
+    CLOSED {
+       (  $<MaterialProcessing_tes> (  &<PlannedProcess_tes> ;
+             rdf:type [ <PlannedProcess> ] ?
+          ) ;
+          rdf:type [ <MaterialProcessing> ]
+       )
+    } OR @<EngineeringMaterialProcessing> OR @<FoodProcessing> OR @<SampleProcessing>
+)
+
+<MathematicalOperation>  (
+    CLOSED {
+       (  $<MathematicalOperation_tes> (  <inputs> @<Any> * ;
+             <outputs> @<Any> * ;
+             <parts> @<MathematicalOperation> * ;
+             <immediate_preceding_steps> @<MathematicalOperation> *
+          ) ;
+          rdf:type [ <MathematicalOperation> ] ?
+       )
+    } OR @<UnitConversionOperation>
+)
+
+<Measurement> CLOSED {
+    (  $<Measurement_tes> (  &<Observation_tes> ;
+          rdf:type [ <Observation> ] ? ;
+          <quantity_measured> @<Quantity> ? ;
+          <variable_measured> @<Variable> ?
+       ) ;
+       rdf:type [ <Measurement> ] ?
+    )
+}
+
+<NamedThing>  (
+    CLOSED {
+       (  $<NamedThing_tes> (  &<Entity_tes> ;
+             rdf:type [ schema1:Thing ] ? ;
+             schema1:name @linkml:String ? ;
+             <subtype> @linkml:String ? ;
+             <ontology_types> @<Concept> * ;
+             schema1:description @linkml:String ?
+          ) ;
+          rdf:type [ <NamedThing> ]
+       )
+    } OR @<ClinicalCohort> OR @<ClinicalCohortDefinition> OR @<Concept> OR @<Event> OR @<InformationEntity> OR @<Investigation> OR
+    @<Organization> OR @<Person> OR @<PhysicalDevice> OR @<Place> OR @<Procedure> OR @<Publication> OR @<RawMaterial> OR
+    @<SampleMaterial>
+)
+
+<Observation>  (
+    CLOSED {
+       (  $<Observation_tes> (  &<Entity_tes> ;
+             rdf:type [ schema1:Thing ] ?
+          ) ;
+          rdf:type [ <Observation> ] ?
+       )
+    } OR @<Measurement>
+)
+
+<Organization>  (
+    CLOSED {
+       (  $<Organization_tes> (  &<NamedThing_tes> ;
+             rdf:type [ <NamedThing> ] ?
+          ) ;
+          rdf:type [ <Organization> ]
+       )
+    } OR @<HealthcareOrganization>
+)
+
+<Patient> CLOSED {
+    (  $<Patient_tes> (  &<HealthcareRole_tes> ;
+          rdf:type [ <HealthcareRole> ] ?
+       ) ;
+       rdf:type [ <Patient> ] ?
+    )
+}
+
+<Person> CLOSED {
+    (  $<Person_tes> (  &<NamedThing_tes> ;
+          rdf:type [ <NamedThing> ] ? ;
+          schema1:email @linkml:String ? ;
+          schema1:birthDate @linkml:Date ? ;
+          <age_in_years> @linkml:Integer ? ;
+          <vital_status> @<PersonStatus> ?
+       ) ;
+       rdf:type [ <Person> ]
+    )
+}
+
+<PhysicalDevice> CLOSED {
+    (  $<PhysicalDevice_tes> (  &<NamedThing_tes> ;
+          rdf:type [ <NamedThing> ] ?
+       ) ;
+       rdf:type [ <PhysicalDevice> ]
+    )
+}
+
+<Place>  (
+    CLOSED {
+       (  $<Place_tes> (  &<NamedThing_tes> ;
+             rdf:type [ <NamedThing> ] ? ;
+             <address> @<PostalAddress> ? ;
+             <geolocation> @<GeoPointLocation> ?
+          ) ;
+          rdf:type [ schema1:Place ]
+       )
+    } OR @<HealthcareSite> OR @<Landform>
+)
+
+<PlannedProcess>  (
+    CLOSED {
+       (  $<PlannedProcess_tes> (  &<Event_tes> ;
+             rdf:type [ <Event> ] ? ;
+             <follows_procedure> @<Procedure> ? ;
+             <uses_physical_device> @<PhysicalDevice> ?
+          ) ;
+          rdf:type [ <PlannedProcess> ]
+       )
+    } OR @<InvestigativeProcess> OR @<MaterialCollection> OR @<MaterialProcessing>
+)
+
+<PointLocation>  (
+    CLOSED {
+       (  $<PointLocation_tes> (  &<Location_tes> ;
+             rdf:type [ <Location> ] ?
+          ) ;
+          rdf:type [ <PointLocation> ] ?
+       )
+    } OR @<GeoPointLocation>
+)
+
+<PostalAddress> CLOSED {
+    (  $<PostalAddress_tes> (  &<Entity_tes> ;
+          rdf:type [ schema1:Thing ] ? ;
+          <street_address> @linkml:String ? ;
+          <street_address_additional> @linkml:String ? ;
+          <city> @linkml:String ? ;
+          <state> @linkml:String ? ;
+          <postal_code> @linkml:String ? ;
+          <country> @linkml:String ?
+       ) ;
+       rdf:type [ schema1:PostalAddress ] ?
+    )
+}
+
+<Procedure>  (
+    CLOSED {
+       (  $<Procedure_tes> (  &<NamedThing_tes> ;
+             rdf:type [ <NamedThing> ] ?
+          ) ;
+          rdf:type [ <Procedure> ]
+       )
+    } OR @<EngineeringSpecification> OR @<FoodRecipe> OR @<InvestigativeProtocol>
+)
+
+<Publication> CLOSED {
+    (  $<Publication_tes> (  &<NamedThing_tes> ;
+          rdf:type [ <NamedThing> ] ?
+       ) ;
+       rdf:type [ <Publication> ]
+    )
+}
+
+<Quantity>  (
+    CLOSED {
+       (  $<Quantity_tes> (  &<Intangible_tes> ;
+             rdf:type [ schema1:Intangible ] ?
+          ) ;
+          rdf:type [ fhir:Quantity ] ?
+       )
+    } OR @<FoodIngredient> OR @<Ratio> OR @<SimpleQuantity>
+)
+
+<QuantityRange> CLOSED {
+    (  $<QuantityRange_tes> (  &<Intangible_tes> ;
+          rdf:type [ schema1:Intangible ] ? ;
+          <lower_bound> @<Quantity> ? ;
+          <upper_bound> @<Quantity> ?
+       ) ;
+       rdf:type [ fhir:Range ] ?
+    )
+}
+
+<Ratio> CLOSED {
+    (  $<Ratio_tes> (  &<Quantity_tes> ;
+          rdf:type [ fhir:Quantity ] ? ;
+          <numerator> @<Quantity> ? ;
+          <denominator> @<Quantity> ?
+       ) ;
+       rdf:type [ fhir:Ratio ] ?
+    )
+}
+
+<RawMaterial> CLOSED {
+    (  $<RawMaterial_tes> (  &<NamedThing_tes> ;
+          rdf:type [ <NamedThing> ] ?
+       ) ;
+       rdf:type [ <RawMaterial> ]
+    )
+}
+
+<Relationship> {
+    (  $<Relationship_tes> rdf:type . * ;
+       rdf:type [ <Relationship> ] ?
+    )
+}
+
+<SampleCollectionProcess> CLOSED {
+    (  $<SampleCollectionProcess_tes> (  &<InvestigativeProcess_tes> ;
+          rdf:type [ <InvestigativeProcess> ] ? ;
+          <material_collected> @<SampleMaterial> ? ;
+          <collected_from> @<NamedThing> ?
+       ) ;
+       rdf:type [ <SampleCollectionProcess> ]
+    )
+}
+
+<SampleMaterial> CLOSED {
+    (  $<SampleMaterial_tes> (  &<NamedThing_tes> ;
+          rdf:type [ <NamedThing> ] ?
+       ) ;
+       rdf:type [ <SampleMaterial> ]
+    )
+}
+
+<SampleProcessing> CLOSED {
+    (  $<SampleProcessing_tes> (  &<MaterialProcessing_tes> ;
+          rdf:type [ <MaterialProcessing> ] ?
+       ) ;
+       rdf:type [ <SampleProcessing> ]
+    )
+}
+
+<SimpleQuantity> CLOSED {
+    (  $<SimpleQuantity_tes> (  &<Quantity_tes> ;
+          rdf:type [ fhir:Quantity ] ? ;
+          <value> @linkml:Float ? ;
+          <unit> @<UnitConcept> ?
+       ) ;
+       rdf:type [ fhir:SimpleQuantity ] ?
+    )
+}
+
+<TimePoint> CLOSED {
+    (  $<TimePoint_tes> (  <date_value> @linkml:Date ? ;
+          <time_value> @linkml:Time ? ;
+          <datetime_value> @linkml:Datetime ? ;
+          <marker_event> @<Event> ? ;
+          schema1:description @linkml:String ?
+       ) ;
+       rdf:type [ <TimePoint> ] ?
+    )
+}
+
+<UnitConcept> CLOSED {
+    (  $<UnitConcept_tes> (  &<Concept_tes> ;
+          rdf:type [ <Concept> ] ?
+       ) ;
+       rdf:type [ <UnitConcept> ]
+    )
+}
+
+<UnitConversionOperation> CLOSED {
+    (  $<UnitConversionOperation_tes> (  &<MathematicalOperation_tes> ;
+          rdf:type [ <MathematicalOperation> ] ? ;
+          <inputs> @<Quantity> * ;
+          <outputs> @<Quantity> *
+       ) ;
+       rdf:type [ <UnitConversionOperation> ] ?
+    )
+}
+
+<Variable> CLOSED {
+    (  $<Variable_tes> (  &<Entity_tes> ;
+          rdf:type [ schema1:Thing ] ? ;
+          <allowed_units> @<UnitConcept> *
+       ) ;
+       rdf:type [ <Variable> ] ?
+    )
+}
+
+<XProcess> CLOSED {
+    (  $<XProcess_tes> (  &<Entity_tes> ;
+          rdf:type [ schema1:Thing ] ?
+       ) ;
+       rdf:type [ <XProcess> ] ?
+    )
+}
+
+

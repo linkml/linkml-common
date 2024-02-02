@@ -1,0 +1,41 @@
+id: https://w3id.org/linkml-common/plannedprocess
+name: linkml-common-plannedprocess
+title: linkml-common-plannedprocess
+description: |-
+  Common Data Model Elements
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  OBI: http://purl.obolibrary.org/obo/OBI_
+  fhir: http://hl7.org/fhir/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - measurements
+  - time
+
+classes:
+
+  PlannedProcess:
+    is_a: Event
+    attributes:
+      follows_procedure:
+        range: Procedure
+      uses_physical_device:
+        range: PhysicalDevice
+
+  MaterialCollection:
+    is_a: PlannedProcess
+
+  MaterialProcessing:
+    is_a: PlannedProcess
+
+

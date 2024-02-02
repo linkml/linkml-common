@@ -1,0 +1,37 @@
+id: https://w3id.org/linkml/linkml-common
+name: linkml-common
+title: linkml-common
+description: |-
+  Common Data Model Elements
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  example: https://example.org/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - core
+  - bibliographic
+  - clinicalresearch
+  - computational
+  - engineering
+  - environmental
+  - financial
+  - foods
+  - geography
+  - healthcare
+  - investigations
+  - measurements
+  - quantities
+  - social
+  - time
+

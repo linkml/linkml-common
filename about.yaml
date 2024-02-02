@@ -1,0 +1,7 @@
+---
+name: linkml_common
+author: LinkML Common <my-name@my-org.org>
+description: Common Data Model Elements
+source_schema_path: src/linkml_common/schema/linkml_common.yaml
+google_sheet_id: 1wVoaiFg47aT9YWNeRfTZ8tYHN8s8PAuDx5i2HUcDpvQ
+google_sheet_tabs: personinfo enums

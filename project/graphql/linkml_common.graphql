@@ -1,0 +1,621 @@
+type Any
+  {
+  }
+
+type BasicFoodType
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type ClinicalCohort
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    definition: ClinicalCohortDefinition
+  }
+
+type ClinicalCohortDefinition
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type ClinicalCohortEnrollment
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    patient: Patient
+    cohort: ClinicalCohort
+  }
+
+type Collection
+  {
+    type: String
+    members: [Entity]
+  }
+
+type CompositeFoodType
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type Concept
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type DataGenerationFromSample
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    usesPhysicalDevice: PhysicalDevice
+    followsProcedure: InvestigativeProtocol
+    partOf: Investigation
+  }
+
+type DataStructure
+  {
+    type: String
+  }
+
+type EngineeringMaterialProcessing
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    followsProcedure: Procedure
+    usesPhysicalDevice: PhysicalDevice
+  }
+
+type EngineeringProcess
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    followsProcedure: EngineeringSpecification
+    partOf: EngineeringProcess
+  }
+
+type EngineeringSpecification
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+interface Entity
+  {
+    type: String
+  }
+
+type EnvironmentalProcess
+  {
+  }
+
+type Event
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+  }
+
+type FoodIngredient
+  {
+    type: String
+  }
+
+type FoodProcessing
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    followsProcedure: Procedure
+    usesPhysicalDevice: PhysicalDevice
+  }
+
+type FoodRecipe
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    ingredients: [FoodIngredient]
+    steps: [FoodProcessing]
+  }
+
+type FoodTypeConcept
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type GeoPointLocation
+  {
+    latitude: Decimal
+    longitude: Decimal
+    altitude: Decimal
+  }
+
+type HealthcareConditionOccurrence
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    patient: Patient
+    observedDuring: HealthcareEncounter
+  }
+
+type HealthcareEncounter
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    patient: Patient
+    provider: HealthcareProvider
+    subtype: HealthcareEncounterClassification
+  }
+
+type HealthcareOrganization
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type HealthcareProvider
+  {
+    isPerson: Person
+    speciality: Concept
+    careSite: HealthcareSite
+  }
+
+type HealthcareRole
+  {
+    isPerson: Person
+  }
+
+type HealthcareSite
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    address: PostalAddress
+    geolocation: GeoPointLocation
+  }
+
+type InformationEntity
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    describes: Any
+  }
+
+type Intangible
+  {
+    type: String
+  }
+
+type Investigation
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    objectives: String
+  }
+
+type InvestigativeProcess
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    usesPhysicalDevice: PhysicalDevice
+    followsProcedure: InvestigativeProtocol
+    partOf: Investigation
+  }
+
+type InvestigativeProtocol
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type Landform
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    address: PostalAddress
+    geolocation: GeoPointLocation!
+  }
+
+type LifeEvent
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+  }
+
+interface Location
+  {
+  }
+
+type MaterialCollection
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    followsProcedure: Procedure
+    usesPhysicalDevice: PhysicalDevice
+  }
+
+type MaterialProcessing
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    followsProcedure: Procedure
+    usesPhysicalDevice: PhysicalDevice
+  }
+
+type MathematicalOperation
+  {
+    inputs: [Any]
+    outputs: [Any]
+    parts: [MathematicalOperation]
+    immediatePrecedingSteps: [MathematicalOperation]
+  }
+
+type Measurement
+  {
+    type: String
+    quantityMeasured: Quantity
+    variableMeasured: Variable
+  }
+
+type NamedThing
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type Observation
+  {
+    type: String
+  }
+
+type Organization
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type Patient
+  {
+    isPerson: Person
+  }
+
+type Person
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    primaryEmail: String
+    birthDate: Date
+    ageInYears: Integer
+    vitalStatus: PersonStatus
+  }
+
+type PhysicalDevice
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type Place
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    address: PostalAddress
+    geolocation: GeoPointLocation
+  }
+
+type PlannedProcess
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    followsProcedure: Procedure
+    usesPhysicalDevice: PhysicalDevice
+  }
+
+type PointLocation
+  {
+  }
+
+type PostalAddress
+  {
+    type: String
+    streetAddress: String
+    streetAddressAdditional: String
+    city: String
+    state: String
+    postalCode: String
+    country: String
+  }
+
+type Procedure
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type Publication
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type Quantity
+  {
+    type: String
+  }
+
+type QuantityRange
+  {
+    type: String
+    lowerBound: Quantity
+    upperBound: Quantity
+  }
+
+type Ratio
+  {
+    type: String
+    numerator: Quantity
+    denominator: Quantity
+  }
+
+type RawMaterial
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+interface Relationship
+  {
+  }
+
+type SampleCollectionProcess
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    usesPhysicalDevice: PhysicalDevice
+    followsProcedure: InvestigativeProtocol
+    partOf: Investigation
+    materialCollected: SampleMaterial
+    collectedFrom: NamedThing
+  }
+
+type SampleMaterial
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type SampleProcessing
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    followsProcedure: Procedure
+    usesPhysicalDevice: PhysicalDevice
+  }
+
+type SimpleQuantity
+  {
+    type: String
+    value: Float
+    unit: UnitConcept
+  }
+
+type TimePoint
+  {
+    dateValue: Date
+    timeValue: Time
+    datetimeValue: Datetime
+    markerEvent: Event
+    description: String
+  }
+
+type UnitConcept
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type UnitConversionOperation
+  {
+    parts: [MathematicalOperation]
+    immediatePrecedingSteps: [MathematicalOperation]
+    inputs: [Quantity]
+    outputs: [Quantity]
+  }
+
+type Variable
+  {
+    type: String
+    allowedUnits: [UnitConcept]
+  }
+
+type XProcess
+  {
+    type: String
+  }
+

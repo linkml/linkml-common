@@ -1,0 +1,43 @@
+{
+   "ENVO": "http://purl.obolibrary.org/obo/ENVO_",
+   "PATO": "http://purl.obolibrary.org/obo/PATO_",
+   "UCUM": "http://example.org/UNKNOWN/UCUM/",
+   "UO": "http://example.org/UNKNOWN/UO/",
+   "biolink": "https://w3id.org/biolink/",
+   "example": "https://example.org/",
+   "fhir": "http://hl7.org/fhir/",
+   "linkml": "https://w3id.org/linkml/",
+   "linkml_common": "https://w3id.org/linkml-common/",
+   "nmdcschema": "http://example.org/UNKNOWN/nmdcschema/",
+   "omopschema": "http://example.org/omop/",
+   "qudt": "http://example.org/UNKNOWN/qudt/",
+   "rdf": "http://example.org/UNKNOWN/rdf/",
+   "schema": "http://schema.org/",
+   "Any": {
+      "@id": "linkml:Any"
+   },
+   "Entity": {
+      "@id": "schema:Thing"
+   },
+   "Intangible": {
+      "@id": "schema:Intangible"
+   },
+   "Place": {
+      "@id": "schema:Place"
+   },
+   "PostalAddress": {
+      "@id": "schema:PostalAddress"
+   },
+   "Quantity": {
+      "@id": "fhir:Quantity"
+   },
+   "QuantityRange": {
+      "@id": "fhir:Range"
+   },
+   "Ratio": {
+      "@id": "fhir:Ratio"
+   },
+   "SimpleQuantity": {
+      "@id": "fhir:SimpleQuantity"
+   }
+}

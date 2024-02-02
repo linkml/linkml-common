@@ -1,0 +1,2629 @@
+{
+    "$defs": {
+        "Any": {
+            "additionalProperties": true,
+            "description": "",
+            "title": "Any",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "BasicFoodType": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "BasicFoodType"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "BasicFoodType",
+            "type": "object"
+        },
+        "ClinicalCohort": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "definition": {
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "ClinicalCohort"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ClinicalCohort",
+            "type": "object"
+        },
+        "ClinicalCohortDefinition": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "ClinicalCohortDefinition"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ClinicalCohortDefinition",
+            "type": "object"
+        },
+        "ClinicalCohortEnrollment": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "cohort": {
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "patient": {
+                    "$ref": "#/$defs/Patient"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "ClinicalCohortEnrollment"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ClinicalCohortEnrollment",
+            "type": "object"
+        },
+        "Collection": {
+            "additionalProperties": false,
+            "description": "A group of things. The collection may be heterogeneous or homogeneous.",
+            "properties": {
+                "members": {
+                    "description": "The members of the collection",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/NamedThing"
+                            },
+                            {
+                                "$ref": "#/$defs/Intangible"
+                            },
+                            {
+                                "$ref": "#/$defs/Observation"
+                            },
+                            {
+                                "$ref": "#/$defs/XProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/Variable"
+                            },
+                            {
+                                "$ref": "#/$defs/PostalAddress"
+                            },
+                            {
+                                "$ref": "#/$defs/Measurement"
+                            },
+                            {
+                                "$ref": "#/$defs/Quantity"
+                            },
+                            {
+                                "$ref": "#/$defs/QuantityRange"
+                            },
+                            {
+                                "$ref": "#/$defs/Collection"
+                            },
+                            {
+                                "$ref": "#/$defs/DataStructure"
+                            },
+                            {
+                                "$ref": "#/$defs/SimpleQuantity"
+                            },
+                            {
+                                "$ref": "#/$defs/Ratio"
+                            },
+                            {
+                                "$ref": "#/$defs/FoodIngredient"
+                            },
+                            {
+                                "$ref": "#/$defs/MoneyQuantity"
+                            },
+                            {
+                                "$ref": "#/$defs/Event"
+                            },
+                            {
+                                "$ref": "#/$defs/Concept"
+                            },
+                            {
+                                "$ref": "#/$defs/InformationEntity"
+                            },
+                            {
+                                "$ref": "#/$defs/PhysicalDevice"
+                            },
+                            {
+                                "$ref": "#/$defs/Procedure"
+                            },
+                            {
+                                "$ref": "#/$defs/Person"
+                            },
+                            {
+                                "$ref": "#/$defs/Organization"
+                            },
+                            {
+                                "$ref": "#/$defs/Investigation"
+                            },
+                            {
+                                "$ref": "#/$defs/SampleMaterial"
+                            },
+                            {
+                                "$ref": "#/$defs/Place"
+                            },
+                            {
+                                "$ref": "#/$defs/RawMaterial"
+                            },
+                            {
+                                "$ref": "#/$defs/ClinicalCohort"
+                            },
+                            {
+                                "$ref": "#/$defs/ClinicalCohortDefinition"
+                            },
+                            {
+                                "$ref": "#/$defs/Publication"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareSite"
+                            },
+                            {
+                                "$ref": "#/$defs/Landform"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareOrganization"
+                            },
+                            {
+                                "$ref": "#/$defs/InvestigativeProtocol"
+                            },
+                            {
+                                "$ref": "#/$defs/FoodRecipe"
+                            },
+                            {
+                                "$ref": "#/$defs/EngineeringSpecification"
+                            },
+                            {
+                                "$ref": "#/$defs/UnitConcept"
+                            },
+                            {
+                                "$ref": "#/$defs/FoodTypeConcept"
+                            },
+                            {
+                                "$ref": "#/$defs/CurrencyConcept"
+                            },
+                            {
+                                "$ref": "#/$defs/BasicFoodType"
+                            },
+                            {
+                                "$ref": "#/$defs/CompositeFoodType"
+                            },
+                            {
+                                "$ref": "#/$defs/LifeEvent"
+                            },
+                            {
+                                "$ref": "#/$defs/PlannedProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareEncounter"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareConditionOccurrence"
+                            },
+                            {
+                                "$ref": "#/$defs/EngineeringProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/ClinicalCohortEnrollment"
+                            },
+                            {
+                                "$ref": "#/$defs/InvestigativeProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/MaterialCollection"
+                            },
+                            {
+                                "$ref": "#/$defs/MaterialProcessing"
+                            },
+                            {
+                                "$ref": "#/$defs/SampleProcessing"
+                            },
+                            {
+                                "$ref": "#/$defs/FoodProcessing"
+                            },
+                            {
+                                "$ref": "#/$defs/EngineeringMaterialProcessing"
+                            },
+                            {
+                                "$ref": "#/$defs/SampleCollectionProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/DataGenerationFromSample"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Collection"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "Collection",
+            "type": "object"
+        },
+        "CompositeFoodType": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "CompositeFoodType"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "CompositeFoodType",
+            "type": "object"
+        },
+        "Concept": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Concept"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Concept",
+            "type": "object"
+        },
+        "CurrencyConcept": {
+            "additionalProperties": false,
+            "description": "A currency",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "CurrencyConcept"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "CurrencyConcept",
+            "type": "object"
+        },
+        "DataGenerationFromSample": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "follows_procedure": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "part_of": {
+                    "type": "string"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "DataGenerationFromSample"
+                    ],
+                    "type": "string"
+                },
+                "uses_physical_device": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "DataGenerationFromSample",
+            "type": "object"
+        },
+        "DataStructure": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "DataStructure"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "DataStructure",
+            "type": "object"
+        },
+        "EngineeringMaterialProcessing": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "follows_procedure": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "EngineeringMaterialProcessing"
+                    ],
+                    "type": "string"
+                },
+                "uses_physical_device": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "EngineeringMaterialProcessing",
+            "type": "object"
+        },
+        "EngineeringProcess": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "follows_procedure": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "part_of": {
+                    "type": "string"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "EngineeringProcess"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "EngineeringProcess",
+            "type": "object"
+        },
+        "EngineeringSpecification": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "EngineeringSpecification"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "EngineeringSpecification",
+            "type": "object"
+        },
+        "EnvironmentalProcess": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "EnvironmentalProcess",
+            "type": "object"
+        },
+        "Event": {
+            "additionalProperties": false,
+            "description": "A thing that happens",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Event"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Event",
+            "type": "object"
+        },
+        "FoodIngredient": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "FoodIngredient"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "FoodIngredient",
+            "type": "object"
+        },
+        "FoodProcessing": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "follows_procedure": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "FoodProcessing"
+                    ],
+                    "type": "string"
+                },
+                "uses_physical_device": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "FoodProcessing",
+            "type": "object"
+        },
+        "FoodRecipe": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "ingredients": {
+                    "items": {
+                        "$ref": "#/$defs/FoodIngredient"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "steps": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "FoodRecipe"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "FoodRecipe",
+            "type": "object"
+        },
+        "FoodTypeConcept": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "FoodTypeConcept"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "FoodTypeConcept",
+            "type": "object"
+        },
+        "GeoPointLocation": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "altitude": {
+                    "description": "The altitude of the location",
+                    "type": "number"
+                },
+                "latitude": {
+                    "description": "The latitude of the location",
+                    "type": "number"
+                },
+                "longitude": {
+                    "description": "The longitude of the location",
+                    "type": "number"
+                }
+            },
+            "title": "GeoPointLocation",
+            "type": "object"
+        },
+        "HealthcareConditionOccurrence": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "observed_during": {
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "patient": {
+                    "$ref": "#/$defs/Patient"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "HealthcareConditionOccurrence"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "HealthcareConditionOccurrence",
+            "type": "object"
+        },
+        "HealthcareEncounter": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "patient": {
+                    "$ref": "#/$defs/Patient"
+                },
+                "provider": {
+                    "$ref": "#/$defs/HealthcareProvider"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "$ref": "#/$defs/HealthcareEncounterClassification",
+                    "description": "An enum with a more specific type"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "HealthcareEncounter"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "HealthcareEncounter",
+            "type": "object"
+        },
+        "HealthcareEncounterClassification": {
+            "description": "",
+            "enum": [
+                "Inpatient Visit",
+                "Emergency Room Visit",
+                "Emergency Room and Inpatient Visit",
+                "Non-hospital institution Visit",
+                "Outpatient Visit",
+                "Home Visit",
+                "Telehealth Visit",
+                "Pharmacy Visit",
+                "Laboratory Visit",
+                "Ambulance Visit",
+                "Case Management Visit"
+            ],
+            "title": "HealthcareEncounterClassification",
+            "type": "string"
+        },
+        "HealthcareOrganization": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "HealthcareOrganization"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "HealthcareOrganization",
+            "type": "object"
+        },
+        "HealthcareProvider": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "care_site": {
+                    "type": "string"
+                },
+                "is_person": {
+                    "type": "string"
+                },
+                "speciality": {
+                    "type": "string"
+                }
+            },
+            "title": "HealthcareProvider",
+            "type": "object"
+        },
+        "HealthcareRole": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "is_person": {
+                    "type": "string"
+                }
+            },
+            "title": "HealthcareRole",
+            "type": "object"
+        },
+        "HealthcareSite": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "address": {
+                    "$ref": "#/$defs/PostalAddress"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "geolocation": {
+                    "$ref": "#/$defs/GeoPointLocation",
+                    "description": "The geolocation of the place"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "HealthcareSite"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "HealthcareSite",
+            "type": "object"
+        },
+        "InformationEntity": {
+            "additionalProperties": false,
+            "description": "An entity that describes some information",
+            "properties": {
+                "describes": {
+                    "$ref": "#/$defs/Any",
+                    "description": "The thing that is being described"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "InformationEntity"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "InformationEntity",
+            "type": "object"
+        },
+        "Intangible": {
+            "additionalProperties": false,
+            "description": "An entity that is not a physical object, process, or information",
+            "properties": {
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Intangible"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "Intangible",
+            "type": "object"
+        },
+        "Investigation": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "objectives": {
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Investigation"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Investigation",
+            "type": "object"
+        },
+        "InvestigativeProcess": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "follows_procedure": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "part_of": {
+                    "type": "string"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "InvestigativeProcess"
+                    ],
+                    "type": "string"
+                },
+                "uses_physical_device": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "InvestigativeProcess",
+            "type": "object"
+        },
+        "InvestigativeProtocol": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "InvestigativeProtocol"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "InvestigativeProtocol",
+            "type": "object"
+        },
+        "Landform": {
+            "additionalProperties": false,
+            "description": "A natural feature of the solid surface of the Earth or other planetary body",
+            "properties": {
+                "address": {
+                    "$ref": "#/$defs/PostalAddress"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "geolocation": {
+                    "$ref": "#/$defs/GeoPointLocation",
+                    "description": "The geolocation of the place"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Landform"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "geolocation",
+                "id"
+            ],
+            "title": "Landform",
+            "type": "object"
+        },
+        "LifeEvent": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "LifeEvent"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "LifeEvent",
+            "type": "object"
+        },
+        "MaterialCollection": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "follows_procedure": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "MaterialCollection"
+                    ],
+                    "type": "string"
+                },
+                "uses_physical_device": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "MaterialCollection",
+            "type": "object"
+        },
+        "MaterialProcessing": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "follows_procedure": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "MaterialProcessing"
+                    ],
+                    "type": "string"
+                },
+                "uses_physical_device": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "MaterialProcessing",
+            "type": "object"
+        },
+        "MathematicalOperation": {
+            "additionalProperties": false,
+            "description": "Application of a mathematical operation to one or more inputs to produce one or more outputs",
+            "properties": {
+                "immediate_preceding_steps": {
+                    "description": "The steps that immediately precede this step",
+                    "items": {
+                        "$ref": "#/$defs/MathematicalOperation"
+                    },
+                    "type": "array"
+                },
+                "inputs": {
+                    "description": "The inputs to the operation",
+                    "items": {
+                        "$ref": "#/$defs/Any"
+                    },
+                    "type": "array"
+                },
+                "outputs": {
+                    "description": "The outputs of the operation",
+                    "items": {
+                        "$ref": "#/$defs/Any"
+                    },
+                    "type": "array"
+                },
+                "parts": {
+                    "description": "The parts of the process",
+                    "items": {
+                        "$ref": "#/$defs/MathematicalOperation"
+                    },
+                    "type": "array"
+                }
+            },
+            "title": "MathematicalOperation",
+            "type": "object"
+        },
+        "Measurement": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "quantity_measured": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ],
+                    "description": "The quantity being measured"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Measurement"
+                    ],
+                    "type": "string"
+                },
+                "variable_measured": {
+                    "$ref": "#/$defs/Variable",
+                    "description": "The variable being measured"
+                }
+            },
+            "title": "Measurement",
+            "type": "object"
+        },
+        "MoneyQuantity": {
+            "additionalProperties": false,
+            "description": "A quantity of money",
+            "properties": {
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "MoneyQuantity"
+                    ],
+                    "type": "string"
+                },
+                "unit": {
+                    "description": "The currency of the quantity",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The value of the quantity",
+                    "type": "number"
+                }
+            },
+            "title": "MoneyQuantity",
+            "type": "object"
+        },
+        "NamedThing": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "NamedThing"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "NamedThing",
+            "type": "object"
+        },
+        "Observation": {
+            "additionalProperties": false,
+            "description": "A statement about the state of something",
+            "properties": {
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Observation"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "Observation",
+            "type": "object"
+        },
+        "Organization": {
+            "additionalProperties": false,
+            "description": "Represents an Organization",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Organization"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Organization",
+            "type": "object"
+        },
+        "Patient": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "is_person": {
+                    "type": "string"
+                }
+            },
+            "title": "Patient",
+            "type": "object"
+        },
+        "Person": {
+            "additionalProperties": false,
+            "description": "Represents a Person",
+            "properties": {
+                "age_in_years": {
+                    "description": "Number of years since birth",
+                    "type": "integer"
+                },
+                "birth_date": {
+                    "description": "Date on which a person is born",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "primary_email": {
+                    "description": "The main email address of a person",
+                    "pattern": "^\\S+@[\\S+\\.]+\\S+",
+                    "type": "string"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Person"
+                    ],
+                    "type": "string"
+                },
+                "vital_status": {
+                    "$ref": "#/$defs/PersonStatus",
+                    "description": "living or dead status"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Person",
+            "type": "object"
+        },
+        "PersonStatus": {
+            "description": "",
+            "enum": [
+                "ALIVE",
+                "DEAD",
+                "UNKNOWN"
+            ],
+            "title": "PersonStatus",
+            "type": "string"
+        },
+        "PhysicalDevice": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "PhysicalDevice"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "PhysicalDevice",
+            "type": "object"
+        },
+        "Place": {
+            "additionalProperties": false,
+            "description": "Entities that have a somewhat fixed, physical extension.",
+            "properties": {
+                "address": {
+                    "$ref": "#/$defs/PostalAddress"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "geolocation": {
+                    "$ref": "#/$defs/GeoPointLocation",
+                    "description": "The geolocation of the place"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Place"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Place",
+            "type": "object"
+        },
+        "PlannedProcess": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "follows_procedure": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "PlannedProcess"
+                    ],
+                    "type": "string"
+                },
+                "uses_physical_device": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "PlannedProcess",
+            "type": "object"
+        },
+        "PointLocation": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "PointLocation",
+            "type": "object"
+        },
+        "PostalAddress": {
+            "additionalProperties": false,
+            "description": "Represents an Address",
+            "properties": {
+                "city": {
+                    "description": "The city",
+                    "type": "string"
+                },
+                "country": {
+                    "description": "The country",
+                    "type": "string"
+                },
+                "postal_code": {
+                    "description": "The postal code or zip code",
+                    "type": "string"
+                },
+                "state": {
+                    "description": "The state",
+                    "type": "string"
+                },
+                "street_address": {
+                    "description": "The street address",
+                    "type": "string"
+                },
+                "street_address_additional": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "PostalAddress"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "PostalAddress",
+            "type": "object"
+        },
+        "Procedure": {
+            "additionalProperties": false,
+            "description": "A canonical series of actions conducted in a certain order or manner",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Procedure"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Procedure",
+            "type": "object"
+        },
+        "Publication": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Publication"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Publication",
+            "type": "object"
+        },
+        "Quantity": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Quantity"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "Quantity",
+            "type": "object"
+        },
+        "QuantityRange": {
+            "additionalProperties": false,
+            "description": "A quantity range is a property that can be measured or counted",
+            "properties": {
+                "lower_bound": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ],
+                    "description": "The lower bound of the range"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "QuantityRange"
+                    ],
+                    "type": "string"
+                },
+                "upper_bound": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ],
+                    "description": "The upper bound of the range"
+                }
+            },
+            "title": "QuantityRange",
+            "type": "object"
+        },
+        "Ratio": {
+            "additionalProperties": false,
+            "description": "A tuple of two quantities",
+            "properties": {
+                "denominator": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ],
+                    "description": "The denominator of the ratio"
+                },
+                "numerator": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ],
+                    "description": "The numerator of the ratio"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Ratio"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "Ratio",
+            "type": "object"
+        },
+        "RawMaterial": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "RawMaterial"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "RawMaterial",
+            "type": "object"
+        },
+        "SampleCollectionProcess": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "collected_from": {
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "follows_procedure": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "material_collected": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "part_of": {
+                    "type": "string"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "SampleCollectionProcess"
+                    ],
+                    "type": "string"
+                },
+                "uses_physical_device": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "SampleCollectionProcess",
+            "type": "object"
+        },
+        "SampleMaterial": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "SampleMaterial"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "SampleMaterial",
+            "type": "object"
+        },
+        "SampleProcessing": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "follows_procedure": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "SampleProcessing"
+                    ],
+                    "type": "string"
+                },
+                "uses_physical_device": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "SampleProcessing",
+            "type": "object"
+        },
+        "SimpleQuantity": {
+            "additionalProperties": false,
+            "description": "A quantity is a property that can be measured or counted",
+            "properties": {
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "SimpleQuantity"
+                    ],
+                    "type": "string"
+                },
+                "unit": {
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The value of the quantity",
+                    "type": "number"
+                }
+            },
+            "title": "SimpleQuantity",
+            "type": "object"
+        },
+        "TimePoint": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "date_value": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "datetime_value": {
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "marker_event": {
+                    "type": "string"
+                },
+                "time_value": {
+                    "format": "time",
+                    "type": "string"
+                }
+            },
+            "title": "TimePoint",
+            "type": "object"
+        },
+        "UnitConcept": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "UnitConcept"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "UnitConcept",
+            "type": "object"
+        },
+        "UnitConversionOperation": {
+            "additionalProperties": false,
+            "description": "A unit conversion operation",
+            "properties": {
+                "immediate_preceding_steps": {
+                    "description": "The steps that immediately precede this step",
+                    "items": {
+                        "$ref": "#/$defs/MathematicalOperation"
+                    },
+                    "type": "array"
+                },
+                "inputs": {
+                    "description": "The input unit",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/Quantity"
+                            },
+                            {
+                                "$ref": "#/$defs/SimpleQuantity"
+                            },
+                            {
+                                "$ref": "#/$defs/Ratio"
+                            },
+                            {
+                                "$ref": "#/$defs/FoodIngredient"
+                            },
+                            {
+                                "$ref": "#/$defs/MoneyQuantity"
+                            }
+                        ]
+                    },
+                    "maxItems": 1,
+                    "type": "array"
+                },
+                "outputs": {
+                    "description": "The output unit",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/Quantity"
+                            },
+                            {
+                                "$ref": "#/$defs/SimpleQuantity"
+                            },
+                            {
+                                "$ref": "#/$defs/Ratio"
+                            },
+                            {
+                                "$ref": "#/$defs/FoodIngredient"
+                            },
+                            {
+                                "$ref": "#/$defs/MoneyQuantity"
+                            }
+                        ]
+                    },
+                    "maxItems": 1,
+                    "type": "array"
+                },
+                "parts": {
+                    "description": "The parts of the process",
+                    "items": {
+                        "$ref": "#/$defs/MathematicalOperation"
+                    },
+                    "type": "array"
+                }
+            },
+            "title": "UnitConversionOperation",
+            "type": "object"
+        },
+        "Variable": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "allowed_units": {
+                    "description": "The units that are allowed for this variable",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Variable"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "Variable",
+            "type": "object"
+        },
+        "XProcess": {
+            "additionalProperties": false,
+            "description": "A series of actions or steps taken in order to achieve a particular end",
+            "properties": {
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "XProcess"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "XProcess",
+            "type": "object"
+        }
+    },
+    "$id": "https://w3id.org/linkml/linkml-common",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "metamodel_version": "1.7.0",
+    "title": "linkml-common",
+    "type": "object",
+    "version": null
+}

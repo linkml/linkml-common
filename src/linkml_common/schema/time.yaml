@@ -1,0 +1,62 @@
+id: https://w3id.org/linkml-common/time
+name: linkml-common-time
+title: linkml-common-time
+description: |-
+  Common Data Model Elements
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  fhir: http://hl7.org/fhir/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - core
+  - quantities
+
+classes:
+
+  Event:
+    description: >-
+      A thing that happens
+    is_a: NamedThing
+    slots:
+      - starts_at
+      - ends_at
+
+  TimePoint:
+    slots:
+      - date_value
+      - time_value
+      - datetime_value
+      - marker_event
+      - description
+
+
+slots:
+
+  starts_at:
+    range: TimePoint
+
+  ends_at:
+    range: TimePoint
+
+  date_value:
+    range: date
+
+  time_value:
+    range: time
+
+  datetime_value:
+    range: datetime
+
+  marker_event:
+    range: Event

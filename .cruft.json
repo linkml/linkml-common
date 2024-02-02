@@ -1,0 +1,27 @@
+{
+  "template": "https://github.com/linkml/linkml-project-cookiecutter",
+  "commit": "50134eef79bd0141f8e3ce6ae037dedb5a79bf41",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "linkml-common",
+      "__project_slug": "linkml_common",
+      "github_org": "linkml",
+      "__source_path": "src/linkml_common/schema/linkml_common.yaml",
+      "project_description": "Common Data Model Elements",
+      "full_name": "LinkML Common",
+      "email": "my-name@my-org.org",
+      "__author": "LinkML Common <my-name@my-org.org>",
+      "license": "MIT",
+      "main_schema_class": "Person",
+      "create_python_classes": "Yes",
+      "use_schemasheets": "No",
+      "google_sheet_id": "1wVoaiFg47aT9YWNeRfTZ8tYHN8s8PAuDx5i2HUcDpvQ",
+      "google_sheet_tabs": "personinfo enums",
+      "__google_sheet_module": "personinfo_enums",
+      "github_token_for_pypi_deployment": "PYPI_PASSWORD",
+      "_template": "https://github.com/linkml/linkml-project-cookiecutter"
+    }
+  },
+  "directory": null
+}

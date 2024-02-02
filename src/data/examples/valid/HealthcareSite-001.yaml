@@ -1,0 +1,9 @@
+# Example data object
+id: example:HSITE001
+name: Our Lady of Perpetual Health
+address:
+  street_address: 123 Main St
+  city: Anytown
+  state: CA
+  postal_code: "12345"
+  country: USA

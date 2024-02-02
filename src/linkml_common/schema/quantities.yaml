@@ -1,0 +1,92 @@
+id: https://w3id.org/linkml-common/quantities
+name: linkml-common-quantities
+title: linkml-common-quantities
+description: |-
+  Common Data Model Elements
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  fhir: http://hl7.org/fhir/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - core
+
+classes:
+
+  Quantity:
+    is_a: Intangible
+    class_uri: fhir:Quantity
+    union_of:
+      - Quantity
+      - QuantityRange
+      - Ratio
+
+  SimpleQuantity:
+    description: >-
+      A quantity is a property that can be measured or counted
+    class_uri: fhir:SimpleQuantity
+    is_a: Quantity
+    attributes:
+      value:
+        range: float
+        description: The value of the quantity
+      unit:
+        range: UnitConcept
+
+  Ratio:
+    description: >-
+      A tuple of two quantities
+    class_uri: fhir:Ratio
+    is_a: Quantity
+    attributes:
+      numerator:
+        range: Quantity
+        description: The numerator of the ratio
+      denominator:
+        range: Quantity
+        description: The denominator of the ratio
+
+  QuantityRange:
+    description: >-
+      A quantity range is a property that can be measured or counted
+    class_uri: fhir:Range
+    is_a: Intangible
+    attributes:
+      lower_bound:
+        range: Quantity
+        description: The lower bound of the range
+      upper_bound:
+        range: Quantity
+        description: The upper bound of the range
+
+  UnitConversionOperation:
+    description: >-
+      A unit conversion operation
+    is_a: MathematicalOperation
+    slot_usage:
+      inputs:
+        range: Quantity
+        description: The input unit
+        maximum_cardinality: 1
+      outputs:
+        range: Quantity
+        description: The output unit
+        maximum_cardinality: 1
+
+  UnitConcept:
+    is_a: Concept
+    id_prefixes:
+      - UO
+      - UCUM
+      - qudt
+

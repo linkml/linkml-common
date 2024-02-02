@@ -1,0 +1,55 @@
+id: https://w3id.org/linkml-common/patterns
+name: linkml-common-patterns
+title: linkml-common-patterns
+description: |-
+  Common Data Model Elements: patterns - to be used as LinkML "interfaces", use these
+  in combination with "instantiates"
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  BFO: http://purl.obolibrary.org/obo/BFO_
+  fhir: http://hl7.org/fhir/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+
+  DesignPattern:
+    abstract: true
+
+  Composable:
+    description: >-
+      A thing that can be composed of other things
+    attributes:
+      components:
+        multivalued: true
+        range: Composable
+        close_mappings:
+          - RO:0002180
+
+  BinaryDirectedRelationship:
+    is_a: Relationship
+    slots:
+      - subject
+      - object
+
+  StateTransition:
+    #is_a: Process
+    attributes:
+      before:
+        range: Any
+        multivalued: true
+        description: The inputs to the operation
+      after:
+        range: Any
+        multivalued: true
+        description: The outputs of the operation

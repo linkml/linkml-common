@@ -1,0 +1,45 @@
+id: https://w3id.org/linkml-common/engineering
+name: linkml-common-engineering
+title: linkml-common-engineering
+description: |-
+  Common Data Model Elements
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  OBI: http://purl.obolibrary.org/obo/OBI_
+  fhir: http://hl7.org/fhir/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - measurements
+  - time
+  - plannedprocess
+
+classes:
+
+
+  EngineeringSpecification:
+    is_a: Procedure
+
+  RawMaterial:
+    is_a: NamedThing
+
+  EngineeringProcess:
+    is_a: Event
+    attributes:
+      follows_procedure:
+        range: EngineeringSpecification
+      part_of:
+        range: EngineeringProcess
+
+  EngineeringMaterialProcessing:
+    is_a: MaterialProcessing
+

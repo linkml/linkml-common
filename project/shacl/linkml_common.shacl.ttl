@@ -1,0 +1,2178 @@
+@prefix PATO: <http://purl.obolibrary.org/obo/PATO_> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix linkml_common: <https://w3id.org/linkml-common/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema1: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://hl7.org/fhir/MoneyQuantity> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A quantity of money" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:CurrencyConcept ;
+            sh:description "The currency of the quantity" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:unit ],
+        [ sh:datatype xsd:float ;
+            sh:description "The value of the quantity" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path linkml_common:value ] ;
+    sh:targetClass <http://hl7.org/fhir/MoneyQuantity> .
+
+<http://hl7.org/fhir/Range> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A quantity range is a property that can be measured or counted" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:class <http://hl7.org/fhir/Quantity> ;
+            sh:description "The upper bound of the range" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path linkml_common:upper_bound ],
+        [ sh:class <http://hl7.org/fhir/Quantity> ;
+            sh:description "The lower bound of the range" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:lower_bound ] ;
+    sh:targetClass <http://hl7.org/fhir/Range> .
+
+<http://hl7.org/fhir/Ratio> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A tuple of two quantities" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class <http://hl7.org/fhir/Quantity> ;
+            sh:description "The denominator of the ratio" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path linkml_common:denominator ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:class <http://hl7.org/fhir/Quantity> ;
+            sh:description "The numerator of the ratio" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:numerator ] ;
+    sh:targetClass <http://hl7.org/fhir/Ratio> .
+
+<http://hl7.org/fhir/SimpleQuantity> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A quantity is a property that can be measured or counted" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:float ;
+            sh:description "The value of the quantity" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path linkml_common:value ],
+        [ sh:class linkml_common:UnitConcept ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:unit ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ] ;
+    sh:targetClass <http://hl7.org/fhir/SimpleQuantity> .
+
+schema1:Intangible a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "An entity that is not a physical object, process, or information" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path linkml_common:type ] ;
+    sh:targetClass schema1:Intangible .
+
+schema1:Place a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Entities that have a somewhat fixed, physical extension." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:description ],
+        [ sh:class linkml_common:GeoPointLocation ;
+            sh:description "The geolocation of the place" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path linkml_common:geolocation ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path linkml_common:subtype ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema1:name ],
+        [ sh:class schema1:PostalAddress ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:address ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 6 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path linkml_common:type ] ;
+    sh:targetClass schema1:Place .
+
+linkml_common:BasicFoodType a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ] ;
+    sh:targetClass linkml_common:BasicFoodType .
+
+linkml_common:ClinicalCohortEnrollment a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:ClinicalCohort ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:cohort ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 8 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:class linkml_common:Patient ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:patient ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:ends_at ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path schema1:description ] ;
+    sh:targetClass linkml_common:ClinicalCohortEnrollment .
+
+linkml_common:Collection a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A group of things. The collection may be heterogeneous or homogeneous." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path linkml_common:type ],
+        [ sh:class schema1:Thing ;
+            sh:description "The members of the collection" ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:members ] ;
+    sh:targetClass linkml_common:Collection .
+
+linkml_common:CompositeFoodType a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ] ;
+    sh:targetClass linkml_common:CompositeFoodType .
+
+linkml_common:DataGenerationFromSample a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path schema1:description ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 4 ;
+            sh:path linkml_common:ends_at ],
+        [ sh:class linkml_common:Investigation ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:part_of ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 9 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:name ],
+        [ sh:class linkml_common:InvestigativeProtocol ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:follows_procedure ],
+        [ sh:class linkml_common:PhysicalDevice ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path linkml_common:uses_physical_device ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:identifier ] ;
+    sh:targetClass linkml_common:DataGenerationFromSample .
+
+linkml_common:DataStructure a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path linkml_common:type ] ;
+    sh:targetClass linkml_common:DataStructure .
+
+linkml_common:EngineeringMaterialProcessing a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path schema1:description ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:ends_at ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path linkml_common:subtype ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 8 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:class linkml_common:Procedure ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:follows_procedure ],
+        [ sh:class linkml_common:PhysicalDevice ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:uses_physical_device ] ;
+    sh:targetClass linkml_common:EngineeringMaterialProcessing .
+
+linkml_common:EnvironmentalProcess a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:targetClass linkml_common:EnvironmentalProcess .
+
+linkml_common:FoodRecipe a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path linkml_common:subtype ],
+        [ sh:class linkml_common:FoodProcessing ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:steps ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:identifier ],
+        [ sh:class linkml_common:FoodIngredient ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:ingredients ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 6 ;
+            sh:path linkml_common:ontology_types ] ;
+    sh:targetClass linkml_common:FoodRecipe .
+
+linkml_common:FoodTypeConcept a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ] ;
+    sh:targetClass linkml_common:FoodTypeConcept .
+
+linkml_common:HealthcareConditionOccurrence a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:Patient ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:patient ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path linkml_common:subtype ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:ends_at ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 8 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:class linkml_common:HealthcareEncounter ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:observed_during ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path schema1:description ] ;
+    sh:targetClass linkml_common:HealthcareConditionOccurrence .
+
+linkml_common:HealthcareOrganization a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ] ;
+    sh:targetClass linkml_common:HealthcareOrganization .
+
+linkml_common:HealthcareRole a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:Person ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:is_person ] ;
+    sh:targetClass linkml_common:HealthcareRole .
+
+linkml_common:InformationEntity a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "An entity that describes some information" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml:Any ;
+            sh:description "The thing that is being described" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path schema1:describes ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:name ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 5 ;
+            sh:path linkml_common:ontology_types ] ;
+    sh:targetClass linkml_common:InformationEntity .
+
+linkml_common:InvestigativeProcess a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:Investigation ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:part_of ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path schema1:description ],
+        [ sh:class linkml_common:InvestigativeProtocol ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:follows_procedure ],
+        [ sh:class linkml_common:PhysicalDevice ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path linkml_common:uses_physical_device ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:identifier ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 9 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path linkml_common:subtype ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 4 ;
+            sh:path linkml_common:ends_at ] ;
+    sh:targetClass linkml_common:InvestigativeProcess .
+
+linkml_common:Landform a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A natural feature of the solid surface of the Earth or other planetary body" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 6 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:description ],
+        [ sh:class linkml_common:GeoPointLocation ;
+            sh:description "The geolocation of the place" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path linkml_common:geolocation ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path linkml_common:subtype ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:identifier ],
+        [ sh:class schema1:PostalAddress ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:address ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path linkml_common:type ] ;
+    sh:targetClass linkml_common:Landform .
+
+linkml_common:LifeEvent a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:description ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 6 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema1:name ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path linkml_common:ends_at ] ;
+    sh:targetClass linkml_common:LifeEvent .
+
+linkml_common:Location a sh:NodeShape ;
+    sh:closed false ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:targetClass linkml_common:Location .
+
+linkml_common:MaterialCollection a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path schema1:description ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:class linkml_common:Procedure ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:follows_procedure ],
+        [ sh:class linkml_common:PhysicalDevice ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:uses_physical_device ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 8 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:ends_at ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path linkml_common:subtype ] ;
+    sh:targetClass linkml_common:MaterialCollection .
+
+linkml_common:MaterialProcessing a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:class linkml_common:PhysicalDevice ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:uses_physical_device ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:ends_at ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path linkml_common:subtype ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 8 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path schema1:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:class linkml_common:Procedure ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:follows_procedure ] ;
+    sh:targetClass linkml_common:MaterialProcessing .
+
+linkml_common:Measurement a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:Variable ;
+            sh:description "The variable being measured" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path linkml_common:variable_measured ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:class <http://hl7.org/fhir/Quantity> ;
+            sh:description "The quantity being measured" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:quantity_measured ] ;
+    sh:targetClass linkml_common:Measurement .
+
+linkml_common:Observation a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A statement about the state of something" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path linkml_common:type ] ;
+    sh:targetClass linkml_common:Observation .
+
+linkml_common:Organization a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Represents an Organization" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ] ;
+    sh:targetClass linkml_common:Organization .
+
+linkml_common:PlannedProcess a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 8 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ],
+        [ sh:class linkml_common:Procedure ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:follows_procedure ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:ends_at ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:PhysicalDevice ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:uses_physical_device ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path linkml_common:subtype ] ;
+    sh:targetClass linkml_common:PlannedProcess .
+
+linkml_common:PointLocation a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:targetClass linkml_common:PointLocation .
+
+linkml_common:Publication a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ] ;
+    sh:targetClass linkml_common:Publication .
+
+linkml_common:RawMaterial a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ] ;
+    sh:targetClass linkml_common:RawMaterial .
+
+linkml_common:Relationship a sh:NodeShape ;
+    sh:closed false ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:targetClass linkml_common:Relationship .
+
+linkml_common:SampleCollectionProcess a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 5 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 6 ;
+            sh:path linkml_common:ends_at ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:Investigation ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path linkml_common:part_of ],
+        [ sh:class linkml_common:NamedThing ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:collected_from ],
+        [ sh:class linkml_common:SampleMaterial ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:material_collected ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 12 ;
+            sh:path schema1:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:identifier ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 11 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:class linkml_common:InvestigativeProtocol ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path linkml_common:follows_procedure ],
+        [ sh:class linkml_common:PhysicalDevice ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:uses_physical_device ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path schema1:name ] ;
+    sh:targetClass linkml_common:SampleCollectionProcess .
+
+linkml_common:SampleProcessing a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:class linkml_common:Procedure ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:follows_procedure ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:ends_at ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 8 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ],
+        [ sh:class linkml_common:PhysicalDevice ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:uses_physical_device ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path linkml_common:subtype ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path schema1:description ] ;
+    sh:targetClass linkml_common:SampleProcessing .
+
+linkml_common:UnitConversionOperation a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A unit conversion operation" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:MathematicalOperation ;
+            sh:description "The steps that immediately precede this step" ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:immediate_preceding_steps ],
+        [ sh:class <http://hl7.org/fhir/Quantity> ;
+            sh:description "The output unit" ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path linkml_common:outputs ],
+        [ sh:class linkml_common:MathematicalOperation ;
+            sh:description "The parts of the process" ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path linkml_common:parts ],
+        [ sh:class <http://hl7.org/fhir/Quantity> ;
+            sh:description "The input unit" ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:inputs ] ;
+    sh:targetClass linkml_common:UnitConversionOperation .
+
+linkml_common:XProcess a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A series of actions or steps taken in order to achieve a particular end" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path linkml_common:type ] ;
+    sh:targetClass linkml_common:XProcess .
+
+schema1:Thing a sh:NodeShape ;
+    sh:closed false ;
+    sh:description "A physical, digital, conceptual, or other kind of thing with some common characteristics" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path linkml_common:type ] ;
+    sh:targetClass schema1:Thing .
+
+linkml_common:ClinicalCohort a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:ClinicalCohortDefinition ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:definition ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 5 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path linkml_common:subtype ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:identifier ] ;
+    sh:targetClass linkml_common:ClinicalCohort .
+
+linkml_common:ClinicalCohortDefinition a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ] ;
+    sh:targetClass linkml_common:ClinicalCohortDefinition .
+
+linkml_common:CurrencyConcept a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A currency" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ] ;
+    sh:targetClass linkml_common:CurrencyConcept .
+
+linkml_common:EngineeringProcess a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path linkml_common:subtype ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:class linkml_common:EngineeringSpecification ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:follows_procedure ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path schema1:description ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:ends_at ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 8 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:class linkml_common:EngineeringProcess ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:part_of ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ] ;
+    sh:targetClass linkml_common:EngineeringProcess .
+
+linkml_common:EngineeringSpecification a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ] ;
+    sh:targetClass linkml_common:EngineeringSpecification .
+
+linkml_common:Event a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A thing that happens" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path linkml_common:type ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:identifier ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 6 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path linkml_common:ends_at ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema1:name ] ;
+    sh:targetClass linkml_common:Event .
+
+linkml_common:FoodIngredient a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path linkml_common:type ] ;
+    sh:targetClass linkml_common:FoodIngredient .
+
+linkml_common:FoodProcessing a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:Procedure ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:follows_procedure ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:class linkml_common:PhysicalDevice ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:uses_physical_device ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:ends_at ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 8 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path schema1:description ] ;
+    sh:targetClass linkml_common:FoodProcessing .
+
+linkml_common:HealthcareEncounter a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 8 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path linkml_common:starts_at ],
+        [ sh:class linkml_common:HealthcareProvider ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path linkml_common:provider ],
+        [ sh:class linkml_common:TimePoint ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:ends_at ],
+        [ sh:description "An enum with a more specific type" ;
+            sh:in ( "Inpatient Visit" "Emergency Room Visit" "Emergency Room and Inpatient Visit" "Non-hospital institution Visit" "Outpatient Visit" "Home Visit" "Telehealth Visit" "Pharmacy Visit" "Laboratory Visit" "Ambulance Visit" "Case Management Visit" ) ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ],
+        [ sh:class linkml_common:Patient ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:patient ] ;
+    sh:targetClass linkml_common:HealthcareEncounter .
+
+linkml_common:HealthcareProvider a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:Concept ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:speciality ],
+        [ sh:class linkml_common:HealthcareSite ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path linkml_common:care_site ],
+        [ sh:class linkml_common:Person ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path linkml_common:is_person ] ;
+    sh:targetClass linkml_common:HealthcareProvider .
+
+linkml_common:HealthcareSite a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class schema1:PostalAddress ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:address ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema1:name ],
+        [ sh:class linkml_common:GeoPointLocation ;
+            sh:description "The geolocation of the place" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path linkml_common:geolocation ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 6 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path schema1:description ] ;
+    sh:targetClass linkml_common:HealthcareSite .
+
+linkml_common:NamedThing a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ] ;
+    sh:targetClass linkml_common:NamedThing .
+
+linkml_common:SampleMaterial a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ] ;
+    sh:targetClass linkml_common:SampleMaterial .
+
+linkml_common:Variable a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:UnitConcept ;
+            sh:description "The units that are allowed for this variable" ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:allowed_units ] ;
+    sh:targetClass linkml_common:Variable .
+
+linkml_common:UnitConcept a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ] ;
+    sh:targetClass linkml_common:UnitConcept .
+
+schema1:PostalAddress a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Represents an Address" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "The postal code or zip code" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path linkml_common:postal_code ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "The city" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:city ],
+        [ sh:datatype xsd:string ;
+            sh:description "The state" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:state ],
+        [ sh:datatype xsd:string ;
+            sh:description "The street address" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path linkml_common:street_address ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path linkml_common:street_address_additional ],
+        [ sh:datatype xsd:string ;
+            sh:description "The country" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path linkml_common:country ] ;
+    sh:targetClass schema1:PostalAddress .
+
+linkml_common:GeoPointLocation a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:decimal ;
+            sh:description "The altitude of the location" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:altitude ],
+        [ sh:datatype xsd:decimal ;
+            sh:description "The latitude of the location" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path linkml_common:latitude ],
+        [ sh:datatype xsd:decimal ;
+            sh:description "The longitude of the location" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path linkml_common:longitude ] ;
+    sh:targetClass linkml_common:GeoPointLocation .
+
+linkml_common:Investigation a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 5 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path linkml_common:objectives ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path schema1:description ] ;
+    sh:targetClass linkml_common:Investigation .
+
+linkml_common:InvestigativeProtocol a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ] ;
+    sh:targetClass linkml_common:InvestigativeProtocol .
+
+linkml_common:Patient a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:Person ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path linkml_common:is_person ] ;
+    sh:targetClass linkml_common:Patient .
+
+linkml_common:Person a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Represents a Person" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "The main email address of a person" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:email ;
+            sh:pattern "^\\S+@[\\S+\\.]+\\S+" ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:integer ;
+            sh:description "Number of years since birth" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:age_in_years ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path linkml_common:subtype ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:date ;
+            sh:description "Date on which a person is born" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:birthDate ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 8 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:description "living or dead status" ;
+            sh:in ( PATO:0001421 PATO:0001422 "UNKNOWN" ) ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:vital_status ] ;
+    sh:targetClass linkml_common:Person .
+
+linkml:Any a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:targetClass linkml:Any .
+
+linkml_common:MathematicalOperation a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Application of a mathematical operation to one or more inputs to produce one or more outputs" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:MathematicalOperation ;
+            sh:description "The parts of the process" ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path linkml_common:parts ],
+        [ sh:class linkml:Any ;
+            sh:description "The inputs to the operation" ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 0 ;
+            sh:path linkml_common:inputs ],
+        [ sh:class linkml:Any ;
+            sh:description "The outputs of the operation" ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 1 ;
+            sh:path linkml_common:outputs ],
+        [ sh:class linkml_common:MathematicalOperation ;
+            sh:description "The steps that immediately precede this step" ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 3 ;
+            sh:path linkml_common:immediate_preceding_steps ] ;
+    sh:targetClass linkml_common:MathematicalOperation .
+
+linkml_common:Procedure a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A canonical series of actions conducted in a certain order or manner" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ] ;
+    sh:targetClass linkml_common:Procedure .
+
+<http://hl7.org/fhir/Quantity> a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path linkml_common:type ] ;
+    sh:targetClass <http://hl7.org/fhir/Quantity> .
+
+linkml_common:PhysicalDevice a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ] ;
+    sh:targetClass linkml_common:PhysicalDevice .
+
+linkml_common:TimePoint a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:dateTime ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:datetime_value ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:time ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path linkml_common:time_value ],
+        [ sh:class linkml_common:Event ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path linkml_common:marker_event ],
+        [ sh:datatype xsd:date ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path linkml_common:date_value ] ;
+    sh:targetClass linkml_common:TimePoint .
+
+linkml_common:Concept a sh:NodeShape ;
+    sh:closed true ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "A type for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path linkml_common:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "An enum with a more specific type" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path linkml_common:subtype ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema1:name ],
+        [ sh:class linkml_common:Concept ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path linkml_common:ontology_types ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema1:description ] ;
+    sh:targetClass linkml_common:Concept .
+

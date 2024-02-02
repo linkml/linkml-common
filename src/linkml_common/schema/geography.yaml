@@ -1,0 +1,91 @@
+id: https://w3id.org/linkml-common/geography
+name: linkml-common-geography
+title: linkml-common-geography
+description: |-
+  Common Data Model Elements
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  ENVO: http://purl.obolibrary.org/obo/ENVO_
+  fhir: http://hl7.org/fhir/
+  omopschema: http://example.org/omop/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - core
+  - quantities
+
+classes:
+
+  Place:
+    class_uri: schema:Place
+    is_a: NamedThing
+    description: Entities that have a somewhat fixed, physical extension.
+    slots:
+      - address
+      - geolocation
+
+  Landform:
+    is_a: Place
+    description: >-
+      A natural feature of the solid surface of the Earth or other planetary body
+    exact_mappings:
+      - ENVO:00000083
+      - fhir:Location
+    slot_usage:
+      geolocation:
+        required: true
+
+  PostalAddress:
+    class_uri: schema:PostalAddress
+    is_a: Entity
+    description: >-
+      Represents an Address
+    attributes:
+      street_address:
+        description: The street address
+        exact_mappings:
+          - omopschema:address_1
+      street_address_additional:
+        exact_mappings:
+          - omopschema:address_2
+      city:
+        description: The city
+      state:
+        description: The state
+      postal_code:
+        description: The postal code or zip code
+      country:
+        description: The country
+    exact_mappings:
+      - omopschema:CARE_SITE
+
+  GeoPointLocation:
+    is_a: PointLocation
+    attributes:
+      latitude:
+        range: decimal
+        description: The latitude of the location
+      longitude:
+        range: decimal
+        description: The longitude of the location
+      altitude:
+        range: decimal
+        description: The altitude of the location
+        unit:
+          ucum_code: m
+
+slots:
+  address:
+    range: PostalAddress
+  geolocation:
+    range: GeoPointLocation
+    description: The geolocation of the place

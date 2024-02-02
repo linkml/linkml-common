@@ -1,0 +1,30 @@
+id: https://w3id.org/linkml-common/environmental
+name: linkml-common-environmental
+title: linkml-common-environmental
+description: |-
+  Common Data Model Elements
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  ENVO: http://purl.obolibrary.org/obo/ENVO_
+  fhir: http://hl7.org/fhir/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - core
+  - quantities
+
+classes:
+
+  EnvironmentalProcess:
+    comments:
+      - TODO
+    #is_a: Process

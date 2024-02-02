@@ -1,0 +1,50 @@
+id: https://w3id.org/linkml-common/foods
+name: linkml-common-foods
+title: linkml-common-foods
+description: |-
+  Common Data Model Elements
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  fhir: http://hl7.org/fhir/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - social
+
+classes:
+
+  FoodRecipe:
+    is_a: Procedure
+    attributes:
+      ingredients:
+        multivalued: true
+        range: FoodIngredient
+      steps:
+        multivalued: true
+        range: FoodProcessing
+
+  FoodIngredient:
+    is_a: Quantity
+
+  FoodProcessing:
+    is_a: MaterialProcessing
+
+  FoodTypeConcept:
+    is_a: Concept
+
+  BasicFoodType:
+    is_a: FoodTypeConcept
+
+  CompositeFoodType:
+    is_a: FoodTypeConcept
+

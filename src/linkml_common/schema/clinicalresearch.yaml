@@ -1,0 +1,48 @@
+id: https://w3id.org/linkml-common/clinicalresearch
+name: linkml-common-clinicalresearch
+title: linkml-common-clinicalresearch
+description: |-
+  Common Data Model Elements
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  fhir: http://hl7.org/fhir/
+  omopschema: http://example.org/omop/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - healthcare
+  - investigations
+
+classes:
+
+  ClinicalCohort:
+    is_a: NamedThing
+    attributes:
+      definition:
+        range: ClinicalCohortDefinition
+
+  ClinicalCohortDefinition:
+    is_a: NamedThing
+    exact_mappings:
+      - omopschema:COHORT_DEFINITION
+
+  ClinicalCohortEnrollment:
+    is_a: Event
+    exact_mappings:
+      - omopschema:COHORT
+    attributes:
+      patient:
+        range: Patient
+      cohort:
+        range: ClinicalCohort
+

@@ -1,0 +1,554 @@
+message BasicFoodType
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message ClinicalCohort
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  clinicalCohortDefinition definition = 0
+ }
+message ClinicalCohortDefinition
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message ClinicalCohortEnrollment
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  patient patient = 0
+  clinicalCohort cohort = 0
+ }
+// A group of things. The collection may be heterogeneous or homogeneous.
+message Collection
+ {
+  string type = 0
+ repeated  entity members = 0
+ }
+message CompositeFoodType
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message Concept
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message DataGenerationFromSample
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  physicalDevice usesPhysicalDevice = 0
+  investigativeProtocol followsProcedure = 0
+  investigation partOf = 0
+ }
+message DataStructure
+ {
+  string type = 0
+ }
+message EngineeringMaterialProcessing
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  procedure followsProcedure = 0
+  physicalDevice usesPhysicalDevice = 0
+ }
+message EngineeringProcess
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  engineeringSpecification followsProcedure = 0
+  engineeringProcess partOf = 0
+ }
+message EngineeringSpecification
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+// A thing that happens
+message Event
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+ }
+message FoodIngredient
+ {
+  string type = 0
+ }
+message FoodProcessing
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  procedure followsProcedure = 0
+  physicalDevice usesPhysicalDevice = 0
+ }
+message FoodRecipe
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ repeated  foodIngredient ingredients = 0
+ repeated  foodProcessing steps = 0
+ }
+message FoodTypeConcept
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message GeoPointLocation
+ {
+  decimal latitude = 0
+  decimal longitude = 0
+  decimal altitude = 0
+ }
+message HealthcareConditionOccurrence
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  patient patient = 0
+  healthcareEncounter observedDuring = 0
+ }
+message HealthcareEncounter
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  patient patient = 0
+  healthcareProvider provider = 0
+  healthcareEncounterClassification subtype = 0
+ }
+message HealthcareOrganization
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message HealthcareProvider
+ {
+  person isPerson = 0
+  concept speciality = 0
+  healthcareSite careSite = 0
+ }
+message HealthcareRole
+ {
+  person isPerson = 0
+ }
+message HealthcareSite
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  postalAddress address = 0
+  geoPointLocation geolocation = 0
+ }
+// An entity that describes some information
+message InformationEntity
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  any describes = 0
+ }
+// An entity that is not a physical object, process, or information
+message Intangible
+ {
+  string type = 0
+ }
+message Investigation
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  string objectives = 0
+ }
+message InvestigativeProcess
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  physicalDevice usesPhysicalDevice = 0
+  investigativeProtocol followsProcedure = 0
+  investigation partOf = 0
+ }
+message InvestigativeProtocol
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+// A natural feature of the solid surface of the Earth or other planetary body
+message Landform
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  postalAddress address = 0
+  geoPointLocation geolocation = 0
+ }
+message LifeEvent
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+ }
+message MaterialCollection
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  procedure followsProcedure = 0
+  physicalDevice usesPhysicalDevice = 0
+ }
+message MaterialProcessing
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  procedure followsProcedure = 0
+  physicalDevice usesPhysicalDevice = 0
+ }
+// Application of a mathematical operation to one or more inputs to produce one or more outputs
+message MathematicalOperation
+ {
+ repeated  any inputs = 0
+ repeated  any outputs = 0
+ repeated  mathematicalOperation parts = 0
+ repeated  mathematicalOperation immediatePrecedingSteps = 0
+ }
+message Measurement
+ {
+  string type = 0
+  quantity quantityMeasured = 0
+  variable variableMeasured = 0
+ }
+message NamedThing
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+// A statement about the state of something
+message Observation
+ {
+  string type = 0
+ }
+// Represents an Organization
+message Organization
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message Patient
+ {
+  person isPerson = 0
+ }
+// Represents a Person
+message Person
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  string primaryEmail = 0
+  date birthDate = 0
+  integer ageInYears = 0
+  personStatus vitalStatus = 0
+ }
+message PhysicalDevice
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+// Entities that have a somewhat fixed, physical extension.
+message Place
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  postalAddress address = 0
+  geoPointLocation geolocation = 0
+ }
+message PlannedProcess
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  procedure followsProcedure = 0
+  physicalDevice usesPhysicalDevice = 0
+ }
+// Represents an Address
+message PostalAddress
+ {
+  string type = 0
+  string streetAddress = 0
+  string streetAddressAdditional = 0
+  string city = 0
+  string state = 0
+  string postalCode = 0
+  string country = 0
+ }
+// A canonical series of actions conducted in a certain order or manner
+message Procedure
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message Publication
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message Quantity
+ {
+  string type = 0
+ }
+// A quantity range is a property that can be measured or counted
+message QuantityRange
+ {
+  string type = 0
+  quantity lowerBound = 0
+  quantity upperBound = 0
+ }
+// A tuple of two quantities
+message Ratio
+ {
+  string type = 0
+  quantity numerator = 0
+  quantity denominator = 0
+ }
+message RawMaterial
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message SampleCollectionProcess
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  physicalDevice usesPhysicalDevice = 0
+  investigativeProtocol followsProcedure = 0
+  investigation partOf = 0
+  sampleMaterial materialCollected = 0
+  namedThing collectedFrom = 0
+ }
+message SampleMaterial
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message SampleProcessing
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  procedure followsProcedure = 0
+  physicalDevice usesPhysicalDevice = 0
+ }
+// A quantity is a property that can be measured or counted
+message SimpleQuantity
+ {
+  string type = 0
+  float value = 0
+  unitConcept unit = 0
+ }
+message TimePoint
+ {
+  date dateValue = 0
+  time timeValue = 0
+  datetime datetimeValue = 0
+  event markerEvent = 0
+  string description = 0
+ }
+message UnitConcept
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+// A unit conversion operation
+message UnitConversionOperation
+ {
+ repeated  mathematicalOperation parts = 0
+ repeated  mathematicalOperation immediatePrecedingSteps = 0
+ repeated  quantity inputs = 0
+ repeated  quantity outputs = 0
+ }
+message Variable
+ {
+  string type = 0
+ repeated  unitConcept allowedUnits = 0
+ }
+// A series of actions or steps taken in order to achieve a particular end
+message XProcess
+ {
+  string type = 0
+ }
