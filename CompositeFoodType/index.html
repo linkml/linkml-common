@@ -213,7 +213,7 @@
 
       CompositeFoodType : ontology_types
 
-          CompositeFoodType --|&gt; Concept : ontology_types
+          CompositeFoodType --&gt; Concept : ontology_types
 
       CompositeFoodType : subtype
 
@@ -264,7 +264,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>
@@ -315,6 +315,8 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: CompositeFoodType
+implements:
+- linkml_common:Composable
 from_schema: https://w3id.org/linkml/linkml-common
 is_a: FoodTypeConcept
 
@@ -323,6 +325,8 @@ is_a: FoodTypeConcept
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: CompositeFoodType
+implements:
+- linkml_common:Composable
 from_schema: https://w3id.org/linkml/linkml-common
 is_a: FoodTypeConcept
 attributes:

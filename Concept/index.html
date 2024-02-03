@@ -211,6 +211,7 @@
       NamedThing &lt;|-- Concept
 
 
+      Concept &lt;|-- QuantityKind
       Concept &lt;|-- UnitConcept
       Concept &lt;|-- FoodTypeConcept
       Concept &lt;|-- CurrencyConcept
@@ -224,7 +225,7 @@
 
       Concept : ontology_types
 
-          Concept --|&gt; Concept : ontology_types
+          Concept --&gt; Concept : ontology_types
 
       Concept : subtype
 
@@ -237,6 +238,7 @@
 <li><a href="../Entity/">Entity</a><ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
 <li><strong>Concept</strong><ul>
+<li><a href="../QuantityKind/">QuantityKind</a></li>
 <li><a href="../UnitConcept/">UnitConcept</a></li>
 <li><a href="../FoodTypeConcept/">FoodTypeConcept</a></li>
 <li><a href="../CurrencyConcept/">CurrencyConcept</a></li>
@@ -274,7 +276,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>
@@ -314,6 +316,12 @@
 <td><a href="./">Concept</a></td>
 </tr>
 <tr>
+<td><a href="../QuantityKind/">QuantityKind</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
 <td><a href="../UnitConcept/">UnitConcept</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
 <td>range</td>
@@ -344,7 +352,19 @@
 <td><a href="./">Concept</a></td>
 </tr>
 <tr>
+<td><a href="../Specification/">Specification</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
 <td><a href="../Procedure/">Procedure</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Agent/">Agent</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
@@ -362,7 +382,19 @@
 <td><a href="./">Concept</a></td>
 </tr>
 <tr>
+<td><a href="../AutomatedAgent/">AutomatedAgent</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
 <td><a href="../LifeEvent/">LifeEvent</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../CreativeWork/">CreativeWork</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
@@ -375,6 +407,12 @@
 </tr>
 <tr>
 <td><a href="../InvestigativeProtocol/">InvestigativeProtocol</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../StudyDesign/">StudyDesign</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
@@ -506,6 +544,12 @@
 <td><a href="./">Concept</a></td>
 </tr>
 <tr>
+<td><a href="../EnvironmentalSite/">EnvironmentalSite</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
 <td><a href="../EngineeringSpecification/">EngineeringSpecification</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
 <td>range</td>
@@ -543,6 +587,12 @@
 </tr>
 <tr>
 <td><a href="../ClinicalCohortEnrollment/">ClinicalCohortEnrollment</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Dataset/">Dataset</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>

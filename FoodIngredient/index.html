@@ -210,6 +210,10 @@
     class FoodIngredient
       Quantity &lt;|-- FoodIngredient
 
+      FoodIngredient : has_quantity_kind
+
+          FoodIngredient --&gt; QuantityKind : has_quantity_kind
+
       FoodIngredient : type
 
 
@@ -238,6 +242,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../has_quantity_kind/">has_quantity_kind</a></td>
+<td>0..1 <br/> <a href="../QuantityKind/">QuantityKind</a></td>
+<td>The kind of quantity</td>
+<td><a href="../Quantity/">Quantity</a></td>
+</tr>
 <tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
@@ -305,6 +315,16 @@ is_a: Quantity
 from_schema: https://w3id.org/linkml/linkml-common
 is_a: Quantity
 attributes:
+  has_quantity_kind:
+    name: has_quantity_kind
+    description: The kind of quantity
+    from_schema: https://w3id.org/linkml-common/quantities
+    rank: 1000
+    alias: has_quantity_kind
+    owner: FoodIngredient
+    domain_of:
+    - Quantity
+    range: QuantityKind
   type:
     name: type
     description: A type for a thing

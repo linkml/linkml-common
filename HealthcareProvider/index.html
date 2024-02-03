@@ -212,22 +212,33 @@
 
       HealthcareProvider : care_site
 
-          HealthcareProvider --|&gt; HealthcareSite : care_site
+          HealthcareProvider --&gt; HealthcareSite : care_site
 
       HealthcareProvider : is_person
 
-          HealthcareProvider --|&gt; Person : is_person
+          HealthcareProvider --&gt; Person : is_person
 
       HealthcareProvider : speciality
 
-          HealthcareProvider --|&gt; Concept : speciality
+          HealthcareProvider --&gt; Concept : speciality
+
+      HealthcareProvider : type
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
+<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Intangible/">Intangible</a><ul>
+<li><a href="../Role/">Role</a><ul>
 <li><a href="../HealthcareRole/">HealthcareRole</a><ul>
 <li><strong>HealthcareProvider</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -259,6 +270,12 @@
 <td>0..1 <br/> <a href="../Person/">Person</a></td>
 <td></td>
 <td><a href="../HealthcareRole/">HealthcareRole</a></td>
+</tr>
+<tr>
+<td><a href="../type/">type</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A type for a thing</td>
+<td><a href="../Entity/">Entity</a></td>
 </tr>
 </tbody>
 </table>
@@ -359,6 +376,18 @@ attributes:
     domain_of:
     - HealthcareRole
     range: Person
+  type:
+    name: type
+    description: A type for a thing
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    designates_type: true
+    alias: type
+    owner: HealthcareProvider
+    domain_of:
+    - Entity
+    - NamedThing
+    range: string
 
 </code></pre>
 </details>

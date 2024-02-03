@@ -220,11 +220,15 @@
 
       Investigation : ontology_types
 
-          Investigation --|&gt; Concept : ontology_types
+          Investigation --&gt; Concept : ontology_types
 
       Investigation : subtype
 
       Investigation : type
+
+      Investigation : variables
+
+          Investigation --&gt; Variable : variables
 
 
 </div>
@@ -256,6 +260,12 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../variables/">variables</a></td>
+<td>0..* <br/> <a href="../Variable/">Variable</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
@@ -271,7 +281,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>
@@ -322,6 +332,12 @@
 <td>range</td>
 <td><a href="./">Investigation</a></td>
 </tr>
+<tr>
+<td><a href="../Dataset/">Dataset</a></td>
+<td><a href="../collected_as_part_of/">collected_as_part_of</a></td>
+<td>range</td>
+<td><a href="./">Investigation</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -363,6 +379,12 @@ attributes:
     from_schema: https://w3id.org/linkml-common/investigations
     rank: 1000
     range: string
+  variables:
+    name: variables
+    from_schema: https://w3id.org/linkml-common/investigations
+    rank: 1000
+    multivalued: true
+    range: Variable
 
 </code></pre>
 </details>
@@ -383,6 +405,16 @@ attributes:
     domain_of:
     - Investigation
     range: string
+  variables:
+    name: variables
+    from_schema: https://w3id.org/linkml-common/investigations
+    rank: 1000
+    multivalued: true
+    alias: variables
+    owner: Investigation
+    domain_of:
+    - Investigation
+    range: Variable
   id:
     name: id
     description: A unique identifier for a thing

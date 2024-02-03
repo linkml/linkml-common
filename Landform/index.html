@@ -208,13 +208,13 @@
 
       Landform : address
 
-          Landform --|&gt; PostalAddress : address
+          Landform --&gt; PostalAddress : address
 
       Landform : description
 
       Landform : geolocation
 
-          Landform --|&gt; GeoPointLocation : geolocation
+          Landform --&gt; GeoPointLocation : geolocation
 
       Landform : id
 
@@ -222,7 +222,7 @@
 
       Landform : ontology_types
 
-          Landform --|&gt; Concept : ontology_types
+          Landform --&gt; Concept : ontology_types
 
       Landform : subtype
 
@@ -282,7 +282,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>

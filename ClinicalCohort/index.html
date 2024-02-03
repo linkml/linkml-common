@@ -205,6 +205,7 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-clinicalcohort">Class: ClinicalCohort</h1>
+<p><em>A group of patients who share a common set of characteristics</em></p>
 <p>URI: <a href="https://w3id.org/linkml-common/ClinicalCohort">linkml_common:ClinicalCohort</a></p>
 <div class="mermaid"> classDiagram
     class ClinicalCohort
@@ -212,7 +213,7 @@
 
       ClinicalCohort : definition
 
-          ClinicalCohort --|&gt; ClinicalCohortDefinition : definition
+          ClinicalCohort --&gt; ClinicalCohortDefinition : definition
 
       ClinicalCohort : description
 
@@ -222,7 +223,7 @@
 
       ClinicalCohort : ontology_types
 
-          ClinicalCohort --|&gt; Concept : ontology_types
+          ClinicalCohort --&gt; Concept : ontology_types
 
       ClinicalCohort : subtype
 
@@ -273,7 +274,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>
@@ -343,6 +344,7 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: ClinicalCohort
+description: A group of patients who share a common set of characteristics
 from_schema: https://w3id.org/linkml/linkml-common
 is_a: NamedThing
 attributes:
@@ -357,6 +359,7 @@ attributes:
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: ClinicalCohort
+description: A group of patients who share a common set of characteristics
 from_schema: https://w3id.org/linkml/linkml-common
 is_a: NamedThing
 attributes:

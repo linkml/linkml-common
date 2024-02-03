@@ -224,7 +224,19 @@
 
       Event : ends_at
 
-          Event --|&gt; TimePoint : ends_at
+          Event --&gt; TimePoint : ends_at
+
+      Event : happens_at
+
+          Event --&gt; TimePoint : happens_at
+
+      Event : has_duration
+
+          Event --&gt; Duration : has_duration
+
+      Event : has_interval
+
+          Event --&gt; TemporalInterval : has_interval
 
       Event : id
 
@@ -232,11 +244,11 @@
 
       Event : ontology_types
 
-          Event --|&gt; Concept : ontology_types
+          Event --&gt; Concept : ontology_types
 
       Event : starts_at
 
-          Event --|&gt; TimePoint : starts_at
+          Event --&gt; TimePoint : starts_at
 
       Event : subtype
 
@@ -286,6 +298,24 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>0..1 <br/> <a href="../TimePoint/">TimePoint</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>0..1 <br/> <a href="../TemporalInterval/">TemporalInterval</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../has_duration/">has_duration</a></td>
+<td>0..1 <br/> <a href="../Duration/">Duration</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
@@ -301,7 +331,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>
@@ -377,6 +407,9 @@ is_a: NamedThing
 slots:
 - starts_at
 - ends_at
+- happens_at
+- has_interval
+- has_duration
 
 </code></pre>
 </details>
@@ -395,6 +428,8 @@ attributes:
     owner: Event
     domain_of:
     - Event
+    - TimePointOrTemporalInterval
+    - TemporalInterval
     range: TimePoint
   ends_at:
     name: ends_at
@@ -404,7 +439,36 @@ attributes:
     owner: Event
     domain_of:
     - Event
+    - TimePointOrTemporalInterval
+    - TemporalInterval
     range: TimePoint
+  happens_at:
+    name: happens_at
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: happens_at
+    owner: Event
+    domain_of:
+    - Event
+    range: TimePoint
+  has_interval:
+    name: has_interval
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: has_interval
+    owner: Event
+    domain_of:
+    - Event
+    range: TemporalInterval
+  has_duration:
+    name: has_duration
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: has_duration
+    owner: Event
+    domain_of:
+    - Event
+    range: Duration
   id:
     name: id
     description: A unique identifier for a thing

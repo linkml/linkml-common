@@ -213,7 +213,7 @@
 
       HealthcareOrganization : ontology_types
 
-          HealthcareOrganization --|&gt; Concept : ontology_types
+          HealthcareOrganization --&gt; Concept : ontology_types
 
       HealthcareOrganization : subtype
 
@@ -225,8 +225,11 @@
 <ul>
 <li><a href="../Entity/">Entity</a><ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Agent/">Agent</a><ul>
 <li><a href="../Organization/">Organization</a><ul>
 <li><strong>HealthcareOrganization</strong></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -261,7 +264,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>

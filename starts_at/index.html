@@ -336,6 +336,21 @@
 <td>no</td>
 </tr>
 <tr>
+<td><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TemporalInterval/">TemporalInterval</a></td>
+<td>A period of time</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TimePoint/">TimePoint</a></td>
+<td>A point in time</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../LifeEvent/">LifeEvent</a></td>
 <td></td>
 <td>no</td>
@@ -362,7 +377,7 @@
 </tr>
 <tr>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
-<td></td>
+<td>A process that follows a defined procedure or plan</td>
 <td>no</td>
 </tr>
 <tr>
@@ -402,7 +417,7 @@
 </tr>
 <tr>
 <td><a href="../ClinicalCohortEnrollment/">ClinicalCohortEnrollment</a></td>
-<td></td>
+<td>An event relating a patient to a clinical cohort</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -425,6 +440,8 @@ rank: 1000
 alias: starts_at
 domain_of:
 - Event
+- TimePointOrTemporalInterval
+- TemporalInterval
 range: TimePoint
 
 </code></pre>

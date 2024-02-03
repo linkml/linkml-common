@@ -200,6 +200,7 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-clinicalcohortenrollment">Class: ClinicalCohortEnrollment</h1>
+<p><em>An event relating a patient to a clinical cohort</em></p>
 <p>URI: <a href="https://w3id.org/linkml-common/ClinicalCohortEnrollment">linkml_common:ClinicalCohortEnrollment</a></p>
 <div class="mermaid"> classDiagram
     class ClinicalCohortEnrollment
@@ -207,13 +208,25 @@
 
       ClinicalCohortEnrollment : cohort
 
-          ClinicalCohortEnrollment --|&gt; ClinicalCohort : cohort
+          ClinicalCohortEnrollment --&gt; ClinicalCohort : cohort
 
       ClinicalCohortEnrollment : description
 
       ClinicalCohortEnrollment : ends_at
 
-          ClinicalCohortEnrollment --|&gt; TimePoint : ends_at
+          ClinicalCohortEnrollment --&gt; TimePoint : ends_at
+
+      ClinicalCohortEnrollment : happens_at
+
+          ClinicalCohortEnrollment --&gt; TimePoint : happens_at
+
+      ClinicalCohortEnrollment : has_duration
+
+          ClinicalCohortEnrollment --&gt; Duration : has_duration
+
+      ClinicalCohortEnrollment : has_interval
+
+          ClinicalCohortEnrollment --&gt; TemporalInterval : has_interval
 
       ClinicalCohortEnrollment : id
 
@@ -221,15 +234,15 @@
 
       ClinicalCohortEnrollment : ontology_types
 
-          ClinicalCohortEnrollment --|&gt; Concept : ontology_types
+          ClinicalCohortEnrollment --&gt; Concept : ontology_types
 
       ClinicalCohortEnrollment : patient
 
-          ClinicalCohortEnrollment --|&gt; Patient : patient
+          ClinicalCohortEnrollment --&gt; Patient : patient
 
       ClinicalCohortEnrollment : starts_at
 
-          ClinicalCohortEnrollment --|&gt; TimePoint : starts_at
+          ClinicalCohortEnrollment --&gt; TimePoint : starts_at
 
       ClinicalCohortEnrollment : subtype
 
@@ -286,6 +299,24 @@
 <td><a href="../Event/">Event</a></td>
 </tr>
 <tr>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>0..1 <br/> <a href="../TimePoint/">TimePoint</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>0..1 <br/> <a href="../TemporalInterval/">TemporalInterval</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
+<td><a href="../has_duration/">has_duration</a></td>
+<td>0..1 <br/> <a href="../Duration/">Duration</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
@@ -301,7 +332,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>
@@ -356,6 +387,7 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: ClinicalCohortEnrollment
+description: An event relating a patient to a clinical cohort
 from_schema: https://w3id.org/linkml/linkml-common
 exact_mappings:
 - omopschema:COHORT
@@ -376,6 +408,7 @@ attributes:
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: ClinicalCohortEnrollment
+description: An event relating a patient to a clinical cohort
 from_schema: https://w3id.org/linkml/linkml-common
 exact_mappings:
 - omopschema:COHORT
@@ -408,6 +441,8 @@ attributes:
     owner: ClinicalCohortEnrollment
     domain_of:
     - Event
+    - TimePointOrTemporalInterval
+    - TemporalInterval
     range: TimePoint
   ends_at:
     name: ends_at
@@ -417,7 +452,36 @@ attributes:
     owner: ClinicalCohortEnrollment
     domain_of:
     - Event
+    - TimePointOrTemporalInterval
+    - TemporalInterval
     range: TimePoint
+  happens_at:
+    name: happens_at
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: happens_at
+    owner: ClinicalCohortEnrollment
+    domain_of:
+    - Event
+    range: TimePoint
+  has_interval:
+    name: has_interval
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: has_interval
+    owner: ClinicalCohortEnrollment
+    domain_of:
+    - Event
+    range: TemporalInterval
+  has_duration:
+    name: has_duration
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: has_duration
+    owner: ClinicalCohortEnrollment
+    domain_of:
+    - Event
+    range: Duration
   id:
     name: id
     description: A unique identifier for a thing

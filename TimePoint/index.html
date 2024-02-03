@@ -142,6 +142,11 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#inheritance">
+    Inheritance
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
     Slots
   </a>
@@ -200,24 +205,51 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-timepoint">Class: TimePoint</h1>
+<p><em>A point in time. Can be fully specified, or specified in relative terms.</em></p>
 <p>URI: <a href="https://w3id.org/linkml-common/TimePoint">linkml_common:TimePoint</a></p>
 <div class="mermaid"> classDiagram
     class TimePoint
+      TimePointOrTemporalInterval &lt;|-- TimePoint
+
       TimePoint : date_value
 
       TimePoint : datetime_value
 
       TimePoint : description
 
+      TimePoint : ends_at
+
+          TimePoint --&gt; TimePoint : ends_at
+
       TimePoint : marker_event
 
-          TimePoint --|&gt; Event : marker_event
+          TimePoint --&gt; Event : marker_event
+
+      TimePoint : starts_at
+
+          TimePoint --&gt; TimePoint : starts_at
 
       TimePoint : time_value
 
+      TimePoint : type
+
+      TimePoint : year_value
+
 
 </div>
-<!-- no inheritance hierarchy -->
+<h2 id="inheritance">Inheritance</h2>
+<ul>
+<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Intangible/">Intangible</a><ul>
+<li><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a><ul>
+<li><strong>TimePoint</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -229,6 +261,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../year_value/">year_value</a></td>
+<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
+<td></td>
+<td>direct</td>
+</tr>
 <tr>
 <td><a href="../date_value/">date_value</a></td>
 <td>0..1 <br/> <a href="../Date/">Date</a></td>
@@ -259,6 +297,24 @@
 <td>A human-readable description for a thing</td>
 <td>direct</td>
 </tr>
+<tr>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>0..1 <br/> <a href="./">TimePoint</a></td>
+<td></td>
+<td><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>0..1 <br/> <a href="./">TimePoint</a></td>
+<td></td>
+<td><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../type/">type</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A type for a thing</td>
+<td><a href="../Entity/">Entity</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="usages">Usages</h2>
@@ -285,6 +341,48 @@
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
+<td><a href="../Event/">Event</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../TemporalInterval/">TemporalInterval</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../TemporalInterval/">TemporalInterval</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="./">TimePoint</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="./">TimePoint</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
 <td><a href="../LifeEvent/">LifeEvent</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
@@ -293,6 +391,12 @@
 <tr>
 <td><a href="../LifeEvent/">LifeEvent</a></td>
 <td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../LifeEvent/">LifeEvent</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
@@ -309,6 +413,12 @@
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
+<td><a href="../InvestigativeProcess/">InvestigativeProcess</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
 <td><a href="../SampleCollectionProcess/">SampleCollectionProcess</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
@@ -317,6 +427,12 @@
 <tr>
 <td><a href="../SampleCollectionProcess/">SampleCollectionProcess</a></td>
 <td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../SampleCollectionProcess/">SampleCollectionProcess</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
@@ -333,6 +449,12 @@
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
+<td><a href="../SampleProcessing/">SampleProcessing</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
 <td><a href="../DataGenerationFromSample/">DataGenerationFromSample</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
@@ -341,6 +463,12 @@
 <tr>
 <td><a href="../DataGenerationFromSample/">DataGenerationFromSample</a></td>
 <td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../DataGenerationFromSample/">DataGenerationFromSample</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
@@ -357,6 +485,12 @@
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
 <td><a href="../MaterialCollection/">MaterialCollection</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
@@ -365,6 +499,12 @@
 <tr>
 <td><a href="../MaterialCollection/">MaterialCollection</a></td>
 <td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../MaterialCollection/">MaterialCollection</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
@@ -381,6 +521,12 @@
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
+<td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
 <td><a href="../HealthcareEncounter/">HealthcareEncounter</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
@@ -389,6 +535,12 @@
 <tr>
 <td><a href="../HealthcareEncounter/">HealthcareEncounter</a></td>
 <td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../HealthcareEncounter/">HealthcareEncounter</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
@@ -405,6 +557,12 @@
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
+<td><a href="../HealthcareConditionOccurrence/">HealthcareConditionOccurrence</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
 <td><a href="../FoodProcessing/">FoodProcessing</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
@@ -413,6 +571,12 @@
 <tr>
 <td><a href="../FoodProcessing/">FoodProcessing</a></td>
 <td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../FoodProcessing/">FoodProcessing</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
@@ -429,6 +593,12 @@
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
+<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
 <td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
@@ -441,6 +611,12 @@
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
+<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
 <td><a href="../ClinicalCohortEnrollment/">ClinicalCohortEnrollment</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
@@ -449,6 +625,12 @@
 <tr>
 <td><a href="../ClinicalCohortEnrollment/">ClinicalCohortEnrollment</a></td>
 <td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../ClinicalCohortEnrollment/">ClinicalCohortEnrollment</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
@@ -476,6 +658,10 @@
 <td>native</td>
 <td>linkml_common:TimePoint</td>
 </tr>
+<tr>
+<td>exact</td>
+<td>fibo.DatesAndTimes:TimeInstant</td>
+</tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
@@ -483,8 +669,13 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: TimePoint
+description: A point in time. Can be fully specified, or specified in relative terms.
 from_schema: https://w3id.org/linkml/linkml-common
+exact_mappings:
+- fibo.DatesAndTimes:TimeInstant
+is_a: TimePointOrTemporalInterval
 slots:
+- year_value
 - date_value
 - time_value
 - datetime_value
@@ -496,8 +687,24 @@ slots:
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: TimePoint
+description: A point in time. Can be fully specified, or specified in relative terms.
 from_schema: https://w3id.org/linkml/linkml-common
+exact_mappings:
+- fibo.DatesAndTimes:TimeInstant
+is_a: TimePointOrTemporalInterval
 attributes:
+  year_value:
+    name: year_value
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: year_value
+    owner: TimePoint
+    domain_of:
+    - TimePoint
+    range: integer
+    unit:
+      symbol: year
+      ucum_code: a
   date_value:
     name: date_value
     from_schema: https://w3id.org/linkml/linkml-common
@@ -544,6 +751,40 @@ attributes:
     owner: TimePoint
     domain_of:
     - TimePoint
+    - NamedThing
+    range: string
+  starts_at:
+    name: starts_at
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: starts_at
+    owner: TimePoint
+    domain_of:
+    - Event
+    - TimePointOrTemporalInterval
+    - TemporalInterval
+    range: TimePoint
+  ends_at:
+    name: ends_at
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: ends_at
+    owner: TimePoint
+    domain_of:
+    - Event
+    - TimePointOrTemporalInterval
+    - TemporalInterval
+    range: TimePoint
+  type:
+    name: type
+    description: A type for a thing
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    designates_type: true
+    alias: type
+    owner: TimePoint
+    domain_of:
+    - Entity
     - NamedThing
     range: string
 

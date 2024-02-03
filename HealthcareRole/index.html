@@ -203,20 +203,35 @@
 <p>URI: <a href="https://w3id.org/linkml-common/HealthcareRole">linkml_common:HealthcareRole</a></p>
 <div class="mermaid"> classDiagram
     class HealthcareRole
+      Role &lt;|-- HealthcareRole
+
+
       HealthcareRole &lt;|-- HealthcareProvider
       HealthcareRole &lt;|-- Patient
 
+
       HealthcareRole : is_person
 
-          HealthcareRole --|&gt; Person : is_person
+          HealthcareRole --&gt; Person : is_person
+
+      HealthcareRole : type
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
+<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Intangible/">Intangible</a><ul>
+<li><a href="../Role/">Role</a><ul>
 <li><strong>HealthcareRole</strong><ul>
 <li><a href="../HealthcareProvider/">HealthcareProvider</a></li>
 <li><a href="../Patient/">Patient</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -236,6 +251,12 @@
 <td>0..1 <br/> <a href="../Person/">Person</a></td>
 <td></td>
 <td>direct</td>
+</tr>
+<tr>
+<td><a href="../type/">type</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A type for a thing</td>
+<td><a href="../Entity/">Entity</a></td>
 </tr>
 </tbody>
 </table>
@@ -269,6 +290,7 @@
 <details>
 <pre><code class="language-yaml">name: HealthcareRole
 from_schema: https://w3id.org/linkml/linkml-common
+is_a: Role
 attributes:
   is_person:
     name: is_person
@@ -282,6 +304,7 @@ attributes:
 <details>
 <pre><code class="language-yaml">name: HealthcareRole
 from_schema: https://w3id.org/linkml/linkml-common
+is_a: Role
 attributes:
   is_person:
     name: is_person
@@ -292,6 +315,18 @@ attributes:
     domain_of:
     - HealthcareRole
     range: Person
+  type:
+    name: type
+    description: A type for a thing
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    designates_type: true
+    alias: type
+    owner: HealthcareRole
+    domain_of:
+    - Entity
+    - NamedThing
+    range: string
 
 </code></pre>
 </details>

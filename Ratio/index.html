@@ -208,11 +208,15 @@
 
       Ratio : denominator
 
-          Ratio --|&gt; Quantity : denominator
+          Ratio --&gt; Quantity : denominator
+
+      Ratio : has_quantity_kind
+
+          Ratio --&gt; QuantityKind : has_quantity_kind
 
       Ratio : numerator
 
-          Ratio --|&gt; Quantity : numerator
+          Ratio --&gt; Quantity : numerator
 
       Ratio : type
 
@@ -253,6 +257,12 @@
 <td>0..1 <br/> <a href="../Quantity/">Quantity</a></td>
 <td>The denominator of the ratio</td>
 <td>direct</td>
+</tr>
+<tr>
+<td><a href="../has_quantity_kind/">has_quantity_kind</a></td>
+<td>0..1 <br/> <a href="../QuantityKind/">QuantityKind</a></td>
+<td>The kind of quantity</td>
+<td><a href="../Quantity/">Quantity</a></td>
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
@@ -338,6 +348,16 @@ attributes:
     domain_of:
     - Ratio
     range: Quantity
+  has_quantity_kind:
+    name: has_quantity_kind
+    description: The kind of quantity
+    from_schema: https://w3id.org/linkml-common/quantities
+    rank: 1000
+    alias: has_quantity_kind
+    owner: Ratio
+    domain_of:
+    - Quantity
+    range: QuantityKind
   type:
     name: type
     description: A type for a thing

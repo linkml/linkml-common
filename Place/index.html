@@ -209,17 +209,18 @@
 
       Place &lt;|-- HealthcareSite
       Place &lt;|-- Landform
+      Place &lt;|-- EnvironmentalSite
 
 
       Place : address
 
-          Place --|&gt; PostalAddress : address
+          Place --&gt; PostalAddress : address
 
       Place : description
 
       Place : geolocation
 
-          Place --|&gt; GeoPointLocation : geolocation
+          Place --&gt; GeoPointLocation : geolocation
 
       Place : id
 
@@ -227,7 +228,7 @@
 
       Place : ontology_types
 
-          Place --|&gt; Concept : ontology_types
+          Place --&gt; Concept : ontology_types
 
       Place : subtype
 
@@ -242,6 +243,7 @@
 <li><strong>Place</strong><ul>
 <li><a href="../HealthcareSite/">HealthcareSite</a></li>
 <li><a href="../Landform/">Landform</a></li>
+<li><a href="../EnvironmentalSite/">EnvironmentalSite</a></li>
 </ul>
 </li>
 </ul>
@@ -288,7 +290,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>

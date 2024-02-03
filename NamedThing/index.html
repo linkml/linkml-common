@@ -215,16 +215,15 @@
       NamedThing &lt;|-- Concept
       NamedThing &lt;|-- InformationEntity
       NamedThing &lt;|-- PhysicalDevice
-      NamedThing &lt;|-- Procedure
-      NamedThing &lt;|-- Person
-      NamedThing &lt;|-- Organization
+      NamedThing &lt;|-- Specification
+      NamedThing &lt;|-- Agent
+      NamedThing &lt;|-- CreativeWork
       NamedThing &lt;|-- Investigation
       NamedThing &lt;|-- SampleMaterial
       NamedThing &lt;|-- Place
       NamedThing &lt;|-- RawMaterial
       NamedThing &lt;|-- ClinicalCohort
       NamedThing &lt;|-- ClinicalCohortDefinition
-      NamedThing &lt;|-- Publication
 
 
       NamedThing : description
@@ -235,7 +234,7 @@
 
       NamedThing : ontology_types
 
-          NamedThing --|&gt; Concept : ontology_types
+          NamedThing --&gt; Concept : ontology_types
 
       NamedThing : subtype
 
@@ -251,16 +250,15 @@
 <li><a href="../Concept/">Concept</a></li>
 <li><a href="../InformationEntity/">InformationEntity</a></li>
 <li><a href="../PhysicalDevice/">PhysicalDevice</a></li>
-<li><a href="../Procedure/">Procedure</a></li>
-<li><a href="../Person/">Person</a></li>
-<li><a href="../Organization/">Organization</a></li>
+<li><a href="../Specification/">Specification</a></li>
+<li><a href="../Agent/">Agent</a></li>
+<li><a href="../CreativeWork/">CreativeWork</a></li>
 <li><a href="../Investigation/">Investigation</a></li>
 <li><a href="../SampleMaterial/">SampleMaterial</a></li>
 <li><a href="../Place/">Place</a></li>
 <li><a href="../RawMaterial/">RawMaterial</a></li>
 <li><a href="../ClinicalCohort/">ClinicalCohort</a></li>
 <li><a href="../ClinicalCohortDefinition/">ClinicalCohortDefinition</a></li>
-<li><a href="../Publication/">Publication</a></li>
 </ul>
 </li>
 </ul>

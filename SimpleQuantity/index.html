@@ -206,11 +206,15 @@
     class SimpleQuantity
       Quantity &lt;|-- SimpleQuantity
 
+      SimpleQuantity : has_quantity_kind
+
+          SimpleQuantity --&gt; QuantityKind : has_quantity_kind
+
       SimpleQuantity : type
 
       SimpleQuantity : unit
 
-          SimpleQuantity --|&gt; UnitConcept : unit
+          SimpleQuantity --&gt; UnitConcept : unit
 
       SimpleQuantity : value
 
@@ -253,6 +257,12 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../has_quantity_kind/">has_quantity_kind</a></td>
+<td>0..1 <br/> <a href="../QuantityKind/">QuantityKind</a></td>
+<td>The kind of quantity</td>
+<td><a href="../Quantity/">Quantity</a></td>
+</tr>
+<tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
@@ -282,6 +292,10 @@
 <td>native</td>
 <td>linkml_common:SimpleQuantity</td>
 </tr>
+<tr>
+<td>exact</td>
+<td>fibo:ScalarQuantityValue</td>
+</tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
@@ -291,6 +305,8 @@
 <pre><code class="language-yaml">name: SimpleQuantity
 description: A quantity is a property that can be measured or counted
 from_schema: https://w3id.org/linkml/linkml-common
+exact_mappings:
+- fibo:ScalarQuantityValue
 is_a: Quantity
 attributes:
   value:
@@ -302,6 +318,9 @@ attributes:
   unit:
     name: unit
     from_schema: https://w3id.org/linkml-common/quantities
+    exact_mappings:
+    - schema:unitCode
+    - qudt:unit
     rank: 1000
     range: UnitConcept
 class_uri: fhir:SimpleQuantity
@@ -313,6 +332,8 @@ class_uri: fhir:SimpleQuantity
 <pre><code class="language-yaml">name: SimpleQuantity
 description: A quantity is a property that can be measured or counted
 from_schema: https://w3id.org/linkml/linkml-common
+exact_mappings:
+- fibo:ScalarQuantityValue
 is_a: Quantity
 attributes:
   value:
@@ -329,6 +350,9 @@ attributes:
   unit:
     name: unit
     from_schema: https://w3id.org/linkml-common/quantities
+    exact_mappings:
+    - schema:unitCode
+    - qudt:unit
     rank: 1000
     alias: unit
     owner: SimpleQuantity
@@ -336,6 +360,16 @@ attributes:
     - SimpleQuantity
     - MoneyQuantity
     range: UnitConcept
+  has_quantity_kind:
+    name: has_quantity_kind
+    description: The kind of quantity
+    from_schema: https://w3id.org/linkml-common/quantities
+    rank: 1000
+    alias: has_quantity_kind
+    owner: SimpleQuantity
+    domain_of:
+    - Quantity
+    range: QuantityKind
   type:
     name: type
     description: A type for a thing

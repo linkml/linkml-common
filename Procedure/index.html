@@ -209,10 +209,11 @@
 <p>URI: <a href="https://w3id.org/linkml-common/Procedure">linkml_common:Procedure</a></p>
 <div class="mermaid"> classDiagram
     class Procedure
-      NamedThing &lt;|-- Procedure
+      Specification &lt;|-- Procedure
 
 
       Procedure &lt;|-- InvestigativeProtocol
+      Procedure &lt;|-- StudyDesign
       Procedure &lt;|-- FoodRecipe
       Procedure &lt;|-- EngineeringSpecification
 
@@ -225,7 +226,7 @@
 
       Procedure : ontology_types
 
-          Procedure --|&gt; Concept : ontology_types
+          Procedure --&gt; Concept : ontology_types
 
       Procedure : subtype
 
@@ -237,10 +238,14 @@
 <ul>
 <li><a href="../Entity/">Entity</a><ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Specification/">Specification</a><ul>
 <li><strong>Procedure</strong><ul>
 <li><a href="../InvestigativeProtocol/">InvestigativeProtocol</a></li>
+<li><a href="../StudyDesign/">StudyDesign</a></li>
 <li><a href="../FoodRecipe/">FoodRecipe</a></li>
 <li><a href="../EngineeringSpecification/">EngineeringSpecification</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -275,7 +280,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>
@@ -377,7 +382,7 @@
 <pre><code class="language-yaml">name: Procedure
 description: A canonical series of actions conducted in a certain order or manner
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: NamedThing
+is_a: Specification
 
 </code></pre>
 </details>
@@ -386,7 +391,7 @@ is_a: NamedThing
 <pre><code class="language-yaml">name: Procedure
 description: A canonical series of actions conducted in a certain order or manner
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: NamedThing
+is_a: Specification
 attributes:
   id:
     name: id

@@ -208,19 +208,19 @@
 
       UnitConversionOperation : immediate_preceding_steps
 
-          UnitConversionOperation --|&gt; MathematicalOperation : immediate_preceding_steps
+          UnitConversionOperation --&gt; MathematicalOperation : immediate_preceding_steps
 
       UnitConversionOperation : inputs
 
-          UnitConversionOperation --|&gt; Quantity : inputs
+          UnitConversionOperation --&gt; Quantity : inputs
 
       UnitConversionOperation : outputs
 
-          UnitConversionOperation --|&gt; Quantity : outputs
+          UnitConversionOperation --&gt; Quantity : outputs
 
       UnitConversionOperation : parts
 
-          UnitConversionOperation --|&gt; MathematicalOperation : parts
+          UnitConversionOperation --&gt; MathematicalOperation : parts
 
 
 </div>

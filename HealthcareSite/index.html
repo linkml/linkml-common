@@ -212,13 +212,13 @@
 
       HealthcareSite : address
 
-          HealthcareSite --|&gt; PostalAddress : address
+          HealthcareSite --&gt; PostalAddress : address
 
       HealthcareSite : description
 
       HealthcareSite : geolocation
 
-          HealthcareSite --|&gt; GeoPointLocation : geolocation
+          HealthcareSite --&gt; GeoPointLocation : geolocation
 
       HealthcareSite : id
 
@@ -226,7 +226,7 @@
 
       HealthcareSite : ontology_types
 
-          HealthcareSite --|&gt; Concept : ontology_types
+          HealthcareSite --&gt; Concept : ontology_types
 
       HealthcareSite : subtype
 
@@ -286,7 +286,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>

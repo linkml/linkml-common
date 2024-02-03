@@ -152,6 +152,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#usages">
+    Usages
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
     Identifier and Mapping Information
   </a>
@@ -204,7 +209,7 @@
 <p>URI: <a href="https://w3id.org/linkml-common/Organization">linkml_common:Organization</a></p>
 <div class="mermaid"> classDiagram
     class Organization
-      NamedThing &lt;|-- Organization
+      Agent &lt;|-- Organization
 
 
       Organization &lt;|-- HealthcareOrganization
@@ -218,7 +223,7 @@
 
       Organization : ontology_types
 
-          Organization --|&gt; Concept : ontology_types
+          Organization --&gt; Concept : ontology_types
 
       Organization : subtype
 
@@ -230,8 +235,11 @@
 <ul>
 <li><a href="../Entity/">Entity</a><ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Agent/">Agent</a><ul>
 <li><strong>Organization</strong><ul>
 <li><a href="../HealthcareOrganization/">HealthcareOrganization</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -266,7 +274,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>
@@ -285,6 +293,25 @@
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable description for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="usages">Usages</h2>
+<table>
+<thead>
+<tr>
+<th>used by</th>
+<th>used in</th>
+<th>type</th>
+<th>used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../FinancialAccount/">FinancialAccount</a></td>
+<td><a href="../bank/">bank</a></td>
+<td>range</td>
+<td><a href="./">Organization</a></td>
 </tr>
 </tbody>
 </table>
@@ -310,6 +337,10 @@
 <td>native</td>
 <td>linkml_common:Organization</td>
 </tr>
+<tr>
+<td>exact</td>
+<td>schema:Organization</td>
+</tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
@@ -319,7 +350,9 @@
 <pre><code class="language-yaml">name: Organization
 description: Represents an Organization
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: NamedThing
+exact_mappings:
+- schema:Organization
+is_a: Agent
 
 </code></pre>
 </details>
@@ -328,7 +361,9 @@ is_a: NamedThing
 <pre><code class="language-yaml">name: Organization
 description: Represents an Organization
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: NamedThing
+exact_mappings:
+- schema:Organization
+is_a: Agent
 attributes:
   id:
     name: id

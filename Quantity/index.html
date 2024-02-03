@@ -211,11 +211,16 @@
       Intangible &lt;|-- Quantity
 
 
+      Quantity &lt;|-- Duration
       Quantity &lt;|-- SimpleQuantity
       Quantity &lt;|-- Ratio
       Quantity &lt;|-- FoodIngredient
       Quantity &lt;|-- MoneyQuantity
 
+
+      Quantity : has_quantity_kind
+
+          Quantity --&gt; QuantityKind : has_quantity_kind
 
       Quantity : type
 
@@ -226,6 +231,7 @@
 <li><a href="../Entity/">Entity</a><ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><strong>Quantity</strong><ul>
+<li><a href="../Duration/">Duration</a></li>
 <li><a href="../SimpleQuantity/">SimpleQuantity</a></li>
 <li><a href="../Ratio/">Ratio</a></li>
 <li><a href="../FoodIngredient/">FoodIngredient</a></li>
@@ -248,6 +254,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../has_quantity_kind/">has_quantity_kind</a></td>
+<td>0..1 <br/> <a href="../QuantityKind/">QuantityKind</a></td>
+<td>The kind of quantity</td>
+<td>direct</td>
+</tr>
 <tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
@@ -333,6 +345,10 @@
 <td>native</td>
 <td>linkml_common:Quantity</td>
 </tr>
+<tr>
+<td>exact</td>
+<td>schema:Quantity</td>
+</tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
@@ -341,7 +357,16 @@
 <details>
 <pre><code class="language-yaml">name: Quantity
 from_schema: https://w3id.org/linkml/linkml-common
+exact_mappings:
+- schema:Quantity
 is_a: Intangible
+attributes:
+  has_quantity_kind:
+    name: has_quantity_kind
+    description: The kind of quantity
+    from_schema: https://w3id.org/linkml-common/quantities
+    rank: 1000
+    range: QuantityKind
 class_uri: fhir:Quantity
 union_of:
 - Quantity
@@ -354,8 +379,20 @@ union_of:
 <details>
 <pre><code class="language-yaml">name: Quantity
 from_schema: https://w3id.org/linkml/linkml-common
+exact_mappings:
+- schema:Quantity
 is_a: Intangible
 attributes:
+  has_quantity_kind:
+    name: has_quantity_kind
+    description: The kind of quantity
+    from_schema: https://w3id.org/linkml-common/quantities
+    rank: 1000
+    alias: has_quantity_kind
+    owner: Quantity
+    domain_of:
+    - Quantity
+    range: QuantityKind
   type:
     name: type
     description: A type for a thing

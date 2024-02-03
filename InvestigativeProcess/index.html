@@ -214,11 +214,23 @@
 
       InvestigativeProcess : ends_at
 
-          InvestigativeProcess --|&gt; TimePoint : ends_at
+          InvestigativeProcess --&gt; TimePoint : ends_at
 
       InvestigativeProcess : follows_procedure
 
-          InvestigativeProcess --|&gt; InvestigativeProtocol : follows_procedure
+          InvestigativeProcess --&gt; InvestigativeProtocol : follows_procedure
+
+      InvestigativeProcess : happens_at
+
+          InvestigativeProcess --&gt; TimePoint : happens_at
+
+      InvestigativeProcess : has_duration
+
+          InvestigativeProcess --&gt; Duration : has_duration
+
+      InvestigativeProcess : has_interval
+
+          InvestigativeProcess --&gt; TemporalInterval : has_interval
 
       InvestigativeProcess : id
 
@@ -226,15 +238,15 @@
 
       InvestigativeProcess : ontology_types
 
-          InvestigativeProcess --|&gt; Concept : ontology_types
+          InvestigativeProcess --&gt; Concept : ontology_types
 
       InvestigativeProcess : part_of
 
-          InvestigativeProcess --|&gt; Investigation : part_of
+          InvestigativeProcess --&gt; Investigation : part_of
 
       InvestigativeProcess : starts_at
 
-          InvestigativeProcess --|&gt; TimePoint : starts_at
+          InvestigativeProcess --&gt; TimePoint : starts_at
 
       InvestigativeProcess : subtype
 
@@ -242,7 +254,7 @@
 
       InvestigativeProcess : uses_physical_device
 
-          InvestigativeProcess --|&gt; PhysicalDevice : uses_physical_device
+          InvestigativeProcess --&gt; PhysicalDevice : uses_physical_device
 
 
 </div>
@@ -308,6 +320,24 @@
 <td><a href="../Event/">Event</a></td>
 </tr>
 <tr>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>0..1 <br/> <a href="../TimePoint/">TimePoint</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>0..1 <br/> <a href="../TemporalInterval/">TemporalInterval</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
+<td><a href="../has_duration/">has_duration</a></td>
+<td>0..1 <br/> <a href="../Duration/">Duration</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
@@ -323,7 +353,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>
@@ -434,6 +464,8 @@ attributes:
     owner: InvestigativeProcess
     domain_of:
     - Event
+    - TimePointOrTemporalInterval
+    - TemporalInterval
     range: TimePoint
   ends_at:
     name: ends_at
@@ -443,7 +475,36 @@ attributes:
     owner: InvestigativeProcess
     domain_of:
     - Event
+    - TimePointOrTemporalInterval
+    - TemporalInterval
     range: TimePoint
+  happens_at:
+    name: happens_at
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: happens_at
+    owner: InvestigativeProcess
+    domain_of:
+    - Event
+    range: TimePoint
+  has_interval:
+    name: has_interval
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: has_interval
+    owner: InvestigativeProcess
+    domain_of:
+    - Event
+    range: TemporalInterval
+  has_duration:
+    name: has_duration
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: has_duration
+    owner: InvestigativeProcess
+    domain_of:
+    - Event
+    range: Duration
   id:
     name: id
     description: A unique identifier for a thing

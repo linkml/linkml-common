@@ -209,11 +209,23 @@
 
       MaterialCollection : ends_at
 
-          MaterialCollection --|&gt; TimePoint : ends_at
+          MaterialCollection --&gt; TimePoint : ends_at
 
       MaterialCollection : follows_procedure
 
-          MaterialCollection --|&gt; Procedure : follows_procedure
+          MaterialCollection --&gt; Procedure : follows_procedure
+
+      MaterialCollection : happens_at
+
+          MaterialCollection --&gt; TimePoint : happens_at
+
+      MaterialCollection : has_duration
+
+          MaterialCollection --&gt; Duration : has_duration
+
+      MaterialCollection : has_interval
+
+          MaterialCollection --&gt; TemporalInterval : has_interval
 
       MaterialCollection : id
 
@@ -221,11 +233,11 @@
 
       MaterialCollection : ontology_types
 
-          MaterialCollection --|&gt; Concept : ontology_types
+          MaterialCollection --&gt; Concept : ontology_types
 
       MaterialCollection : starts_at
 
-          MaterialCollection --|&gt; TimePoint : starts_at
+          MaterialCollection --&gt; TimePoint : starts_at
 
       MaterialCollection : subtype
 
@@ -233,7 +245,7 @@
 
       MaterialCollection : uses_physical_device
 
-          MaterialCollection --|&gt; PhysicalDevice : uses_physical_device
+          MaterialCollection --&gt; PhysicalDevice : uses_physical_device
 
 
 </div>
@@ -289,6 +301,24 @@
 <td><a href="../Event/">Event</a></td>
 </tr>
 <tr>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>0..1 <br/> <a href="../TimePoint/">TimePoint</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>0..1 <br/> <a href="../TemporalInterval/">TemporalInterval</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
+<td><a href="../has_duration/">has_duration</a></td>
+<td>0..1 <br/> <a href="../Duration/">Duration</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
@@ -304,7 +334,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>
@@ -393,6 +423,8 @@ attributes:
     owner: MaterialCollection
     domain_of:
     - Event
+    - TimePointOrTemporalInterval
+    - TemporalInterval
     range: TimePoint
   ends_at:
     name: ends_at
@@ -402,7 +434,36 @@ attributes:
     owner: MaterialCollection
     domain_of:
     - Event
+    - TimePointOrTemporalInterval
+    - TemporalInterval
     range: TimePoint
+  happens_at:
+    name: happens_at
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: happens_at
+    owner: MaterialCollection
+    domain_of:
+    - Event
+    range: TimePoint
+  has_interval:
+    name: has_interval
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: has_interval
+    owner: MaterialCollection
+    domain_of:
+    - Event
+    range: TemporalInterval
+  has_duration:
+    name: has_duration
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: has_duration
+    owner: MaterialCollection
+    domain_of:
+    - Event
+    range: Duration
   id:
     name: id
     description: A unique identifier for a thing

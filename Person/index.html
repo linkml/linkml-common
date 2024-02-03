@@ -209,7 +209,7 @@
 <p>URI: <a href="https://w3id.org/linkml-common/Person">linkml_common:Person</a></p>
 <div class="mermaid"> classDiagram
     class Person
-      NamedThing &lt;|-- Person
+      Agent &lt;|-- Person
 
       Person : age_in_years
 
@@ -223,7 +223,7 @@
 
       Person : ontology_types
 
-          Person --|&gt; Concept : ontology_types
+          Person --&gt; Concept : ontology_types
 
       Person : primary_email
 
@@ -233,7 +233,7 @@
 
       Person : vital_status
 
-          Person --|&gt; PersonStatus : vital_status
+          Person --&gt; PersonStatus : vital_status
 
 
 </div>
@@ -241,7 +241,10 @@
 <ul>
 <li><a href="../Entity/">Entity</a><ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Agent/">Agent</a><ul>
 <li><strong>Person</strong></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -298,7 +301,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>
@@ -349,6 +352,12 @@
 <td>range</td>
 <td><a href="./">Person</a></td>
 </tr>
+<tr>
+<td><a href="../FinancialAccount/">FinancialAccount</a></td>
+<td><a href="../account_holder/">account_holder</a></td>
+<td>range</td>
+<td><a href="./">Person</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -373,6 +382,10 @@
 <td>native</td>
 <td>linkml_common:Person</td>
 </tr>
+<tr>
+<td>exact</td>
+<td>schema:Person</td>
+</tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
@@ -382,7 +395,9 @@
 <pre><code class="language-yaml">name: Person
 description: Represents a Person
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: NamedThing
+exact_mappings:
+- schema:Person
+is_a: Agent
 slots:
 - primary_email
 - birth_date
@@ -402,7 +417,9 @@ slot_usage:
 <pre><code class="language-yaml">name: Person
 description: Represents a Person
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: NamedThing
+exact_mappings:
+- schema:Person
+is_a: Agent
 slot_usage:
   primary_email:
     name: primary_email
