@@ -1,0 +1,11 @@
+# Example data object
+id: example:Dataset001
+name: my dataset
+collected_as_part_of:
+  - example:Investigation001
+creators:
+  - example:Person001
+keywords:
+  - sample data
+  - testing
+

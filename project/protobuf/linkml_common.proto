@@ -1,3 +1,23 @@
+// Represents an Agent
+message Agent
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+// Represents an Automated Agent
+message AutomatedAgent
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
 message BasicFoodType
  {
   uriorcurie id = 0
@@ -7,6 +27,7 @@ message BasicFoodType
  repeated  concept ontologyTypes = 0
   string description = 0
  }
+// A group of patients who share a common set of characteristics
 message ClinicalCohort
  {
   uriorcurie id = 0
@@ -17,6 +38,7 @@ message ClinicalCohort
   string description = 0
   clinicalCohortDefinition definition = 0
  }
+// A definition of a clinical cohort
 message ClinicalCohortDefinition
  {
   uriorcurie id = 0
@@ -26,6 +48,7 @@ message ClinicalCohortDefinition
  repeated  concept ontologyTypes = 0
   string description = 0
  }
+// An event relating a patient to a clinical cohort
 message ClinicalCohortEnrollment
  {
   uriorcurie id = 0
@@ -36,6 +59,9 @@ message ClinicalCohortEnrollment
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
   patient patient = 0
   clinicalCohort cohort = 0
  }
@@ -63,6 +89,23 @@ message Concept
  repeated  concept ontologyTypes = 0
   string description = 0
  }
+// The most generic kind of creative work, including books, movies, photographs, software programs, etc.
+message CreativeWork
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  string title = 0
+  string abstract = 0
+  string rights = 0
+ repeated  agent creators = 0
+ repeated  agent contributors = 0
+ repeated  agent contacts = 0
+ repeated  string keywords = 0
+ }
 message DataGenerationFromSample
  {
   uriorcurie id = 0
@@ -73,13 +116,39 @@ message DataGenerationFromSample
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
   physicalDevice usesPhysicalDevice = 0
   investigativeProtocol followsProcedure = 0
   investigation partOf = 0
  }
+message Dataset
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  string title = 0
+  string abstract = 0
+  string rights = 0
+ repeated  agent creators = 0
+ repeated  agent contributors = 0
+ repeated  agent contacts = 0
+ repeated  string keywords = 0
+ repeated  investigation collectedAsPartOf = 0
+ }
 message DataStructure
  {
   string type = 0
+ }
+// A length of time
+message Duration
+ {
+  string type = 0
+  quantityKind hasQuantityKind = 0
  }
 message EngineeringMaterialProcessing
  {
@@ -91,6 +160,9 @@ message EngineeringMaterialProcessing
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
   procedure followsProcedure = 0
   physicalDevice usesPhysicalDevice = 0
  }
@@ -104,6 +176,9 @@ message EngineeringProcess
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
   engineeringSpecification followsProcedure = 0
   engineeringProcess partOf = 0
  }
@@ -116,6 +191,18 @@ message EngineeringSpecification
  repeated  concept ontologyTypes = 0
   string description = 0
  }
+// A location or site that is the subject of environmental monitoring
+message EnvironmentalSite
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  postalAddress address = 0
+  geoPointLocation geolocation = 0
+ }
 // A thing that happens
 message Event
  {
@@ -127,10 +214,14 @@ message Event
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
  }
 message FoodIngredient
  {
   string type = 0
+  quantityKind hasQuantityKind = 0
  }
 message FoodProcessing
  {
@@ -142,6 +233,9 @@ message FoodProcessing
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
   procedure followsProcedure = 0
   physicalDevice usesPhysicalDevice = 0
  }
@@ -181,6 +275,9 @@ message HealthcareConditionOccurrence
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
   patient patient = 0
   healthcareEncounter observedDuring = 0
  }
@@ -193,6 +290,9 @@ message HealthcareEncounter
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
   patient patient = 0
   healthcareProvider provider = 0
   healthcareEncounterClassification subtype = 0
@@ -208,12 +308,14 @@ message HealthcareOrganization
  }
 message HealthcareProvider
  {
+  string type = 0
   person isPerson = 0
   concept speciality = 0
   healthcareSite careSite = 0
  }
 message HealthcareRole
  {
+  string type = 0
   person isPerson = 0
  }
 message HealthcareSite
@@ -252,6 +354,7 @@ message Investigation
  repeated  concept ontologyTypes = 0
   string description = 0
   string objectives = 0
+ repeated  variable variables = 0
  }
 message InvestigativeProcess
  {
@@ -263,6 +366,9 @@ message InvestigativeProcess
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
   physicalDevice usesPhysicalDevice = 0
   investigativeProtocol followsProcedure = 0
   investigation partOf = 0
@@ -298,6 +404,9 @@ message LifeEvent
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
  }
 message MaterialCollection
  {
@@ -309,6 +418,9 @@ message MaterialCollection
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
   procedure followsProcedure = 0
   physicalDevice usesPhysicalDevice = 0
  }
@@ -322,6 +434,9 @@ message MaterialProcessing
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
   procedure followsProcedure = 0
   physicalDevice usesPhysicalDevice = 0
  }
@@ -365,6 +480,7 @@ message Organization
  }
 message Patient
  {
+  string type = 0
   person isPerson = 0
  }
 // Represents a Person
@@ -402,6 +518,7 @@ message Place
   postalAddress address = 0
   geoPointLocation geolocation = 0
  }
+// A process that follows a defined procedure or plan
 message PlannedProcess
  {
   uriorcurie id = 0
@@ -412,6 +529,9 @@ message PlannedProcess
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
   procedure followsProcedure = 0
   physicalDevice usesPhysicalDevice = 0
  }
@@ -444,10 +564,27 @@ message Publication
   string subtype = 0
  repeated  concept ontologyTypes = 0
   string description = 0
+  string title = 0
+  string abstract = 0
+  string rights = 0
+ repeated  agent creators = 0
+ repeated  agent contributors = 0
+ repeated  agent contacts = 0
+ repeated  string keywords = 0
  }
 message Quantity
  {
   string type = 0
+  quantityKind hasQuantityKind = 0
+ }
+message QuantityKind
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
  }
 // A quantity range is a property that can be measured or counted
 message QuantityRange
@@ -460,6 +597,7 @@ message QuantityRange
 message Ratio
  {
   string type = 0
+  quantityKind hasQuantityKind = 0
   quantity numerator = 0
   quantity denominator = 0
  }
@@ -482,6 +620,9 @@ message SampleCollectionProcess
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
   physicalDevice usesPhysicalDevice = 0
   investigativeProtocol followsProcedure = 0
   investigation partOf = 0
@@ -507,23 +648,76 @@ message SampleProcessing
   string description = 0
   timePoint startsAt = 0
   timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
   procedure followsProcedure = 0
   physicalDevice usesPhysicalDevice = 0
+ }
+// A service provided by an organization
+message Service
+ {
+  string type = 0
  }
 // A quantity is a property that can be measured or counted
 message SimpleQuantity
  {
   string type = 0
+  quantityKind hasQuantityKind = 0
   float value = 0
   unitConcept unit = 0
  }
+// A specification of a thing
+message Specification
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message StudyDesign
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  string subtype = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+// A period of time
+message TemporalInterval
+ {
+  string type = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+ }
+// A relationship to another time point
+message TemporalRelationship
+ {
+  string type = 0
+  relativeTimeEnum predicate = 0
+  entity relativeTo = 0
+ }
+// A point in time. Can be fully specified, or specified in relative terms.
 message TimePoint
  {
+  string type = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  integer yearValue = 0
   date dateValue = 0
   time timeValue = 0
   datetime datetimeValue = 0
   event markerEvent = 0
   string description = 0
+ }
+message TimePointOrTemporalInterval
+ {
+  string type = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
  }
 message UnitConcept
  {
@@ -546,9 +740,4 @@ message Variable
  {
   string type = 0
  repeated  unitConcept allowedUnits = 0
- }
-// A series of actions or steps taken in order to achieve a particular end
-message XProcess
- {
-  string type = 0
  }

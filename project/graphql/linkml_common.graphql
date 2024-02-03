@@ -1,5 +1,25 @@
+type Agent
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
 type Any
   {
+  }
+
+type AutomatedAgent
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
   }
 
 type BasicFoodType
@@ -43,6 +63,9 @@ type ClinicalCohortEnrollment
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
     patient: Patient
     cohort: ClinicalCohort
   }
@@ -73,6 +96,23 @@ type Concept
     description: String
   }
 
+type CreativeWork
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    title: String
+    abstract: String
+    rights: String
+    creators: [Agent]
+    contributors: [Agent]
+    contacts: [Agent]
+    keywords: [String]
+  }
+
 type DataGenerationFromSample
   {
     id: Uriorcurie!
@@ -83,14 +123,41 @@ type DataGenerationFromSample
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
     usesPhysicalDevice: PhysicalDevice
     followsProcedure: InvestigativeProtocol
     partOf: Investigation
   }
 
+type Dataset
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    title: String
+    abstract: String
+    rights: String
+    creators: [Agent]
+    contributors: [Agent]
+    contacts: [Agent]
+    keywords: [String]
+    collectedAsPartOf: [Investigation]
+  }
+
 type DataStructure
   {
     type: String
+  }
+
+type Duration
+  {
+    type: String
+    hasQuantityKind: QuantityKind
   }
 
 type EngineeringMaterialProcessing
@@ -103,6 +170,9 @@ type EngineeringMaterialProcessing
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
     followsProcedure: Procedure
     usesPhysicalDevice: PhysicalDevice
   }
@@ -117,6 +187,9 @@ type EngineeringProcess
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
     followsProcedure: EngineeringSpecification
     partOf: EngineeringProcess
   }
@@ -136,8 +209,24 @@ interface Entity
     type: String
   }
 
+type EnvironmentalMonitoring
+  {
+  }
+
 type EnvironmentalProcess
   {
+  }
+
+type EnvironmentalSite
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+    address: PostalAddress
+    geolocation: GeoPointLocation
   }
 
 type Event
@@ -150,11 +239,15 @@ type Event
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
   }
 
 type FoodIngredient
   {
     type: String
+    hasQuantityKind: QuantityKind
   }
 
 type FoodProcessing
@@ -167,6 +260,9 @@ type FoodProcessing
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
     followsProcedure: Procedure
     usesPhysicalDevice: PhysicalDevice
   }
@@ -210,6 +306,9 @@ type HealthcareConditionOccurrence
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
     patient: Patient
     observedDuring: HealthcareEncounter
   }
@@ -223,6 +322,9 @@ type HealthcareEncounter
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
     patient: Patient
     provider: HealthcareProvider
     subtype: HealthcareEncounterClassification
@@ -240,6 +342,7 @@ type HealthcareOrganization
 
 type HealthcareProvider
   {
+    type: String
     isPerson: Person
     speciality: Concept
     careSite: HealthcareSite
@@ -247,6 +350,7 @@ type HealthcareProvider
 
 type HealthcareRole
   {
+    type: String
     isPerson: Person
   }
 
@@ -287,6 +391,7 @@ type Investigation
     ontologyTypes: [Concept]
     description: String
     objectives: String
+    variables: [Variable]
   }
 
 type InvestigativeProcess
@@ -299,6 +404,9 @@ type InvestigativeProcess
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
     usesPhysicalDevice: PhysicalDevice
     followsProcedure: InvestigativeProtocol
     partOf: Investigation
@@ -336,6 +444,9 @@ type LifeEvent
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
   }
 
 interface Location
@@ -352,6 +463,9 @@ type MaterialCollection
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
     followsProcedure: Procedure
     usesPhysicalDevice: PhysicalDevice
   }
@@ -366,6 +480,9 @@ type MaterialProcessing
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
     followsProcedure: Procedure
     usesPhysicalDevice: PhysicalDevice
   }
@@ -412,6 +529,7 @@ type Organization
 
 type Patient
   {
+    type: String
     isPerson: Person
   }
 
@@ -461,6 +579,9 @@ type PlannedProcess
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
     followsProcedure: Procedure
     usesPhysicalDevice: PhysicalDevice
   }
@@ -498,11 +619,29 @@ type Publication
     subtype: String
     ontologyTypes: [Concept]
     description: String
+    title: String
+    abstract: String
+    rights: String
+    creators: [Agent]
+    contributors: [Agent]
+    contacts: [Agent]
+    keywords: [String]
   }
 
 type Quantity
   {
     type: String
+    hasQuantityKind: QuantityKind
+  }
+
+type QuantityKind
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
   }
 
 type QuantityRange
@@ -515,6 +654,7 @@ type QuantityRange
 type Ratio
   {
     type: String
+    hasQuantityKind: QuantityKind
     numerator: Quantity
     denominator: Quantity
   }
@@ -531,6 +671,12 @@ type RawMaterial
 
 interface Relationship
   {
+    type: String
+  }
+
+interface Role
+  {
+    type: String
   }
 
 type SampleCollectionProcess
@@ -543,6 +689,9 @@ type SampleCollectionProcess
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
     usesPhysicalDevice: PhysicalDevice
     followsProcedure: InvestigativeProtocol
     partOf: Investigation
@@ -570,24 +719,78 @@ type SampleProcessing
     description: String
     startsAt: TimePoint
     endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
     followsProcedure: Procedure
     usesPhysicalDevice: PhysicalDevice
+  }
+
+type Service
+  {
+    type: String
   }
 
 type SimpleQuantity
   {
     type: String
+    hasQuantityKind: QuantityKind
     value: Float
     unit: UnitConcept
   }
 
+type Specification
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type StudyDesign
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    subtype: String
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type TemporalInterval
+  {
+    type: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+  }
+
+type TemporalRelationship
+  {
+    type: String
+    predicate: RelativeTimeEnum
+    relativeTo: Entity
+  }
+
 type TimePoint
   {
+    type: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    yearValue: Integer
     dateValue: Date
     timeValue: Time
     datetimeValue: Datetime
     markerEvent: Event
     description: String
+  }
+
+type TimePointOrTemporalInterval
+  {
+    type: String
+    startsAt: TimePoint
+    endsAt: TimePoint
   }
 
 type UnitConcept
@@ -612,10 +815,5 @@ type Variable
   {
     type: String
     allowedUnits: [UnitConcept]
-  }
-
-type XProcess
-  {
-    type: String
   }
 

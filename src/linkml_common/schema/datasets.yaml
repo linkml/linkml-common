@@ -1,6 +1,6 @@
-id: https://w3id.org/linkml/linkml-common
-name: linkml-common
-title: linkml-common
+id: https://w3id.org/linkml-common/datasets
+name: linkml-common-datasets
+title: linkml-common-datasets
 description: |-
   Common Data Model Elements
 license: MIT
@@ -13,26 +13,21 @@ prefixes:
   biolink: https://w3id.org/biolink/
   schema: http://schema.org/
   PATO: http://purl.obolibrary.org/obo/PATO_
-  example: https://example.org/
+  fhir: http://hl7.org/fhir/
 default_prefix: linkml_common
 default_range: string
 
 imports:
   - linkml:types
-  - core
   - bibliographic
-  - datasets
-  - clinicalresearch
-  - computational
-  - engineering
-  - environmental
-  - financial
-  - foods
-  - geography
-  - healthcare
   - investigations
-  - measurements
-  - quantities
-  - social
-  - time
+
+classes:
+
+  Dataset:
+    is_a: CreativeWork
+    attributes:
+      collected_as_part_of:
+        range: Investigation
+        multivalued: true
 

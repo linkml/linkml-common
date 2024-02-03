@@ -2,7 +2,7 @@ id: https://w3id.org/linkml-common/financial
 name: linkml-common-financial
 title: linkml-common-financial
 description: |-
-  Common Data Model Elements
+  Common Data Model Elements: Bibliographic and Publishing Data
 license: MIT
 see_also:
   - https://linkml.github.io/linkml-common
@@ -24,5 +24,5 @@ imports:
 classes:
 
   Publication:
-    is_a: NamedThing
+    is_a: CreativeWork
 

@@ -14,6 +14,7 @@ prefixes:
   schema: http://schema.org/
   PATO: http://purl.obolibrary.org/obo/PATO_
   fhir: http://hl7.org/fhir/
+  fibo.DatesAndTimes: https://www.omg.org/spec/Commons/DatesAndTimes/
 default_prefix: linkml_common
 default_range: string
 
@@ -25,20 +26,60 @@ imports:
 classes:
 
   Event:
-    description: >-
-      A thing that happens
+    description: A thing that happens
     is_a: NamedThing
+    slots:
+      - starts_at
+      - ends_at
+      - happens_at
+      - has_interval
+      - has_duration
+
+
+  TimePointOrTemporalInterval:
+    is_a: Intangible
+    slots:
+      - starts_at
+      - ends_at
+
+  TemporalInterval:
+    description: A period of time
+    is_a: TimePointOrTemporalInterval
     slots:
       - starts_at
       - ends_at
 
   TimePoint:
+    description: A point in time. Can be fully specified, or specified in relative terms.
+    is_a: TimePointOrTemporalInterval
     slots:
+      - year_value
       - date_value
       - time_value
       - datetime_value
       - marker_event
       - description
+    exact_mappings:
+      - fibo.DatesAndTimes:TimeInstant
+
+  Duration:
+    description: A length of time
+    is_a: Quantity
+
+
+  TemporalRelationship:
+    description: A relationship to another time point
+    is_a: Relationship
+    attributes:
+      predicate:
+        range: RelativeTimeEnum
+        description: The relationship between the two time points
+      relative_to:
+        range: Entity
+        any_of:
+          - range: TimePoint
+          - range: TemporalInterval
+          - range: Event
 
 
 slots:
@@ -48,6 +89,15 @@ slots:
 
   ends_at:
     range: TimePoint
+
+  happens_at:
+    range: TimePoint
+
+  year_value:
+    range: integer
+    unit:
+      symbol: year
+      ucum_code: a
 
   date_value:
     range: date
@@ -60,3 +110,17 @@ slots:
 
   marker_event:
     range: Event
+
+  has_interval:
+    range: TemporalInterval
+
+  has_duration:
+    range: Duration
+
+enums:
+
+  RelativeTimeEnum:
+    permissible_values:
+      BEFORE:
+      AFTER:
+      AT_SAME_TIME_AS:

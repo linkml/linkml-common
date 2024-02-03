@@ -13,7 +13,10 @@ prefixes:
   biolink: https://w3id.org/biolink/
   schema: http://schema.org/
   BFO: http://purl.obolibrary.org/obo/BFO_
+  IAO: http://purl.obolibrary.org/obo/IAO_
   fhir: http://hl7.org/fhir/
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
 default_prefix: linkml_common
 default_range: string
 
@@ -63,8 +66,18 @@ classes:
     class_uri: schema:Intangible
     is_a: Entity
 
-  Relationship:
+  Role:
+    is_a: Intangible
     abstract: true
+    class_uri: schema:Role
+    close_mappings:
+      - BFO:0000023
+
+  Relationship:
+    is_a: Intangible
+    abstract: true
+    close_mappings:
+      - rdfs:Statement
 
 
   Location:
@@ -74,14 +87,19 @@ classes:
     is_a: Location
 
   Observation:
-    description: >-
-      A statement about the state of something
+    description: A statement about the state of something
     is_a: Entity
 
-  Procedure:
-    description: >-
-      A canonical series of actions conducted in a certain order or manner
+
+  Specification:
+    description: A specification of a thing
     is_a: NamedThing
+    exact_mappings:
+      - IAO:0000104
+
+  Procedure:
+    description: A canonical series of actions conducted in a certain order or manner
+    is_a: Specification
 
   MathematicalOperation:
     description: >-

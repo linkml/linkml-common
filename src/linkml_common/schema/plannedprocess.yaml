@@ -25,12 +25,15 @@ imports:
 classes:
 
   PlannedProcess:
+    description: A process that follows a defined procedure or plan
     is_a: Event
     attributes:
       follows_procedure:
         range: Procedure
       uses_physical_device:
         range: PhysicalDevice
+    exact_mappings:
+      - OBI:0000011
 
   MaterialCollection:
     is_a: PlannedProcess

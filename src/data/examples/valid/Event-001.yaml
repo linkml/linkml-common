@@ -1,0 +1,6 @@
+# Example data object
+id: example:Event001
+name: Battle of Hastings
+happens_at:
+  year_value: 1066
+

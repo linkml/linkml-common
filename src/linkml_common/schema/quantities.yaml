@@ -14,6 +14,8 @@ prefixes:
   schema: http://schema.org/
   PATO: http://purl.obolibrary.org/obo/PATO_
   fhir: http://hl7.org/fhir/
+  qudt: http://qudt.org/vocab/unit/
+  fibo.QuantitiesAndUnits: https://www.omg.org/spec/Commons/QuantitiesAndUnits/
 default_prefix: linkml_common
 default_range: string
 
@@ -23,6 +25,12 @@ imports:
 
 classes:
 
+  QuantityKind:
+    is_a: Concept
+    exact_mappings:
+      - qudt:QuantityKind
+      - fibo.QuantitiesAndUnits:ScalarQuantity
+
   Quantity:
     is_a: Intangible
     class_uri: fhir:Quantity
@@ -30,6 +38,12 @@ classes:
       - Quantity
       - QuantityRange
       - Ratio
+    attributes:
+      has_quantity_kind:
+        range: QuantityKind
+        description: The kind of quantity
+    exact_mappings:
+      - schema:Quantity
 
   SimpleQuantity:
     description: >-
@@ -42,6 +56,12 @@ classes:
         description: The value of the quantity
       unit:
         range: UnitConcept
+        exact_mappings:
+          - schema:unitCode
+          - qudt:unit
+    exact_mappings:
+      - fibo:ScalarQuantityValue
+
 
   Ratio:
     description: >-

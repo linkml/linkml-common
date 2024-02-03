@@ -10,6 +10,7 @@
     "linkml:types",
     "core",
     "bibliographic",
+    "datasets",
     "clinicalresearch",
     "computational",
     "engineering",
@@ -417,6 +418,42 @@
       ]
     },
     {
+      "name": "CaseOrControlEnum",
+      "definition_uri": "https://w3id.org/linkml-common/CaseOrControlEnum",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "permissible_values": [
+        {
+          "text": "CASE",
+          "meaning": "OBI:0002492",
+          "title": "case role in case-control study"
+        },
+        {
+          "text": "CONTROL",
+          "meaning": "OBI:0002493",
+          "title": "control role in case-control study"
+        }
+      ]
+    },
+    {
+      "name": "StudyDesignEnum",
+      "definition_uri": "https://w3id.org/linkml-common/StudyDesignEnum",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "reachable_from": {
+        "source_nodes": [
+          "OBI:0500000"
+        ],
+        "relationship_types": [
+          "rdfs:subClassOf"
+        ]
+      }
+    },
+    {
+      "name": "HumanLanguageCodeEnum",
+      "definition_uri": "https://w3id.org/linkml-common/HumanLanguageCodeEnum",
+      "description": "An enumeration of languages",
+      "from_schema": "https://w3id.org/linkml-common/social"
+    },
+    {
       "name": "PersonStatus",
       "definition_uri": "https://w3id.org/linkml-common/PersonStatus",
       "from_schema": "https://w3id.org/linkml-common/social",
@@ -437,6 +474,22 @@
           "todos": [
             "map this to an ontology"
           ]
+        }
+      ]
+    },
+    {
+      "name": "RelativeTimeEnum",
+      "definition_uri": "https://w3id.org/linkml-common/RelativeTimeEnum",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "permissible_values": [
+        {
+          "text": "BEFORE"
+        },
+        {
+          "text": "AFTER"
+        },
+        {
+          "text": "AT_SAME_TIME_AS"
         }
       ]
     }
@@ -557,9 +610,9 @@
       "description": "The subject of a relationship",
       "from_schema": "https://w3id.org/linkml-common/core",
       "mappings": [
-        "http://example.org/UNKNOWN/rdf/subject"
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"
       ],
-      "slot_uri": "http://example.org/UNKNOWN/rdf/subject",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject",
       "range": "Any",
       "inlined": true,
       "@type": "SlotDefinition"
@@ -570,9 +623,9 @@
       "description": "The object of a relationship",
       "from_schema": "https://w3id.org/linkml-common/core",
       "mappings": [
-        "http://example.org/UNKNOWN/rdf/object"
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#object"
       ],
-      "slot_uri": "http://example.org/UNKNOWN/rdf/object",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#object",
       "range": "Any",
       "inlined": true,
       "@type": "SlotDefinition"
@@ -667,9 +720,11 @@
       "definition_uri": "https://w3id.org/linkml-common/starts_at",
       "from_schema": "https://w3id.org/linkml-common/time",
       "slot_uri": "https://w3id.org/linkml-common/starts_at",
-      "owner": "Event",
+      "owner": "TemporalInterval",
       "domain_of": [
-        "Event"
+        "Event",
+        "TimePointOrTemporalInterval",
+        "TemporalInterval"
       ],
       "range": "TimePoint",
       "inlined": true,
@@ -680,12 +735,39 @@
       "definition_uri": "https://w3id.org/linkml-common/ends_at",
       "from_schema": "https://w3id.org/linkml-common/time",
       "slot_uri": "https://w3id.org/linkml-common/ends_at",
+      "owner": "TemporalInterval",
+      "domain_of": [
+        "Event",
+        "TimePointOrTemporalInterval",
+        "TemporalInterval"
+      ],
+      "range": "TimePoint",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "happens_at",
+      "definition_uri": "https://w3id.org/linkml-common/happens_at",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "slot_uri": "https://w3id.org/linkml-common/happens_at",
       "owner": "Event",
       "domain_of": [
         "Event"
       ],
       "range": "TimePoint",
       "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "year_value",
+      "definition_uri": "https://w3id.org/linkml-common/year_value",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "slot_uri": "https://w3id.org/linkml-common/year_value",
+      "owner": "TimePoint",
+      "domain_of": [
+        "TimePoint"
+      ],
+      "range": "integer",
       "@type": "SlotDefinition"
     },
     {
@@ -734,6 +816,32 @@
         "TimePoint"
       ],
       "range": "Event",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_interval",
+      "definition_uri": "https://w3id.org/linkml-common/has_interval",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "slot_uri": "https://w3id.org/linkml-common/has_interval",
+      "owner": "Event",
+      "domain_of": [
+        "Event"
+      ],
+      "range": "TemporalInterval",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_duration",
+      "definition_uri": "https://w3id.org/linkml-common/has_duration",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "slot_uri": "https://w3id.org/linkml-common/has_duration",
+      "owner": "Event",
+      "domain_of": [
+        "Event"
+      ],
+      "range": "Duration",
+      "inlined": true,
       "@type": "SlotDefinition"
     },
     {
@@ -810,6 +918,19 @@
       "range": "Entity",
       "inlined": true,
       "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "dataset__collected_as_part_of",
+      "from_schema": "https://w3id.org/linkml-common/datasets",
+      "slot_uri": "https://w3id.org/linkml-common/collected_as_part_of",
+      "multivalued": true,
+      "alias": "collected_as_part_of",
+      "owner": "Dataset",
+      "domain_of": [
+        "Dataset"
+      ],
+      "range": "Investigation",
       "@type": "SlotDefinition"
     },
     {
@@ -1129,6 +1250,20 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "investigation__variables",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "slot_uri": "https://w3id.org/linkml-common/variables",
+      "multivalued": true,
+      "alias": "variables",
+      "owner": "Investigation",
+      "domain_of": [
+        "Investigation"
+      ],
+      "range": "Variable",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "investigativeProcess__follows_procedure",
       "from_schema": "https://w3id.org/linkml-common/investigations",
       "slot_uri": "https://w3id.org/linkml-common/follows_procedure",
@@ -1219,6 +1354,19 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "quantity__has_quantity_kind",
+      "description": "The kind of quantity",
+      "from_schema": "https://w3id.org/linkml-common/quantities",
+      "slot_uri": "https://w3id.org/linkml-common/has_quantity_kind",
+      "alias": "has_quantity_kind",
+      "owner": "Quantity",
+      "domain_of": [
+        "Quantity"
+      ],
+      "range": "QuantityKind",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "simpleQuantity__value",
       "description": "The value of the quantity",
       "from_schema": "https://w3id.org/linkml-common/quantities",
@@ -1234,6 +1382,10 @@
     {
       "name": "simpleQuantity__unit",
       "from_schema": "https://w3id.org/linkml-common/quantities",
+      "exact_mappings": [
+        "http://schema.org/unitCode",
+        "http://qudt.org/vocab/unit/unit"
+      ],
       "slot_uri": "https://w3id.org/linkml-common/unit",
       "alias": "unit",
       "owner": "SimpleQuantity",
@@ -1297,6 +1449,156 @@
       ],
       "range": "Quantity",
       "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "creativeWork__title",
+      "description": "The title of the item",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "exact_mappings": [
+        "http://purl.org/dc/terms/title"
+      ],
+      "slot_uri": "https://w3id.org/linkml-common/title",
+      "alias": "title",
+      "owner": "CreativeWork",
+      "domain_of": [
+        "CreativeWork"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "creativeWork__abstract",
+      "description": "A summary of the item",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "slot_uri": "https://w3id.org/linkml-common/abstract",
+      "alias": "abstract",
+      "owner": "CreativeWork",
+      "domain_of": [
+        "CreativeWork"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "creativeWork__rights",
+      "description": "Information about rights held in and over the item",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "slot_uri": "https://w3id.org/linkml-common/rights",
+      "alias": "rights",
+      "owner": "CreativeWork",
+      "domain_of": [
+        "CreativeWork"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "creativeWork__creators",
+      "description": "The person or organization who created the work",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "mappings": [
+        "http://purl.org/dc/terms/creator"
+      ],
+      "slot_uri": "http://purl.org/dc/terms/creator",
+      "multivalued": true,
+      "alias": "creators",
+      "owner": "CreativeWork",
+      "domain_of": [
+        "CreativeWork"
+      ],
+      "range": "Agent",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "creativeWork__contributors",
+      "description": "A person or organization that contributed to the creation of the work",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "mappings": [
+        "http://purl.org/dc/terms/contributor"
+      ],
+      "slot_uri": "http://purl.org/dc/terms/contributor",
+      "multivalued": true,
+      "alias": "contributors",
+      "owner": "CreativeWork",
+      "domain_of": [
+        "CreativeWork"
+      ],
+      "range": "Agent",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "creativeWork__contacts",
+      "description": "A contact point for a person or organization",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "mappings": [
+        "http://schema.org/contactPoint"
+      ],
+      "slot_uri": "http://schema.org/contactPoint",
+      "multivalued": true,
+      "alias": "contacts",
+      "owner": "CreativeWork",
+      "domain_of": [
+        "CreativeWork"
+      ],
+      "range": "Agent",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "creativeWork__keywords",
+      "description": "Keywords or tags used to describe this item",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "mappings": [
+        "http://schema.org/keywords"
+      ],
+      "slot_uri": "http://schema.org/keywords",
+      "multivalued": true,
+      "alias": "keywords",
+      "owner": "CreativeWork",
+      "domain_of": [
+        "CreativeWork"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "temporalRelationship__predicate",
+      "description": "The relationship between the two time points",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "slot_uri": "https://w3id.org/linkml-common/predicate",
+      "alias": "predicate",
+      "owner": "TemporalRelationship",
+      "domain_of": [
+        "TemporalRelationship"
+      ],
+      "range": "RelativeTimeEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "temporalRelationship__relative_to",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "slot_uri": "https://w3id.org/linkml-common/relative_to",
+      "alias": "relative_to",
+      "owner": "TemporalRelationship",
+      "domain_of": [
+        "TemporalRelationship"
+      ],
+      "range": "Entity",
+      "inlined": true,
+      "any_of": [
+        {
+          "range": "TimePoint",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "TemporalInterval",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "Event",
+          "@type": "AnonymousSlotExpression"
+        }
+      ],
       "@type": "SlotDefinition"
     },
     {
@@ -1532,10 +1834,36 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "Role",
+      "definition_uri": "https://w3id.org/linkml-common/Role",
+      "from_schema": "https://w3id.org/linkml-common/core",
+      "mappings": [
+        "schema:Role"
+      ],
+      "close_mappings": [
+        "BFO:0000023"
+      ],
+      "is_a": "Intangible",
+      "abstract": true,
+      "slots": [
+        "type"
+      ],
+      "slot_usage": {},
+      "class_uri": "http://schema.org/Role",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "Relationship",
       "definition_uri": "https://w3id.org/linkml-common/Relationship",
       "from_schema": "https://w3id.org/linkml-common/core",
+      "close_mappings": [
+        "rdfs:Statement"
+      ],
+      "is_a": "Intangible",
       "abstract": true,
+      "slots": [
+        "type"
+      ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/Relationship",
       "@type": "ClassDefinition"
@@ -1572,10 +1900,13 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "Procedure",
-      "definition_uri": "https://w3id.org/linkml-common/Procedure",
-      "description": "A canonical series of actions conducted in a certain order or manner",
+      "name": "Specification",
+      "definition_uri": "https://w3id.org/linkml-common/Specification",
+      "description": "A specification of a thing",
       "from_schema": "https://w3id.org/linkml-common/core",
+      "exact_mappings": [
+        "IAO:0000104"
+      ],
       "is_a": "NamedThing",
       "slots": [
         "id",
@@ -1586,20 +1917,25 @@
         "description"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml-common/Procedure",
+      "class_uri": "https://w3id.org/linkml-common/Specification",
       "@type": "ClassDefinition"
     },
     {
-      "name": "XProcess",
-      "definition_uri": "https://w3id.org/linkml-common/XProcess",
-      "description": "A series of actions or steps taken in order to achieve a particular end",
+      "name": "Procedure",
+      "definition_uri": "https://w3id.org/linkml-common/Procedure",
+      "description": "A canonical series of actions conducted in a certain order or manner",
       "from_schema": "https://w3id.org/linkml-common/core",
-      "is_a": "Entity",
+      "is_a": "Specification",
       "slots": [
-        "type"
+        "id",
+        "name",
+        "type",
+        "subtype",
+        "ontology_types",
+        "description"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml-common/XProcess",
+      "class_uri": "https://w3id.org/linkml-common/Procedure",
       "@type": "ClassDefinition"
     },
     {
@@ -1686,22 +2022,63 @@
       "name": "Publication",
       "definition_uri": "https://w3id.org/linkml-common/Publication",
       "from_schema": "https://w3id.org/linkml-common/financial",
-      "is_a": "NamedThing",
+      "is_a": "CreativeWork",
       "slots": [
         "id",
         "name",
         "type",
         "subtype",
         "ontology_types",
-        "description"
+        "description",
+        "creativeWork__title",
+        "creativeWork__abstract",
+        "creativeWork__rights",
+        "creativeWork__creators",
+        "creativeWork__contributors",
+        "creativeWork__contacts",
+        "creativeWork__keywords"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/Publication",
       "@type": "ClassDefinition"
     },
     {
+      "name": "Dataset",
+      "definition_uri": "https://w3id.org/linkml-common/Dataset",
+      "from_schema": "https://w3id.org/linkml-common/datasets",
+      "is_a": "CreativeWork",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "subtype",
+        "ontology_types",
+        "description",
+        "creativeWork__title",
+        "creativeWork__abstract",
+        "creativeWork__rights",
+        "creativeWork__creators",
+        "creativeWork__contributors",
+        "creativeWork__contacts",
+        "creativeWork__keywords",
+        "dataset__collected_as_part_of"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "collected_as_part_of",
+          "multivalued": true,
+          "range": "Investigation",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/Dataset",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "ClinicalCohort",
       "definition_uri": "https://w3id.org/linkml-common/ClinicalCohort",
+      "description": "A group of patients who share a common set of characteristics",
       "from_schema": "https://w3id.org/linkml-common/clinicalresearch",
       "is_a": "NamedThing",
       "slots": [
@@ -1727,6 +2104,7 @@
     {
       "name": "ClinicalCohortDefinition",
       "definition_uri": "https://w3id.org/linkml-common/ClinicalCohortDefinition",
+      "description": "A definition of a clinical cohort",
       "from_schema": "https://w3id.org/linkml-common/clinicalresearch",
       "exact_mappings": [
         "omopschema:COHORT_DEFINITION"
@@ -1747,6 +2125,7 @@
     {
       "name": "ClinicalCohortEnrollment",
       "definition_uri": "https://w3id.org/linkml-common/ClinicalCohortEnrollment",
+      "description": "An event relating a patient to a clinical cohort",
       "from_schema": "https://w3id.org/linkml-common/clinicalresearch",
       "exact_mappings": [
         "omopschema:COHORT"
@@ -1761,6 +2140,9 @@
         "description",
         "starts_at",
         "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
         "clinicalCohortEnrollment__patient",
         "clinicalCohortEnrollment__cohort"
       ],
@@ -1840,6 +2222,9 @@
         "description",
         "starts_at",
         "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
         "engineeringProcess__follows_procedure",
         "engineeringProcess__part_of"
       ],
@@ -1873,11 +2258,34 @@
         "description",
         "starts_at",
         "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
         "plannedProcess__follows_procedure",
         "plannedProcess__uses_physical_device"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/EngineeringMaterialProcessing",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "EnvironmentalSite",
+      "definition_uri": "https://w3id.org/linkml-common/EnvironmentalSite",
+      "description": "A location or site that is the subject of environmental monitoring",
+      "from_schema": "https://w3id.org/linkml-common/environmental",
+      "is_a": "Place",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "subtype",
+        "ontology_types",
+        "description",
+        "address",
+        "geolocation"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/EnvironmentalSite",
       "@type": "ClassDefinition"
     },
     {
@@ -1889,6 +2297,15 @@
       "from_schema": "https://w3id.org/linkml-common/environmental",
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/EnvironmentalProcess",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "EnvironmentalMonitoring",
+      "definition_uri": "https://w3id.org/linkml-common/EnvironmentalMonitoring",
+      "from_schema": "https://w3id.org/linkml-common/environmental",
+      "is_a": "EnvironmentalProcess",
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/EnvironmentalMonitoring",
       "@type": "ClassDefinition"
     },
     {
@@ -1930,7 +2347,8 @@
       "from_schema": "https://w3id.org/linkml-common/foods",
       "is_a": "Quantity",
       "slots": [
-        "type"
+        "type",
+        "quantity__has_quantity_kind"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/FoodIngredient",
@@ -1950,6 +2368,9 @@
         "description",
         "starts_at",
         "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
         "plannedProcess__follows_procedure",
         "plannedProcess__uses_physical_device"
       ],
@@ -1994,6 +2415,9 @@
     {
       "name": "CompositeFoodType",
       "definition_uri": "https://w3id.org/linkml-common/CompositeFoodType",
+      "implements": [
+        "linkml_common:Composable"
+      ],
       "from_schema": "https://w3id.org/linkml-common/foods",
       "is_a": "FoodTypeConcept",
       "slots": [
@@ -2193,6 +2617,9 @@
         "description",
         "starts_at",
         "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
         "healthcareEncounter__patient",
         "healthcareEncounter__provider",
         "HealthcareEncounter_subtype"
@@ -2234,7 +2661,9 @@
       "name": "HealthcareRole",
       "definition_uri": "https://w3id.org/linkml-common/HealthcareRole",
       "from_schema": "https://w3id.org/linkml-common/healthcare",
+      "is_a": "Role",
       "slots": [
+        "type",
         "healthcareRole__is_person"
       ],
       "slot_usage": {},
@@ -2254,6 +2683,7 @@
       "from_schema": "https://w3id.org/linkml-common/healthcare",
       "is_a": "HealthcareRole",
       "slots": [
+        "type",
         "healthcareRole__is_person",
         "healthcareProvider__speciality",
         "healthcareProvider__care_site"
@@ -2291,6 +2721,9 @@
         "description",
         "starts_at",
         "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
         "healthcareConditionOccurrence__patient",
         "healthcareConditionOccurrence__observed_during"
       ],
@@ -2319,6 +2752,7 @@
       "from_schema": "https://w3id.org/linkml-common/healthcare",
       "is_a": "HealthcareRole",
       "slots": [
+        "type",
         "healthcareRole__is_person"
       ],
       "slot_usage": {},
@@ -2340,13 +2774,20 @@
         "subtype",
         "ontology_types",
         "description",
-        "investigation__objectives"
+        "investigation__objectives",
+        "investigation__variables"
       ],
       "slot_usage": {},
       "attributes": [
         {
           "name": "objectives",
           "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "variables",
+          "multivalued": true,
+          "range": "Variable",
           "@type": "SlotDefinition"
         }
       ],
@@ -2368,6 +2809,23 @@
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/InvestigativeProtocol",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "StudyDesign",
+      "definition_uri": "https://w3id.org/linkml-common/StudyDesign",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "is_a": "Procedure",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "subtype",
+        "ontology_types",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/StudyDesign",
       "@type": "ClassDefinition"
     },
     {
@@ -2401,6 +2859,9 @@
         "description",
         "starts_at",
         "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
         "plannedProcess__uses_physical_device",
         "investigativeProcess__follows_procedure",
         "investigativeProcess__part_of"
@@ -2438,6 +2899,9 @@
         "description",
         "starts_at",
         "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
         "plannedProcess__uses_physical_device",
         "investigativeProcess__follows_procedure",
         "investigativeProcess__part_of",
@@ -2474,6 +2938,9 @@
         "description",
         "starts_at",
         "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
         "plannedProcess__follows_procedure",
         "plannedProcess__uses_physical_device"
       ],
@@ -2495,6 +2962,9 @@
         "description",
         "starts_at",
         "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
         "plannedProcess__uses_physical_device",
         "investigativeProcess__follows_procedure",
         "investigativeProcess__part_of"
@@ -2554,17 +3024,50 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "QuantityKind",
+      "definition_uri": "https://w3id.org/linkml-common/QuantityKind",
+      "from_schema": "https://w3id.org/linkml-common/quantities",
+      "exact_mappings": [
+        "qudt:QuantityKind",
+        "fibo.QuantitiesAndUnits:ScalarQuantity"
+      ],
+      "is_a": "Concept",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "subtype",
+        "ontology_types",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/QuantityKind",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "Quantity",
       "definition_uri": "https://w3id.org/linkml-common/Quantity",
       "from_schema": "https://w3id.org/linkml-common/quantities",
       "mappings": [
         "fhir:Quantity"
       ],
+      "exact_mappings": [
+        "schema:Quantity"
+      ],
       "is_a": "Intangible",
       "slots": [
-        "type"
+        "type",
+        "quantity__has_quantity_kind"
       ],
       "slot_usage": {},
+      "attributes": [
+        {
+          "name": "has_quantity_kind",
+          "description": "The kind of quantity",
+          "range": "QuantityKind",
+          "@type": "SlotDefinition"
+        }
+      ],
       "class_uri": "http://hl7.org/fhir/Quantity",
       "union_of": [
         "Quantity",
@@ -2581,9 +3084,13 @@
       "mappings": [
         "fhir:SimpleQuantity"
       ],
+      "exact_mappings": [
+        "fibo:ScalarQuantityValue"
+      ],
       "is_a": "Quantity",
       "slots": [
         "type",
+        "quantity__has_quantity_kind",
         "simpleQuantity__value",
         "simpleQuantity__unit"
       ],
@@ -2597,6 +3104,10 @@
         },
         {
           "name": "unit",
+          "exact_mappings": [
+            "schema:unitCode",
+            "qudt:unit"
+          ],
           "range": "UnitConcept",
           "@type": "SlotDefinition"
         }
@@ -2615,6 +3126,7 @@
       "is_a": "Quantity",
       "slots": [
         "type",
+        "quantity__has_quantity_kind",
         "ratio__numerator",
         "ratio__denominator"
       ],
@@ -2707,11 +3219,36 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "Agent",
+      "definition_uri": "https://w3id.org/linkml-common/Agent",
+      "description": "Represents an Agent",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "exact_mappings": [
+        "prov:Agent",
+        "fibo.commons.PartiesAndSituations:Agent"
+      ],
+      "is_a": "NamedThing",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "subtype",
+        "ontology_types",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/Agent",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "Person",
       "definition_uri": "https://w3id.org/linkml-common/Person",
       "description": "Represents a Person",
       "from_schema": "https://w3id.org/linkml-common/social",
-      "is_a": "NamedThing",
+      "exact_mappings": [
+        "schema:Person"
+      ],
+      "is_a": "Agent",
       "slots": [
         "id",
         "name",
@@ -2733,7 +3270,10 @@
       "definition_uri": "https://w3id.org/linkml-common/Organization",
       "description": "Represents an Organization",
       "from_schema": "https://w3id.org/linkml-common/social",
-      "is_a": "NamedThing",
+      "exact_mappings": [
+        "schema:Organization"
+      ],
+      "is_a": "Agent",
       "slots": [
         "id",
         "name",
@@ -2744,6 +3284,24 @@
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/Organization",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "AutomatedAgent",
+      "definition_uri": "https://w3id.org/linkml-common/AutomatedAgent",
+      "description": "Represents an Automated Agent",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "is_a": "Agent",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "subtype",
+        "ontology_types",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/AutomatedAgent",
       "@type": "ClassDefinition"
     },
     {
@@ -2759,10 +3317,112 @@
         "ontology_types",
         "description",
         "starts_at",
-        "ends_at"
+        "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/LifeEvent",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "CreativeWork",
+      "definition_uri": "https://w3id.org/linkml-common/CreativeWork",
+      "description": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "exact_mappings": [
+        "schema:CreativeWork"
+      ],
+      "is_a": "NamedThing",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "subtype",
+        "ontology_types",
+        "description",
+        "creativeWork__title",
+        "creativeWork__abstract",
+        "creativeWork__rights",
+        "creativeWork__creators",
+        "creativeWork__contributors",
+        "creativeWork__contacts",
+        "creativeWork__keywords"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "title",
+          "description": "The title of the item",
+          "exact_mappings": [
+            "dcterms:title"
+          ],
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "abstract",
+          "description": "A summary of the item",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "rights",
+          "description": "Information about rights held in and over the item",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "creators",
+          "description": "The person or organization who created the work",
+          "slot_uri": "dcterms:creator",
+          "multivalued": true,
+          "range": "Agent",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "contributors",
+          "description": "A person or organization that contributed to the creation of the work",
+          "slot_uri": "dcterms:contributor",
+          "multivalued": true,
+          "range": "Agent",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "contacts",
+          "description": "A contact point for a person or organization",
+          "slot_uri": "schema:contactPoint",
+          "multivalued": true,
+          "range": "Agent",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "keywords",
+          "description": "Keywords or tags used to describe this item",
+          "slot_uri": "schema:keywords",
+          "multivalued": true,
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/CreativeWork",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Service",
+      "definition_uri": "https://w3id.org/linkml-common/Service",
+      "description": "A service provided by an organization",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "exact_mappings": [
+        "schema:Service"
+      ],
+      "is_a": "Intangible",
+      "slots": [
+        "type"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/Service",
       "@type": "ClassDefinition"
     },
     {
@@ -2779,17 +3439,58 @@
         "ontology_types",
         "description",
         "starts_at",
-        "ends_at"
+        "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/Event",
       "@type": "ClassDefinition"
     },
     {
+      "name": "TimePointOrTemporalInterval",
+      "definition_uri": "https://w3id.org/linkml-common/TimePointOrTemporalInterval",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "is_a": "Intangible",
+      "slots": [
+        "type",
+        "starts_at",
+        "ends_at"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/TimePointOrTemporalInterval",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "TemporalInterval",
+      "definition_uri": "https://w3id.org/linkml-common/TemporalInterval",
+      "description": "A period of time",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "is_a": "TimePointOrTemporalInterval",
+      "slots": [
+        "type",
+        "starts_at",
+        "ends_at"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/TemporalInterval",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "TimePoint",
       "definition_uri": "https://w3id.org/linkml-common/TimePoint",
+      "description": "A point in time. Can be fully specified, or specified in relative terms.",
       "from_schema": "https://w3id.org/linkml-common/time",
+      "exact_mappings": [
+        "fibo.DatesAndTimes:TimeInstant"
+      ],
+      "is_a": "TimePointOrTemporalInterval",
       "slots": [
+        "type",
+        "starts_at",
+        "ends_at",
+        "year_value",
         "date_value",
         "time_value",
         "datetime_value",
@@ -2801,9 +3502,69 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "Duration",
+      "definition_uri": "https://w3id.org/linkml-common/Duration",
+      "description": "A length of time",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "is_a": "Quantity",
+      "slots": [
+        "type",
+        "quantity__has_quantity_kind"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/Duration",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "TemporalRelationship",
+      "definition_uri": "https://w3id.org/linkml-common/TemporalRelationship",
+      "description": "A relationship to another time point",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "is_a": "Relationship",
+      "slots": [
+        "type",
+        "temporalRelationship__predicate",
+        "temporalRelationship__relative_to"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "predicate",
+          "description": "The relationship between the two time points",
+          "range": "RelativeTimeEnum",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "relative_to",
+          "range": "Entity",
+          "any_of": [
+            {
+              "range": "TimePoint",
+              "@type": "AnonymousSlotExpression"
+            },
+            {
+              "range": "TemporalInterval",
+              "@type": "AnonymousSlotExpression"
+            },
+            {
+              "range": "Event",
+              "@type": "AnonymousSlotExpression"
+            }
+          ],
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/TemporalRelationship",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "PlannedProcess",
       "definition_uri": "https://w3id.org/linkml-common/PlannedProcess",
+      "description": "A process that follows a defined procedure or plan",
       "from_schema": "https://w3id.org/linkml-common/plannedprocess",
+      "exact_mappings": [
+        "OBI:0000011"
+      ],
       "is_a": "Event",
       "slots": [
         "id",
@@ -2814,6 +3575,9 @@
         "description",
         "starts_at",
         "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
         "plannedProcess__follows_procedure",
         "plannedProcess__uses_physical_device"
       ],
@@ -2847,6 +3611,9 @@
         "description",
         "starts_at",
         "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
         "plannedProcess__follows_procedure",
         "plannedProcess__uses_physical_device"
       ],
@@ -2868,6 +3635,9 @@
         "description",
         "starts_at",
         "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
         "plannedProcess__follows_procedure",
         "plannedProcess__uses_physical_device"
       ],
@@ -2878,15 +3648,16 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "linkml_common.yaml",
-  "source_file_date": "2024-01-11T17:31:02",
-  "source_file_size": 736,
-  "generation_date": "2024-01-13T18:02:36",
+  "source_file_date": "2024-02-02T15:51:52",
+  "source_file_size": 749,
+  "generation_date": "2024-02-02T17:33:01",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/linkml_common.context.jsonld",
     "https://w3id.org/linkml/types.context.jsonld",
     "core.context.jsonld",
     "bibliographic.context.jsonld",
+    "datasets.context.jsonld",
     "clinicalresearch.context.jsonld",
     "computational.context.jsonld",
     "engineering.context.jsonld",

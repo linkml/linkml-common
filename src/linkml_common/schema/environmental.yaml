@@ -24,7 +24,14 @@ imports:
 
 classes:
 
+  EnvironmentalSite:
+    description: A location or site that is the subject of environmental monitoring
+    is_a: Place
+
   EnvironmentalProcess:
     comments:
       - TODO
     #is_a: Process
+
+  EnvironmentalMonitoring:
+    is_a: EnvironmentalProcess

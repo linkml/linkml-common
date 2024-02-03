@@ -47,6 +47,7 @@ classes:
     is_a: Organization
 
   HealthcareRole:
+    is_a: Role
     attributes:
       is_person:
         range: Person

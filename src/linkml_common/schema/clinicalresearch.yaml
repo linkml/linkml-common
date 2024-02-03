@@ -1,8 +1,8 @@
 id: https://w3id.org/linkml-common/clinicalresearch
 name: linkml-common-clinicalresearch
-title: linkml-common-clinicalresearch
+title: "LinkML Common Schema Components: Clinical Research"
 description: |-
-  Common Data Model Elements
+  Common Schema Components: Clinical Research
 license: MIT
 see_also:
   - https://linkml.github.io/linkml-common
@@ -26,17 +26,20 @@ imports:
 classes:
 
   ClinicalCohort:
+    description: A group of patients who share a common set of characteristics
     is_a: NamedThing
     attributes:
       definition:
         range: ClinicalCohortDefinition
 
   ClinicalCohortDefinition:
+    description: A definition of a clinical cohort
     is_a: NamedThing
     exact_mappings:
       - omopschema:COHORT_DEFINITION
 
   ClinicalCohortEnrollment:
+    description: An event relating a patient to a clinical cohort
     is_a: Event
     exact_mappings:
       - omopschema:COHORT

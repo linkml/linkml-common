@@ -2,7 +2,7 @@ id: https://w3id.org/linkml-common/social
 name: linkml-common-social
 title: linkml-common-social
 description: |-
-  Common Data Model Elements
+  Common Data Model Elements: Human and social activities
 license: MIT
 see_also:
   - https://linkml.github.io/linkml-common
@@ -14,6 +14,9 @@ prefixes:
   schema: http://schema.org/
   PATO: http://purl.obolibrary.org/obo/PATO_
   fhir: http://hl7.org/fhir/
+  prov: http://www.w3.org/ns/prov#
+  dcterms: http://purl.org/dc/terms/
+  fibo.commons.PartiesAndSituations: https://spec.edmcouncil.org/fibo/ontology/FBC/ommons/PartiesAndSituations/
 default_prefix: linkml_common
 default_range: string
 
@@ -23,10 +26,16 @@ imports:
 
 classes:
 
-  Person:
+  Agent:
     is_a: NamedThing
-    description: >-
-      Represents a Person
+    description: Represents an Agent
+    exact_mappings:
+      - prov:Agent
+      - fibo.commons.PartiesAndSituations:Agent
+
+  Person:
+    is_a: Agent
+    description: Represents a Person
     slots:
       - primary_email
       - birth_date
@@ -35,14 +44,65 @@ classes:
     slot_usage:
       primary_email:
         pattern: "^\\S+@[\\S+\\.]+\\S+"
+    exact_mappings:
+      - schema:Person
 
   Organization:
-    is_a: NamedThing
-    description: >-
-      Represents an Organization
+    is_a: Agent
+    description: Represents an Organization
+    exact_mappings:
+      - schema:Organization
+
+  AutomatedAgent:
+    is_a: Agent
+    description: Represents an Automated Agent
 
   LifeEvent:
     is_a: Event
+
+  CreativeWork:
+    description: The most generic kind of creative work, including books, movies, photographs, software programs, etc.
+    is_a: NamedThing
+    exact_mappings:
+      - schema:CreativeWork
+    attributes:
+      title:
+        range: string
+        description: The title of the item
+        exact_mappings:
+          - dcterms:title
+      abstract:
+        range: string
+        description: A summary of the item
+      rights:
+        range: string
+        description: Information about rights held in and over the item
+      creators:
+        range: Agent
+        slot_uri: dcterms:creator
+        description: The person or organization who created the work
+        multivalued: true
+      contributors:
+        range: Agent
+        slot_uri: dcterms:contributor
+        description: A person or organization that contributed to the creation of the work
+        multivalued: true
+      contacts:
+        range: Agent
+        slot_uri: schema:contactPoint
+        description: A contact point for a person or organization
+        multivalued: true
+      keywords:
+        range: string
+        slot_uri: schema:keywords
+        description: Keywords or tags used to describe this item
+        multivalued: true
+
+  Service:
+    description: A service provided by an organization
+    is_a: Intangible
+    exact_mappings:
+      - schema:Service
 
 
 slots:
@@ -61,6 +121,8 @@ slots:
     description: living or dead status
 
 enums:
+  HumanLanguageCodeEnum:
+    description: An enumeration of languages
   PersonStatus:
     permissible_values:
       ALIVE:

@@ -1,5 +1,25 @@
 
 
+CREATE TABLE "Agent" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	type TEXT, 
+	subtype TEXT, 
+	ontology_types TEXT, 
+	description TEXT, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE "AutomatedAgent" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	type TEXT, 
+	subtype TEXT, 
+	ontology_types TEXT, 
+	description TEXT, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE "BasicFoodType" (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -46,6 +66,39 @@ CREATE TABLE "Concept" (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE "CreativeWork" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	type TEXT, 
+	subtype TEXT, 
+	ontology_types TEXT, 
+	description TEXT, 
+	title TEXT, 
+	abstract TEXT, 
+	rights TEXT, 
+	creators TEXT, 
+	contributors TEXT, 
+	contacts TEXT, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE "Dataset" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	type TEXT, 
+	subtype TEXT, 
+	ontology_types TEXT, 
+	description TEXT, 
+	title TEXT, 
+	abstract TEXT, 
+	rights TEXT, 
+	creators TEXT, 
+	contributors TEXT, 
+	contacts TEXT, 
+	collected_as_part_of TEXT, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE "DataStructure" (
 	type TEXT, 
 	PRIMARY KEY (type)
@@ -61,6 +114,18 @@ CREATE TABLE "EngineeringSpecification" (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE "EnvironmentalSite" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	type TEXT, 
+	subtype TEXT, 
+	ontology_types TEXT, 
+	description TEXT, 
+	address TEXT, 
+	geolocation TEXT, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE "Event" (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -70,6 +135,9 @@ CREATE TABLE "Event" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -108,6 +176,9 @@ CREATE TABLE "HealthcareEncounter" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	patient TEXT, 
 	provider TEXT, 
 	subtype VARCHAR(34), 
@@ -160,6 +231,7 @@ CREATE TABLE "Investigation" (
 	ontology_types TEXT, 
 	description TEXT, 
 	objectives TEXT, 
+	variables TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -194,6 +266,9 @@ CREATE TABLE "LifeEvent" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -301,12 +376,23 @@ CREATE TABLE "Publication" (
 	subtype TEXT, 
 	ontology_types TEXT, 
 	description TEXT, 
+	title TEXT, 
+	abstract TEXT, 
+	rights TEXT, 
+	creators TEXT, 
+	contributors TEXT, 
+	contacts TEXT, 
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE "Quantity" (
+CREATE TABLE "QuantityKind" (
+	id TEXT NOT NULL, 
+	name TEXT, 
 	type TEXT, 
-	PRIMARY KEY (type)
+	subtype TEXT, 
+	ontology_types TEXT, 
+	description TEXT, 
+	PRIMARY KEY (id)
 );
 
 CREATE TABLE "QuantityRange" (
@@ -314,13 +400,6 @@ CREATE TABLE "QuantityRange" (
 	lower_bound TEXT, 
 	upper_bound TEXT, 
 	PRIMARY KEY (type, lower_bound, upper_bound)
-);
-
-CREATE TABLE "Ratio" (
-	type TEXT, 
-	numerator TEXT, 
-	denominator TEXT, 
-	PRIMARY KEY (type, numerator, denominator)
 );
 
 CREATE TABLE "RawMaterial" (
@@ -341,6 +420,52 @@ CREATE TABLE "SampleMaterial" (
 	ontology_types TEXT, 
 	description TEXT, 
 	PRIMARY KEY (id)
+);
+
+CREATE TABLE "Service" (
+	type TEXT, 
+	PRIMARY KEY (type)
+);
+
+CREATE TABLE "Specification" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	type TEXT, 
+	subtype TEXT, 
+	ontology_types TEXT, 
+	description TEXT, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE "StudyDesign" (
+	id TEXT NOT NULL, 
+	name TEXT, 
+	type TEXT, 
+	subtype TEXT, 
+	ontology_types TEXT, 
+	description TEXT, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE "TemporalInterval" (
+	type TEXT, 
+	starts_at TEXT, 
+	ends_at TEXT, 
+	PRIMARY KEY (type, starts_at, ends_at)
+);
+
+CREATE TABLE "TemporalRelationship" (
+	type TEXT, 
+	predicate VARCHAR(15), 
+	relative_to TEXT, 
+	PRIMARY KEY (type, predicate, relative_to)
+);
+
+CREATE TABLE "TimePointOrTemporalInterval" (
+	type TEXT, 
+	starts_at TEXT, 
+	ends_at TEXT, 
+	PRIMARY KEY (type, starts_at, ends_at)
 );
 
 CREATE TABLE "UnitConcept" (
@@ -367,11 +492,6 @@ CREATE TABLE "Variable" (
 	PRIMARY KEY (type, allowed_units)
 );
 
-CREATE TABLE "XProcess" (
-	type TEXT, 
-	PRIMARY KEY (type)
-);
-
 CREATE TABLE "ClinicalCohort" (
 	id TEXT NOT NULL, 
 	name TEXT, 
@@ -393,6 +513,9 @@ CREATE TABLE "DataGenerationFromSample" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	uses_physical_device TEXT, 
 	follows_procedure TEXT, 
 	part_of TEXT, 
@@ -400,6 +523,13 @@ CREATE TABLE "DataGenerationFromSample" (
 	FOREIGN KEY(uses_physical_device) REFERENCES "PhysicalDevice" (id), 
 	FOREIGN KEY(follows_procedure) REFERENCES "InvestigativeProtocol" (id), 
 	FOREIGN KEY(part_of) REFERENCES "Investigation" (id)
+);
+
+CREATE TABLE "Duration" (
+	type TEXT, 
+	has_quantity_kind TEXT, 
+	PRIMARY KEY (type, has_quantity_kind), 
+	FOREIGN KEY(has_quantity_kind) REFERENCES "QuantityKind" (id)
 );
 
 CREATE TABLE "EngineeringMaterialProcessing" (
@@ -411,6 +541,9 @@ CREATE TABLE "EngineeringMaterialProcessing" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	follows_procedure TEXT, 
 	uses_physical_device TEXT, 
 	PRIMARY KEY (id), 
@@ -427,6 +560,9 @@ CREATE TABLE "EngineeringProcess" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	follows_procedure TEXT, 
 	part_of TEXT, 
 	PRIMARY KEY (id), 
@@ -436,8 +572,10 @@ CREATE TABLE "EngineeringProcess" (
 
 CREATE TABLE "FoodIngredient" (
 	type TEXT, 
+	has_quantity_kind TEXT, 
 	"FoodRecipe_id" TEXT, 
-	PRIMARY KEY (type, "FoodRecipe_id"), 
+	PRIMARY KEY (type, has_quantity_kind, "FoodRecipe_id"), 
+	FOREIGN KEY(has_quantity_kind) REFERENCES "QuantityKind" (id), 
 	FOREIGN KEY("FoodRecipe_id") REFERENCES "FoodRecipe" (id)
 );
 
@@ -450,6 +588,9 @@ CREATE TABLE "FoodProcessing" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	follows_procedure TEXT, 
 	uses_physical_device TEXT, 
 	"FoodRecipe_id" TEXT, 
@@ -468,6 +609,9 @@ CREATE TABLE "HealthcareConditionOccurrence" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	patient TEXT, 
 	observed_during TEXT, 
 	PRIMARY KEY (id), 
@@ -475,18 +619,20 @@ CREATE TABLE "HealthcareConditionOccurrence" (
 );
 
 CREATE TABLE "HealthcareProvider" (
+	type TEXT, 
 	is_person TEXT, 
 	speciality TEXT, 
 	care_site TEXT, 
-	PRIMARY KEY (is_person, speciality, care_site), 
+	PRIMARY KEY (type, is_person, speciality, care_site), 
 	FOREIGN KEY(is_person) REFERENCES "Person" (id), 
 	FOREIGN KEY(speciality) REFERENCES "Concept" (id), 
 	FOREIGN KEY(care_site) REFERENCES "HealthcareSite" (id)
 );
 
 CREATE TABLE "HealthcareRole" (
+	type TEXT, 
 	is_person TEXT, 
-	PRIMARY KEY (is_person), 
+	PRIMARY KEY (type, is_person), 
 	FOREIGN KEY(is_person) REFERENCES "Person" (id)
 );
 
@@ -499,6 +645,9 @@ CREATE TABLE "InvestigativeProcess" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	uses_physical_device TEXT, 
 	follows_procedure TEXT, 
 	part_of TEXT, 
@@ -517,6 +666,9 @@ CREATE TABLE "MaterialCollection" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	follows_procedure TEXT, 
 	uses_physical_device TEXT, 
 	PRIMARY KEY (id), 
@@ -533,6 +685,9 @@ CREATE TABLE "MaterialProcessing" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	follows_procedure TEXT, 
 	uses_physical_device TEXT, 
 	PRIMARY KEY (id), 
@@ -541,8 +696,9 @@ CREATE TABLE "MaterialProcessing" (
 );
 
 CREATE TABLE "Patient" (
+	type TEXT, 
 	is_person TEXT, 
-	PRIMARY KEY (is_person), 
+	PRIMARY KEY (type, is_person), 
 	FOREIGN KEY(is_person) REFERENCES "Person" (id)
 );
 
@@ -555,11 +711,30 @@ CREATE TABLE "PlannedProcess" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	follows_procedure TEXT, 
 	uses_physical_device TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(follows_procedure) REFERENCES "Procedure" (id), 
 	FOREIGN KEY(uses_physical_device) REFERENCES "PhysicalDevice" (id)
+);
+
+CREATE TABLE "Quantity" (
+	type TEXT, 
+	has_quantity_kind TEXT, 
+	PRIMARY KEY (type, has_quantity_kind), 
+	FOREIGN KEY(has_quantity_kind) REFERENCES "QuantityKind" (id)
+);
+
+CREATE TABLE "Ratio" (
+	type TEXT, 
+	has_quantity_kind TEXT, 
+	numerator TEXT, 
+	denominator TEXT, 
+	PRIMARY KEY (type, has_quantity_kind, numerator, denominator), 
+	FOREIGN KEY(has_quantity_kind) REFERENCES "QuantityKind" (id)
 );
 
 CREATE TABLE "SampleCollectionProcess" (
@@ -571,6 +746,9 @@ CREATE TABLE "SampleCollectionProcess" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	uses_physical_device TEXT, 
 	follows_procedure TEXT, 
 	part_of TEXT, 
@@ -593,6 +771,9 @@ CREATE TABLE "SampleProcessing" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	follows_procedure TEXT, 
 	uses_physical_device TEXT, 
 	PRIMARY KEY (id), 
@@ -602,20 +783,47 @@ CREATE TABLE "SampleProcessing" (
 
 CREATE TABLE "SimpleQuantity" (
 	type TEXT, 
+	has_quantity_kind TEXT, 
 	value FLOAT, 
 	unit TEXT, 
-	PRIMARY KEY (type, value, unit), 
+	PRIMARY KEY (type, has_quantity_kind, value, unit), 
+	FOREIGN KEY(has_quantity_kind) REFERENCES "QuantityKind" (id), 
 	FOREIGN KEY(unit) REFERENCES "UnitConcept" (id)
 );
 
 CREATE TABLE "TimePoint" (
+	type TEXT, 
+	starts_at TEXT, 
+	ends_at TEXT, 
+	year_value INTEGER, 
 	date_value DATE, 
 	time_value TIME, 
 	datetime_value DATETIME, 
 	marker_event TEXT, 
 	description TEXT, 
-	PRIMARY KEY (date_value, time_value, datetime_value, marker_event, description), 
+	PRIMARY KEY (type, starts_at, ends_at, year_value, date_value, time_value, datetime_value, marker_event, description), 
 	FOREIGN KEY(marker_event) REFERENCES "Event" (id)
+);
+
+CREATE TABLE "CreativeWork_keywords" (
+	backref_id TEXT, 
+	keywords TEXT, 
+	PRIMARY KEY (backref_id, keywords), 
+	FOREIGN KEY(backref_id) REFERENCES "CreativeWork" (id)
+);
+
+CREATE TABLE "Dataset_keywords" (
+	backref_id TEXT, 
+	keywords TEXT, 
+	PRIMARY KEY (backref_id, keywords), 
+	FOREIGN KEY(backref_id) REFERENCES "Dataset" (id)
+);
+
+CREATE TABLE "Publication_keywords" (
+	backref_id TEXT, 
+	keywords TEXT, 
+	PRIMARY KEY (backref_id, keywords), 
+	FOREIGN KEY(backref_id) REFERENCES "Publication" (id)
 );
 
 CREATE TABLE "ClinicalCohortEnrollment" (
@@ -627,6 +835,9 @@ CREATE TABLE "ClinicalCohortEnrollment" (
 	description TEXT, 
 	starts_at TEXT, 
 	ends_at TEXT, 
+	happens_at TEXT, 
+	has_interval TEXT, 
+	has_duration TEXT, 
 	patient TEXT, 
 	cohort TEXT, 
 	PRIMARY KEY (id), 

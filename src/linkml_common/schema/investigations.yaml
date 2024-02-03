@@ -6,6 +6,7 @@ description: |-
 license: MIT
 see_also:
   - https://linkml.github.io/linkml-common
+  - https://obi-ontology.org/
 
 prefixes:
   linkml_common: https://w3id.org/linkml-common/
@@ -32,8 +33,14 @@ classes:
     attributes:
       objectives:
         range: string
+      variables:
+        range: Variable
+        multivalued: true
 
   InvestigativeProtocol:
+    is_a: Procedure
+
+  StudyDesign:
     is_a: Procedure
 
   SampleMaterial:
@@ -63,3 +70,21 @@ classes:
   DataGenerationFromSample:
     is_a: InvestigativeProcess
 
+enums:
+
+  CaseOrControlEnum:
+    permissible_values:
+      CASE:
+        title: case role in case-control study
+        meaning: OBI:0002492
+      CONTROL:
+        title: control role in case-control study
+        meaning: OBI:0002493
+
+  StudyDesignEnum:
+    reachable_from:
+      source_nodes:
+        - OBI:0500000
+      is_direct: false
+      relationship_types:
+        - rdfs:subClassOf

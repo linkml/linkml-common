@@ -1,5 +1,45 @@
 {
     "$defs": {
+        "Agent": {
+            "additionalProperties": false,
+            "description": "Represents an Agent",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Agent"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Agent",
+            "type": "object"
+        },
         "Any": {
             "additionalProperties": true,
             "description": "",
@@ -11,6 +51,46 @@
                 "number",
                 "string"
             ]
+        },
+        "AutomatedAgent": {
+            "additionalProperties": false,
+            "description": "Represents an Automated Agent",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "AutomatedAgent"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "AutomatedAgent",
+            "type": "object"
         },
         "BasicFoodType": {
             "additionalProperties": false,
@@ -52,9 +132,18 @@
             "title": "BasicFoodType",
             "type": "object"
         },
+        "CaseOrControlEnum": {
+            "description": "",
+            "enum": [
+                "CASE",
+                "CONTROL"
+            ],
+            "title": "CaseOrControlEnum",
+            "type": "string"
+        },
         "ClinicalCohort": {
             "additionalProperties": false,
-            "description": "",
+            "description": "A group of patients who share a common set of characteristics",
             "properties": {
                 "definition": {
                     "type": "string"
@@ -97,7 +186,7 @@
         },
         "ClinicalCohortDefinition": {
             "additionalProperties": false,
-            "description": "",
+            "description": "A definition of a clinical cohort",
             "properties": {
                 "description": {
                     "description": "A human-readable description for a thing",
@@ -137,7 +226,7 @@
         },
         "ClinicalCohortEnrollment": {
             "additionalProperties": false,
-            "description": "",
+            "description": "An event relating a patient to a clinical cohort",
             "properties": {
                 "cohort": {
                     "type": "string"
@@ -148,6 +237,15 @@
                 },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -205,9 +303,6 @@
                                 "$ref": "#/$defs/Observation"
                             },
                             {
-                                "$ref": "#/$defs/XProcess"
-                            },
-                            {
                                 "$ref": "#/$defs/Variable"
                             },
                             {
@@ -215,6 +310,9 @@
                             },
                             {
                                 "$ref": "#/$defs/Measurement"
+                            },
+                            {
+                                "$ref": "#/$defs/TimePointOrTemporalInterval"
                             },
                             {
                                 "$ref": "#/$defs/Quantity"
@@ -226,7 +324,31 @@
                                 "$ref": "#/$defs/Collection"
                             },
                             {
+                                "$ref": "#/$defs/Service"
+                            },
+                            {
                                 "$ref": "#/$defs/DataStructure"
+                            },
+                            {
+                                "$ref": "#/$defs/FinancialProduct"
+                            },
+                            {
+                                "$ref": "#/$defs/FinancialAccount"
+                            },
+                            {
+                                "$ref": "#/$defs/TemporalRelationship"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareRole"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareProvider"
+                            },
+                            {
+                                "$ref": "#/$defs/Patient"
+                            },
+                            {
+                                "$ref": "#/$defs/Duration"
                             },
                             {
                                 "$ref": "#/$defs/SimpleQuantity"
@@ -241,6 +363,12 @@
                                 "$ref": "#/$defs/MoneyQuantity"
                             },
                             {
+                                "$ref": "#/$defs/TemporalInterval"
+                            },
+                            {
+                                "$ref": "#/$defs/TimePoint"
+                            },
+                            {
                                 "$ref": "#/$defs/Event"
                             },
                             {
@@ -253,13 +381,13 @@
                                 "$ref": "#/$defs/PhysicalDevice"
                             },
                             {
-                                "$ref": "#/$defs/Procedure"
+                                "$ref": "#/$defs/Specification"
                             },
                             {
-                                "$ref": "#/$defs/Person"
+                                "$ref": "#/$defs/Agent"
                             },
                             {
-                                "$ref": "#/$defs/Organization"
+                                "$ref": "#/$defs/CreativeWork"
                             },
                             {
                                 "$ref": "#/$defs/Investigation"
@@ -280,25 +408,49 @@
                                 "$ref": "#/$defs/ClinicalCohortDefinition"
                             },
                             {
-                                "$ref": "#/$defs/Publication"
-                            },
-                            {
                                 "$ref": "#/$defs/HealthcareSite"
                             },
                             {
                                 "$ref": "#/$defs/Landform"
                             },
                             {
+                                "$ref": "#/$defs/EnvironmentalSite"
+                            },
+                            {
+                                "$ref": "#/$defs/Dataset"
+                            },
+                            {
+                                "$ref": "#/$defs/Publication"
+                            },
+                            {
+                                "$ref": "#/$defs/Person"
+                            },
+                            {
+                                "$ref": "#/$defs/Organization"
+                            },
+                            {
+                                "$ref": "#/$defs/AutomatedAgent"
+                            },
+                            {
                                 "$ref": "#/$defs/HealthcareOrganization"
                             },
                             {
+                                "$ref": "#/$defs/Procedure"
+                            },
+                            {
                                 "$ref": "#/$defs/InvestigativeProtocol"
+                            },
+                            {
+                                "$ref": "#/$defs/StudyDesign"
                             },
                             {
                                 "$ref": "#/$defs/FoodRecipe"
                             },
                             {
                                 "$ref": "#/$defs/EngineeringSpecification"
+                            },
+                            {
+                                "$ref": "#/$defs/QuantityKind"
                             },
                             {
                                 "$ref": "#/$defs/UnitConcept"
@@ -452,6 +604,86 @@
             "title": "Concept",
             "type": "object"
         },
+        "CreativeWork": {
+            "additionalProperties": false,
+            "description": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
+            "properties": {
+                "abstract": {
+                    "description": "A summary of the item",
+                    "type": "string"
+                },
+                "contacts": {
+                    "description": "A contact point for a person or organization",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "contributors": {
+                    "description": "A person or organization that contributed to the creation of the work",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creators": {
+                    "description": "The person or organization who created the work",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "keywords": {
+                    "description": "Keywords or tags used to describe this item",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "Information about rights held in and over the item",
+                    "type": "string"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "The title of the item",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "CreativeWork"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "CreativeWork",
+            "type": "object"
+        },
         "CurrencyConcept": {
             "additionalProperties": false,
             "description": "A currency",
@@ -505,6 +737,15 @@
                 },
                 "follows_procedure": {
                     "type": "string"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -562,6 +803,111 @@
             "title": "DataStructure",
             "type": "object"
         },
+        "Dataset": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "abstract": {
+                    "description": "A summary of the item",
+                    "type": "string"
+                },
+                "collected_as_part_of": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "contacts": {
+                    "description": "A contact point for a person or organization",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "contributors": {
+                    "description": "A person or organization that contributed to the creation of the work",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creators": {
+                    "description": "The person or organization who created the work",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "keywords": {
+                    "description": "Keywords or tags used to describe this item",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "Information about rights held in and over the item",
+                    "type": "string"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "The title of the item",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Dataset"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Dataset",
+            "type": "object"
+        },
+        "Duration": {
+            "additionalProperties": false,
+            "description": "A length of time",
+            "properties": {
+                "has_quantity_kind": {
+                    "description": "The kind of quantity",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Duration"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "Duration",
+            "type": "object"
+        },
         "EngineeringMaterialProcessing": {
             "additionalProperties": false,
             "description": "",
@@ -575,6 +921,15 @@
                 },
                 "follows_procedure": {
                     "type": "string"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -627,6 +982,15 @@
                 },
                 "follows_procedure": {
                     "type": "string"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -706,10 +1070,63 @@
             "title": "EngineeringSpecification",
             "type": "object"
         },
+        "EnvironmentalMonitoring": {
+            "additionalProperties": false,
+            "description": "",
+            "title": "EnvironmentalMonitoring",
+            "type": "object"
+        },
         "EnvironmentalProcess": {
             "additionalProperties": false,
             "description": "",
             "title": "EnvironmentalProcess",
+            "type": "object"
+        },
+        "EnvironmentalSite": {
+            "additionalProperties": false,
+            "description": "A location or site that is the subject of environmental monitoring",
+            "properties": {
+                "address": {
+                    "$ref": "#/$defs/PostalAddress"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "geolocation": {
+                    "$ref": "#/$defs/GeoPointLocation",
+                    "description": "The geolocation of the place"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "EnvironmentalSite"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "EnvironmentalSite",
             "type": "object"
         },
         "Event": {
@@ -722,6 +1139,15 @@
                 },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -758,10 +1184,56 @@
             "title": "Event",
             "type": "object"
         },
+        "FinancialAccount": {
+            "additionalProperties": false,
+            "description": "A bank account",
+            "properties": {
+                "account_holder": {
+                    "description": "The person or organization that holds the account",
+                    "type": "string"
+                },
+                "account_number": {
+                    "description": "The account number",
+                    "type": "string"
+                },
+                "bank": {
+                    "description": "The bank that holds the account",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "FinancialAccount"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "FinancialAccount",
+            "type": "object"
+        },
+        "FinancialProduct": {
+            "additionalProperties": false,
+            "description": "A product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be paid interest.",
+            "properties": {
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "FinancialProduct"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "FinancialProduct",
+            "type": "object"
+        },
         "FoodIngredient": {
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "has_quantity_kind": {
+                    "description": "The kind of quantity",
+                    "type": "string"
+                },
                 "type": {
                     "description": "A type for a thing",
                     "enum": [
@@ -786,6 +1258,15 @@
                 },
                 "follows_procedure": {
                     "type": "string"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -948,6 +1429,15 @@
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
+                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -999,6 +1489,15 @@
                 },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -1111,6 +1610,13 @@
                 },
                 "speciality": {
                     "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "HealthcareProvider"
+                    ],
+                    "type": "string"
                 }
             },
             "title": "HealthcareProvider",
@@ -1121,6 +1627,13 @@
             "description": "",
             "properties": {
                 "is_person": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "HealthcareRole"
+                    ],
                     "type": "string"
                 }
             },
@@ -1173,6 +1686,11 @@
             ],
             "title": "HealthcareSite",
             "type": "object"
+        },
+        "HumanLanguageCodeEnum": {
+            "description": "An enumeration of languages",
+            "title": "HumanLanguageCodeEnum",
+            "type": "string"
         },
         "InformationEntity": {
             "additionalProperties": false,
@@ -1268,6 +1786,12 @@
                         "Investigation"
                     ],
                     "type": "string"
+                },
+                "variables": {
+                    "items": {
+                        "$ref": "#/$defs/Variable"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
@@ -1289,6 +1813,15 @@
                 },
                 "follows_procedure": {
                     "type": "string"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -1430,6 +1963,15 @@
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
+                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -1478,6 +2020,15 @@
                 },
                 "follows_procedure": {
                     "type": "string"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -1530,6 +2081,15 @@
                 },
                 "follows_procedure": {
                     "type": "string"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -1615,6 +2175,9 @@
                             "$ref": "#/$defs/Quantity"
                         },
                         {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
                             "$ref": "#/$defs/SimpleQuantity"
                         },
                         {
@@ -1648,6 +2211,10 @@
             "additionalProperties": false,
             "description": "A quantity of money",
             "properties": {
+                "has_quantity_kind": {
+                    "description": "The kind of quantity",
+                    "type": "string"
+                },
                 "type": {
                     "description": "A type for a thing",
                     "enum": [
@@ -1767,6 +2334,13 @@
             "description": "",
             "properties": {
                 "is_person": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Patient"
+                    ],
                     "type": "string"
                 }
             },
@@ -1930,7 +2504,7 @@
         },
         "PlannedProcess": {
             "additionalProperties": false,
-            "description": "",
+            "description": "A process that follows a defined procedure or plan",
             "properties": {
                 "description": {
                     "description": "A human-readable description for a thing",
@@ -1941,6 +2515,15 @@
                 },
                 "follows_procedure": {
                     "type": "string"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -2068,6 +2651,105 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "abstract": {
+                    "description": "A summary of the item",
+                    "type": "string"
+                },
+                "contacts": {
+                    "description": "A contact point for a person or organization",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "contributors": {
+                    "description": "A person or organization that contributed to the creation of the work",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creators": {
+                    "description": "The person or organization who created the work",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "keywords": {
+                    "description": "Keywords or tags used to describe this item",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "Information about rights held in and over the item",
+                    "type": "string"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "The title of the item",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Publication"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Publication",
+            "type": "object"
+        },
+        "Quantity": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "has_quantity_kind": {
+                    "description": "The kind of quantity",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Quantity"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "Quantity",
+            "type": "object"
+        },
+        "QuantityKind": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -2093,7 +2775,7 @@
                 "type": {
                     "description": "A type for a thing",
                     "enum": [
-                        "Publication"
+                        "QuantityKind"
                     ],
                     "type": "string"
                 }
@@ -2101,22 +2783,7 @@
             "required": [
                 "id"
             ],
-            "title": "Publication",
-            "type": "object"
-        },
-        "Quantity": {
-            "additionalProperties": false,
-            "description": "",
-            "properties": {
-                "type": {
-                    "description": "A type for a thing",
-                    "enum": [
-                        "Quantity"
-                    ],
-                    "type": "string"
-                }
-            },
-            "title": "Quantity",
+            "title": "QuantityKind",
             "type": "object"
         },
         "QuantityRange": {
@@ -2127,6 +2794,9 @@
                     "anyOf": [
                         {
                             "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
                         },
                         {
                             "$ref": "#/$defs/SimpleQuantity"
@@ -2154,6 +2824,9 @@
                     "anyOf": [
                         {
                             "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
                         },
                         {
                             "$ref": "#/$defs/SimpleQuantity"
@@ -2184,6 +2857,9 @@
                             "$ref": "#/$defs/Quantity"
                         },
                         {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
                             "$ref": "#/$defs/SimpleQuantity"
                         },
                         {
@@ -2198,10 +2874,17 @@
                     ],
                     "description": "The denominator of the ratio"
                 },
+                "has_quantity_kind": {
+                    "description": "The kind of quantity",
+                    "type": "string"
+                },
                 "numerator": {
                     "anyOf": [
                         {
                             "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
                         },
                         {
                             "$ref": "#/$defs/SimpleQuantity"
@@ -2269,6 +2952,16 @@
             "title": "RawMaterial",
             "type": "object"
         },
+        "RelativeTimeEnum": {
+            "description": "",
+            "enum": [
+                "BEFORE",
+                "AFTER",
+                "AT_SAME_TIME_AS"
+            ],
+            "title": "RelativeTimeEnum",
+            "type": "string"
+        },
         "SampleCollectionProcess": {
             "additionalProperties": false,
             "description": "",
@@ -2285,6 +2978,15 @@
                 },
                 "follows_procedure": {
                     "type": "string"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -2384,6 +3086,15 @@
                 "follows_procedure": {
                     "type": "string"
                 },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
+                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -2422,10 +3133,29 @@
             "title": "SampleProcessing",
             "type": "object"
         },
+        "Service": {
+            "additionalProperties": false,
+            "description": "A service provided by an organization",
+            "properties": {
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Service"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "Service",
+            "type": "object"
+        },
         "SimpleQuantity": {
             "additionalProperties": false,
             "description": "A quantity is a property that can be measured or counted",
             "properties": {
+                "has_quantity_kind": {
+                    "description": "The kind of quantity",
+                    "type": "string"
+                },
                 "type": {
                     "description": "A type for a thing",
                     "enum": [
@@ -2444,9 +3174,147 @@
             "title": "SimpleQuantity",
             "type": "object"
         },
-        "TimePoint": {
+        "Specification": {
+            "additionalProperties": false,
+            "description": "A specification of a thing",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "Specification"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Specification",
+            "type": "object"
+        },
+        "StudyDesign": {
             "additionalProperties": false,
             "description": "",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "subtype": {
+                    "description": "An enum with a more specific type",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "StudyDesign"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "StudyDesign",
+            "type": "object"
+        },
+        "StudyDesignEnum": {
+            "description": "",
+            "title": "StudyDesignEnum",
+            "type": "string"
+        },
+        "TemporalInterval": {
+            "additionalProperties": false,
+            "description": "A period of time",
+            "properties": {
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "TemporalInterval"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "TemporalInterval",
+            "type": "object"
+        },
+        "TemporalRelationship": {
+            "additionalProperties": false,
+            "description": "A relationship to another time point",
+            "properties": {
+                "predicate": {
+                    "$ref": "#/$defs/RelativeTimeEnum",
+                    "description": "The relationship between the two time points"
+                },
+                "relative_to": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/TimePoint"
+                        },
+                        {
+                            "$ref": "#/$defs/TemporalInterval"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "TemporalRelationship"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "TemporalRelationship",
+            "type": "object"
+        },
+        "TimePoint": {
+            "additionalProperties": false,
+            "description": "A point in time. Can be fully specified, or specified in relative terms.",
             "properties": {
                 "date_value": {
                     "format": "date",
@@ -2460,15 +3328,52 @@
                     "description": "A human-readable description for a thing",
                     "type": "string"
                 },
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "marker_event": {
                     "type": "string"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
                 },
                 "time_value": {
                     "format": "time",
                     "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "TimePoint"
+                    ],
+                    "type": "string"
+                },
+                "year_value": {
+                    "type": "integer"
                 }
             },
             "title": "TimePoint",
+            "type": "object"
+        },
+        "TimePointOrTemporalInterval": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "type": {
+                    "description": "A type for a thing",
+                    "enum": [
+                        "TimePointOrTemporalInterval"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "TimePointOrTemporalInterval",
             "type": "object"
         },
         "UnitConcept": {
@@ -2530,6 +3435,9 @@
                                 "$ref": "#/$defs/Quantity"
                             },
                             {
+                                "$ref": "#/$defs/Duration"
+                            },
+                            {
                                 "$ref": "#/$defs/SimpleQuantity"
                             },
                             {
@@ -2552,6 +3460,9 @@
                         "anyOf": [
                             {
                                 "$ref": "#/$defs/Quantity"
+                            },
+                            {
+                                "$ref": "#/$defs/Duration"
                             },
                             {
                                 "$ref": "#/$defs/SimpleQuantity"
@@ -2601,21 +3512,6 @@
                 }
             },
             "title": "Variable",
-            "type": "object"
-        },
-        "XProcess": {
-            "additionalProperties": false,
-            "description": "A series of actions or steps taken in order to achieve a particular end",
-            "properties": {
-                "type": {
-                    "description": "A type for a thing",
-                    "enum": [
-                        "XProcess"
-                    ],
-                    "type": "string"
-                }
-            },
-            "title": "XProcess",
             "type": "object"
         }
     },

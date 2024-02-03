@@ -47,4 +47,6 @@ classes:
 
   CompositeFoodType:
     is_a: FoodTypeConcept
+    implements:
+      - linkml_common:Composable
 

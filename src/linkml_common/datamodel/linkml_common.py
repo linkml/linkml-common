@@ -1,5 +1,5 @@
 # Auto generated from linkml_common.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-01-13T18:02:58
+# Generation date: 2024-02-02T17:33:04
 # Schema: linkml-common
 #
 # id: https://w3id.org/linkml/linkml-common
@@ -31,19 +31,29 @@ version = None
 dataclasses._init_fn = dataclasses_init_fn_with_kwargs
 
 # Namespaces
+BFO = CurieNamespace('BFO', 'http://purl.obolibrary.org/obo/BFO_')
 ENVO = CurieNamespace('ENVO', 'http://purl.obolibrary.org/obo/ENVO_')
+IAO = CurieNamespace('IAO', 'http://purl.obolibrary.org/obo/IAO_')
+OBI = CurieNamespace('OBI', 'http://purl.obolibrary.org/obo/OBI_')
 PATO = CurieNamespace('PATO', 'http://purl.obolibrary.org/obo/PATO_')
 UCUM = CurieNamespace('UCUM', 'http://example.org/UNKNOWN/UCUM/')
 UO = CurieNamespace('UO', 'http://example.org/UNKNOWN/UO/')
 BIOLINK = CurieNamespace('biolink', 'https://w3id.org/biolink/')
+DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
 EXAMPLE = CurieNamespace('example', 'https://example.org/')
 FHIR = CurieNamespace('fhir', 'http://hl7.org/fhir/')
+FIBO = CurieNamespace('fibo', 'http://example.org/UNKNOWN/fibo/')
+FIBO_DATESANDTIMES = CurieNamespace('fibo_DatesAndTimes', 'https://www.omg.org/spec/Commons/DatesAndTimes/')
+FIBO_QUANTITIESANDUNITS = CurieNamespace('fibo_QuantitiesAndUnits', 'https://www.omg.org/spec/Commons/QuantitiesAndUnits/')
+FIBO_COMMONS_PARTIESANDSITUATIONS = CurieNamespace('fibo_commons_PartiesAndSituations', 'https://spec.edmcouncil.org/fibo/ontology/FBC/ommons/PartiesAndSituations/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 LINKML_COMMON = CurieNamespace('linkml_common', 'https://w3id.org/linkml-common/')
 NMDCSCHEMA = CurieNamespace('nmdcschema', 'http://example.org/UNKNOWN/nmdcschema/')
 OMOPSCHEMA = CurieNamespace('omopschema', 'http://example.org/omop/')
-QUDT = CurieNamespace('qudt', 'http://example.org/UNKNOWN/qudt/')
-RDF = CurieNamespace('rdf', 'http://example.org/UNKNOWN/rdf/')
+PROV = CurieNamespace('prov', 'http://www.w3.org/ns/prov#')
+QUDT = CurieNamespace('qudt', 'http://qudt.org/vocab/unit/')
+RDF = CurieNamespace('rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#')
+RDFS = CurieNamespace('rdfs', 'http://www.w3.org/2000/01/rdf-schema#')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
 DEFAULT_ = LINKML_COMMON
 
@@ -67,11 +77,11 @@ class PhysicalDeviceId(NamedThingId):
     pass
 
 
-class ProcedureId(NamedThingId):
+class SpecificationId(NamedThingId):
     pass
 
 
-class PublicationId(NamedThingId):
+class ProcedureId(SpecificationId):
     pass
 
 
@@ -111,6 +121,10 @@ class PlaceId(NamedThingId):
     pass
 
 
+class EnvironmentalSiteId(PlaceId):
+    pass
+
+
 class LandformId(PlaceId):
     pass
 
@@ -127,7 +141,15 @@ class InvestigativeProtocolId(ProcedureId):
     pass
 
 
+class StudyDesignId(ProcedureId):
+    pass
+
+
 class SampleMaterialId(NamedThingId):
+    pass
+
+
+class QuantityKindId(ConceptId):
     pass
 
 
@@ -135,15 +157,35 @@ class UnitConceptId(ConceptId):
     pass
 
 
-class PersonId(NamedThingId):
+class AgentId(NamedThingId):
     pass
 
 
-class OrganizationId(NamedThingId):
+class PersonId(AgentId):
+    pass
+
+
+class OrganizationId(AgentId):
     pass
 
 
 class HealthcareOrganizationId(OrganizationId):
+    pass
+
+
+class AutomatedAgentId(AgentId):
+    pass
+
+
+class CreativeWorkId(NamedThingId):
+    pass
+
+
+class PublicationId(CreativeWorkId):
+    pass
+
+
+class DatasetId(CreativeWorkId):
     pass
 
 
@@ -386,13 +428,34 @@ class Intangible(Entity):
         self.type = str(self.class_name)
 
 
-class Relationship(YAMLRoot):
+class Role(Intangible):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = SCHEMA["Role"]
+    class_class_curie: ClassVar[str] = "schema:Role"
+    class_name: ClassVar[str] = "Role"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Role
+
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+class Relationship(Intangible):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Relationship"]
     class_class_curie: ClassVar[str] = "linkml_common:Relationship"
     class_name: ClassVar[str] = "Relationship"
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Relationship
+
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
 
 
 class Location(YAMLRoot):
@@ -432,7 +495,31 @@ class Observation(Entity):
 
 
 @dataclass
-class Procedure(NamedThing):
+class Specification(NamedThing):
+    """
+    A specification of a thing
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Specification"]
+    class_class_curie: ClassVar[str] = "linkml_common:Specification"
+    class_name: ClassVar[str] = "Specification"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Specification
+
+    id: Union[str, SpecificationId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, SpecificationId):
+            self.id = SpecificationId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class Procedure(Specification):
     """
     A canonical series of actions conducted in a certain order or manner
     """
@@ -450,24 +537,6 @@ class Procedure(NamedThing):
             self.MissingRequiredField("id")
         if not isinstance(self.id, ProcedureId):
             self.id = ProcedureId(self.id)
-
-        super().__post_init__(**kwargs)
-        self.type = str(self.class_name)
-
-
-class XProcess(Entity):
-    """
-    A series of actions or steps taken in order to achieve a particular end
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["XProcess"]
-    class_class_curie: ClassVar[str] = "linkml_common:XProcess"
-    class_name: ClassVar[str] = "XProcess"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.XProcess
-
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -528,28 +597,10 @@ class Collection(Intangible):
 Any = Any
 
 @dataclass
-class Publication(NamedThing):
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Publication"]
-    class_class_curie: ClassVar[str] = "linkml_common:Publication"
-    class_name: ClassVar[str] = "Publication"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Publication
-
-    id: Union[str, PublicationId] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, PublicationId):
-            self.id = PublicationId(self.id)
-
-        super().__post_init__(**kwargs)
-        self.type = str(self.class_name)
-
-
-@dataclass
 class ClinicalCohort(NamedThing):
+    """
+    A group of patients who share a common set of characteristics
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = LINKML_COMMON["ClinicalCohort"]
@@ -575,6 +626,9 @@ class ClinicalCohort(NamedThing):
 
 @dataclass
 class ClinicalCohortDefinition(NamedThing):
+    """
+    A definition of a clinical cohort
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = LINKML_COMMON["ClinicalCohortDefinition"]
@@ -658,6 +712,15 @@ class EnvironmentalProcess(YAMLRoot):
     class_class_curie: ClassVar[str] = "linkml_common:EnvironmentalProcess"
     class_name: ClassVar[str] = "EnvironmentalProcess"
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.EnvironmentalProcess
+
+
+class EnvironmentalMonitoring(EnvironmentalProcess):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["EnvironmentalMonitoring"]
+    class_class_curie: ClassVar[str] = "linkml_common:EnvironmentalMonitoring"
+    class_name: ClassVar[str] = "EnvironmentalMonitoring"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.EnvironmentalMonitoring
 
 
 @dataclass
@@ -787,6 +850,30 @@ class Place(NamedThing):
 
 
 @dataclass
+class EnvironmentalSite(Place):
+    """
+    A location or site that is the subject of environmental monitoring
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["EnvironmentalSite"]
+    class_class_curie: ClassVar[str] = "linkml_common:EnvironmentalSite"
+    class_name: ClassVar[str] = "EnvironmentalSite"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.EnvironmentalSite
+
+    id: Union[str, EnvironmentalSiteId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, EnvironmentalSiteId):
+            self.id = EnvironmentalSiteId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
 class Landform(Place):
     """
     A natural feature of the solid surface of the Earth or other planetary body
@@ -906,7 +993,7 @@ class HealthcareSite(Place):
 
 
 @dataclass
-class HealthcareRole(YAMLRoot):
+class HealthcareRole(Role):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = LINKML_COMMON["HealthcareRole"]
@@ -921,6 +1008,7 @@ class HealthcareRole(YAMLRoot):
             self.is_person = PersonId(self.is_person)
 
         super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
 
 
 @dataclass
@@ -943,6 +1031,7 @@ class HealthcareProvider(HealthcareRole):
             self.care_site = HealthcareSiteId(self.care_site)
 
         super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
 
 
 class Patient(HealthcareRole):
@@ -952,6 +1041,12 @@ class Patient(HealthcareRole):
     class_class_curie: ClassVar[str] = "linkml_common:Patient"
     class_name: ClassVar[str] = "Patient"
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Patient
+
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
 
 
 @dataclass
@@ -965,6 +1060,7 @@ class Investigation(NamedThing):
 
     id: Union[str, InvestigationId] = None
     objectives: Optional[str] = None
+    variables: Optional[Union[Union[dict, "Variable"], List[Union[dict, "Variable"]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -974,6 +1070,10 @@ class Investigation(NamedThing):
 
         if self.objectives is not None and not isinstance(self.objectives, str):
             self.objectives = str(self.objectives)
+
+        if not isinstance(self.variables, list):
+            self.variables = [self.variables] if self.variables is not None else []
+        self.variables = [v if isinstance(v, Variable) else Variable(**as_dict(v)) for v in self.variables]
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -995,6 +1095,27 @@ class InvestigativeProtocol(Procedure):
             self.MissingRequiredField("id")
         if not isinstance(self.id, InvestigativeProtocolId):
             self.id = InvestigativeProtocolId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class StudyDesign(Procedure):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["StudyDesign"]
+    class_class_curie: ClassVar[str] = "linkml_common:StudyDesign"
+    class_name: ClassVar[str] = "StudyDesign"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.StudyDesign
+
+    id: Union[str, StudyDesignId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, StudyDesignId):
+            self.id = StudyDesignId(self.id)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -1064,6 +1185,28 @@ class Variable(Entity):
         self.type = str(self.class_name)
 
 
+@dataclass
+class QuantityKind(Concept):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["QuantityKind"]
+    class_class_curie: ClassVar[str] = "linkml_common:QuantityKind"
+    class_name: ClassVar[str] = "QuantityKind"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.QuantityKind
+
+    id: Union[str, QuantityKindId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, QuantityKindId):
+            self.id = QuantityKindId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
 class Quantity(Intangible):
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -1072,8 +1215,11 @@ class Quantity(Intangible):
     class_name: ClassVar[str] = "Quantity"
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Quantity
 
+    has_quantity_kind: Optional[Union[str, QuantityKindId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.has_quantity_kind is not None and not isinstance(self.has_quantity_kind, QuantityKindId):
+            self.has_quantity_kind = QuantityKindId(self.has_quantity_kind)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -1221,7 +1367,31 @@ class UnitConcept(Concept):
 
 
 @dataclass
-class Person(NamedThing):
+class Agent(NamedThing):
+    """
+    Represents an Agent
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Agent"]
+    class_class_curie: ClassVar[str] = "linkml_common:Agent"
+    class_name: ClassVar[str] = "Agent"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Agent
+
+    id: Union[str, AgentId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, AgentId):
+            self.id = AgentId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class Person(Agent):
     """
     Represents a Person
     """
@@ -1261,7 +1431,7 @@ class Person(NamedThing):
 
 
 @dataclass
-class Organization(NamedThing):
+class Organization(Agent):
     """
     Represents an Organization
     """
@@ -1306,6 +1476,151 @@ class HealthcareOrganization(Organization):
 
 
 @dataclass
+class AutomatedAgent(Agent):
+    """
+    Represents an Automated Agent
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["AutomatedAgent"]
+    class_class_curie: ClassVar[str] = "linkml_common:AutomatedAgent"
+    class_name: ClassVar[str] = "AutomatedAgent"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.AutomatedAgent
+
+    id: Union[str, AutomatedAgentId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, AutomatedAgentId):
+            self.id = AutomatedAgentId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class CreativeWork(NamedThing):
+    """
+    The most generic kind of creative work, including books, movies, photographs, software programs, etc.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["CreativeWork"]
+    class_class_curie: ClassVar[str] = "linkml_common:CreativeWork"
+    class_name: ClassVar[str] = "CreativeWork"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.CreativeWork
+
+    id: Union[str, CreativeWorkId] = None
+    title: Optional[str] = None
+    abstract: Optional[str] = None
+    rights: Optional[str] = None
+    creators: Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]] = empty_list()
+    contributors: Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]] = empty_list()
+    contacts: Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]] = empty_list()
+    keywords: Optional[Union[str, List[str]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, CreativeWorkId):
+            self.id = CreativeWorkId(self.id)
+
+        if self.title is not None and not isinstance(self.title, str):
+            self.title = str(self.title)
+
+        if self.abstract is not None and not isinstance(self.abstract, str):
+            self.abstract = str(self.abstract)
+
+        if self.rights is not None and not isinstance(self.rights, str):
+            self.rights = str(self.rights)
+
+        if not isinstance(self.creators, list):
+            self.creators = [self.creators] if self.creators is not None else []
+        self.creators = [v if isinstance(v, AgentId) else AgentId(v) for v in self.creators]
+
+        if not isinstance(self.contributors, list):
+            self.contributors = [self.contributors] if self.contributors is not None else []
+        self.contributors = [v if isinstance(v, AgentId) else AgentId(v) for v in self.contributors]
+
+        if not isinstance(self.contacts, list):
+            self.contacts = [self.contacts] if self.contacts is not None else []
+        self.contacts = [v if isinstance(v, AgentId) else AgentId(v) for v in self.contacts]
+
+        if not isinstance(self.keywords, list):
+            self.keywords = [self.keywords] if self.keywords is not None else []
+        self.keywords = [v if isinstance(v, str) else str(v) for v in self.keywords]
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class Publication(CreativeWork):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Publication"]
+    class_class_curie: ClassVar[str] = "linkml_common:Publication"
+    class_name: ClassVar[str] = "Publication"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Publication
+
+    id: Union[str, PublicationId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, PublicationId):
+            self.id = PublicationId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class Dataset(CreativeWork):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Dataset"]
+    class_class_curie: ClassVar[str] = "linkml_common:Dataset"
+    class_name: ClassVar[str] = "Dataset"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Dataset
+
+    id: Union[str, DatasetId] = None
+    collected_as_part_of: Optional[Union[Union[str, InvestigationId], List[Union[str, InvestigationId]]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, DatasetId):
+            self.id = DatasetId(self.id)
+
+        if not isinstance(self.collected_as_part_of, list):
+            self.collected_as_part_of = [self.collected_as_part_of] if self.collected_as_part_of is not None else []
+        self.collected_as_part_of = [v if isinstance(v, InvestigationId) else InvestigationId(v) for v in self.collected_as_part_of]
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+class Service(Intangible):
+    """
+    A service provided by an organization
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Service"]
+    class_class_curie: ClassVar[str] = "linkml_common:Service"
+    class_name: ClassVar[str] = "Service"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Service
+
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
 class Event(NamedThing):
     """
     A thing that happens
@@ -1320,6 +1635,9 @@ class Event(NamedThing):
     id: Union[str, EventId] = None
     starts_at: Optional[Union[dict, "TimePoint"]] = None
     ends_at: Optional[Union[dict, "TimePoint"]] = None
+    happens_at: Optional[Union[dict, "TimePoint"]] = None
+    has_interval: Optional[Union[dict, "TemporalInterval"]] = None
+    has_duration: Optional[Union[dict, "Duration"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -1333,12 +1651,24 @@ class Event(NamedThing):
         if self.ends_at is not None and not isinstance(self.ends_at, TimePoint):
             self.ends_at = TimePoint(**as_dict(self.ends_at))
 
+        if self.happens_at is not None and not isinstance(self.happens_at, TimePoint):
+            self.happens_at = TimePoint(**as_dict(self.happens_at))
+
+        if self.has_interval is not None and not isinstance(self.has_interval, TemporalInterval):
+            self.has_interval = TemporalInterval(**as_dict(self.has_interval))
+
+        if self.has_duration is not None and not isinstance(self.has_duration, Duration):
+            self.has_duration = Duration(**as_dict(self.has_duration))
+
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
 
 
 @dataclass
 class ClinicalCohortEnrollment(Event):
+    """
+    An event relating a patient to a clinical cohort
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = LINKML_COMMON["ClinicalCohortEnrollment"]
@@ -1479,7 +1809,59 @@ class LifeEvent(Event):
 
 
 @dataclass
-class TimePoint(YAMLRoot):
+class TimePointOrTemporalInterval(Intangible):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["TimePointOrTemporalInterval"]
+    class_class_curie: ClassVar[str] = "linkml_common:TimePointOrTemporalInterval"
+    class_name: ClassVar[str] = "TimePointOrTemporalInterval"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.TimePointOrTemporalInterval
+
+    starts_at: Optional[Union[dict, "TimePoint"]] = None
+    ends_at: Optional[Union[dict, "TimePoint"]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.starts_at is not None and not isinstance(self.starts_at, TimePoint):
+            self.starts_at = TimePoint(**as_dict(self.starts_at))
+
+        if self.ends_at is not None and not isinstance(self.ends_at, TimePoint):
+            self.ends_at = TimePoint(**as_dict(self.ends_at))
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class TemporalInterval(TimePointOrTemporalInterval):
+    """
+    A period of time
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["TemporalInterval"]
+    class_class_curie: ClassVar[str] = "linkml_common:TemporalInterval"
+    class_name: ClassVar[str] = "TemporalInterval"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.TemporalInterval
+
+    starts_at: Optional[Union[dict, "TimePoint"]] = None
+    ends_at: Optional[Union[dict, "TimePoint"]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.starts_at is not None and not isinstance(self.starts_at, TimePoint):
+            self.starts_at = TimePoint(**as_dict(self.starts_at))
+
+        if self.ends_at is not None and not isinstance(self.ends_at, TimePoint):
+            self.ends_at = TimePoint(**as_dict(self.ends_at))
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class TimePoint(TimePointOrTemporalInterval):
+    """
+    A point in time. Can be fully specified, or specified in relative terms.
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = LINKML_COMMON["TimePoint"]
@@ -1487,6 +1869,7 @@ class TimePoint(YAMLRoot):
     class_name: ClassVar[str] = "TimePoint"
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.TimePoint
 
+    year_value: Optional[int] = None
     date_value: Optional[Union[str, XSDDate]] = None
     time_value: Optional[Union[str, XSDTime]] = None
     datetime_value: Optional[Union[str, XSDDateTime]] = None
@@ -1494,6 +1877,9 @@ class TimePoint(YAMLRoot):
     description: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.year_value is not None and not isinstance(self.year_value, int):
+            self.year_value = int(self.year_value)
+
         if self.date_value is not None and not isinstance(self.date_value, XSDDate):
             self.date_value = XSDDate(self.date_value)
 
@@ -1510,10 +1896,58 @@ class TimePoint(YAMLRoot):
             self.description = str(self.description)
 
         super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+class Duration(Quantity):
+    """
+    A length of time
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Duration"]
+    class_class_curie: ClassVar[str] = "linkml_common:Duration"
+    class_name: ClassVar[str] = "Duration"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Duration
+
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class TemporalRelationship(Relationship):
+    """
+    A relationship to another time point
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["TemporalRelationship"]
+    class_class_curie: ClassVar[str] = "linkml_common:TemporalRelationship"
+    class_name: ClassVar[str] = "TemporalRelationship"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.TemporalRelationship
+
+    predicate: Optional[Union[str, "RelativeTimeEnum"]] = None
+    relative_to: Optional[Union[dict, Entity]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.predicate is not None and not isinstance(self.predicate, RelativeTimeEnum):
+            self.predicate = RelativeTimeEnum(self.predicate)
+
+        if self.relative_to is not None and not isinstance(self.relative_to, Entity):
+            self.relative_to = Entity(**as_dict(self.relative_to))
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
 
 
 @dataclass
 class PlannedProcess(Event):
+    """
+    A process that follows a defined procedure or plan
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = LINKML_COMMON["PlannedProcess"]
@@ -1779,6 +2213,34 @@ class HealthcareEncounterClassification(EnumDefinitionImpl):
                 text="Case Management Visit",
                 description="""Person interacting with healthcare system, without a Care Site, within a day, with no Providers involved, for administrative purposes"""))
 
+class CaseOrControlEnum(EnumDefinitionImpl):
+
+    CASE = PermissibleValue(
+        text="CASE",
+        meaning=OBI["0002492"])
+    CONTROL = PermissibleValue(
+        text="CONTROL",
+        meaning=OBI["0002493"])
+
+    _defn = EnumDefinition(
+        name="CaseOrControlEnum",
+    )
+
+class StudyDesignEnum(EnumDefinitionImpl):
+
+    _defn = EnumDefinition(
+        name="StudyDesignEnum",
+    )
+
+class HumanLanguageCodeEnum(EnumDefinitionImpl):
+    """
+    An enumeration of languages
+    """
+    _defn = EnumDefinition(
+        name="HumanLanguageCodeEnum",
+        description="An enumeration of languages",
+    )
+
 class PersonStatus(EnumDefinitionImpl):
 
     ALIVE = PermissibleValue(
@@ -1795,6 +2257,16 @@ class PersonStatus(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
         name="PersonStatus",
+    )
+
+class RelativeTimeEnum(EnumDefinitionImpl):
+
+    BEFORE = PermissibleValue(text="BEFORE")
+    AFTER = PermissibleValue(text="AFTER")
+    AT_SAME_TIME_AS = PermissibleValue(text="AT_SAME_TIME_AS")
+
+    _defn = EnumDefinition(
+        name="RelativeTimeEnum",
     )
 
 # Slots
@@ -1852,6 +2324,12 @@ slots.starts_at = Slot(uri=LINKML_COMMON.starts_at, name="starts_at", curie=LINK
 slots.ends_at = Slot(uri=LINKML_COMMON.ends_at, name="ends_at", curie=LINKML_COMMON.curie('ends_at'),
                    model_uri=LINKML_COMMON.ends_at, domain=None, range=Optional[Union[dict, TimePoint]])
 
+slots.happens_at = Slot(uri=LINKML_COMMON.happens_at, name="happens_at", curie=LINKML_COMMON.curie('happens_at'),
+                   model_uri=LINKML_COMMON.happens_at, domain=None, range=Optional[Union[dict, TimePoint]])
+
+slots.year_value = Slot(uri=LINKML_COMMON.year_value, name="year_value", curie=LINKML_COMMON.curie('year_value'),
+                   model_uri=LINKML_COMMON.year_value, domain=None, range=Optional[int])
+
 slots.date_value = Slot(uri=LINKML_COMMON.date_value, name="date_value", curie=LINKML_COMMON.curie('date_value'),
                    model_uri=LINKML_COMMON.date_value, domain=None, range=Optional[Union[str, XSDDate]])
 
@@ -1863,6 +2341,12 @@ slots.datetime_value = Slot(uri=LINKML_COMMON.datetime_value, name="datetime_val
 
 slots.marker_event = Slot(uri=LINKML_COMMON.marker_event, name="marker_event", curie=LINKML_COMMON.curie('marker_event'),
                    model_uri=LINKML_COMMON.marker_event, domain=None, range=Optional[Union[str, EventId]])
+
+slots.has_interval = Slot(uri=LINKML_COMMON.has_interval, name="has_interval", curie=LINKML_COMMON.curie('has_interval'),
+                   model_uri=LINKML_COMMON.has_interval, domain=None, range=Optional[Union[dict, TemporalInterval]])
+
+slots.has_duration = Slot(uri=LINKML_COMMON.has_duration, name="has_duration", curie=LINKML_COMMON.curie('has_duration'),
+                   model_uri=LINKML_COMMON.has_duration, domain=None, range=Optional[Union[dict, Duration]])
 
 slots.mathematicalOperation__inputs = Slot(uri=LINKML_COMMON.inputs, name="mathematicalOperation__inputs", curie=LINKML_COMMON.curie('inputs'),
                    model_uri=LINKML_COMMON.mathematicalOperation__inputs, domain=None, range=Optional[Union[Union[dict, Any], List[Union[dict, Any]]]])
@@ -1878,6 +2362,9 @@ slots.mathematicalOperation__immediate_preceding_steps = Slot(uri=LINKML_COMMON.
 
 slots.collection__members = Slot(uri=LINKML_COMMON.members, name="collection__members", curie=LINKML_COMMON.curie('members'),
                    model_uri=LINKML_COMMON.collection__members, domain=None, range=Optional[Union[Union[dict, Entity], List[Union[dict, Entity]]]])
+
+slots.dataset__collected_as_part_of = Slot(uri=LINKML_COMMON.collected_as_part_of, name="dataset__collected_as_part_of", curie=LINKML_COMMON.curie('collected_as_part_of'),
+                   model_uri=LINKML_COMMON.dataset__collected_as_part_of, domain=None, range=Optional[Union[Union[str, InvestigationId], List[Union[str, InvestigationId]]]])
 
 slots.clinicalCohort__definition = Slot(uri=LINKML_COMMON.definition, name="clinicalCohort__definition", curie=LINKML_COMMON.curie('definition'),
                    model_uri=LINKML_COMMON.clinicalCohort__definition, domain=None, range=Optional[Union[str, ClinicalCohortDefinitionId]])
@@ -1951,6 +2438,9 @@ slots.healthcareConditionOccurrence__observed_during = Slot(uri=LINKML_COMMON.ob
 slots.investigation__objectives = Slot(uri=LINKML_COMMON.objectives, name="investigation__objectives", curie=LINKML_COMMON.curie('objectives'),
                    model_uri=LINKML_COMMON.investigation__objectives, domain=None, range=Optional[str])
 
+slots.investigation__variables = Slot(uri=LINKML_COMMON.variables, name="investigation__variables", curie=LINKML_COMMON.curie('variables'),
+                   model_uri=LINKML_COMMON.investigation__variables, domain=None, range=Optional[Union[Union[dict, Variable], List[Union[dict, Variable]]]])
+
 slots.investigativeProcess__follows_procedure = Slot(uri=LINKML_COMMON.follows_procedure, name="investigativeProcess__follows_procedure", curie=LINKML_COMMON.curie('follows_procedure'),
                    model_uri=LINKML_COMMON.investigativeProcess__follows_procedure, domain=None, range=Optional[Union[str, InvestigativeProtocolId]])
 
@@ -1972,6 +2462,9 @@ slots.measurement__variable_measured = Slot(uri=LINKML_COMMON.variable_measured,
 slots.variable__allowed_units = Slot(uri=LINKML_COMMON.allowed_units, name="variable__allowed_units", curie=LINKML_COMMON.curie('allowed_units'),
                    model_uri=LINKML_COMMON.variable__allowed_units, domain=None, range=Optional[Union[Union[str, UnitConceptId], List[Union[str, UnitConceptId]]]])
 
+slots.quantity__has_quantity_kind = Slot(uri=LINKML_COMMON.has_quantity_kind, name="quantity__has_quantity_kind", curie=LINKML_COMMON.curie('has_quantity_kind'),
+                   model_uri=LINKML_COMMON.quantity__has_quantity_kind, domain=None, range=Optional[Union[str, QuantityKindId]])
+
 slots.simpleQuantity__value = Slot(uri=LINKML_COMMON.value, name="simpleQuantity__value", curie=LINKML_COMMON.curie('value'),
                    model_uri=LINKML_COMMON.simpleQuantity__value, domain=None, range=Optional[float])
 
@@ -1989,6 +2482,33 @@ slots.quantityRange__lower_bound = Slot(uri=LINKML_COMMON.lower_bound, name="qua
 
 slots.quantityRange__upper_bound = Slot(uri=LINKML_COMMON.upper_bound, name="quantityRange__upper_bound", curie=LINKML_COMMON.curie('upper_bound'),
                    model_uri=LINKML_COMMON.quantityRange__upper_bound, domain=None, range=Optional[Union[dict, Quantity]])
+
+slots.creativeWork__title = Slot(uri=LINKML_COMMON.title, name="creativeWork__title", curie=LINKML_COMMON.curie('title'),
+                   model_uri=LINKML_COMMON.creativeWork__title, domain=None, range=Optional[str])
+
+slots.creativeWork__abstract = Slot(uri=LINKML_COMMON.abstract, name="creativeWork__abstract", curie=LINKML_COMMON.curie('abstract'),
+                   model_uri=LINKML_COMMON.creativeWork__abstract, domain=None, range=Optional[str])
+
+slots.creativeWork__rights = Slot(uri=LINKML_COMMON.rights, name="creativeWork__rights", curie=LINKML_COMMON.curie('rights'),
+                   model_uri=LINKML_COMMON.creativeWork__rights, domain=None, range=Optional[str])
+
+slots.creativeWork__creators = Slot(uri=DCTERMS.creator, name="creativeWork__creators", curie=DCTERMS.curie('creator'),
+                   model_uri=LINKML_COMMON.creativeWork__creators, domain=None, range=Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]])
+
+slots.creativeWork__contributors = Slot(uri=DCTERMS.contributor, name="creativeWork__contributors", curie=DCTERMS.curie('contributor'),
+                   model_uri=LINKML_COMMON.creativeWork__contributors, domain=None, range=Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]])
+
+slots.creativeWork__contacts = Slot(uri=SCHEMA.contactPoint, name="creativeWork__contacts", curie=SCHEMA.curie('contactPoint'),
+                   model_uri=LINKML_COMMON.creativeWork__contacts, domain=None, range=Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]])
+
+slots.creativeWork__keywords = Slot(uri=SCHEMA.keywords, name="creativeWork__keywords", curie=SCHEMA.curie('keywords'),
+                   model_uri=LINKML_COMMON.creativeWork__keywords, domain=None, range=Optional[Union[str, List[str]]])
+
+slots.temporalRelationship__predicate = Slot(uri=LINKML_COMMON.predicate, name="temporalRelationship__predicate", curie=LINKML_COMMON.curie('predicate'),
+                   model_uri=LINKML_COMMON.temporalRelationship__predicate, domain=None, range=Optional[Union[str, "RelativeTimeEnum"]])
+
+slots.temporalRelationship__relative_to = Slot(uri=LINKML_COMMON.relative_to, name="temporalRelationship__relative_to", curie=LINKML_COMMON.curie('relative_to'),
+                   model_uri=LINKML_COMMON.temporalRelationship__relative_to, domain=None, range=Optional[Union[dict, Entity]])
 
 slots.plannedProcess__follows_procedure = Slot(uri=LINKML_COMMON.follows_procedure, name="plannedProcess__follows_procedure", curie=LINKML_COMMON.curie('follows_procedure'),
                    model_uri=LINKML_COMMON.plannedProcess__follows_procedure, domain=None, range=Optional[Union[str, ProcedureId]])

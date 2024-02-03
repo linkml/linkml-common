@@ -1,17 +1,27 @@
 {
+   "BFO": "http://purl.obolibrary.org/obo/BFO_",
    "ENVO": "http://purl.obolibrary.org/obo/ENVO_",
+   "IAO": "http://purl.obolibrary.org/obo/IAO_",
+   "OBI": "http://purl.obolibrary.org/obo/OBI_",
    "PATO": "http://purl.obolibrary.org/obo/PATO_",
    "UCUM": "http://example.org/UNKNOWN/UCUM/",
    "UO": "http://example.org/UNKNOWN/UO/",
    "biolink": "https://w3id.org/biolink/",
+   "dcterms": "http://purl.org/dc/terms/",
    "example": "https://example.org/",
    "fhir": "http://hl7.org/fhir/",
+   "fibo": "http://example.org/UNKNOWN/fibo/",
+   "fibo.DatesAndTimes": "https://www.omg.org/spec/Commons/DatesAndTimes/",
+   "fibo.QuantitiesAndUnits": "https://www.omg.org/spec/Commons/QuantitiesAndUnits/",
+   "fibo.commons.PartiesAndSituations": "https://spec.edmcouncil.org/fibo/ontology/FBC/ommons/PartiesAndSituations/",
    "linkml": "https://w3id.org/linkml/",
    "linkml_common": "https://w3id.org/linkml-common/",
    "nmdcschema": "http://example.org/UNKNOWN/nmdcschema/",
    "omopschema": "http://example.org/omop/",
-   "qudt": "http://example.org/UNKNOWN/qudt/",
-   "rdf": "http://example.org/UNKNOWN/rdf/",
+   "prov": "http://www.w3.org/ns/prov#",
+   "qudt": "http://qudt.org/vocab/unit/",
+   "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+   "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
    "schema": "http://schema.org/",
    "Any": {
       "@id": "linkml:Any"
@@ -36,6 +46,9 @@
    },
    "Ratio": {
       "@id": "fhir:Ratio"
+   },
+   "Role": {
+      "@id": "schema:Role"
    },
    "SimpleQuantity": {
       "@id": "fhir:SimpleQuantity"

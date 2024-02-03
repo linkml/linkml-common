@@ -2,8 +2,9 @@ BASE <https://w3id.org/linkml-common/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
-PREFIX schema1: <http://schema.org/>
+PREFIX schema: <http://schema.org/>
 PREFIX fhir: <http://hl7.org/fhir/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 
 
 linkml:String xsd:string
@@ -44,9 +45,27 @@ linkml:Jsonpath xsd:string
 
 linkml:Sparqlpath xsd:string
 
+<Agent>  (
+    CLOSED {
+       (  $<Agent_tes> (  &<NamedThing_tes> ;
+             rdf:type [ <NamedThing> ] ?
+          ) ;
+          rdf:type [ <Agent> ]
+       )
+    } OR @<AutomatedAgent> OR @<Organization> OR @<Person>
+)
+
 <Any> CLOSED {
     (  $<Any_tes> rdf:type . * ;
        rdf:type [ linkml:Any ] ?
+    )
+}
+
+<AutomatedAgent> CLOSED {
+    (  $<AutomatedAgent_tes> (  &<Agent_tes> ;
+          rdf:type [ <Agent> ] ?
+       ) ;
+       rdf:type [ <AutomatedAgent> ]
     )
 }
 
@@ -87,7 +106,7 @@ linkml:Sparqlpath xsd:string
 
 <Collection> CLOSED {
     (  $<Collection_tes> (  &<Intangible_tes> ;
-          rdf:type [ schema1:Intangible ] ? ;
+          rdf:type [ schema:Intangible ] ? ;
           <members> @<Entity> *
        ) ;
        rdf:type [ <Collection> ] ?
@@ -109,7 +128,24 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <Concept> ]
        )
-    } OR @<FoodTypeConcept> OR @<UnitConcept>
+    } OR @<FoodTypeConcept> OR @<QuantityKind> OR @<UnitConcept>
+)
+
+<CreativeWork>  (
+    CLOSED {
+       (  $<CreativeWork_tes> (  &<NamedThing_tes> ;
+             rdf:type [ <NamedThing> ] ? ;
+             <title> @linkml:String ? ;
+             <abstract> @linkml:String ? ;
+             <rights> @linkml:String ? ;
+             dcterms:creator @<Agent> * ;
+             dcterms:contributor @<Agent> * ;
+             schema:contactPoint @<Agent> * ;
+             schema:keywords @linkml:String *
+          ) ;
+          rdf:type [ <CreativeWork> ]
+       )
+    } OR @<Dataset> OR @<Publication>
 )
 
 <DataGenerationFromSample> CLOSED {
@@ -120,11 +156,28 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<Dataset> CLOSED {
+    (  $<Dataset_tes> (  &<CreativeWork_tes> ;
+          rdf:type [ <CreativeWork> ] ? ;
+          <collected_as_part_of> @<Investigation> *
+       ) ;
+       rdf:type [ <Dataset> ]
+    )
+}
+
 <DataStructure> CLOSED {
     (  $<DataStructure_tes> (  &<Intangible_tes> ;
-          rdf:type [ schema1:Intangible ] ?
+          rdf:type [ schema:Intangible ] ?
        ) ;
        rdf:type [ <DataStructure> ] ?
+    )
+}
+
+<Duration> CLOSED {
+    (  $<Duration_tes> (  &<Quantity_tes> ;
+          rdf:type [ fhir:Quantity ] ?
+       ) ;
+       rdf:type [ <Duration> ] ?
     )
 }
 
@@ -155,18 +208,36 @@ linkml:Sparqlpath xsd:string
 }
 
 <Entity>  (
-    @<Intangible> OR @<NamedThing> OR @<Observation> OR @<PostalAddress> OR @<Variable> OR @<XProcess>
+    @<Intangible> OR @<NamedThing> OR @<Observation> OR @<PostalAddress> OR @<Variable>
 )
 
 <Entity_struct> {
     (  $<Entity_tes> <type> @linkml:String ? ;
-       rdf:type [ schema1:Thing ] ?
+       rdf:type [ schema:Thing ] ?
     )
 }
 
-<EnvironmentalProcess> CLOSED {
-    (  $<EnvironmentalProcess_tes> rdf:type . * ;
-       rdf:type [ <EnvironmentalProcess> ] ?
+<EnvironmentalMonitoring> CLOSED {
+    (  $<EnvironmentalMonitoring_tes> (  &<EnvironmentalProcess_tes> ;
+          rdf:type [ <EnvironmentalProcess> ] ?
+       ) ;
+       rdf:type [ <EnvironmentalMonitoring> ] ?
+    )
+}
+
+<EnvironmentalProcess>  (
+    CLOSED {
+       (  $<EnvironmentalProcess_tes> rdf:type . * ;
+          rdf:type [ <EnvironmentalProcess> ] ?
+       )
+    } OR @<EnvironmentalMonitoring>
+)
+
+<EnvironmentalSite> CLOSED {
+    (  $<EnvironmentalSite_tes> (  &<Place_tes> ;
+          rdf:type [ schema:Place ] ?
+       ) ;
+       rdf:type [ <EnvironmentalSite> ]
     )
 }
 
@@ -175,7 +246,10 @@ linkml:Sparqlpath xsd:string
        (  $<Event_tes> (  &<NamedThing_tes> ;
              rdf:type [ <NamedThing> ] ? ;
              <starts_at> @<TimePoint> ? ;
-             <ends_at> @<TimePoint> ?
+             <ends_at> @<TimePoint> ? ;
+             <happens_at> @<TimePoint> ? ;
+             <has_interval> @<TemporalInterval> ? ;
+             <has_duration> @<Duration> ?
           ) ;
           rdf:type [ <Event> ]
        )
@@ -245,7 +319,17 @@ linkml:Sparqlpath xsd:string
           rdf:type [ <Event> ] ? ;
           <patient> @<Patient> ? ;
           <provider> @<HealthcareProvider> ? ;
-          <subtype> @<HealthcareEncounterClassification> ?
+          <subtype> [ <https://w3id.org/linkml-common/HealthcareEncounterClassification#Inpatient%20Visit>
+             <https://w3id.org/linkml-common/HealthcareEncounterClassification#Emergency%20Room%20Visit>
+             <https://w3id.org/linkml-common/HealthcareEncounterClassification#Emergency%20Room%20and%20Inpatient%20Visit>
+             <https://w3id.org/linkml-common/HealthcareEncounterClassification#Non-hospital%20institution%20Visit>
+             <https://w3id.org/linkml-common/HealthcareEncounterClassification#Outpatient%20Visit>
+             <https://w3id.org/linkml-common/HealthcareEncounterClassification#Home%20Visit>
+             <https://w3id.org/linkml-common/HealthcareEncounterClassification#Telehealth%20Visit>
+             <https://w3id.org/linkml-common/HealthcareEncounterClassification#Pharmacy%20Visit>
+             <https://w3id.org/linkml-common/HealthcareEncounterClassification#Laboratory%20Visit>
+             <https://w3id.org/linkml-common/HealthcareEncounterClassification#Ambulance%20Visit>
+             <https://w3id.org/linkml-common/HealthcareEncounterClassification#Case%20Management%20Visit> ] ?
        ) ;
        rdf:type [ <HealthcareEncounter> ]
     )
@@ -271,7 +355,10 @@ linkml:Sparqlpath xsd:string
 
 <HealthcareRole>  (
     CLOSED {
-       (  $<HealthcareRole_tes> <is_person> @<Person> ? ;
+       (  $<HealthcareRole_tes> (  &<Role_tes> ;
+             rdf:type [ schema:Role ] ? ;
+             <is_person> @<Person> ?
+          ) ;
           rdf:type [ <HealthcareRole> ] ?
        )
     } OR @<HealthcareProvider> OR @<Patient>
@@ -279,7 +366,7 @@ linkml:Sparqlpath xsd:string
 
 <HealthcareSite> CLOSED {
     (  $<HealthcareSite_tes> (  &<Place_tes> ;
-          rdf:type [ schema1:Place ] ?
+          rdf:type [ schema:Place ] ?
        ) ;
        rdf:type [ <HealthcareSite> ]
     )
@@ -288,7 +375,7 @@ linkml:Sparqlpath xsd:string
 <InformationEntity> CLOSED {
     (  $<InformationEntity_tes> (  &<NamedThing_tes> ;
           rdf:type [ <NamedThing> ] ? ;
-          schema1:describes @<Any> ?
+          schema:describes @<Any> ?
        ) ;
        rdf:type [ <InformationEntity> ]
     )
@@ -297,17 +384,19 @@ linkml:Sparqlpath xsd:string
 <Intangible>  (
     CLOSED {
        (  $<Intangible_tes> (  &<Entity_tes> ;
-             rdf:type [ schema1:Thing ] ?
+             rdf:type [ schema:Thing ] ?
           ) ;
-          rdf:type [ schema1:Intangible ] ?
+          rdf:type [ schema:Intangible ] ?
        )
-    } OR @<Collection> OR @<DataStructure> OR @<Quantity> OR @<QuantityRange>
+    } OR @<Collection> OR @<DataStructure> OR @<Quantity> OR @<QuantityRange> OR @<Relationship> OR @<Role> OR @<Service> OR
+    @<TimePointOrTemporalInterval>
 )
 
 <Investigation> CLOSED {
     (  $<Investigation_tes> (  &<NamedThing_tes> ;
           rdf:type [ <NamedThing> ] ? ;
-          <objectives> @linkml:String ?
+          <objectives> @linkml:String ? ;
+          <variables> @<Variable> *
        ) ;
        rdf:type [ <Investigation> ]
     )
@@ -335,7 +424,7 @@ linkml:Sparqlpath xsd:string
 
 <Landform> CLOSED {
     (  $<Landform_tes> (  &<Place_tes> ;
-          rdf:type [ schema1:Place ] ? ;
+          rdf:type [ schema:Place ] ? ;
           <geolocation> @<GeoPointLocation>
        ) ;
        rdf:type [ <Landform> ]
@@ -401,23 +490,23 @@ linkml:Sparqlpath xsd:string
 <NamedThing>  (
     CLOSED {
        (  $<NamedThing_tes> (  &<Entity_tes> ;
-             rdf:type [ schema1:Thing ] ? ;
-             schema1:name @linkml:String ? ;
+             rdf:type [ schema:Thing ] ? ;
+             schema:name @linkml:String ? ;
              <subtype> @linkml:String ? ;
              <ontology_types> @<Concept> * ;
-             schema1:description @linkml:String ?
+             schema:description @linkml:String ?
           ) ;
           rdf:type [ <NamedThing> ]
        )
-    } OR @<ClinicalCohort> OR @<ClinicalCohortDefinition> OR @<Concept> OR @<Event> OR @<InformationEntity> OR @<Investigation> OR
-    @<Organization> OR @<Person> OR @<PhysicalDevice> OR @<Place> OR @<Procedure> OR @<Publication> OR @<RawMaterial> OR
-    @<SampleMaterial>
+    } OR @<Agent> OR @<ClinicalCohort> OR @<ClinicalCohortDefinition> OR @<Concept> OR @<CreativeWork> OR @<Event> OR
+    @<InformationEntity> OR @<Investigation> OR @<PhysicalDevice> OR @<Place> OR @<RawMaterial> OR @<SampleMaterial> OR
+    @<Specification>
 )
 
 <Observation>  (
     CLOSED {
        (  $<Observation_tes> (  &<Entity_tes> ;
-             rdf:type [ schema1:Thing ] ?
+             rdf:type [ schema:Thing ] ?
           ) ;
           rdf:type [ <Observation> ] ?
        )
@@ -426,8 +515,8 @@ linkml:Sparqlpath xsd:string
 
 <Organization>  (
     CLOSED {
-       (  $<Organization_tes> (  &<NamedThing_tes> ;
-             rdf:type [ <NamedThing> ] ?
+       (  $<Organization_tes> (  &<Agent_tes> ;
+             rdf:type [ <Agent> ] ?
           ) ;
           rdf:type [ <Organization> ]
        )
@@ -443,12 +532,13 @@ linkml:Sparqlpath xsd:string
 }
 
 <Person> CLOSED {
-    (  $<Person_tes> (  &<NamedThing_tes> ;
-          rdf:type [ <NamedThing> ] ? ;
-          schema1:email @linkml:String ? ;
-          schema1:birthDate @linkml:Date ? ;
+    (  $<Person_tes> (  &<Agent_tes> ;
+          rdf:type [ <Agent> ] ? ;
+          schema:email @linkml:String ? ;
+          schema:birthDate @linkml:Date ? ;
           <age_in_years> @linkml:Integer ? ;
-          <vital_status> @<PersonStatus> ?
+          <vital_status> [ <http://purl.obolibrary.org/obo/PATO_0001421> <http://purl.obolibrary.org/obo/PATO_0001422>
+             <https://w3id.org/linkml-common/PersonStatus#UNKNOWN> ] ?
        ) ;
        rdf:type [ <Person> ]
     )
@@ -469,9 +559,9 @@ linkml:Sparqlpath xsd:string
              <address> @<PostalAddress> ? ;
              <geolocation> @<GeoPointLocation> ?
           ) ;
-          rdf:type [ schema1:Place ]
+          rdf:type [ schema:Place ]
        )
-    } OR @<HealthcareSite> OR @<Landform>
+    } OR @<EnvironmentalSite> OR @<HealthcareSite> OR @<Landform>
 )
 
 <PlannedProcess>  (
@@ -498,7 +588,7 @@ linkml:Sparqlpath xsd:string
 
 <PostalAddress> CLOSED {
     (  $<PostalAddress_tes> (  &<Entity_tes> ;
-          rdf:type [ schema1:Thing ] ? ;
+          rdf:type [ schema:Thing ] ? ;
           <street_address> @linkml:String ? ;
           <street_address_additional> @linkml:String ? ;
           <city> @linkml:String ? ;
@@ -506,23 +596,23 @@ linkml:Sparqlpath xsd:string
           <postal_code> @linkml:String ? ;
           <country> @linkml:String ?
        ) ;
-       rdf:type [ schema1:PostalAddress ] ?
+       rdf:type [ schema:PostalAddress ] ?
     )
 }
 
 <Procedure>  (
     CLOSED {
-       (  $<Procedure_tes> (  &<NamedThing_tes> ;
-             rdf:type [ <NamedThing> ] ?
+       (  $<Procedure_tes> (  &<Specification_tes> ;
+             rdf:type [ <Specification> ] ?
           ) ;
           rdf:type [ <Procedure> ]
        )
-    } OR @<EngineeringSpecification> OR @<FoodRecipe> OR @<InvestigativeProtocol>
+    } OR @<EngineeringSpecification> OR @<FoodRecipe> OR @<InvestigativeProtocol> OR @<StudyDesign>
 )
 
 <Publication> CLOSED {
-    (  $<Publication_tes> (  &<NamedThing_tes> ;
-          rdf:type [ <NamedThing> ] ?
+    (  $<Publication_tes> (  &<CreativeWork_tes> ;
+          rdf:type [ <CreativeWork> ] ?
        ) ;
        rdf:type [ <Publication> ]
     )
@@ -531,16 +621,25 @@ linkml:Sparqlpath xsd:string
 <Quantity>  (
     CLOSED {
        (  $<Quantity_tes> (  &<Intangible_tes> ;
-             rdf:type [ schema1:Intangible ] ?
+             rdf:type [ schema:Intangible ] ? ;
+             <has_quantity_kind> @<QuantityKind> ?
           ) ;
           rdf:type [ fhir:Quantity ] ?
        )
-    } OR @<FoodIngredient> OR @<Ratio> OR @<SimpleQuantity>
+    } OR @<Duration> OR @<FoodIngredient> OR @<Ratio> OR @<SimpleQuantity>
 )
+
+<QuantityKind> CLOSED {
+    (  $<QuantityKind_tes> (  &<Concept_tes> ;
+          rdf:type [ <Concept> ] ?
+       ) ;
+       rdf:type [ <QuantityKind> ]
+    )
+}
 
 <QuantityRange> CLOSED {
     (  $<QuantityRange_tes> (  &<Intangible_tes> ;
-          rdf:type [ schema1:Intangible ] ? ;
+          rdf:type [ schema:Intangible ] ? ;
           <lower_bound> @<Quantity> ? ;
           <upper_bound> @<Quantity> ?
        ) ;
@@ -566,11 +665,25 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<Relationship> {
-    (  $<Relationship_tes> rdf:type . * ;
-       rdf:type [ <Relationship> ] ?
-    )
-}
+<Relationship>  (
+    {
+       (  $<Relationship_tes> (  &<Intangible_tes> ;
+             rdf:type [ schema:Intangible ] ?
+          ) ;
+          rdf:type [ <Relationship> ] ?
+       )
+    } OR @<TemporalRelationship>
+)
+
+<Role>  (
+    {
+       (  $<Role_tes> (  &<Intangible_tes> ;
+             rdf:type [ schema:Intangible ] ?
+          ) ;
+          rdf:type [ schema:Role ] ?
+       )
+    } OR @<HealthcareRole>
+)
 
 <SampleCollectionProcess> CLOSED {
     (  $<SampleCollectionProcess_tes> (  &<InvestigativeProcess_tes> ;
@@ -598,6 +711,14 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<Service> CLOSED {
+    (  $<Service_tes> (  &<Intangible_tes> ;
+          rdf:type [ schema:Intangible ] ?
+       ) ;
+       rdf:type [ <Service> ] ?
+    )
+}
+
 <SimpleQuantity> CLOSED {
     (  $<SimpleQuantity_tes> (  &<Quantity_tes> ;
           rdf:type [ fhir:Quantity ] ? ;
@@ -608,16 +729,69 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<Specification>  (
+    CLOSED {
+       (  $<Specification_tes> (  &<NamedThing_tes> ;
+             rdf:type [ <NamedThing> ] ?
+          ) ;
+          rdf:type [ <Specification> ]
+       )
+    } OR @<Procedure>
+)
+
+<StudyDesign> CLOSED {
+    (  $<StudyDesign_tes> (  &<Procedure_tes> ;
+          rdf:type [ <Procedure> ] ?
+       ) ;
+       rdf:type [ <StudyDesign> ]
+    )
+}
+
+<TemporalInterval> CLOSED {
+    (  $<TemporalInterval_tes> (  &<TimePointOrTemporalInterval_tes> ;
+          rdf:type [ <TimePointOrTemporalInterval> ] ?
+       ) ;
+       rdf:type [ <TemporalInterval> ] ?
+    )
+}
+
+<TemporalRelationship> CLOSED {
+    (  $<TemporalRelationship_tes> (  &<Relationship_tes> ;
+          rdf:type [ <Relationship> ] ? ;
+          <predicate> [ <https://w3id.org/linkml-common/RelativeTimeEnum#BEFORE>
+             <https://w3id.org/linkml-common/RelativeTimeEnum#AFTER>
+             <https://w3id.org/linkml-common/RelativeTimeEnum#AT_SAME_TIME_AS> ] ? ;
+          <relative_to> @<Entity> ?
+       ) ;
+       rdf:type [ <TemporalRelationship> ] ?
+    )
+}
+
 <TimePoint> CLOSED {
-    (  $<TimePoint_tes> (  <date_value> @linkml:Date ? ;
+    (  $<TimePoint_tes> (  &<TimePointOrTemporalInterval_tes> ;
+          rdf:type [ <TimePointOrTemporalInterval> ] ? ;
+          <year_value> @linkml:Integer ? ;
+          <date_value> @linkml:Date ? ;
           <time_value> @linkml:Time ? ;
           <datetime_value> @linkml:Datetime ? ;
           <marker_event> @<Event> ? ;
-          schema1:description @linkml:String ?
+          schema:description @linkml:String ?
        ) ;
        rdf:type [ <TimePoint> ] ?
     )
 }
+
+<TimePointOrTemporalInterval>  (
+    CLOSED {
+       (  $<TimePointOrTemporalInterval_tes> (  &<Intangible_tes> ;
+             rdf:type [ schema:Intangible ] ? ;
+             <starts_at> @<TimePoint> ? ;
+             <ends_at> @<TimePoint> ?
+          ) ;
+          rdf:type [ <TimePointOrTemporalInterval> ] ?
+       )
+    } OR @<TemporalInterval> OR @<TimePoint>
+)
 
 <UnitConcept> CLOSED {
     (  $<UnitConcept_tes> (  &<Concept_tes> ;
@@ -639,18 +813,10 @@ linkml:Sparqlpath xsd:string
 
 <Variable> CLOSED {
     (  $<Variable_tes> (  &<Entity_tes> ;
-          rdf:type [ schema1:Thing ] ? ;
+          rdf:type [ schema:Thing ] ? ;
           <allowed_units> @<UnitConcept> *
        ) ;
        rdf:type [ <Variable> ] ?
-    )
-}
-
-<XProcess> CLOSED {
-    (  $<XProcess_tes> (  &<Entity_tes> ;
-          rdf:type [ schema1:Thing ] ?
-       ) ;
-       rdf:type [ <XProcess> ] ?
     )
 }
 
