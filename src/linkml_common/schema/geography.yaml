@@ -32,6 +32,7 @@ classes:
     slots:
       - address
       - geolocation
+      - bounding_coordinates
 
   Landform:
     is_a: Place
@@ -83,9 +84,28 @@ classes:
         unit:
           ucum_code: m
 
+  GeoBoxLocation:
+    is_a: Location
+    attributes:
+      west_bounding_coordinate:
+        range: decimal
+        description: The westernmost coordinate of the location
+      east_bounding_coordinate:
+        range: decimal
+        description: The easternmost coordinate of the location
+      north_bounding_coordinate:
+        range: decimal
+        description: The northernmost coordinate of the location
+      south_bounding_coordinate:
+        range: decimal
+        description: The southernmost coordinate of the location
+
 slots:
   address:
     range: PostalAddress
   geolocation:
     range: GeoPointLocation
     description: The geolocation of the place
+  bounding_coordinates:
+    range: GeoBoxLocation
+    description: The bounding coordinates of the place
