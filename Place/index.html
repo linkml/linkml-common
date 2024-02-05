@@ -216,6 +216,10 @@
 
           Place --&gt; PostalAddress : address
 
+      Place : bounding_coordinates
+
+          Place --&gt; GeoBoxLocation : bounding_coordinates
+
       Place : description
 
       Place : geolocation
@@ -275,6 +279,12 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../bounding_coordinates/">bounding_coordinates</a></td>
+<td>0..1 <br/> <a href="../GeoBoxLocation/">GeoBoxLocation</a></td>
+<td>The bounding coordinates of the place</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
@@ -290,7 +300,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a>, <a href="../Entity/">Entity</a></td>
+<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
 <td><a href="../subtype/">subtype</a></td>
@@ -347,6 +357,7 @@ is_a: NamedThing
 slots:
 - address
 - geolocation
+- bounding_coordinates
 class_uri: schema:Place
 
 </code></pre>
@@ -377,6 +388,16 @@ attributes:
     domain_of:
     - Place
     range: GeoPointLocation
+  bounding_coordinates:
+    name: bounding_coordinates
+    description: The bounding coordinates of the place
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: bounding_coordinates
+    owner: Place
+    domain_of:
+    - Place
+    range: GeoBoxLocation
   id:
     name: id
     description: A unique identifier for a thing
