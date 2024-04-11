@@ -207,14 +207,14 @@
       Entity &lt;|-- Intangible
 
 
-      Intangible &lt;|-- TimePointOrTemporalInterval
-      Intangible &lt;|-- Quantity
-      Intangible &lt;|-- QuantityRange
       Intangible &lt;|-- Role
       Intangible &lt;|-- Relationship
       Intangible &lt;|-- Collection
       Intangible &lt;|-- Service
       Intangible &lt;|-- DataStructure
+      Intangible &lt;|-- Quantity
+      Intangible &lt;|-- QuantityRange
+      Intangible &lt;|-- TimePointOrTemporalInterval
 
 
       Intangible : type
@@ -225,14 +225,14 @@
 <ul>
 <li><a href="../Entity/">Entity</a><ul>
 <li><strong>Intangible</strong><ul>
-<li><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a></li>
-<li><a href="../Quantity/">Quantity</a></li>
-<li><a href="../QuantityRange/">QuantityRange</a></li>
 <li><a href="../Role/">Role</a></li>
 <li><a href="../Relationship/">Relationship</a></li>
 <li><a href="../Collection/">Collection</a></li>
 <li><a href="../Service/">Service</a></li>
 <li><a href="../DataStructure/">DataStructure</a></li>
+<li><a href="../Quantity/">Quantity</a></li>
+<li><a href="../QuantityRange/">QuantityRange</a></li>
+<li><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a></li>
 </ul>
 </li>
 </ul>
@@ -302,7 +302,9 @@ is_a: Entity
 attributes:
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true

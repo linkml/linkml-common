@@ -262,14 +262,14 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../Measurement/">Measurement</a></td>
-<td><a href="../variable_measured/">variable_measured</a></td>
+<td><a href="../Investigation/">Investigation</a></td>
+<td><a href="../variables/">variables</a></td>
 <td>range</td>
 <td><a href="./">Variable</a></td>
 </tr>
 <tr>
-<td><a href="../Investigation/">Investigation</a></td>
-<td><a href="../variables/">variables</a></td>
+<td><a href="../Measurement/">Measurement</a></td>
+<td><a href="../variable_measured/">variable_measured</a></td>
 <td>range</td>
 <td><a href="./">Variable</a></td>
 </tr>
@@ -313,6 +313,8 @@ attributes:
     from_schema: https://w3id.org/linkml-common/meaurements
     rank: 1000
     multivalued: true
+    domain_of:
+    - Variable
     range: UnitConcept
 
 </code></pre>
@@ -336,7 +338,9 @@ attributes:
     range: UnitConcept
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true

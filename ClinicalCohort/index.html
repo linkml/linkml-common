@@ -211,6 +211,10 @@
     class ClinicalCohort
       NamedThing &lt;|-- ClinicalCohort
 
+      ClinicalCohort : classification
+
+          ClinicalCohort --&gt; Concept : classification
+
       ClinicalCohort : definition
 
           ClinicalCohort --&gt; ClinicalCohortDefinition : definition
@@ -224,8 +228,6 @@
       ClinicalCohort : ontology_types
 
           ClinicalCohort --&gt; Concept : ontology_types
-
-      ClinicalCohort : subtype
 
       ClinicalCohort : type
 
@@ -277,9 +279,9 @@
 <td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
-<td><a href="../subtype/">subtype</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>An enum with a more specific type</td>
+<td><a href="../classification/">classification</a></td>
+<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
+<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
@@ -352,6 +354,8 @@ attributes:
     name: definition
     from_schema: https://w3id.org/linkml-common/clinicalresearch
     rank: 1000
+    domain_of:
+    - ClinicalCohort
     range: ClinicalCohortDefinition
 
 </code></pre>
@@ -398,7 +402,9 @@ attributes:
     range: string
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true
@@ -408,16 +414,19 @@ attributes:
     - Entity
     - NamedThing
     range: string
-  subtype:
-    name: subtype
-    description: An enum with a more specific type
+  classification:
+    name: classification
+    description: A precise classification of the thing, using a concept from an ontology,
+      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
+      to restrict the range of values which this slot can take, using `values_from`,
+      or bindings.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
-    alias: subtype
+    alias: classification
     owner: ClinicalCohort
     domain_of:
     - NamedThing
-    range: string
+    range: Concept
   ontology_types:
     name: ontology_types
     from_schema: https://w3id.org/linkml/linkml-common
@@ -437,8 +446,8 @@ attributes:
     alias: description
     owner: ClinicalCohort
     domain_of:
-    - TimePoint
     - NamedThing
+    - TimePoint
     range: string
 
 </code></pre>

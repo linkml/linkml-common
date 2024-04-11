@@ -210,6 +210,10 @@
     class QuantityKind
       Concept &lt;|-- QuantityKind
 
+      QuantityKind : classification
+
+          QuantityKind --&gt; Concept : classification
+
       QuantityKind : description
 
       QuantityKind : id
@@ -219,8 +223,6 @@
       QuantityKind : ontology_types
 
           QuantityKind --&gt; Concept : ontology_types
-
-      QuantityKind : subtype
 
       QuantityKind : type
 
@@ -269,9 +271,9 @@
 <td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
-<td><a href="../subtype/">subtype</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>An enum with a more specific type</td>
+<td><a href="../classification/">classification</a></td>
+<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
+<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
@@ -300,12 +302,6 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../Duration/">Duration</a></td>
-<td><a href="../has_quantity_kind/">has_quantity_kind</a></td>
-<td>range</td>
-<td><a href="./">QuantityKind</a></td>
-</tr>
-<tr>
 <td><a href="../Quantity/">Quantity</a></td>
 <td><a href="../has_quantity_kind/">has_quantity_kind</a></td>
 <td>range</td>
@@ -324,13 +320,19 @@
 <td><a href="./">QuantityKind</a></td>
 </tr>
 <tr>
-<td><a href="../FoodIngredient/">FoodIngredient</a></td>
+<td><a href="../MoneyQuantity/">MoneyQuantity</a></td>
 <td><a href="../has_quantity_kind/">has_quantity_kind</a></td>
 <td>range</td>
 <td><a href="./">QuantityKind</a></td>
 </tr>
 <tr>
-<td><a href="../MoneyQuantity/">MoneyQuantity</a></td>
+<td><a href="../Duration/">Duration</a></td>
+<td><a href="../has_quantity_kind/">has_quantity_kind</a></td>
+<td>range</td>
+<td><a href="./">QuantityKind</a></td>
+</tr>
+<tr>
+<td><a href="../FoodIngredient/">FoodIngredient</a></td>
 <td><a href="../has_quantity_kind/">has_quantity_kind</a></td>
 <td>range</td>
 <td><a href="./">QuantityKind</a></td>
@@ -413,7 +415,9 @@ attributes:
     range: string
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true
@@ -423,16 +427,19 @@ attributes:
     - Entity
     - NamedThing
     range: string
-  subtype:
-    name: subtype
-    description: An enum with a more specific type
+  classification:
+    name: classification
+    description: A precise classification of the thing, using a concept from an ontology,
+      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
+      to restrict the range of values which this slot can take, using `values_from`,
+      or bindings.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
-    alias: subtype
+    alias: classification
     owner: QuantityKind
     domain_of:
     - NamedThing
-    range: string
+    range: Concept
   ontology_types:
     name: ontology_types
     from_schema: https://w3id.org/linkml/linkml-common
@@ -452,8 +459,8 @@ attributes:
     alias: description
     owner: QuantityKind
     domain_of:
-    - TimePoint
     - NamedThing
+    - TimePoint
     range: string
 
 </code></pre>

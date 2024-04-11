@@ -2,982 +2,1252 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://linkml.github.io/linkml-common/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Agent/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Any/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/AutomatedAgent/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/BasicFoodType/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Boolean/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/Building/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/BuiltEnvironmentFeature/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/BuiltSystem/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/CaseOrControlEnum/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/ClinicalCohort/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/ClinicalCohortDefinition/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/ClinicalCohortEnrollment/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Collection/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/CompositeFoodType/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Concept/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/CreativeWork/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Curie/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/CurrencyConcept/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/DataGenerationFromSample/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/DataStructure/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Dataset/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Date/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/DateOrDatetime/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Datetime/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Decimal/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Double/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Duration/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/ElectricalGrid/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/EngineeringMaterialProcessing/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/EngineeringProcess/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/EngineeringSpecification/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Entity/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/EnvironmentalMonitoring/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/EnvironmentalProcess/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/EnvironmentalSite/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/Equipment/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Event/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/ExtractiveIndustryEquipment/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/ExtractiveIndustryFacility/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/ExtractiveIndustryFacilityType/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/ExtractiveIndustryProduct/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/ExtractiveIndustryProductType/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/ExtractiveIndustryWaste/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/Facility/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/FinancialAccount/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/FinancialProduct/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Float/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/FoodIngredient/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/FoodProcessing/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/FoodRecipe/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/FoodTypeConcept/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/FossilFuel/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/FossilFuelPlant/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/FossilFuelType/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/GeoBoxLocation/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/GeoPointLocation/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/HealthcareConditionOccurrence/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/HealthcareEncounter/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/HealthcareEncounterClassification/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/HealthcareOrganization/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/HealthcareProvider/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/HealthcareRole/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/HealthcareSite/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/HumanLanguageCodeEnum/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/HydroelectricPlant/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/InformationEntity/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Intangible/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Integer/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Investigation/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/InvestigativeProcess/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/InvestigativeProtocol/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/InvestigativeProtocolEnum/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Jsonpath/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Jsonpointer/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Landform/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/LifeEvent/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Location/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/MaterialCollection/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/MaterialProcessing/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/MathematicalOperation/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Measurement/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/MiningFacility/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/MiningMethod/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/MoneyQuantity/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/NamedThing/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Ncname/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Nodeidentifier/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/NuclearPlant/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Objectidentifier/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Observation/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Organization/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Patient/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Person/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/PersonStatus/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/PhysicalDevice/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Place/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/PlannedProcess/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/PointLocation/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/PostalAddress/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/PowerPlant/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/PowerPlantType/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Procedure/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Publication/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Quantity/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/QuantityKind/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/QuantityRange/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/QuarryFacility/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Ratio/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/RawMaterial/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Relationship/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/RelativeTimeEnum/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/RenewablePlant/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Role/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/SampleCollectionProcess/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/SampleMaterial/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/SampleProcessing/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/SampleProcessingEnum/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Service/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/SimpleQuantity/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/SolarPlant/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Sparqlpath/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Specification/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/String/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/StudyDesign/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/StudyDesignEnum/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/TemporalInterval/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/TemporalRelationship/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Time/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/TimePoint/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/TimePointOrTemporalInterval/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/UnitConcept/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/UnitConversionOperation/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Uri/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Uriorcurie/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/Variable/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/WellFacility/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/WellType/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/WindFarm/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/about/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/abstract/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/account_holder/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/account_number/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/address/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/age_in_years/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/allowed_units/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/altitude/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/annual_production/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/area/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/bank/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/birth_date/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/bounding_coordinates/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/capacity/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/capex/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/care_site/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/city/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/classification/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/cohort/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/collected_as_part_of/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/collected_from/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/commissioning_date/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/contacts/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/contributors/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/country/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/creators/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/dam/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/date_value/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/datetime_value/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/decommissioning_date/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/definition/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/denominator/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/depth/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/describes/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/description/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/east_bounding_coordinate/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/ends_at/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/facility_type/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/follows_procedure/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/fuel/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/geolocation/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/grade/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/happens_at/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/has_duration/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/has_interval/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/has_quantity_kind/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/id/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/immediate_preceding_steps/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/ingredients/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/inputs/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/is_person/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/keywords/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/latitude/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/linkml-common/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/located_at_place/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/location/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/longitude/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/lower_bound/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/marker_event/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/material_collected/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/members/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/mining_method/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/name/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/north_bounding_coordinate/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/numerator/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/object/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/objectives/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/observed_during/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/ontology_types/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/operator/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/opex/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/outputs/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/part_of/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/parts/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/patient/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/plant_type/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/plants/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/postal_code/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/predicate/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/primary_email/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/processing_method/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/product_type/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/production_capacity/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/products/</loc>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/protocols_io_url/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/provider/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/quantity_measured/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/relative_to/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/reserves/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/rights/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/south_bounding_coordinate/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/speciality/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/starts_at/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/state/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/steps/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/street_address/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/street_address_additional/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/subject/</loc>
-         <lastmod>2024-02-05</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://linkml.github.io/linkml-common/subtype/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/time_value/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/title/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/type/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/unit/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/upper_bound/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/uses_physical_device/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/value/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/variable_measured/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/variables/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/vital_status/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://linkml.github.io/linkml-common/well_type/</loc>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/west_bounding_coordinate/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://linkml.github.io/linkml-common/year_value/</loc>
-         <lastmod>2024-02-05</lastmod>
+         <lastmod>2024-04-11</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

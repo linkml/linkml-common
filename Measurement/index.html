@@ -295,12 +295,16 @@ attributes:
     description: The quantity being measured
     from_schema: https://w3id.org/linkml-common/meaurements
     rank: 1000
+    domain_of:
+    - Measurement
     range: Quantity
   variable_measured:
     name: variable_measured
     description: The variable being measured
     from_schema: https://w3id.org/linkml-common/meaurements
     rank: 1000
+    domain_of:
+    - Measurement
     range: Variable
 
 </code></pre>
@@ -333,7 +337,9 @@ attributes:
     range: Variable
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true

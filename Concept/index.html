@@ -213,9 +213,17 @@
 
       Concept &lt;|-- QuantityKind
       Concept &lt;|-- UnitConcept
-      Concept &lt;|-- FoodTypeConcept
       Concept &lt;|-- CurrencyConcept
+      Concept &lt;|-- PowerPlantType
+      Concept &lt;|-- FossilFuel
+      Concept &lt;|-- ExtractiveIndustryProduct
+      Concept &lt;|-- ExtractiveIndustryWaste
+      Concept &lt;|-- FoodTypeConcept
 
+
+      Concept : classification
+
+          Concept --&gt; Concept : classification
 
       Concept : description
 
@@ -226,8 +234,6 @@
       Concept : ontology_types
 
           Concept --&gt; Concept : ontology_types
-
-      Concept : subtype
 
       Concept : type
 
@@ -240,8 +246,12 @@
 <li><strong>Concept</strong><ul>
 <li><a href="../QuantityKind/">QuantityKind</a></li>
 <li><a href="../UnitConcept/">UnitConcept</a></li>
-<li><a href="../FoodTypeConcept/">FoodTypeConcept</a></li>
 <li><a href="../CurrencyConcept/">CurrencyConcept</a></li>
+<li><a href="../PowerPlantType/">PowerPlantType</a></li>
+<li><a href="../FossilFuel/">FossilFuel</a></li>
+<li><a href="../ExtractiveIndustryProduct/">ExtractiveIndustryProduct</a></li>
+<li><a href="../ExtractiveIndustryWaste/">ExtractiveIndustryWaste</a></li>
+<li><a href="../FoodTypeConcept/">FoodTypeConcept</a></li>
 </ul>
 </li>
 </ul>
@@ -279,9 +289,9 @@
 <td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
-<td><a href="../subtype/">subtype</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>An enum with a more specific type</td>
+<td><a href="../classification/">classification</a></td>
+<td>0..1 <br/> <a href="./">Concept</a></td>
+<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
@@ -310,20 +320,8 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../Event/">Event</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../QuantityKind/">QuantityKind</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../UnitConcept/">UnitConcept</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
+<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
@@ -335,7 +333,19 @@
 </tr>
 <tr>
 <td><a href="./">Concept</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="./">Concept</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../InformationEntity/">InformationEntity</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
@@ -347,7 +357,19 @@
 </tr>
 <tr>
 <td><a href="../PhysicalDevice/">PhysicalDevice</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../PhysicalDevice/">PhysicalDevice</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Specification/">Specification</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
@@ -359,7 +381,31 @@
 </tr>
 <tr>
 <td><a href="../Procedure/">Procedure</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Procedure/">Procedure</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Publication/">Publication</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Publication/">Publication</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Agent/">Agent</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
@@ -371,7 +417,19 @@
 </tr>
 <tr>
 <td><a href="../Person/">Person</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Person/">Person</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Organization/">Organization</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
@@ -383,7 +441,19 @@
 </tr>
 <tr>
 <td><a href="../AutomatedAgent/">AutomatedAgent</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../AutomatedAgent/">AutomatedAgent</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../LifeEvent/">LifeEvent</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
@@ -395,7 +465,19 @@
 </tr>
 <tr>
 <td><a href="../CreativeWork/">CreativeWork</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../CreativeWork/">CreativeWork</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Investigation/">Investigation</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
@@ -407,7 +489,19 @@
 </tr>
 <tr>
 <td><a href="../InvestigativeProtocol/">InvestigativeProtocol</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../InvestigativeProtocol/">InvestigativeProtocol</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../StudyDesign/">StudyDesign</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
@@ -419,7 +513,19 @@
 </tr>
 <tr>
 <td><a href="../SampleMaterial/">SampleMaterial</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../SampleMaterial/">SampleMaterial</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../InvestigativeProcess/">InvestigativeProcess</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
@@ -431,7 +537,19 @@
 </tr>
 <tr>
 <td><a href="../SampleCollectionProcess/">SampleCollectionProcess</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../SampleCollectionProcess/">SampleCollectionProcess</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../SampleProcessing/">SampleProcessing</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
@@ -443,25 +561,79 @@
 </tr>
 <tr>
 <td><a href="../DataGenerationFromSample/">DataGenerationFromSample</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../DataGenerationFromSample/">DataGenerationFromSample</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
 <tr>
-<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+<td><a href="../Dataset/">Dataset</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Dataset/">Dataset</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
 <tr>
-<td><a href="../MaterialCollection/">MaterialCollection</a></td>
+<td><a href="../BuiltEnvironmentFeature/">BuiltEnvironmentFeature</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../BuiltEnvironmentFeature/">BuiltEnvironmentFeature</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
 <tr>
-<td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
+<td><a href="../Facility/">Facility</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Facility/">Facility</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Building/">Building</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Building/">Building</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../BuiltSystem/">BuiltSystem</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../BuiltSystem/">BuiltSystem</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../HealthcareSite/">HealthcareSite</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
@@ -479,6 +651,12 @@
 </tr>
 <tr>
 <td><a href="../HealthcareOrganization/">HealthcareOrganization</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../HealthcareOrganization/">HealthcareOrganization</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
@@ -491,85 +669,19 @@
 </tr>
 <tr>
 <td><a href="../HealthcareConditionOccurrence/">HealthcareConditionOccurrence</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../HealthcareConditionOccurrence/">HealthcareConditionOccurrence</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
 <tr>
-<td><a href="../Place/">Place</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../Landform/">Landform</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../FoodRecipe/">FoodRecipe</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../FoodProcessing/">FoodProcessing</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../FoodTypeConcept/">FoodTypeConcept</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../BasicFoodType/">BasicFoodType</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../CompositeFoodType/">CompositeFoodType</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../CurrencyConcept/">CurrencyConcept</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../EnvironmentalSite/">EnvironmentalSite</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../EngineeringSpecification/">EngineeringSpecification</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../RawMaterial/">RawMaterial</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>range</td>
-<td><a href="./">Concept</a></td>
-</tr>
-<tr>
-<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
-<td><a href="../ontology_types/">ontology_types</a></td>
+<td><a href="../ClinicalCohort/">ClinicalCohort</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
@@ -581,7 +693,19 @@
 </tr>
 <tr>
 <td><a href="../ClinicalCohortDefinition/">ClinicalCohortDefinition</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../ClinicalCohortDefinition/">ClinicalCohortDefinition</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../ClinicalCohortEnrollment/">ClinicalCohortEnrollment</a></td>
+<td><a href="../classification/">classification</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
@@ -592,13 +716,445 @@
 <td><a href="./">Concept</a></td>
 </tr>
 <tr>
-<td><a href="../Dataset/">Dataset</a></td>
+<td><a href="../EngineeringSpecification/">EngineeringSpecification</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringSpecification/">EngineeringSpecification</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
 </tr>
 <tr>
-<td><a href="../Publication/">Publication</a></td>
+<td><a href="../RawMaterial/">RawMaterial</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../RawMaterial/">RawMaterial</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Equipment/">Equipment</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Equipment/">Equipment</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Place/">Place</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Place/">Place</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Landform/">Landform</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Landform/">Landform</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../QuantityKind/">QuantityKind</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../QuantityKind/">QuantityKind</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../UnitConcept/">UnitConcept</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../UnitConcept/">UnitConcept</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../CurrencyConcept/">CurrencyConcept</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../CurrencyConcept/">CurrencyConcept</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../PowerPlant/">PowerPlant</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../PowerPlant/">PowerPlant</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../PowerPlantType/">PowerPlantType</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../PowerPlantType/">PowerPlantType</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../FossilFuelPlant/">FossilFuelPlant</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../FossilFuelPlant/">FossilFuelPlant</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../NuclearPlant/">NuclearPlant</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../NuclearPlant/">NuclearPlant</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../RenewablePlant/">RenewablePlant</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../RenewablePlant/">RenewablePlant</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../HydroelectricPlant/">HydroelectricPlant</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../HydroelectricPlant/">HydroelectricPlant</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../SolarPlant/">SolarPlant</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../SolarPlant/">SolarPlant</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../WindFarm/">WindFarm</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../WindFarm/">WindFarm</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../FossilFuel/">FossilFuel</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../FossilFuel/">FossilFuel</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../ElectricalGrid/">ElectricalGrid</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../ElectricalGrid/">ElectricalGrid</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Event/">Event</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../Event/">Event</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../MaterialCollection/">MaterialCollection</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../MaterialCollection/">MaterialCollection</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../ExtractiveIndustryFacility/">ExtractiveIndustryFacility</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../ExtractiveIndustryFacility/">ExtractiveIndustryFacility</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../MiningFacility/">MiningFacility</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../MiningFacility/">MiningFacility</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../WellFacility/">WellFacility</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../WellFacility/">WellFacility</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../QuarryFacility/">QuarryFacility</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../QuarryFacility/">QuarryFacility</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../ExtractiveIndustryEquipment/">ExtractiveIndustryEquipment</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../ExtractiveIndustryEquipment/">ExtractiveIndustryEquipment</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../ExtractiveIndustryProduct/">ExtractiveIndustryProduct</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../ExtractiveIndustryProduct/">ExtractiveIndustryProduct</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../ExtractiveIndustryWaste/">ExtractiveIndustryWaste</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../ExtractiveIndustryWaste/">ExtractiveIndustryWaste</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../EnvironmentalSite/">EnvironmentalSite</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../EnvironmentalSite/">EnvironmentalSite</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../FoodRecipe/">FoodRecipe</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../FoodRecipe/">FoodRecipe</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../FoodProcessing/">FoodProcessing</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../FoodProcessing/">FoodProcessing</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../FoodTypeConcept/">FoodTypeConcept</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../FoodTypeConcept/">FoodTypeConcept</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../BasicFoodType/">BasicFoodType</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../BasicFoodType/">BasicFoodType</a></td>
+<td><a href="../ontology_types/">ontology_types</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../CompositeFoodType/">CompositeFoodType</a></td>
+<td><a href="../classification/">classification</a></td>
+<td>range</td>
+<td><a href="./">Concept</a></td>
+</tr>
+<tr>
+<td><a href="../CompositeFoodType/">CompositeFoodType</a></td>
 <td><a href="../ontology_types/">ontology_types</a></td>
 <td>range</td>
 <td><a href="./">Concept</a></td>
@@ -681,7 +1237,9 @@ attributes:
     range: string
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true
@@ -691,16 +1249,19 @@ attributes:
     - Entity
     - NamedThing
     range: string
-  subtype:
-    name: subtype
-    description: An enum with a more specific type
+  classification:
+    name: classification
+    description: A precise classification of the thing, using a concept from an ontology,
+      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
+      to restrict the range of values which this slot can take, using `values_from`,
+      or bindings.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
-    alias: subtype
+    alias: classification
     owner: Concept
     domain_of:
     - NamedThing
-    range: string
+    range: Concept
   ontology_types:
     name: ontology_types
     from_schema: https://w3id.org/linkml/linkml-common
@@ -720,8 +1281,8 @@ attributes:
     alias: description
     owner: Concept
     domain_of:
-    - TimePoint
     - NamedThing
+    - TimePoint
     range: string
 
 </code></pre>

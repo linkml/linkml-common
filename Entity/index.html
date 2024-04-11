@@ -215,8 +215,8 @@
       Entity &lt;|-- NamedThing
       Entity &lt;|-- Intangible
       Entity &lt;|-- Observation
-      Entity &lt;|-- Variable
       Entity &lt;|-- PostalAddress
+      Entity &lt;|-- Variable
 
       Entity : type
 
@@ -228,8 +228,8 @@
 <li><a href="../NamedThing/">NamedThing</a></li>
 <li><a href="../Intangible/">Intangible</a></li>
 <li><a href="../Observation/">Observation</a></li>
-<li><a href="../Variable/">Variable</a></li>
 <li><a href="../PostalAddress/">PostalAddress</a></li>
+<li><a href="../Variable/">Variable</a></li>
 </ul>
 </li>
 </ul>
@@ -264,14 +264,14 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../TemporalRelationship/">TemporalRelationship</a></td>
-<td><a href="../relative_to/">relative_to</a></td>
+<td><a href="../Collection/">Collection</a></td>
+<td><a href="../members/">members</a></td>
 <td>range</td>
 <td><a href="./">Entity</a></td>
 </tr>
 <tr>
-<td><a href="../Collection/">Collection</a></td>
-<td><a href="../members/">members</a></td>
+<td><a href="../TemporalRelationship/">TemporalRelationship</a></td>
+<td><a href="../relative_to/">relative_to</a></td>
 <td>range</td>
 <td><a href="./">Entity</a></td>
 </tr>
@@ -326,7 +326,9 @@ abstract: true
 attributes:
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true

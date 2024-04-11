@@ -372,32 +372,44 @@ attributes:
     exact_mappings:
     - omopschema:address_1
     rank: 1000
+    domain_of:
+    - PostalAddress
   street_address_additional:
     name: street_address_additional
     from_schema: https://w3id.org/linkml-common/geography
     exact_mappings:
     - omopschema:address_2
     rank: 1000
+    domain_of:
+    - PostalAddress
   city:
     name: city
     description: The city
     from_schema: https://w3id.org/linkml-common/geography
     rank: 1000
+    domain_of:
+    - PostalAddress
   state:
     name: state
     description: The state
     from_schema: https://w3id.org/linkml-common/geography
     rank: 1000
+    domain_of:
+    - PostalAddress
   postal_code:
     name: postal_code
     description: The postal code or zip code
     from_schema: https://w3id.org/linkml-common/geography
     rank: 1000
+    domain_of:
+    - PostalAddress
   country:
     name: country
     description: The country
     from_schema: https://w3id.org/linkml-common/geography
     rank: 1000
+    domain_of:
+    - PostalAddress
 class_uri: schema:PostalAddress
 
 </code></pre>
@@ -476,7 +488,9 @@ attributes:
     range: string
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true

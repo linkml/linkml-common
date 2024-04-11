@@ -296,6 +296,8 @@ attributes:
     name: is_person
     from_schema: https://w3id.org/linkml-common/healthcare
     rank: 1000
+    domain_of:
+    - HealthcareRole
     range: Person
 
 </code></pre>
@@ -317,7 +319,9 @@ attributes:
     range: Person
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true

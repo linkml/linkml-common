@@ -279,12 +279,6 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../Event/">Event</a></td>
-<td><a href="../has_interval/">has_interval</a></td>
-<td>range</td>
-<td><a href="./">TemporalInterval</a></td>
-</tr>
-<tr>
 <td><a href="../LifeEvent/">LifeEvent</a></td>
 <td><a href="../has_interval/">has_interval</a></td>
 <td>range</td>
@@ -315,6 +309,42 @@
 <td><a href="./">TemporalInterval</a></td>
 </tr>
 <tr>
+<td><a href="../HealthcareEncounter/">HealthcareEncounter</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../HealthcareConditionOccurrence/">HealthcareConditionOccurrence</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../ClinicalCohortEnrollment/">ClinicalCohortEnrollment</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../Event/">Event</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
 <td><a href="../has_interval/">has_interval</a></td>
 <td>range</td>
@@ -333,37 +363,7 @@
 <td><a href="./">TemporalInterval</a></td>
 </tr>
 <tr>
-<td><a href="../HealthcareEncounter/">HealthcareEncounter</a></td>
-<td><a href="../has_interval/">has_interval</a></td>
-<td>range</td>
-<td><a href="./">TemporalInterval</a></td>
-</tr>
-<tr>
-<td><a href="../HealthcareConditionOccurrence/">HealthcareConditionOccurrence</a></td>
-<td><a href="../has_interval/">has_interval</a></td>
-<td>range</td>
-<td><a href="./">TemporalInterval</a></td>
-</tr>
-<tr>
 <td><a href="../FoodProcessing/">FoodProcessing</a></td>
-<td><a href="../has_interval/">has_interval</a></td>
-<td>range</td>
-<td><a href="./">TemporalInterval</a></td>
-</tr>
-<tr>
-<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
-<td><a href="../has_interval/">has_interval</a></td>
-<td>range</td>
-<td><a href="./">TemporalInterval</a></td>
-</tr>
-<tr>
-<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
-<td><a href="../has_interval/">has_interval</a></td>
-<td>range</td>
-<td><a href="./">TemporalInterval</a></td>
-</tr>
-<tr>
-<td><a href="../ClinicalCohortEnrollment/">ClinicalCohortEnrollment</a></td>
 <td><a href="../has_interval/">has_interval</a></td>
 <td>range</td>
 <td><a href="./">TemporalInterval</a></td>
@@ -439,7 +439,9 @@ attributes:
     range: TimePoint
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true

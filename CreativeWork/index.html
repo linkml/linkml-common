@@ -207,11 +207,15 @@
       NamedThing &lt;|-- CreativeWork
 
 
-      CreativeWork &lt;|-- Dataset
       CreativeWork &lt;|-- Publication
+      CreativeWork &lt;|-- Dataset
 
 
       CreativeWork : abstract
+
+      CreativeWork : classification
+
+          CreativeWork --&gt; Concept : classification
 
       CreativeWork : contacts
 
@@ -239,8 +243,6 @@
 
       CreativeWork : rights
 
-      CreativeWork : subtype
-
       CreativeWork : title
 
       CreativeWork : type
@@ -252,8 +254,8 @@
 <li><a href="../Entity/">Entity</a><ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
 <li><strong>CreativeWork</strong><ul>
-<li><a href="../Dataset/">Dataset</a></li>
 <li><a href="../Publication/">Publication</a></li>
+<li><a href="../Dataset/">Dataset</a></li>
 </ul>
 </li>
 </ul>
@@ -333,9 +335,9 @@
 <td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
-<td><a href="../subtype/">subtype</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>An enum with a more specific type</td>
+<td><a href="../classification/">classification</a></td>
+<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
+<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
@@ -399,18 +401,24 @@ attributes:
     exact_mappings:
     - dcterms:title
     rank: 1000
+    domain_of:
+    - CreativeWork
     range: string
   abstract:
     name: abstract
     description: A summary of the item
     from_schema: https://w3id.org/linkml-common/social
     rank: 1000
+    domain_of:
+    - CreativeWork
     range: string
   rights:
     name: rights
     description: Information about rights held in and over the item
     from_schema: https://w3id.org/linkml-common/social
     rank: 1000
+    domain_of:
+    - CreativeWork
     range: string
   creators:
     name: creators
@@ -419,6 +427,8 @@ attributes:
     rank: 1000
     slot_uri: dcterms:creator
     multivalued: true
+    domain_of:
+    - CreativeWork
     range: Agent
   contributors:
     name: contributors
@@ -428,6 +438,8 @@ attributes:
     rank: 1000
     slot_uri: dcterms:contributor
     multivalued: true
+    domain_of:
+    - CreativeWork
     range: Agent
   contacts:
     name: contacts
@@ -436,6 +448,8 @@ attributes:
     rank: 1000
     slot_uri: schema:contactPoint
     multivalued: true
+    domain_of:
+    - CreativeWork
     range: Agent
   keywords:
     name: keywords
@@ -444,6 +458,8 @@ attributes:
     rank: 1000
     slot_uri: schema:keywords
     multivalued: true
+    domain_of:
+    - CreativeWork
     range: string
 
 </code></pre>
@@ -565,7 +581,9 @@ attributes:
     range: string
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true
@@ -575,16 +593,19 @@ attributes:
     - Entity
     - NamedThing
     range: string
-  subtype:
-    name: subtype
-    description: An enum with a more specific type
+  classification:
+    name: classification
+    description: A precise classification of the thing, using a concept from an ontology,
+      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
+      to restrict the range of values which this slot can take, using `values_from`,
+      or bindings.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
-    alias: subtype
+    alias: classification
     owner: CreativeWork
     domain_of:
     - NamedThing
-    range: string
+    range: Concept
   ontology_types:
     name: ontology_types
     from_schema: https://w3id.org/linkml/linkml-common
@@ -604,8 +625,8 @@ attributes:
     alias: description
     owner: CreativeWork
     domain_of:
-    - TimePoint
     - NamedThing
+    - TimePoint
     range: string
 
 </code></pre>

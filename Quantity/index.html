@@ -211,11 +211,10 @@
       Intangible &lt;|-- Quantity
 
 
-      Quantity &lt;|-- Duration
       Quantity &lt;|-- SimpleQuantity
       Quantity &lt;|-- Ratio
+      Quantity &lt;|-- Duration
       Quantity &lt;|-- FoodIngredient
-      Quantity &lt;|-- MoneyQuantity
 
 
       Quantity : has_quantity_kind
@@ -231,11 +230,10 @@
 <li><a href="../Entity/">Entity</a><ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><strong>Quantity</strong><ul>
-<li><a href="../Duration/">Duration</a></li>
 <li><a href="../SimpleQuantity/">SimpleQuantity</a></li>
 <li><a href="../Ratio/">Ratio</a></li>
+<li><a href="../Duration/">Duration</a></li>
 <li><a href="../FoodIngredient/">FoodIngredient</a></li>
-<li><a href="../MoneyQuantity/">MoneyQuantity</a></li>
 </ul>
 </li>
 </ul>
@@ -366,6 +364,8 @@ attributes:
     description: The kind of quantity
     from_schema: https://w3id.org/linkml-common/quantities
     rank: 1000
+    domain_of:
+    - Quantity
     range: QuantityKind
 class_uri: fhir:Quantity
 union_of:
@@ -395,7 +395,9 @@ attributes:
     range: QuantityKind
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true

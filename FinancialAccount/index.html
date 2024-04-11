@@ -318,18 +318,24 @@ attributes:
     description: The account number
     from_schema: https://w3id.org/linkml-common/financial
     rank: 1000
+    domain_of:
+    - FinancialAccount
     range: string
   bank:
     name: bank
     description: The bank that holds the account
     from_schema: https://w3id.org/linkml-common/financial
     rank: 1000
+    domain_of:
+    - FinancialAccount
     range: Organization
   account_holder:
     name: account_holder
     description: The person or organization that holds the account
     from_schema: https://w3id.org/linkml-common/financial
     rank: 1000
+    domain_of:
+    - FinancialAccount
     range: Person
 
 </code></pre>
@@ -376,7 +382,9 @@ attributes:
     range: Person
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true

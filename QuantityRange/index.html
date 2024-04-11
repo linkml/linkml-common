@@ -297,12 +297,16 @@ attributes:
     description: The lower bound of the range
     from_schema: https://w3id.org/linkml-common/quantities
     rank: 1000
+    domain_of:
+    - QuantityRange
     range: Quantity
   upper_bound:
     name: upper_bound
     description: The upper bound of the range
     from_schema: https://w3id.org/linkml-common/quantities
     rank: 1000
+    domain_of:
+    - QuantityRange
     range: Quantity
 class_uri: fhir:Range
 
@@ -337,7 +341,9 @@ attributes:
     range: Quantity
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true

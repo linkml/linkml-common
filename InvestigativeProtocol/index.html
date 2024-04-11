@@ -210,6 +210,10 @@
     class InvestigativeProtocol
       Procedure &lt;|-- InvestigativeProtocol
 
+      InvestigativeProtocol : classification
+
+          InvestigativeProtocol --&gt; Concept : classification
+
       InvestigativeProtocol : description
 
       InvestigativeProtocol : id
@@ -220,7 +224,7 @@
 
           InvestigativeProtocol --&gt; Concept : ontology_types
 
-      InvestigativeProtocol : subtype
+      InvestigativeProtocol : protocols_io_url
 
       InvestigativeProtocol : type
 
@@ -254,6 +258,12 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../protocols_io_url/">protocols_io_url</a></td>
+<td>0..1 <br/> <a href="../Uri/">Uri</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
@@ -272,9 +282,9 @@
 <td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
-<td><a href="../subtype/">subtype</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>An enum with a more specific type</td>
+<td><a href="../classification/">classification</a></td>
+<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
+<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
@@ -353,6 +363,23 @@
 <pre><code class="language-yaml">name: InvestigativeProtocol
 from_schema: https://w3id.org/linkml/linkml-common
 is_a: Procedure
+slot_usage:
+  classification:
+    name: classification
+    annotations:
+      recommended_value_set_bindings:
+        tag: recommended_value_set_bindings
+        value: linkml_common:InvestigativeProtocolEnum
+    domain_of:
+    - NamedThing
+attributes:
+  protocols_io_url:
+    name: protocols_io_url
+    from_schema: https://w3id.org/linkml-common/investigations
+    rank: 1000
+    domain_of:
+    - InvestigativeProtocol
+    range: uri
 
 </code></pre>
 </details>
@@ -361,7 +388,25 @@ is_a: Procedure
 <pre><code class="language-yaml">name: InvestigativeProtocol
 from_schema: https://w3id.org/linkml/linkml-common
 is_a: Procedure
+slot_usage:
+  classification:
+    name: classification
+    annotations:
+      recommended_value_set_bindings:
+        tag: recommended_value_set_bindings
+        value: linkml_common:InvestigativeProtocolEnum
+    domain_of:
+    - NamedThing
 attributes:
+  protocols_io_url:
+    name: protocols_io_url
+    from_schema: https://w3id.org/linkml-common/investigations
+    rank: 1000
+    alias: protocols_io_url
+    owner: InvestigativeProtocol
+    domain_of:
+    - InvestigativeProtocol
+    range: uri
   id:
     name: id
     description: A unique identifier for a thing
@@ -388,7 +433,9 @@ attributes:
     range: string
   type:
     name: type
-    description: A type for a thing
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     designates_type: true
@@ -398,16 +445,23 @@ attributes:
     - Entity
     - NamedThing
     range: string
-  subtype:
-    name: subtype
-    description: An enum with a more specific type
+  classification:
+    name: classification
+    annotations:
+      recommended_value_set_bindings:
+        tag: recommended_value_set_bindings
+        value: linkml_common:InvestigativeProtocolEnum
+    description: A precise classification of the thing, using a concept from an ontology,
+      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
+      to restrict the range of values which this slot can take, using `values_from`,
+      or bindings.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
-    alias: subtype
+    alias: classification
     owner: InvestigativeProtocol
     domain_of:
     - NamedThing
-    range: string
+    range: Concept
   ontology_types:
     name: ontology_types
     from_schema: https://w3id.org/linkml/linkml-common
@@ -427,8 +481,8 @@ attributes:
     alias: description
     owner: InvestigativeProtocol
     domain_of:
-    - TimePoint
     - NamedThing
+    - TimePoint
     range: string
 
 </code></pre>
