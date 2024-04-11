@@ -23,6 +23,7 @@ default_range: string
 imports:
   - linkml:types
   - core
+  - time
 
 classes:
 

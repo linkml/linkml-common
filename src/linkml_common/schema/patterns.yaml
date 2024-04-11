@@ -16,40 +16,199 @@ prefixes:
   BFO: http://purl.obolibrary.org/obo/BFO_
   fhir: http://hl7.org/fhir/
 default_prefix: linkml_common
-default_range: string
+default_range: Any
 
 imports:
   - linkml:types
 
 classes:
 
-  DesignPattern:
+  Any:
+    class_uri: linkml:Any
+
+  ModelingAbstraction:
     abstract: true
 
-  Composable:
+  GraphElementMixin:
+    is_a: ModelingAbstraction
+    mixin: true
+
+  GraphMixin:
+    is_a: GraphElementMixin
+    mixin: true
+
+  GraphNodeMixin:
+    is_a: GraphElementMixin
+    mixin: true
+
+  GraphEdgeMixin:
+    is_a: GraphElementMixin
+    mixin: true
+
+  TreeElementMixin:
+    is_a: ModelingAbstraction
+    mixin: true
+
+  TreeMixin:
+    is_a: TreeElementMixin
+    mixin: true
+
+  SubTreeMixin:
+    is_a: TreeMixin
+    mixin: true
+
+  TreeNodeMixin:
+    is_a: TreeElementMixin
+    mixin: true
+
+  DiscreteEntity:
+    is_a: ModelingAbstraction
+
+  Composite:
+    is_a: ModelingAbstraction
+    mixins:
+      - TreeMixin
     description: >-
       A thing that can be composed of other things
-    attributes:
+    slots:
+      - components
+    slot_usage:
       components:
-        multivalued: true
-        range: Composable
-        close_mappings:
-          - RO:0002180
+        any_of:
+          - range: Composite
+          - range: AtomicDiscreteEntity
+
+  SimpleComposite:
+    is_a: Composite
+    mixins:
+      - SubTreeMixin
+    description: >-
+      A thing that can be composed of only AtomicDiscreteEntities
+    slot_usage:
+      components:
+        range: AtomicDiscreteEntity
+
+  AtomicDiscreteEntity:
+    is_a: DiscreteEntity
+    mixins:
+      - TreeNodeMixin
+    description: >-
+      A thing that cannot be decomposed into smaller parts, within a given system of components
+
+  System:
+    is_a: Composite
+    mixins:
+      - GraphMixin
+    description: >-
+      A system is a composite entity that has connected components
+    slots:
+      - connections
+    slot_usage:
+      components:
+        any_of:
+          - range: SubSystem
+          - range: AtomicSystemComponent
+      connections:
+        range: SystemConnection
+
+  SubSystem:
+    is_a: System
+    description: >-
+      A system that is part of a larger system
+
+  AtomicSystemComponent:
+    is_a: AtomicDiscreteEntity
+    description: >-
+      A system component that cannot be decomposed into smaller parts
+
+  SystemConnection:
+    is_a: BinaryDirectedRelationship
+    description: >-
+      A connection between two system components
+    slot_usage:
+      subject:
+        any_of:
+          - range: SubSystem
+          - range: AtomicSystemComponent
+      object:
+        any_of:
+          - range: SubSystem
+          - range: AtomicSystemComponent
+
+
+  Relationship:
+    is_a: ModelingAbstraction
+    mixins:
+      - GraphEdgeMixin
+    description: >-
+      A relationship between two or more entities
+
+  BinaryRelationship:
+    is_a: Relationship
+
+  MultiNAryRelationship:
+    is_a: Relationship
 
   BinaryDirectedRelationship:
-    is_a: Relationship
+    is_a: BinaryRelationship
     slots:
       - subject
       - object
 
+  StateTransitionNetworkElement:
+    is_a: ModelingAbstraction
+    description: >-
+      An element in a state transition network
+
+  StateTransitionNetwork:
+    is_a: StateTransitionNetworkElement
+    mixins:
+      - GraphMixin
+    description: >-
+      A network of state transitions
+
   StateTransition:
-    #is_a: Process
+    is_a: StateTransitionNetworkElement
     attributes:
       before:
-        range: Any
-        multivalued: true
-        description: The inputs to the operation
+        mixins:
+          - subject
+        range: State
+        description: The previous state
       after:
-        range: Any
-        multivalued: true
-        description: The outputs of the operation
+        mixins:
+          - subject
+        range: State
+        description: The next state
+      conditions:
+        description: Conditions under which the transition occurs
+
+  State:
+    is_a: StateTransitionNetworkElement
+    description: >-
+      A state in a state transition network
+
+
+slots:
+  relationship_participant:
+    abstract: true
+    range: DiscreteEntity
+    domain: Relationship
+
+  subject:
+    is_a: relationship_participant
+    description: >-
+      The subject of a relationship
+
+  object:
+    is_a: relationship_participant
+    description: >-
+      The object of a relationship
+      
+  components:
+    multivalued: true
+    close_mappings:
+      - RO:0002180
+
+  connections:
+    multivalued: true

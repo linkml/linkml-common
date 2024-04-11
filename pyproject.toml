@@ -14,7 +14,7 @@ neo4j = "^5.14.1"
 linkml-transformer = "^0.2.2"
 
 [tool.poetry.group.dev.dependencies]
-linkml = "^1.6.10"
+linkml = "^1.7.6"
 schema-automator = "^0.4.0"
 
 [tool.poetry-dynamic-versioning]

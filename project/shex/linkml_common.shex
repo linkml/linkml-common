@@ -1,10 +1,10 @@
 BASE <https://w3id.org/linkml-common/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
-PREFIX schema: <http://schema.org/>
+PREFIX schema1: <http://schema.org/>
 PREFIX fhir: <http://hl7.org/fhir/>
-PREFIX dcterms: <http://purl.org/dc/terms/>
 
 
 linkml:String xsd:string
@@ -77,6 +77,36 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<Building>  (
+    CLOSED {
+       (  $<Building_tes> (  &<Facility_tes> ;
+             rdf:type [ <Facility> ] ?
+          ) ;
+          rdf:type [ <Building> ]
+       )
+    } OR @<PowerPlant>
+)
+
+<BuiltEnvironmentFeature>  (
+    CLOSED {
+       (  $<BuiltEnvironmentFeature_tes> (  &<NamedThing_tes> ;
+             rdf:type [ <NamedThing> ] ?
+          ) ;
+          rdf:type [ <BuiltEnvironmentFeature> ]
+       )
+    } OR @<BuiltSystem> OR @<Facility>
+)
+
+<BuiltSystem>  (
+    CLOSED {
+       (  $<BuiltSystem_tes> (  &<BuiltEnvironmentFeature_tes> ;
+             rdf:type [ <BuiltEnvironmentFeature> ] ?
+          ) ;
+          rdf:type [ <BuiltSystem> ]
+       )
+    } OR @<ElectricalGrid>
+)
+
 <ClinicalCohort> CLOSED {
     (  $<ClinicalCohort_tes> (  &<NamedThing_tes> ;
           rdf:type [ <NamedThing> ] ? ;
@@ -106,7 +136,7 @@ linkml:Sparqlpath xsd:string
 
 <Collection> CLOSED {
     (  $<Collection_tes> (  &<Intangible_tes> ;
-          rdf:type [ schema:Intangible ] ? ;
+          rdf:type [ schema1:Intangible ] ? ;
           <members> @<Entity> *
        ) ;
        rdf:type [ <Collection> ] ?
@@ -128,7 +158,8 @@ linkml:Sparqlpath xsd:string
           ) ;
           rdf:type [ <Concept> ]
        )
-    } OR @<FoodTypeConcept> OR @<QuantityKind> OR @<UnitConcept>
+    } OR @<CurrencyConcept> OR @<ExtractiveIndustryProduct> OR @<ExtractiveIndustryWaste> OR @<FoodTypeConcept> OR @<FossilFuel> OR
+    @<PowerPlantType> OR @<QuantityKind> OR @<UnitConcept>
 )
 
 <CreativeWork>  (
@@ -140,13 +171,21 @@ linkml:Sparqlpath xsd:string
              <rights> @linkml:String ? ;
              dcterms:creator @<Agent> * ;
              dcterms:contributor @<Agent> * ;
-             schema:contactPoint @<Agent> * ;
-             schema:keywords @linkml:String *
+             schema1:contactPoint @<Agent> * ;
+             schema1:keywords @linkml:String *
           ) ;
           rdf:type [ <CreativeWork> ]
        )
     } OR @<Dataset> OR @<Publication>
 )
+
+<CurrencyConcept> CLOSED {
+    (  $<CurrencyConcept_tes> (  &<Concept_tes> ;
+          rdf:type [ <Concept> ] ?
+       ) ;
+       rdf:type [ <CurrencyConcept> ]
+    )
+}
 
 <DataGenerationFromSample> CLOSED {
     (  $<DataGenerationFromSample_tes> (  &<InvestigativeProcess_tes> ;
@@ -167,7 +206,7 @@ linkml:Sparqlpath xsd:string
 
 <DataStructure> CLOSED {
     (  $<DataStructure_tes> (  &<Intangible_tes> ;
-          rdf:type [ schema:Intangible ] ?
+          rdf:type [ schema1:Intangible ] ?
        ) ;
        rdf:type [ <DataStructure> ] ?
     )
@@ -178,6 +217,15 @@ linkml:Sparqlpath xsd:string
           rdf:type [ fhir:Quantity ] ?
        ) ;
        rdf:type [ <Duration> ] ?
+    )
+}
+
+<ElectricalGrid> CLOSED {
+    (  $<ElectricalGrid_tes> (  &<BuiltSystem_tes> ;
+          rdf:type [ <BuiltSystem> ] ? ;
+          <plants> @<PowerPlant> *
+       ) ;
+       rdf:type [ <ElectricalGrid> ]
     )
 }
 
@@ -213,7 +261,7 @@ linkml:Sparqlpath xsd:string
 
 <Entity_struct> {
     (  $<Entity_tes> <type> @linkml:String ? ;
-       rdf:type [ schema:Thing ] ?
+       rdf:type [ schema1:Thing ] ?
     )
 }
 
@@ -235,11 +283,21 @@ linkml:Sparqlpath xsd:string
 
 <EnvironmentalSite> CLOSED {
     (  $<EnvironmentalSite_tes> (  &<Place_tes> ;
-          rdf:type [ schema:Place ] ?
+          rdf:type [ schema1:Place ] ?
        ) ;
        rdf:type [ <EnvironmentalSite> ]
     )
 }
+
+<Equipment>  (
+    CLOSED {
+       (  $<Equipment_tes> (  &<NamedThing_tes> ;
+             rdf:type [ <NamedThing> ] ?
+          ) ;
+          rdf:type [ <Equipment> ]
+       )
+    } OR @<ExtractiveIndustryEquipment>
+)
 
 <Event>  (
     CLOSED {
@@ -255,6 +313,90 @@ linkml:Sparqlpath xsd:string
        )
     } OR @<ClinicalCohortEnrollment> OR @<EngineeringProcess> OR @<HealthcareConditionOccurrence> OR @<HealthcareEncounter> OR
     @<LifeEvent> OR @<PlannedProcess>
+)
+
+<ExtractiveIndustryEquipment> CLOSED {
+    (  $<ExtractiveIndustryEquipment_tes> (  &<Equipment_tes> ;
+          rdf:type [ <Equipment> ] ?
+       ) ;
+       rdf:type [ <ExtractiveIndustryEquipment> ]
+    )
+}
+
+<ExtractiveIndustryFacility>  (
+    CLOSED {
+       (  $<ExtractiveIndustryFacility_tes> (  &<Facility_tes> ;
+             rdf:type [ <Facility> ] ? ;
+             <facility_type> [ <https://w3id.org/linkml-common/ExtractiveIndustryFacilityType#MINING_FACILITY>
+                <https://w3id.org/linkml-common/ExtractiveIndustryFacilityType#WELL_FACILITY>
+                <https://w3id.org/linkml-common/ExtractiveIndustryFacilityType#QUARRY_FACILITY> ] ? ;
+             <operator> @<Organization> ? ;
+             <products> @<ExtractiveIndustryProduct> * ;
+             <production_capacity> @<Quantity> ? ;
+             <annual_production> @<Quantity> ? ;
+             <reserves> @<Quantity> ?
+          ) ;
+          rdf:type [ <ExtractiveIndustryFacility> ]
+       )
+    } OR @<MiningFacility> OR @<QuarryFacility> OR @<WellFacility>
+)
+
+<ExtractiveIndustryProduct> CLOSED {
+    (  $<ExtractiveIndustryProduct_tes> (  &<Concept_tes> ;
+          rdf:type [ <Concept> ] ? ;
+          <product_type> [ <https://w3id.org/linkml-common/ExtractiveIndustryProductType#MINERAL>
+             <https://w3id.org/linkml-common/ExtractiveIndustryProductType#METAL>
+             <https://w3id.org/linkml-common/ExtractiveIndustryProductType#COAL>
+             <https://w3id.org/linkml-common/ExtractiveIndustryProductType#OIL>
+             <https://w3id.org/linkml-common/ExtractiveIndustryProductType#GAS>
+             <https://w3id.org/linkml-common/ExtractiveIndustryProductType#STONE>
+             <https://w3id.org/linkml-common/ExtractiveIndustryProductType#SAND>
+             <https://w3id.org/linkml-common/ExtractiveIndustryProductType#GRAVEL> ] ? ;
+          <grade> @<SimpleQuantity> ? ;
+          <processing_method> @<EngineeringSpecification> ?
+       ) ;
+       rdf:type [ <ExtractiveIndustryProduct> ]
+    )
+}
+
+<ExtractiveIndustryWaste> CLOSED {
+    (  $<ExtractiveIndustryWaste_tes> (  &<Concept_tes> ;
+          rdf:type [ <Concept> ] ?
+       ) ;
+       rdf:type [ <ExtractiveIndustryWaste> ]
+    )
+}
+
+<Facility>  (
+    CLOSED {
+       (  $<Facility_tes> (  &<BuiltEnvironmentFeature_tes> ;
+             rdf:type [ <BuiltEnvironmentFeature> ] ? ;
+             <located_at_place> @<Place> ?
+          ) ;
+          rdf:type [ <Facility> ]
+       )
+    } OR @<Building> OR @<ExtractiveIndustryFacility>
+)
+
+<FinancialAccount> CLOSED {
+    (  $<FinancialAccount_tes> (  &<FinancialProduct_tes> ;
+          rdf:type [ <FinancialProduct> ] ? ;
+          <account_number> @linkml:String ? ;
+          <bank> @<Organization> ? ;
+          <account_holder> @<Person> ?
+       ) ;
+       rdf:type [ <FinancialAccount> ] ?
+    )
+}
+
+<FinancialProduct>  (
+    CLOSED {
+       (  $<FinancialProduct_tes> (  &<Service_tes> ;
+             rdf:type [ <Service> ] ?
+          ) ;
+          rdf:type [ <FinancialProduct> ] ?
+       )
+    } OR @<FinancialAccount>
 )
 
 <FoodIngredient> CLOSED {
@@ -293,6 +435,35 @@ linkml:Sparqlpath xsd:string
     } OR @<BasicFoodType> OR @<CompositeFoodType>
 )
 
+<FossilFuel> CLOSED {
+    (  $<FossilFuel_tes> (  &<Concept_tes> ;
+          rdf:type [ <Concept> ] ?
+       ) ;
+       rdf:type [ <FossilFuel> ]
+    )
+}
+
+<FossilFuelPlant> CLOSED {
+    (  $<FossilFuelPlant_tes> (  &<PowerPlant_tes> ;
+          rdf:type [ <PowerPlant> ] ? ;
+          <fuel> @<FossilFuel> ?
+       ) ;
+       rdf:type [ <FossilFuelPlant> ]
+    )
+}
+
+<GeoBoxLocation> CLOSED {
+    (  $<GeoBoxLocation_tes> (  &<Location_tes> ;
+          rdf:type [ <Location> ] ? ;
+          <west_bounding_coordinate> @linkml:Decimal ? ;
+          <east_bounding_coordinate> @linkml:Decimal ? ;
+          <north_bounding_coordinate> @linkml:Decimal ? ;
+          <south_bounding_coordinate> @linkml:Decimal ?
+       ) ;
+       rdf:type [ <GeoBoxLocation> ] ?
+    )
+}
+
 <GeoPointLocation> CLOSED {
     (  $<GeoPointLocation_tes> (  &<PointLocation_tes> ;
           rdf:type [ <PointLocation> ] ? ;
@@ -319,7 +490,7 @@ linkml:Sparqlpath xsd:string
           rdf:type [ <Event> ] ? ;
           <patient> @<Patient> ? ;
           <provider> @<HealthcareProvider> ? ;
-          <subtype> [ <https://w3id.org/linkml-common/HealthcareEncounterClassification#Inpatient%20Visit>
+          <classification> [ <https://w3id.org/linkml-common/HealthcareEncounterClassification#Inpatient%20Visit>
              <https://w3id.org/linkml-common/HealthcareEncounterClassification#Emergency%20Room%20Visit>
              <https://w3id.org/linkml-common/HealthcareEncounterClassification#Emergency%20Room%20and%20Inpatient%20Visit>
              <https://w3id.org/linkml-common/HealthcareEncounterClassification#Non-hospital%20institution%20Visit>
@@ -356,7 +527,7 @@ linkml:Sparqlpath xsd:string
 <HealthcareRole>  (
     CLOSED {
        (  $<HealthcareRole_tes> (  &<Role_tes> ;
-             rdf:type [ schema:Role ] ? ;
+             rdf:type [ schema1:Role ] ? ;
              <is_person> @<Person> ?
           ) ;
           rdf:type [ <HealthcareRole> ] ?
@@ -366,16 +537,25 @@ linkml:Sparqlpath xsd:string
 
 <HealthcareSite> CLOSED {
     (  $<HealthcareSite_tes> (  &<Place_tes> ;
-          rdf:type [ schema:Place ] ?
+          rdf:type [ schema1:Place ] ?
        ) ;
        rdf:type [ <HealthcareSite> ]
+    )
+}
+
+<HydroelectricPlant> CLOSED {
+    (  $<HydroelectricPlant_tes> (  &<RenewablePlant_tes> ;
+          rdf:type [ <RenewablePlant> ] ? ;
+          <dam> @<Landform> ?
+       ) ;
+       rdf:type [ <HydroelectricPlant> ]
     )
 }
 
 <InformationEntity> CLOSED {
     (  $<InformationEntity_tes> (  &<NamedThing_tes> ;
           rdf:type [ <NamedThing> ] ? ;
-          schema:describes @<Any> ?
+          schema1:describes @<Any> ?
        ) ;
        rdf:type [ <InformationEntity> ]
     )
@@ -384,9 +564,9 @@ linkml:Sparqlpath xsd:string
 <Intangible>  (
     CLOSED {
        (  $<Intangible_tes> (  &<Entity_tes> ;
-             rdf:type [ schema:Thing ] ?
+             rdf:type [ schema1:Thing ] ?
           ) ;
-          rdf:type [ schema:Intangible ] ?
+          rdf:type [ schema1:Intangible ] ?
        )
     } OR @<Collection> OR @<DataStructure> OR @<Quantity> OR @<QuantityRange> OR @<Relationship> OR @<Role> OR @<Service> OR
     @<TimePointOrTemporalInterval>
@@ -416,7 +596,9 @@ linkml:Sparqlpath xsd:string
 
 <InvestigativeProtocol> CLOSED {
     (  $<InvestigativeProtocol_tes> (  &<Procedure_tes> ;
-          rdf:type [ <Procedure> ] ?
+          rdf:type [ <Procedure> ] ? ;
+          <protocols_io_url> @linkml:Uri ? ;
+          <classification> @<Concept> ?
        ) ;
        rdf:type [ <InvestigativeProtocol> ]
     )
@@ -424,8 +606,8 @@ linkml:Sparqlpath xsd:string
 
 <Landform> CLOSED {
     (  $<Landform_tes> (  &<Place_tes> ;
-          rdf:type [ schema:Place ] ? ;
-          <geolocation> @<GeoPointLocation>
+          rdf:type [ schema1:Place ] ? ;
+          <geolocation> @<GeoPointLocation> ?
        ) ;
        rdf:type [ <Landform> ]
     )
@@ -440,12 +622,14 @@ linkml:Sparqlpath xsd:string
 }
 
 <Location>  (
-    {
-       (  $<Location_tes> rdf:type . * ;
-          rdf:type [ <Location> ] ?
-       )
-    } OR @<PointLocation>
+    @<GeoBoxLocation> OR @<PointLocation>
 )
+
+<Location_struct> {
+    (  $<Location_tes> rdf:type . * ;
+       rdf:type [ <Location> ] ?
+    )
+}
 
 <MaterialCollection> CLOSED {
     (  $<MaterialCollection_tes> (  &<PlannedProcess_tes> ;
@@ -487,26 +671,57 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<MiningFacility> CLOSED {
+    (  $<MiningFacility_tes> (  &<ExtractiveIndustryFacility_tes> ;
+          rdf:type [ <ExtractiveIndustryFacility> ] ? ;
+          <mining_method> [ <https://w3id.org/linkml-common/MiningMethod#UNDERGROUND>
+             <https://w3id.org/linkml-common/MiningMethod#OPEN_PIT> <https://w3id.org/linkml-common/MiningMethod#PLACER>
+             <https://w3id.org/linkml-common/MiningMethod#IN_SITU> ] ? ;
+          <depth> @<Quantity> ? ;
+          <area> @<Quantity> ?
+       ) ;
+       rdf:type [ <MiningFacility> ]
+    )
+}
+
+<MoneyQuantity> CLOSED {
+    (  $<MoneyQuantity_tes> (  &<SimpleQuantity_tes> ;
+          rdf:type [ fhir:SimpleQuantity ] ? ;
+          <value> @linkml:Float ? ;
+          <unit> @<CurrencyConcept> ?
+       ) ;
+       rdf:type [ fhir:MoneyQuantity ] ?
+    )
+}
+
 <NamedThing>  (
     CLOSED {
        (  $<NamedThing_tes> (  &<Entity_tes> ;
-             rdf:type [ schema:Thing ] ? ;
-             schema:name @linkml:String ? ;
-             <subtype> @linkml:String ? ;
+             rdf:type [ schema1:Thing ] ? ;
+             schema1:name @linkml:String ? ;
+             <classification> @<Concept> ? ;
              <ontology_types> @<Concept> * ;
-             schema:description @linkml:String ?
+             schema1:description @linkml:String ?
           ) ;
           rdf:type [ <NamedThing> ]
        )
-    } OR @<Agent> OR @<ClinicalCohort> OR @<ClinicalCohortDefinition> OR @<Concept> OR @<CreativeWork> OR @<Event> OR
-    @<InformationEntity> OR @<Investigation> OR @<PhysicalDevice> OR @<Place> OR @<RawMaterial> OR @<SampleMaterial> OR
-    @<Specification>
+    } OR @<Agent> OR @<BuiltEnvironmentFeature> OR @<ClinicalCohort> OR @<ClinicalCohortDefinition> OR @<Concept> OR
+    @<CreativeWork> OR @<Equipment> OR @<Event> OR @<InformationEntity> OR @<Investigation> OR @<PhysicalDevice> OR @<Place> OR
+    @<RawMaterial> OR @<SampleMaterial> OR @<Specification>
 )
+
+<NuclearPlant> CLOSED {
+    (  $<NuclearPlant_tes> (  &<PowerPlant_tes> ;
+          rdf:type [ <PowerPlant> ] ?
+       ) ;
+       rdf:type [ <NuclearPlant> ]
+    )
+}
 
 <Observation>  (
     CLOSED {
        (  $<Observation_tes> (  &<Entity_tes> ;
-             rdf:type [ schema:Thing ] ?
+             rdf:type [ schema1:Thing ] ?
           ) ;
           rdf:type [ <Observation> ] ?
        )
@@ -534,8 +749,8 @@ linkml:Sparqlpath xsd:string
 <Person> CLOSED {
     (  $<Person_tes> (  &<Agent_tes> ;
           rdf:type [ <Agent> ] ? ;
-          schema:email @linkml:String ? ;
-          schema:birthDate @linkml:Date ? ;
+          schema1:email @linkml:String ? ;
+          schema1:birthDate @linkml:Date ? ;
           <age_in_years> @linkml:Integer ? ;
           <vital_status> [ <http://purl.obolibrary.org/obo/PATO_0001421> <http://purl.obolibrary.org/obo/PATO_0001422>
              <https://w3id.org/linkml-common/PersonStatus#UNKNOWN> ] ?
@@ -557,9 +772,10 @@ linkml:Sparqlpath xsd:string
        (  $<Place_tes> (  &<NamedThing_tes> ;
              rdf:type [ <NamedThing> ] ? ;
              <address> @<PostalAddress> ? ;
-             <geolocation> @<GeoPointLocation> ?
+             <geolocation> @<GeoPointLocation> ? ;
+             <bounding_coordinates> @<GeoBoxLocation> ?
           ) ;
-          rdf:type [ schema:Place ]
+          rdf:type [ schema1:Place ]
        )
     } OR @<EnvironmentalSite> OR @<HealthcareSite> OR @<Landform>
 )
@@ -588,7 +804,7 @@ linkml:Sparqlpath xsd:string
 
 <PostalAddress> CLOSED {
     (  $<PostalAddress_tes> (  &<Entity_tes> ;
-          rdf:type [ schema:Thing ] ? ;
+          rdf:type [ schema1:Thing ] ? ;
           <street_address> @linkml:String ? ;
           <street_address_additional> @linkml:String ? ;
           <city> @linkml:String ? ;
@@ -596,7 +812,33 @@ linkml:Sparqlpath xsd:string
           <postal_code> @linkml:String ? ;
           <country> @linkml:String ?
        ) ;
-       rdf:type [ schema:PostalAddress ] ?
+       rdf:type [ schema1:PostalAddress ] ?
+    )
+}
+
+<PowerPlant>  (
+    CLOSED {
+       (  $<PowerPlant_tes> (  &<Building_tes> ;
+             rdf:type [ <Building> ] ? ;
+             <plant_type> @<PowerPlantType> ? ;
+             <location> @<Place> ? ;
+             <operator> @<Organization> ? ;
+             <capacity> @<SimpleQuantity> ? ;
+             <commissioning_date> @linkml:Date ? ;
+             <decommissioning_date> @linkml:Date ? ;
+             <capex> @<MoneyQuantity> ? ;
+             <opex> @<MoneyQuantity> ?
+          ) ;
+          rdf:type [ <PowerPlant> ]
+       )
+    } OR @<FossilFuelPlant> OR @<NuclearPlant> OR @<RenewablePlant>
+)
+
+<PowerPlantType> CLOSED {
+    (  $<PowerPlantType_tes> (  &<Concept_tes> ;
+          rdf:type [ <Concept> ] ?
+       ) ;
+       rdf:type [ <PowerPlantType> ]
     )
 }
 
@@ -621,7 +863,7 @@ linkml:Sparqlpath xsd:string
 <Quantity>  (
     CLOSED {
        (  $<Quantity_tes> (  &<Intangible_tes> ;
-             rdf:type [ schema:Intangible ] ? ;
+             rdf:type [ schema1:Intangible ] ? ;
              <has_quantity_kind> @<QuantityKind> ?
           ) ;
           rdf:type [ fhir:Quantity ] ?
@@ -639,11 +881,19 @@ linkml:Sparqlpath xsd:string
 
 <QuantityRange> CLOSED {
     (  $<QuantityRange_tes> (  &<Intangible_tes> ;
-          rdf:type [ schema:Intangible ] ? ;
+          rdf:type [ schema1:Intangible ] ? ;
           <lower_bound> @<Quantity> ? ;
           <upper_bound> @<Quantity> ?
        ) ;
        rdf:type [ fhir:Range ] ?
+    )
+}
+
+<QuarryFacility> CLOSED {
+    (  $<QuarryFacility_tes> (  &<ExtractiveIndustryFacility_tes> ;
+          rdf:type [ <ExtractiveIndustryFacility> ] ?
+       ) ;
+       rdf:type [ <QuarryFacility> ]
     )
 }
 
@@ -668,19 +918,29 @@ linkml:Sparqlpath xsd:string
 <Relationship>  (
     {
        (  $<Relationship_tes> (  &<Intangible_tes> ;
-             rdf:type [ schema:Intangible ] ?
+             rdf:type [ schema1:Intangible ] ?
           ) ;
           rdf:type [ <Relationship> ] ?
        )
     } OR @<TemporalRelationship>
 )
 
+<RenewablePlant>  (
+    CLOSED {
+       (  $<RenewablePlant_tes> (  &<PowerPlant_tes> ;
+             rdf:type [ <PowerPlant> ] ?
+          ) ;
+          rdf:type [ <RenewablePlant> ]
+       )
+    } OR @<HydroelectricPlant> OR @<SolarPlant> OR @<WindFarm>
+)
+
 <Role>  (
     {
        (  $<Role_tes> (  &<Intangible_tes> ;
-             rdf:type [ schema:Intangible ] ?
+             rdf:type [ schema1:Intangible ] ?
           ) ;
-          rdf:type [ schema:Role ] ?
+          rdf:type [ schema1:Role ] ?
        )
     } OR @<HealthcareRole>
 )
@@ -711,21 +971,33 @@ linkml:Sparqlpath xsd:string
     )
 }
 
-<Service> CLOSED {
-    (  $<Service_tes> (  &<Intangible_tes> ;
-          rdf:type [ schema:Intangible ] ?
-       ) ;
-       rdf:type [ <Service> ] ?
-    )
-}
+<Service>  (
+    CLOSED {
+       (  $<Service_tes> (  &<Intangible_tes> ;
+             rdf:type [ schema1:Intangible ] ?
+          ) ;
+          rdf:type [ <Service> ] ?
+       )
+    } OR @<FinancialProduct>
+)
 
-<SimpleQuantity> CLOSED {
-    (  $<SimpleQuantity_tes> (  &<Quantity_tes> ;
-          rdf:type [ fhir:Quantity ] ? ;
-          <value> @linkml:Float ? ;
-          <unit> @<UnitConcept> ?
+<SimpleQuantity>  (
+    CLOSED {
+       (  $<SimpleQuantity_tes> (  &<Quantity_tes> ;
+             rdf:type [ fhir:Quantity ] ? ;
+             <value> @linkml:Float ? ;
+             <unit> @<UnitConcept> ?
+          ) ;
+          rdf:type [ fhir:SimpleQuantity ] ?
+       )
+    } OR @<MoneyQuantity>
+)
+
+<SolarPlant> CLOSED {
+    (  $<SolarPlant_tes> (  &<RenewablePlant_tes> ;
+          rdf:type [ <RenewablePlant> ] ?
        ) ;
-       rdf:type [ fhir:SimpleQuantity ] ?
+       rdf:type [ <SolarPlant> ]
     )
 }
 
@@ -741,7 +1013,8 @@ linkml:Sparqlpath xsd:string
 
 <StudyDesign> CLOSED {
     (  $<StudyDesign_tes> (  &<Procedure_tes> ;
-          rdf:type [ <Procedure> ] ?
+          rdf:type [ <Procedure> ] ? ;
+          <classification> @<Concept> ?
        ) ;
        rdf:type [ <StudyDesign> ]
     )
@@ -775,7 +1048,7 @@ linkml:Sparqlpath xsd:string
           <time_value> @linkml:Time ? ;
           <datetime_value> @linkml:Datetime ? ;
           <marker_event> @<Event> ? ;
-          schema:description @linkml:String ?
+          schema1:description @linkml:String ?
        ) ;
        rdf:type [ <TimePoint> ] ?
     )
@@ -784,7 +1057,7 @@ linkml:Sparqlpath xsd:string
 <TimePointOrTemporalInterval>  (
     CLOSED {
        (  $<TimePointOrTemporalInterval_tes> (  &<Intangible_tes> ;
-             rdf:type [ schema:Intangible ] ? ;
+             rdf:type [ schema1:Intangible ] ? ;
              <starts_at> @<TimePoint> ? ;
              <ends_at> @<TimePoint> ?
           ) ;
@@ -813,10 +1086,29 @@ linkml:Sparqlpath xsd:string
 
 <Variable> CLOSED {
     (  $<Variable_tes> (  &<Entity_tes> ;
-          rdf:type [ schema:Thing ] ? ;
+          rdf:type [ schema1:Thing ] ? ;
           <allowed_units> @<UnitConcept> *
        ) ;
        rdf:type [ <Variable> ] ?
+    )
+}
+
+<WellFacility> CLOSED {
+    (  $<WellFacility_tes> (  &<ExtractiveIndustryFacility_tes> ;
+          rdf:type [ <ExtractiveIndustryFacility> ] ? ;
+          <well_type> [ <https://w3id.org/linkml-common/WellType#OIL> <https://w3id.org/linkml-common/WellType#GAS>
+             <https://w3id.org/linkml-common/WellType#WATER> <https://w3id.org/linkml-common/WellType#INJECTION> ] ? ;
+          <depth> @<Quantity> ?
+       ) ;
+       rdf:type [ <WellFacility> ]
+    )
+}
+
+<WindFarm> CLOSED {
+    (  $<WindFarm_tes> (  &<RenewablePlant_tes> ;
+          rdf:type [ <RenewablePlant> ] ?
+       ) ;
+       rdf:type [ <WindFarm> ]
     )
 }
 

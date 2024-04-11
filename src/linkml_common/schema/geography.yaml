@@ -15,6 +15,7 @@ prefixes:
   ENVO: http://purl.obolibrary.org/obo/ENVO_
   fhir: http://hl7.org/fhir/
   omopschema: http://example.org/omop/
+  wgs84: http://www.w3.org/2003/01/geo/wgs84_pos#
 default_prefix: linkml_common
 default_range: string
 
@@ -43,7 +44,7 @@ classes:
       - fhir:Location
     slot_usage:
       geolocation:
-        required: true
+        recommended: true
 
   PostalAddress:
     class_uri: schema:PostalAddress
@@ -101,6 +102,9 @@ classes:
         description: The southernmost coordinate of the location
 
 slots:
+  located_at_place:
+    range: Place
+    description: The place where the entity is located
   address:
     range: PostalAddress
   geolocation:

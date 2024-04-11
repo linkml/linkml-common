@@ -1,0 +1,45 @@
+id: https://w3id.org/linkml-common/civilengineering
+name: linkml-common-civil-engineering
+title: linkml-common-civil-engineering
+description: |-
+  LinkML Common module for representing data modeling elements in the domain of civil engineering
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  OBI: http://purl.obolibrary.org/obo/OBI_
+  fhir: http://hl7.org/fhir/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - measurements
+  - geography
+  - engineering
+
+classes:
+
+  BuiltEnvironmentFeature:
+    is_a: NamedThing
+
+  Facility:
+    is_a: BuiltEnvironmentFeature
+    slots:
+      - located_at_place
+
+  Building:
+    is_a: Facility
+    slots:
+      - located_at_place
+
+  BuiltSystem:
+    is_a: BuiltEnvironmentFeature
+
+
+

@@ -42,3 +42,6 @@ classes:
   EngineeringMaterialProcessing:
     is_a: MaterialProcessing
 
+  Equipment:
+    is_a: NamedThing
+

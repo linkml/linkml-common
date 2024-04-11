@@ -11,9 +11,12 @@
     "core",
     "bibliographic",
     "datasets",
+    "civilengineering",
     "clinicalresearch",
     "computational",
     "engineering",
+    "energytechnology",
+    "extractiveindustry",
     "environmental",
     "financial",
     "foods",
@@ -367,6 +370,129 @@
   ],
   "enums": [
     {
+      "name": "FossilFuelType",
+      "definition_uri": "https://w3id.org/linkml-common/FossilFuelType",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "permissible_values": [
+        {
+          "text": "COAL",
+          "description": "Coal"
+        },
+        {
+          "text": "NATURAL_GAS",
+          "description": "Natural gas"
+        },
+        {
+          "text": "PETROLEUM",
+          "description": "Petroleum"
+        }
+      ]
+    },
+    {
+      "name": "ExtractiveIndustryFacilityType",
+      "definition_uri": "https://w3id.org/linkml-common/ExtractiveIndustryFacilityType",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "permissible_values": [
+        {
+          "text": "MINING_FACILITY",
+          "description": "A facility where mineral resources are extracted"
+        },
+        {
+          "text": "WELL_FACILITY",
+          "description": "A facility where fluid resources are extracted"
+        },
+        {
+          "text": "QUARRY_FACILITY",
+          "description": "A facility where stone, sand, or gravel are extracted"
+        }
+      ]
+    },
+    {
+      "name": "ExtractiveIndustryProductType",
+      "definition_uri": "https://w3id.org/linkml-common/ExtractiveIndustryProductType",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "permissible_values": [
+        {
+          "text": "MINERAL",
+          "description": "A solid inorganic substance"
+        },
+        {
+          "text": "METAL",
+          "description": "A solid metallic substance"
+        },
+        {
+          "text": "COAL",
+          "description": "A combustible black or brownish-black sedimentary rock"
+        },
+        {
+          "text": "OIL",
+          "description": "A liquid petroleum resource"
+        },
+        {
+          "text": "GAS",
+          "description": "A gaseous petroleum resource"
+        },
+        {
+          "text": "STONE",
+          "description": "A solid aggregate of minerals"
+        },
+        {
+          "text": "SAND",
+          "description": "A granular material composed of finely divided rock and mineral particles"
+        },
+        {
+          "text": "GRAVEL",
+          "description": "A loose aggregation of rock fragments"
+        }
+      ]
+    },
+    {
+      "name": "MiningMethod",
+      "definition_uri": "https://w3id.org/linkml-common/MiningMethod",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "permissible_values": [
+        {
+          "text": "UNDERGROUND",
+          "description": "Extraction occurs beneath the earth's surface"
+        },
+        {
+          "text": "OPEN_PIT",
+          "description": "Extraction occurs on the earth's surface"
+        },
+        {
+          "text": "PLACER",
+          "description": "Extraction of valuable minerals from alluvial deposits"
+        },
+        {
+          "text": "IN_SITU",
+          "description": "Extraction without removing the ore from its original location"
+        }
+      ]
+    },
+    {
+      "name": "WellType",
+      "definition_uri": "https://w3id.org/linkml-common/WellType",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "permissible_values": [
+        {
+          "text": "OIL",
+          "description": "A well that primarily extracts crude oil"
+        },
+        {
+          "text": "GAS",
+          "description": "A well that primarily extracts natural gas"
+        },
+        {
+          "text": "WATER",
+          "description": "A well that extracts water for various purposes"
+        },
+        {
+          "text": "INJECTION",
+          "description": "A well used to inject fluids into underground formations"
+        }
+      ]
+    },
+    {
       "name": "HealthcareEncounterClassification",
       "definition_uri": "https://w3id.org/linkml-common/HealthcareEncounterClassification",
       "from_schema": "https://w3id.org/linkml-common/healthcare",
@@ -441,6 +567,32 @@
       "reachable_from": {
         "source_nodes": [
           "OBI:0500000"
+        ],
+        "relationship_types": [
+          "rdfs:subClassOf"
+        ]
+      }
+    },
+    {
+      "name": "InvestigativeProtocolEnum",
+      "definition_uri": "https://w3id.org/linkml-common/InvestigativeProtocolEnum",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "reachable_from": {
+        "source_nodes": [
+          "OBI:0000272"
+        ],
+        "relationship_types": [
+          "rdfs:subClassOf"
+        ]
+      }
+    },
+    {
+      "name": "SampleProcessingEnum",
+      "definition_uri": "https://w3id.org/linkml-common/SampleProcessingEnum",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "reachable_from": {
+        "source_nodes": [
+          "OBI:0000094"
         ],
         "relationship_types": [
           "rdfs:subClassOf"
@@ -549,7 +701,7 @@
     {
       "name": "type",
       "definition_uri": "https://w3id.org/linkml-common/type",
-      "description": "A type for a thing",
+      "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
       "from_schema": "https://w3id.org/linkml-common/core",
       "slot_uri": "https://w3id.org/linkml-common/type",
       "designates_type": true,
@@ -562,16 +714,16 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "subtype",
-      "definition_uri": "https://w3id.org/linkml-common/subtype",
-      "description": "An enum with a more specific type",
+      "name": "classification",
+      "definition_uri": "https://w3id.org/linkml-common/classification",
+      "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
       "from_schema": "https://w3id.org/linkml-common/core",
-      "slot_uri": "https://w3id.org/linkml-common/subtype",
+      "slot_uri": "https://w3id.org/linkml-common/classification",
       "owner": "NamedThing",
       "domain_of": [
         "NamedThing"
       ],
-      "range": "string",
+      "range": "Concept",
       "@type": "SlotDefinition"
     },
     {
@@ -631,6 +783,20 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "located_at_place",
+      "definition_uri": "https://w3id.org/linkml-common/located_at_place",
+      "description": "The place where the entity is located",
+      "from_schema": "https://w3id.org/linkml-common/geography",
+      "slot_uri": "https://w3id.org/linkml-common/located_at_place",
+      "owner": "Building",
+      "domain_of": [
+        "Facility",
+        "Building"
+      ],
+      "range": "Place",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "address",
       "definition_uri": "https://w3id.org/linkml-common/address",
       "from_schema": "https://w3id.org/linkml-common/geography",
@@ -654,6 +820,20 @@
         "Place"
       ],
       "range": "GeoPointLocation",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bounding_coordinates",
+      "definition_uri": "https://w3id.org/linkml-common/bounding_coordinates",
+      "description": "The bounding coordinates of the place",
+      "from_schema": "https://w3id.org/linkml-common/geography",
+      "slot_uri": "https://w3id.org/linkml-common/bounding_coordinates",
+      "owner": "Place",
+      "domain_of": [
+        "Place"
+      ],
+      "range": "GeoBoxLocation",
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -768,6 +948,11 @@
         "TimePoint"
       ],
       "range": "integer",
+      "unit": {
+        "symbol": "year",
+        "ucum_code": "a",
+        "@type": "UnitOfMeasure"
+      },
       "@type": "SlotDefinition"
     },
     {
@@ -995,6 +1180,389 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "powerPlant__plant_type",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "slot_uri": "https://w3id.org/linkml-common/plant_type",
+      "alias": "plant_type",
+      "owner": "PowerPlant",
+      "domain_of": [
+        "PowerPlant"
+      ],
+      "range": "PowerPlantType",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "powerPlant__location",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "slot_uri": "https://w3id.org/linkml-common/location",
+      "alias": "location",
+      "owner": "PowerPlant",
+      "domain_of": [
+        "PowerPlant"
+      ],
+      "range": "Place",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "powerPlant__operator",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "slot_uri": "https://w3id.org/linkml-common/operator",
+      "alias": "operator",
+      "owner": "PowerPlant",
+      "domain_of": [
+        "PowerPlant"
+      ],
+      "range": "Organization",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "powerPlant__capacity",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "slot_uri": "https://w3id.org/linkml-common/capacity",
+      "alias": "capacity",
+      "owner": "PowerPlant",
+      "domain_of": [
+        "PowerPlant"
+      ],
+      "range": "SimpleQuantity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "powerPlant__commissioning_date",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "slot_uri": "https://w3id.org/linkml-common/commissioning_date",
+      "alias": "commissioning_date",
+      "owner": "PowerPlant",
+      "domain_of": [
+        "PowerPlant"
+      ],
+      "range": "date",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "powerPlant__decommissioning_date",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "slot_uri": "https://w3id.org/linkml-common/decommissioning_date",
+      "alias": "decommissioning_date",
+      "owner": "PowerPlant",
+      "domain_of": [
+        "PowerPlant"
+      ],
+      "range": "date",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "powerPlant__capex",
+      "description": "Capital expenditure for the plant",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "slot_uri": "https://w3id.org/linkml-common/capex",
+      "alias": "capex",
+      "owner": "PowerPlant",
+      "domain_of": [
+        "PowerPlant"
+      ],
+      "range": "MoneyQuantity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "powerPlant__opex",
+      "description": "Operating expense for the plant",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "slot_uri": "https://w3id.org/linkml-common/opex",
+      "alias": "opex",
+      "owner": "PowerPlant",
+      "domain_of": [
+        "PowerPlant"
+      ],
+      "range": "MoneyQuantity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "fossilFuelPlant__fuel",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "slot_uri": "https://w3id.org/linkml-common/fuel",
+      "alias": "fuel",
+      "owner": "FossilFuelPlant",
+      "domain_of": [
+        "FossilFuelPlant"
+      ],
+      "range": "FossilFuel",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "hydroelectricPlant__dam",
+      "description": "The dam used by the hydroelectric plant",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "slot_uri": "https://w3id.org/linkml-common/dam",
+      "alias": "dam",
+      "owner": "HydroelectricPlant",
+      "domain_of": [
+        "HydroelectricPlant"
+      ],
+      "range": "Landform",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "electricalGrid__plants",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "slot_uri": "https://w3id.org/linkml-common/plants",
+      "multivalued": true,
+      "alias": "plants",
+      "owner": "ElectricalGrid",
+      "domain_of": [
+        "ElectricalGrid"
+      ],
+      "range": "PowerPlant",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "extractiveIndustryFacility__facility_type",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/facility_type",
+      "alias": "facility_type",
+      "owner": "ExtractiveIndustryFacility",
+      "domain_of": [
+        "ExtractiveIndustryFacility"
+      ],
+      "range": "ExtractiveIndustryFacilityType",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "extractiveIndustryFacility__operator",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/operator",
+      "alias": "operator",
+      "owner": "ExtractiveIndustryFacility",
+      "domain_of": [
+        "ExtractiveIndustryFacility"
+      ],
+      "range": "Organization",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "extractiveIndustryFacility__products",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/products",
+      "multivalued": true,
+      "alias": "products",
+      "owner": "ExtractiveIndustryFacility",
+      "domain_of": [
+        "ExtractiveIndustryFacility"
+      ],
+      "range": "ExtractiveIndustryProduct",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "extractiveIndustryFacility__production_capacity",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/production_capacity",
+      "alias": "production_capacity",
+      "owner": "ExtractiveIndustryFacility",
+      "domain_of": [
+        "ExtractiveIndustryFacility"
+      ],
+      "range": "Quantity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "extractiveIndustryFacility__annual_production",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/annual_production",
+      "alias": "annual_production",
+      "owner": "ExtractiveIndustryFacility",
+      "domain_of": [
+        "ExtractiveIndustryFacility"
+      ],
+      "range": "Quantity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "extractiveIndustryFacility__reserves",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/reserves",
+      "alias": "reserves",
+      "owner": "ExtractiveIndustryFacility",
+      "domain_of": [
+        "ExtractiveIndustryFacility"
+      ],
+      "range": "Quantity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "miningFacility__mining_method",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/mining_method",
+      "alias": "mining_method",
+      "owner": "MiningFacility",
+      "domain_of": [
+        "MiningFacility"
+      ],
+      "range": "MiningMethod",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "miningFacility__depth",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/depth",
+      "alias": "depth",
+      "owner": "MiningFacility",
+      "domain_of": [
+        "MiningFacility"
+      ],
+      "range": "Quantity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "miningFacility__area",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/area",
+      "alias": "area",
+      "owner": "MiningFacility",
+      "domain_of": [
+        "MiningFacility"
+      ],
+      "range": "Quantity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "wellFacility__well_type",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/well_type",
+      "alias": "well_type",
+      "owner": "WellFacility",
+      "domain_of": [
+        "WellFacility"
+      ],
+      "range": "WellType",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "wellFacility__depth",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/depth",
+      "alias": "depth",
+      "owner": "WellFacility",
+      "domain_of": [
+        "WellFacility"
+      ],
+      "range": "Quantity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "extractiveIndustryProduct__product_type",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/product_type",
+      "alias": "product_type",
+      "owner": "ExtractiveIndustryProduct",
+      "domain_of": [
+        "ExtractiveIndustryProduct"
+      ],
+      "range": "ExtractiveIndustryProductType",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "extractiveIndustryProduct__grade",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/grade",
+      "alias": "grade",
+      "owner": "ExtractiveIndustryProduct",
+      "domain_of": [
+        "ExtractiveIndustryProduct"
+      ],
+      "range": "SimpleQuantity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "extractiveIndustryProduct__processing_method",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "slot_uri": "https://w3id.org/linkml-common/processing_method",
+      "alias": "processing_method",
+      "owner": "ExtractiveIndustryProduct",
+      "domain_of": [
+        "ExtractiveIndustryProduct"
+      ],
+      "range": "EngineeringSpecification",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "moneyQuantity__value",
+      "description": "The value of the quantity",
+      "from_schema": "https://w3id.org/linkml-common/financial",
+      "slot_uri": "https://w3id.org/linkml-common/value",
+      "alias": "value",
+      "owner": "MoneyQuantity",
+      "domain_of": [
+        "MoneyQuantity"
+      ],
+      "range": "float",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "moneyQuantity__unit",
+      "description": "The currency of the quantity",
+      "from_schema": "https://w3id.org/linkml-common/financial",
+      "slot_uri": "https://w3id.org/linkml-common/unit",
+      "alias": "unit",
+      "owner": "MoneyQuantity",
+      "domain_of": [
+        "MoneyQuantity"
+      ],
+      "role": "currency",
+      "range": "CurrencyConcept",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "financialAccount__account_number",
+      "description": "The account number",
+      "from_schema": "https://w3id.org/linkml-common/financial",
+      "slot_uri": "https://w3id.org/linkml-common/account_number",
+      "alias": "account_number",
+      "owner": "FinancialAccount",
+      "domain_of": [
+        "FinancialAccount"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "financialAccount__bank",
+      "description": "The bank that holds the account",
+      "from_schema": "https://w3id.org/linkml-common/financial",
+      "slot_uri": "https://w3id.org/linkml-common/bank",
+      "alias": "bank",
+      "owner": "FinancialAccount",
+      "domain_of": [
+        "FinancialAccount"
+      ],
+      "range": "Organization",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "financialAccount__account_holder",
+      "description": "The person or organization that holds the account",
+      "from_schema": "https://w3id.org/linkml-common/financial",
+      "slot_uri": "https://w3id.org/linkml-common/account_holder",
+      "alias": "account_holder",
+      "owner": "FinancialAccount",
+      "domain_of": [
+        "FinancialAccount"
+      ],
+      "range": "Person",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "foodRecipe__ingredients",
       "from_schema": "https://w3id.org/linkml-common/foods",
       "slot_uri": "https://w3id.org/linkml-common/ingredients",
@@ -1148,6 +1716,58 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "geoBoxLocation__west_bounding_coordinate",
+      "description": "The westernmost coordinate of the location",
+      "from_schema": "https://w3id.org/linkml-common/geography",
+      "slot_uri": "https://w3id.org/linkml-common/west_bounding_coordinate",
+      "alias": "west_bounding_coordinate",
+      "owner": "GeoBoxLocation",
+      "domain_of": [
+        "GeoBoxLocation"
+      ],
+      "range": "decimal",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "geoBoxLocation__east_bounding_coordinate",
+      "description": "The easternmost coordinate of the location",
+      "from_schema": "https://w3id.org/linkml-common/geography",
+      "slot_uri": "https://w3id.org/linkml-common/east_bounding_coordinate",
+      "alias": "east_bounding_coordinate",
+      "owner": "GeoBoxLocation",
+      "domain_of": [
+        "GeoBoxLocation"
+      ],
+      "range": "decimal",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "geoBoxLocation__north_bounding_coordinate",
+      "description": "The northernmost coordinate of the location",
+      "from_schema": "https://w3id.org/linkml-common/geography",
+      "slot_uri": "https://w3id.org/linkml-common/north_bounding_coordinate",
+      "alias": "north_bounding_coordinate",
+      "owner": "GeoBoxLocation",
+      "domain_of": [
+        "GeoBoxLocation"
+      ],
+      "range": "decimal",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "geoBoxLocation__south_bounding_coordinate",
+      "description": "The southernmost coordinate of the location",
+      "from_schema": "https://w3id.org/linkml-common/geography",
+      "slot_uri": "https://w3id.org/linkml-common/south_bounding_coordinate",
+      "alias": "south_bounding_coordinate",
+      "owner": "GeoBoxLocation",
+      "domain_of": [
+        "GeoBoxLocation"
+      ],
+      "range": "decimal",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "healthcareEncounter__patient",
       "from_schema": "https://w3id.org/linkml-common/healthcare",
       "slot_uri": "https://w3id.org/linkml-common/patient",
@@ -1261,6 +1881,18 @@
       ],
       "range": "Variable",
       "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "investigativeProtocol__protocols_io_url",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "slot_uri": "https://w3id.org/linkml-common/protocols_io_url",
+      "alias": "protocols_io_url",
+      "owner": "InvestigativeProtocol",
+      "domain_of": [
+        "InvestigativeProtocol"
+      ],
+      "range": "uri",
       "@type": "SlotDefinition"
     },
     {
@@ -1641,26 +2273,76 @@
       "is_usage_slot": true,
       "usage_slot_name": "geolocation",
       "range": "GeoPointLocation",
-      "required": true,
+      "recommended": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
     {
-      "name": "HealthcareEncounter_subtype",
-      "definition_uri": "https://w3id.org/linkml-common/subtype",
-      "description": "An enum with a more specific type",
+      "name": "HealthcareEncounter_classification",
+      "definition_uri": "https://w3id.org/linkml-common/classification",
+      "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
       "from_schema": "https://w3id.org/linkml-common/core",
-      "is_a": "subtype",
+      "is_a": "classification",
       "domain": "HealthcareEncounter",
-      "slot_uri": "https://w3id.org/linkml-common/subtype",
-      "alias": "subtype",
+      "slot_uri": "https://w3id.org/linkml-common/classification",
+      "alias": "classification",
       "owner": "HealthcareEncounter",
       "domain_of": [
         "HealthcareEncounter"
       ],
       "is_usage_slot": true,
-      "usage_slot_name": "subtype",
+      "usage_slot_name": "classification",
       "range": "HealthcareEncounterClassification",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "InvestigativeProtocol_classification",
+      "definition_uri": "https://w3id.org/linkml-common/classification",
+      "annotations": [
+        {
+          "tag": "recommended_value_set_bindings",
+          "value": "linkml_common:InvestigativeProtocolEnum",
+          "@type": "Annotation"
+        }
+      ],
+      "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+      "from_schema": "https://w3id.org/linkml-common/core",
+      "is_a": "classification",
+      "domain": "InvestigativeProtocol",
+      "slot_uri": "https://w3id.org/linkml-common/classification",
+      "alias": "classification",
+      "owner": "InvestigativeProtocol",
+      "domain_of": [
+        "InvestigativeProtocol"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "classification",
+      "range": "Concept",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "StudyDesign_classification",
+      "definition_uri": "https://w3id.org/linkml-common/classification",
+      "annotations": [
+        {
+          "tag": "recommended_value_set_bindings",
+          "value": "linkml_common:StudyDesignEnum",
+          "@type": "Annotation"
+        }
+      ],
+      "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+      "from_schema": "https://w3id.org/linkml-common/core",
+      "is_a": "classification",
+      "domain": "StudyDesign",
+      "slot_uri": "https://w3id.org/linkml-common/classification",
+      "alias": "classification",
+      "owner": "StudyDesign",
+      "domain_of": [
+        "StudyDesign"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "classification",
+      "range": "Concept",
       "@type": "SlotDefinition"
     },
     {
@@ -1752,7 +2434,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -1773,7 +2455,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -1791,7 +2473,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "describes"
@@ -1809,7 +2491,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -1912,7 +2594,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -1930,7 +2612,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -2021,13 +2703,13 @@
     {
       "name": "Publication",
       "definition_uri": "https://w3id.org/linkml-common/Publication",
-      "from_schema": "https://w3id.org/linkml-common/financial",
+      "from_schema": "https://w3id.org/linkml-common/bibliographic",
       "is_a": "CreativeWork",
       "slots": [
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "creativeWork__title",
@@ -2051,7 +2733,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "creativeWork__title",
@@ -2076,6 +2758,76 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "BuiltEnvironmentFeature",
+      "definition_uri": "https://w3id.org/linkml-common/BuiltEnvironmentFeature",
+      "from_schema": "https://w3id.org/linkml-common/civilengineering",
+      "is_a": "NamedThing",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/BuiltEnvironmentFeature",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Facility",
+      "definition_uri": "https://w3id.org/linkml-common/Facility",
+      "from_schema": "https://w3id.org/linkml-common/civilengineering",
+      "is_a": "BuiltEnvironmentFeature",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "located_at_place"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/Facility",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Building",
+      "definition_uri": "https://w3id.org/linkml-common/Building",
+      "from_schema": "https://w3id.org/linkml-common/civilengineering",
+      "is_a": "Facility",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "located_at_place"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/Building",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "BuiltSystem",
+      "definition_uri": "https://w3id.org/linkml-common/BuiltSystem",
+      "from_schema": "https://w3id.org/linkml-common/civilengineering",
+      "is_a": "BuiltEnvironmentFeature",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/BuiltSystem",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "ClinicalCohort",
       "definition_uri": "https://w3id.org/linkml-common/ClinicalCohort",
       "description": "A group of patients who share a common set of characteristics",
@@ -2085,7 +2837,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "clinicalCohort__definition"
@@ -2114,7 +2866,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -2135,7 +2887,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -2183,7 +2935,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -2200,7 +2952,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -2217,7 +2969,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -2253,7 +3005,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -2269,6 +3021,578 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "Equipment",
+      "definition_uri": "https://w3id.org/linkml-common/Equipment",
+      "from_schema": "https://w3id.org/linkml-common/engineering",
+      "is_a": "NamedThing",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/Equipment",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "PowerPlant",
+      "definition_uri": "https://w3id.org/linkml-common/PowerPlant",
+      "description": "A facility for generating electrical power",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "is_a": "Building",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "located_at_place",
+        "powerPlant__plant_type",
+        "powerPlant__location",
+        "powerPlant__operator",
+        "powerPlant__capacity",
+        "powerPlant__commissioning_date",
+        "powerPlant__decommissioning_date",
+        "powerPlant__capex",
+        "powerPlant__opex"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "plant_type",
+          "range": "PowerPlantType",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "location",
+          "range": "Place",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "operator",
+          "range": "Organization",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "capacity",
+          "range": "SimpleQuantity",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "commissioning_date",
+          "range": "date",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "decommissioning_date",
+          "range": "date",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "capex",
+          "description": "Capital expenditure for the plant",
+          "range": "MoneyQuantity",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "opex",
+          "description": "Operating expense for the plant",
+          "range": "MoneyQuantity",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/PowerPlant",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "PowerPlantType",
+      "definition_uri": "https://w3id.org/linkml-common/PowerPlantType",
+      "description": "The type of power plant",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "is_a": "Concept",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/PowerPlantType",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "FossilFuelPlant",
+      "definition_uri": "https://w3id.org/linkml-common/FossilFuelPlant",
+      "description": "A power plant that uses fossil fuels",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "is_a": "PowerPlant",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "located_at_place",
+        "powerPlant__plant_type",
+        "powerPlant__location",
+        "powerPlant__operator",
+        "powerPlant__capacity",
+        "powerPlant__commissioning_date",
+        "powerPlant__decommissioning_date",
+        "powerPlant__capex",
+        "powerPlant__opex",
+        "fossilFuelPlant__fuel"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "fuel",
+          "range": "FossilFuel",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/FossilFuelPlant",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "NuclearPlant",
+      "definition_uri": "https://w3id.org/linkml-common/NuclearPlant",
+      "description": "A nuclear power plant",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "is_a": "PowerPlant",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "located_at_place",
+        "powerPlant__plant_type",
+        "powerPlant__location",
+        "powerPlant__operator",
+        "powerPlant__capacity",
+        "powerPlant__commissioning_date",
+        "powerPlant__decommissioning_date",
+        "powerPlant__capex",
+        "powerPlant__opex"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/NuclearPlant",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "RenewablePlant",
+      "definition_uri": "https://w3id.org/linkml-common/RenewablePlant",
+      "description": "A power plant that uses renewable energy sources",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "is_a": "PowerPlant",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "located_at_place",
+        "powerPlant__plant_type",
+        "powerPlant__location",
+        "powerPlant__operator",
+        "powerPlant__capacity",
+        "powerPlant__commissioning_date",
+        "powerPlant__decommissioning_date",
+        "powerPlant__capex",
+        "powerPlant__opex"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/RenewablePlant",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "HydroelectricPlant",
+      "definition_uri": "https://w3id.org/linkml-common/HydroelectricPlant",
+      "description": "A hydroelectric power plant",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "is_a": "RenewablePlant",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "located_at_place",
+        "powerPlant__plant_type",
+        "powerPlant__location",
+        "powerPlant__operator",
+        "powerPlant__capacity",
+        "powerPlant__commissioning_date",
+        "powerPlant__decommissioning_date",
+        "powerPlant__capex",
+        "powerPlant__opex",
+        "hydroelectricPlant__dam"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "dam",
+          "description": "The dam used by the hydroelectric plant",
+          "range": "Landform",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/HydroelectricPlant",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SolarPlant",
+      "definition_uri": "https://w3id.org/linkml-common/SolarPlant",
+      "description": "A solar power plant",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "is_a": "RenewablePlant",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "located_at_place",
+        "powerPlant__plant_type",
+        "powerPlant__location",
+        "powerPlant__operator",
+        "powerPlant__capacity",
+        "powerPlant__commissioning_date",
+        "powerPlant__decommissioning_date",
+        "powerPlant__capex",
+        "powerPlant__opex"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/SolarPlant",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "WindFarm",
+      "definition_uri": "https://w3id.org/linkml-common/WindFarm",
+      "description": "A wind farm",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "is_a": "RenewablePlant",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "located_at_place",
+        "powerPlant__plant_type",
+        "powerPlant__location",
+        "powerPlant__operator",
+        "powerPlant__capacity",
+        "powerPlant__commissioning_date",
+        "powerPlant__decommissioning_date",
+        "powerPlant__capex",
+        "powerPlant__opex"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/WindFarm",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "FossilFuel",
+      "definition_uri": "https://w3id.org/linkml-common/FossilFuel",
+      "description": "A type of fossil fuel",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "is_a": "Concept",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/FossilFuel",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ElectricalGrid",
+      "definition_uri": "https://w3id.org/linkml-common/ElectricalGrid",
+      "description": "A network of electrical transmission lines",
+      "from_schema": "https://w3id.org/linkml-common/energytechnology",
+      "is_a": "BuiltSystem",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "electricalGrid__plants"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "plants",
+          "multivalued": true,
+          "range": "PowerPlant",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/ElectricalGrid",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ExtractiveIndustryFacility",
+      "definition_uri": "https://w3id.org/linkml-common/ExtractiveIndustryFacility",
+      "description": "A facility where natural resources are extracted from the earth",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "is_a": "Facility",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "located_at_place",
+        "extractiveIndustryFacility__facility_type",
+        "extractiveIndustryFacility__operator",
+        "extractiveIndustryFacility__products",
+        "extractiveIndustryFacility__production_capacity",
+        "extractiveIndustryFacility__annual_production",
+        "extractiveIndustryFacility__reserves"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "facility_type",
+          "range": "ExtractiveIndustryFacilityType",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "operator",
+          "range": "Organization",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "products",
+          "multivalued": true,
+          "range": "ExtractiveIndustryProduct",
+          "inlined_as_list": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "production_capacity",
+          "range": "Quantity",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "annual_production",
+          "range": "Quantity",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "reserves",
+          "range": "Quantity",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/ExtractiveIndustryFacility",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "MiningFacility",
+      "definition_uri": "https://w3id.org/linkml-common/MiningFacility",
+      "description": "A facility where mineral resources are extracted from the earth",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "is_a": "ExtractiveIndustryFacility",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "located_at_place",
+        "extractiveIndustryFacility__facility_type",
+        "extractiveIndustryFacility__operator",
+        "extractiveIndustryFacility__products",
+        "extractiveIndustryFacility__production_capacity",
+        "extractiveIndustryFacility__annual_production",
+        "extractiveIndustryFacility__reserves",
+        "miningFacility__mining_method",
+        "miningFacility__depth",
+        "miningFacility__area"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "mining_method",
+          "range": "MiningMethod",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "depth",
+          "range": "Quantity",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "area",
+          "range": "Quantity",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/MiningFacility",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "WellFacility",
+      "definition_uri": "https://w3id.org/linkml-common/WellFacility",
+      "description": "A facility where fluid resources (e.g., oil, gas, water) are extracted from the earth",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "is_a": "ExtractiveIndustryFacility",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "located_at_place",
+        "extractiveIndustryFacility__facility_type",
+        "extractiveIndustryFacility__operator",
+        "extractiveIndustryFacility__products",
+        "extractiveIndustryFacility__production_capacity",
+        "extractiveIndustryFacility__annual_production",
+        "extractiveIndustryFacility__reserves",
+        "wellFacility__well_type",
+        "wellFacility__depth"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "well_type",
+          "range": "WellType",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "depth",
+          "range": "Quantity",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/WellFacility",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "QuarryFacility",
+      "definition_uri": "https://w3id.org/linkml-common/QuarryFacility",
+      "description": "A facility where stone, sand, or gravel are extracted from the earth",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "is_a": "ExtractiveIndustryFacility",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "located_at_place",
+        "extractiveIndustryFacility__facility_type",
+        "extractiveIndustryFacility__operator",
+        "extractiveIndustryFacility__products",
+        "extractiveIndustryFacility__production_capacity",
+        "extractiveIndustryFacility__annual_production",
+        "extractiveIndustryFacility__reserves"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/QuarryFacility",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ExtractiveIndustryEquipment",
+      "definition_uri": "https://w3id.org/linkml-common/ExtractiveIndustryEquipment",
+      "description": "The equipment used in extractive industry operations",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "is_a": "Equipment",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/ExtractiveIndustryEquipment",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ExtractiveIndustryProduct",
+      "definition_uri": "https://w3id.org/linkml-common/ExtractiveIndustryProduct",
+      "description": "A product extracted from an extractive industry facility",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "is_a": "Concept",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "extractiveIndustryProduct__product_type",
+        "extractiveIndustryProduct__grade",
+        "extractiveIndustryProduct__processing_method"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "product_type",
+          "range": "ExtractiveIndustryProductType",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "grade",
+          "range": "SimpleQuantity",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "processing_method",
+          "range": "EngineeringSpecification",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/ExtractiveIndustryProduct",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ExtractiveIndustryWaste",
+      "definition_uri": "https://w3id.org/linkml-common/ExtractiveIndustryWaste",
+      "description": "Waste material generated from extractive industry operations",
+      "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
+      "is_a": "Concept",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/ExtractiveIndustryWaste",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "EnvironmentalSite",
       "definition_uri": "https://w3id.org/linkml-common/EnvironmentalSite",
       "description": "A location or site that is the subject of environmental monitoring",
@@ -2278,11 +3602,12 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "address",
-        "geolocation"
+        "geolocation",
+        "bounding_coordinates"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/EnvironmentalSite",
@@ -2309,6 +3634,111 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "MoneyQuantity",
+      "definition_uri": "https://w3id.org/linkml-common/MoneyQuantity",
+      "description": "A quantity of money",
+      "from_schema": "https://w3id.org/linkml-common/financial",
+      "mappings": [
+        "fhir:MoneyQuantity"
+      ],
+      "is_a": "SimpleQuantity",
+      "slots": [
+        "type",
+        "quantity__has_quantity_kind",
+        "moneyQuantity__value",
+        "moneyQuantity__unit"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "value",
+          "description": "The value of the quantity",
+          "range": "float",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "unit",
+          "description": "The currency of the quantity",
+          "role": "currency",
+          "range": "CurrencyConcept",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "http://hl7.org/fhir/MoneyQuantity",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "CurrencyConcept",
+      "definition_uri": "https://w3id.org/linkml-common/CurrencyConcept",
+      "description": "A currency",
+      "from_schema": "https://w3id.org/linkml-common/financial",
+      "is_a": "Concept",
+      "slots": [
+        "id",
+        "name",
+        "type",
+        "classification",
+        "ontology_types",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/CurrencyConcept",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "FinancialProduct",
+      "definition_uri": "https://w3id.org/linkml-common/FinancialProduct",
+      "description": "A product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be paid interest.",
+      "from_schema": "https://w3id.org/linkml-common/financial",
+      "is_a": "Service",
+      "slots": [
+        "type"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/FinancialProduct",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "FinancialAccount",
+      "definition_uri": "https://w3id.org/linkml-common/FinancialAccount",
+      "description": "A bank account",
+      "from_schema": "https://w3id.org/linkml-common/financial",
+      "exact_mappings": [
+        "fibo:ProductsAndServices/ClientsAndAccounts/Account",
+        "schema:BankAccount"
+      ],
+      "is_a": "FinancialProduct",
+      "slots": [
+        "type",
+        "financialAccount__account_number",
+        "financialAccount__bank",
+        "financialAccount__account_holder"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "account_number",
+          "description": "The account number",
+          "range": "string",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "bank",
+          "description": "The bank that holds the account",
+          "range": "Organization",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "account_holder",
+          "description": "The person or organization that holds the account",
+          "range": "Person",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/FinancialAccount",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "FoodRecipe",
       "definition_uri": "https://w3id.org/linkml-common/FoodRecipe",
       "from_schema": "https://w3id.org/linkml-common/foods",
@@ -2317,7 +3747,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "foodRecipe__ingredients",
@@ -2363,7 +3793,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -2387,7 +3817,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -2404,7 +3834,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -2424,7 +3854,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -2445,11 +3875,12 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "address",
-        "geolocation"
+        "geolocation",
+        "bounding_coordinates"
       ],
       "slot_usage": {},
       "class_uri": "http://schema.org/Place",
@@ -2469,10 +3900,11 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "address",
+        "bounding_coordinates",
         "Landform_geolocation"
       ],
       "slot_usage": {},
@@ -2580,6 +4012,47 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "GeoBoxLocation",
+      "definition_uri": "https://w3id.org/linkml-common/GeoBoxLocation",
+      "from_schema": "https://w3id.org/linkml-common/geography",
+      "is_a": "Location",
+      "slots": [
+        "geoBoxLocation__west_bounding_coordinate",
+        "geoBoxLocation__east_bounding_coordinate",
+        "geoBoxLocation__north_bounding_coordinate",
+        "geoBoxLocation__south_bounding_coordinate"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "west_bounding_coordinate",
+          "description": "The westernmost coordinate of the location",
+          "range": "decimal",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "east_bounding_coordinate",
+          "description": "The easternmost coordinate of the location",
+          "range": "decimal",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "north_bounding_coordinate",
+          "description": "The northernmost coordinate of the location",
+          "range": "decimal",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "south_bounding_coordinate",
+          "description": "The southernmost coordinate of the location",
+          "range": "decimal",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/GeoBoxLocation",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "HealthcareSite",
       "definition_uri": "https://w3id.org/linkml-common/HealthcareSite",
       "from_schema": "https://w3id.org/linkml-common/healthcare",
@@ -2591,11 +4064,12 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "address",
-        "geolocation"
+        "geolocation",
+        "bounding_coordinates"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/HealthcareSite",
@@ -2604,6 +4078,7 @@
     {
       "name": "HealthcareEncounter",
       "definition_uri": "https://w3id.org/linkml-common/HealthcareEncounter",
+      "description": "An interaction between a patient and one or more healthcare providers",
       "from_schema": "https://w3id.org/linkml-common/healthcare",
       "exact_mappings": [
         "omopschema:VISIT_OCCURRENCE"
@@ -2622,7 +4097,7 @@
         "has_duration",
         "healthcareEncounter__patient",
         "healthcareEncounter__provider",
-        "HealthcareEncounter_subtype"
+        "HealthcareEncounter_classification"
       ],
       "slot_usage": {},
       "attributes": [
@@ -2643,13 +4118,14 @@
     {
       "name": "HealthcareOrganization",
       "definition_uri": "https://w3id.org/linkml-common/HealthcareOrganization",
+      "description": "An organization that provides healthcare services",
       "from_schema": "https://w3id.org/linkml-common/healthcare",
       "is_a": "Organization",
       "slots": [
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -2716,7 +4192,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -2771,7 +4247,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "investigation__objectives",
@@ -2803,11 +4279,19 @@
         "id",
         "name",
         "type",
-        "subtype",
         "ontology_types",
-        "description"
+        "description",
+        "investigativeProtocol__protocols_io_url",
+        "InvestigativeProtocol_classification"
       ],
       "slot_usage": {},
+      "attributes": [
+        {
+          "name": "protocols_io_url",
+          "range": "uri",
+          "@type": "SlotDefinition"
+        }
+      ],
       "class_uri": "https://w3id.org/linkml-common/InvestigativeProtocol",
       "@type": "ClassDefinition"
     },
@@ -2820,9 +4304,9 @@
         "id",
         "name",
         "type",
-        "subtype",
         "ontology_types",
-        "description"
+        "description",
+        "StudyDesign_classification"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/StudyDesign",
@@ -2837,7 +4321,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -2854,7 +4338,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -2894,7 +4378,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -2933,7 +4417,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -2957,7 +4441,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -3036,7 +4520,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -3210,7 +4694,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -3232,7 +4716,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -3253,7 +4737,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "Person_primary_email",
@@ -3278,7 +4762,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -3296,7 +4780,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description"
       ],
@@ -3313,7 +4797,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -3339,7 +4823,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "creativeWork__title",
@@ -3435,7 +4919,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -3570,7 +5054,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -3606,7 +5090,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -3630,7 +5114,7 @@
         "id",
         "name",
         "type",
-        "subtype",
+        "classification",
         "ontology_types",
         "description",
         "starts_at",
@@ -3648,9 +5132,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "linkml_common.yaml",
-  "source_file_date": "2024-02-02T15:51:52",
-  "source_file_size": 749,
-  "generation_date": "2024-02-02T17:33:01",
+  "source_file_date": "2024-04-06T14:50:38",
+  "source_file_size": 815,
+  "generation_date": "2024-04-09T19:01:34",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/linkml_common.context.jsonld",
@@ -3658,10 +5142,14 @@
     "core.context.jsonld",
     "bibliographic.context.jsonld",
     "datasets.context.jsonld",
+    "civilengineering.context.jsonld",
     "clinicalresearch.context.jsonld",
     "computational.context.jsonld",
     "engineering.context.jsonld",
+    "energytechnology.context.jsonld",
+    "extractiveindustry.context.jsonld",
     "environmental.context.jsonld",
+    "financial.context.jsonld",
     "foods.context.jsonld",
     "geography.context.jsonld",
     "healthcare.context.jsonld",

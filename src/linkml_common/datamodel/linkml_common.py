@@ -1,5 +1,5 @@
 # Auto generated from linkml_common.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-02-02T17:33:04
+# Generation date: 2024-04-09T19:01:35
 # Schema: linkml-common
 #
 # id: https://w3id.org/linkml/linkml-common
@@ -11,6 +11,7 @@ import re
 from jsonasobj2 import JsonObj, as_dict
 from typing import Optional, List, Union, Dict, ClassVar, Any
 from dataclasses import dataclass
+from datetime import date, datetime
 from linkml_runtime.linkml_model.meta import EnumDefinition, PermissibleValue, PvFormulaOptions
 
 from linkml_runtime.utils.slot import Slot
@@ -21,8 +22,8 @@ from linkml_runtime.utils.formatutils import camelcase, underscore, sfx
 from linkml_runtime.utils.enumerations import EnumDefinitionImpl
 from rdflib import Namespace, URIRef
 from linkml_runtime.utils.curienamespace import CurieNamespace
-from linkml_runtime.linkml_model.types import Date, Datetime, Decimal, Float, Integer, String, Time, Uriorcurie
-from linkml_runtime.utils.metamodelcore import Decimal, URIorCURIE, XSDDate, XSDDateTime, XSDTime
+from linkml_runtime.linkml_model.types import Date, Datetime, Decimal, Float, Integer, String, Time, Uri, Uriorcurie
+from linkml_runtime.utils.metamodelcore import Decimal, URI, URIorCURIE, XSDDate, XSDDateTime, XSDTime
 
 metamodel_version = "1.7.0"
 version = None
@@ -42,7 +43,7 @@ BIOLINK = CurieNamespace('biolink', 'https://w3id.org/biolink/')
 DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
 EXAMPLE = CurieNamespace('example', 'https://example.org/')
 FHIR = CurieNamespace('fhir', 'http://hl7.org/fhir/')
-FIBO = CurieNamespace('fibo', 'http://example.org/UNKNOWN/fibo/')
+FIBO = CurieNamespace('fibo', 'https://spec.edmcouncil.org/fibo/ontology/FBC')
 FIBO_DATESANDTIMES = CurieNamespace('fibo_DatesAndTimes', 'https://www.omg.org/spec/Commons/DatesAndTimes/')
 FIBO_QUANTITIESANDUNITS = CurieNamespace('fibo_QuantitiesAndUnits', 'https://www.omg.org/spec/Commons/QuantitiesAndUnits/')
 FIBO_COMMONS_PARTIESANDSITUATIONS = CurieNamespace('fibo_commons_PartiesAndSituations', 'https://spec.edmcouncil.org/fibo/ontology/FBC/ommons/PartiesAndSituations/')
@@ -85,6 +86,22 @@ class ProcedureId(SpecificationId):
     pass
 
 
+class BuiltEnvironmentFeatureId(NamedThingId):
+    pass
+
+
+class FacilityId(BuiltEnvironmentFeatureId):
+    pass
+
+
+class BuildingId(FacilityId):
+    pass
+
+
+class BuiltSystemId(BuiltEnvironmentFeatureId):
+    pass
+
+
 class ClinicalCohortId(NamedThingId):
     pass
 
@@ -98,6 +115,82 @@ class EngineeringSpecificationId(ProcedureId):
 
 
 class RawMaterialId(NamedThingId):
+    pass
+
+
+class EquipmentId(NamedThingId):
+    pass
+
+
+class PowerPlantId(BuildingId):
+    pass
+
+
+class PowerPlantTypeId(ConceptId):
+    pass
+
+
+class FossilFuelPlantId(PowerPlantId):
+    pass
+
+
+class NuclearPlantId(PowerPlantId):
+    pass
+
+
+class RenewablePlantId(PowerPlantId):
+    pass
+
+
+class HydroelectricPlantId(RenewablePlantId):
+    pass
+
+
+class SolarPlantId(RenewablePlantId):
+    pass
+
+
+class WindFarmId(RenewablePlantId):
+    pass
+
+
+class FossilFuelId(ConceptId):
+    pass
+
+
+class ElectricalGridId(BuiltSystemId):
+    pass
+
+
+class ExtractiveIndustryFacilityId(FacilityId):
+    pass
+
+
+class MiningFacilityId(ExtractiveIndustryFacilityId):
+    pass
+
+
+class WellFacilityId(ExtractiveIndustryFacilityId):
+    pass
+
+
+class QuarryFacilityId(ExtractiveIndustryFacilityId):
+    pass
+
+
+class ExtractiveIndustryEquipmentId(EquipmentId):
+    pass
+
+
+class ExtractiveIndustryProductId(ConceptId):
+    pass
+
+
+class ExtractiveIndustryWasteId(ConceptId):
+    pass
+
+
+class CurrencyConceptId(ConceptId):
     pass
 
 
@@ -298,7 +391,7 @@ class NamedThing(Entity):
     id: Union[str, NamedThingId] = None
     name: Optional[str] = None
     type: Optional[str] = None
-    subtype: Optional[str] = None
+    classification: Optional[Union[str, ConceptId]] = None
     ontology_types: Optional[Union[Union[str, ConceptId], List[Union[str, ConceptId]]]] = empty_list()
     description: Optional[str] = None
 
@@ -313,8 +406,8 @@ class NamedThing(Entity):
 
         self.type = str(self.class_name)
 
-        if self.subtype is not None and not isinstance(self.subtype, str):
-            self.subtype = str(self.subtype)
+        if self.classification is not None and not isinstance(self.classification, ConceptId):
+            self.classification = ConceptId(self.classification)
 
         if not isinstance(self.ontology_types, list):
             self.ontology_types = [self.ontology_types] if self.ontology_types is not None else []
@@ -597,6 +690,98 @@ class Collection(Intangible):
 Any = Any
 
 @dataclass
+class BuiltEnvironmentFeature(NamedThing):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["BuiltEnvironmentFeature"]
+    class_class_curie: ClassVar[str] = "linkml_common:BuiltEnvironmentFeature"
+    class_name: ClassVar[str] = "BuiltEnvironmentFeature"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.BuiltEnvironmentFeature
+
+    id: Union[str, BuiltEnvironmentFeatureId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, BuiltEnvironmentFeatureId):
+            self.id = BuiltEnvironmentFeatureId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class Facility(BuiltEnvironmentFeature):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Facility"]
+    class_class_curie: ClassVar[str] = "linkml_common:Facility"
+    class_name: ClassVar[str] = "Facility"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Facility
+
+    id: Union[str, FacilityId] = None
+    located_at_place: Optional[Union[str, PlaceId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, FacilityId):
+            self.id = FacilityId(self.id)
+
+        if self.located_at_place is not None and not isinstance(self.located_at_place, PlaceId):
+            self.located_at_place = PlaceId(self.located_at_place)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class Building(Facility):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Building"]
+    class_class_curie: ClassVar[str] = "linkml_common:Building"
+    class_name: ClassVar[str] = "Building"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Building
+
+    id: Union[str, BuildingId] = None
+    located_at_place: Optional[Union[str, PlaceId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, BuildingId):
+            self.id = BuildingId(self.id)
+
+        if self.located_at_place is not None and not isinstance(self.located_at_place, PlaceId):
+            self.located_at_place = PlaceId(self.located_at_place)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class BuiltSystem(BuiltEnvironmentFeature):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["BuiltSystem"]
+    class_class_curie: ClassVar[str] = "linkml_common:BuiltSystem"
+    class_name: ClassVar[str] = "BuiltSystem"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.BuiltSystem
+
+    id: Union[str, BuiltSystemId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, BuiltSystemId):
+            self.id = BuiltSystemId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
 class ClinicalCohort(NamedThing):
     """
     A group of patients who share a common set of characteristics
@@ -705,6 +890,535 @@ class RawMaterial(NamedThing):
         self.type = str(self.class_name)
 
 
+@dataclass
+class Equipment(NamedThing):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Equipment"]
+    class_class_curie: ClassVar[str] = "linkml_common:Equipment"
+    class_name: ClassVar[str] = "Equipment"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Equipment
+
+    id: Union[str, EquipmentId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, EquipmentId):
+            self.id = EquipmentId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class PowerPlant(Building):
+    """
+    A facility for generating electrical power
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["PowerPlant"]
+    class_class_curie: ClassVar[str] = "linkml_common:PowerPlant"
+    class_name: ClassVar[str] = "PowerPlant"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.PowerPlant
+
+    id: Union[str, PowerPlantId] = None
+    plant_type: Optional[Union[str, PowerPlantTypeId]] = None
+    location: Optional[Union[str, PlaceId]] = None
+    operator: Optional[Union[str, OrganizationId]] = None
+    capacity: Optional[Union[dict, "SimpleQuantity"]] = None
+    commissioning_date: Optional[Union[str, XSDDate]] = None
+    decommissioning_date: Optional[Union[str, XSDDate]] = None
+    capex: Optional[Union[dict, "MoneyQuantity"]] = None
+    opex: Optional[Union[dict, "MoneyQuantity"]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, PowerPlantId):
+            self.id = PowerPlantId(self.id)
+
+        if self.plant_type is not None and not isinstance(self.plant_type, PowerPlantTypeId):
+            self.plant_type = PowerPlantTypeId(self.plant_type)
+
+        if self.location is not None and not isinstance(self.location, PlaceId):
+            self.location = PlaceId(self.location)
+
+        if self.operator is not None and not isinstance(self.operator, OrganizationId):
+            self.operator = OrganizationId(self.operator)
+
+        if self.capacity is not None and not isinstance(self.capacity, SimpleQuantity):
+            self.capacity = SimpleQuantity(**as_dict(self.capacity))
+
+        if self.commissioning_date is not None and not isinstance(self.commissioning_date, XSDDate):
+            self.commissioning_date = XSDDate(self.commissioning_date)
+
+        if self.decommissioning_date is not None and not isinstance(self.decommissioning_date, XSDDate):
+            self.decommissioning_date = XSDDate(self.decommissioning_date)
+
+        if self.capex is not None and not isinstance(self.capex, MoneyQuantity):
+            self.capex = MoneyQuantity(**as_dict(self.capex))
+
+        if self.opex is not None and not isinstance(self.opex, MoneyQuantity):
+            self.opex = MoneyQuantity(**as_dict(self.opex))
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class PowerPlantType(Concept):
+    """
+    The type of power plant
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["PowerPlantType"]
+    class_class_curie: ClassVar[str] = "linkml_common:PowerPlantType"
+    class_name: ClassVar[str] = "PowerPlantType"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.PowerPlantType
+
+    id: Union[str, PowerPlantTypeId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, PowerPlantTypeId):
+            self.id = PowerPlantTypeId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class FossilFuelPlant(PowerPlant):
+    """
+    A power plant that uses fossil fuels
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["FossilFuelPlant"]
+    class_class_curie: ClassVar[str] = "linkml_common:FossilFuelPlant"
+    class_name: ClassVar[str] = "FossilFuelPlant"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.FossilFuelPlant
+
+    id: Union[str, FossilFuelPlantId] = None
+    fuel: Optional[Union[str, FossilFuelId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, FossilFuelPlantId):
+            self.id = FossilFuelPlantId(self.id)
+
+        if self.fuel is not None and not isinstance(self.fuel, FossilFuelId):
+            self.fuel = FossilFuelId(self.fuel)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class NuclearPlant(PowerPlant):
+    """
+    A nuclear power plant
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["NuclearPlant"]
+    class_class_curie: ClassVar[str] = "linkml_common:NuclearPlant"
+    class_name: ClassVar[str] = "NuclearPlant"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.NuclearPlant
+
+    id: Union[str, NuclearPlantId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, NuclearPlantId):
+            self.id = NuclearPlantId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class RenewablePlant(PowerPlant):
+    """
+    A power plant that uses renewable energy sources
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["RenewablePlant"]
+    class_class_curie: ClassVar[str] = "linkml_common:RenewablePlant"
+    class_name: ClassVar[str] = "RenewablePlant"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.RenewablePlant
+
+    id: Union[str, RenewablePlantId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, RenewablePlantId):
+            self.id = RenewablePlantId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class HydroelectricPlant(RenewablePlant):
+    """
+    A hydroelectric power plant
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["HydroelectricPlant"]
+    class_class_curie: ClassVar[str] = "linkml_common:HydroelectricPlant"
+    class_name: ClassVar[str] = "HydroelectricPlant"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.HydroelectricPlant
+
+    id: Union[str, HydroelectricPlantId] = None
+    dam: Optional[Union[str, LandformId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, HydroelectricPlantId):
+            self.id = HydroelectricPlantId(self.id)
+
+        if self.dam is not None and not isinstance(self.dam, LandformId):
+            self.dam = LandformId(self.dam)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class SolarPlant(RenewablePlant):
+    """
+    A solar power plant
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["SolarPlant"]
+    class_class_curie: ClassVar[str] = "linkml_common:SolarPlant"
+    class_name: ClassVar[str] = "SolarPlant"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.SolarPlant
+
+    id: Union[str, SolarPlantId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, SolarPlantId):
+            self.id = SolarPlantId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class WindFarm(RenewablePlant):
+    """
+    A wind farm
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["WindFarm"]
+    class_class_curie: ClassVar[str] = "linkml_common:WindFarm"
+    class_name: ClassVar[str] = "WindFarm"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.WindFarm
+
+    id: Union[str, WindFarmId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, WindFarmId):
+            self.id = WindFarmId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class FossilFuel(Concept):
+    """
+    A type of fossil fuel
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["FossilFuel"]
+    class_class_curie: ClassVar[str] = "linkml_common:FossilFuel"
+    class_name: ClassVar[str] = "FossilFuel"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.FossilFuel
+
+    id: Union[str, FossilFuelId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, FossilFuelId):
+            self.id = FossilFuelId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class ElectricalGrid(BuiltSystem):
+    """
+    A network of electrical transmission lines
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["ElectricalGrid"]
+    class_class_curie: ClassVar[str] = "linkml_common:ElectricalGrid"
+    class_name: ClassVar[str] = "ElectricalGrid"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.ElectricalGrid
+
+    id: Union[str, ElectricalGridId] = None
+    plants: Optional[Union[Union[str, PowerPlantId], List[Union[str, PowerPlantId]]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ElectricalGridId):
+            self.id = ElectricalGridId(self.id)
+
+        if not isinstance(self.plants, list):
+            self.plants = [self.plants] if self.plants is not None else []
+        self.plants = [v if isinstance(v, PowerPlantId) else PowerPlantId(v) for v in self.plants]
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class ExtractiveIndustryFacility(Facility):
+    """
+    A facility where natural resources are extracted from the earth
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["ExtractiveIndustryFacility"]
+    class_class_curie: ClassVar[str] = "linkml_common:ExtractiveIndustryFacility"
+    class_name: ClassVar[str] = "ExtractiveIndustryFacility"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.ExtractiveIndustryFacility
+
+    id: Union[str, ExtractiveIndustryFacilityId] = None
+    facility_type: Optional[Union[str, "ExtractiveIndustryFacilityType"]] = None
+    operator: Optional[Union[str, OrganizationId]] = None
+    products: Optional[Union[Dict[Union[str, ExtractiveIndustryProductId], Union[dict, "ExtractiveIndustryProduct"]], List[Union[dict, "ExtractiveIndustryProduct"]]]] = empty_dict()
+    production_capacity: Optional[Union[dict, "Quantity"]] = None
+    annual_production: Optional[Union[dict, "Quantity"]] = None
+    reserves: Optional[Union[dict, "Quantity"]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ExtractiveIndustryFacilityId):
+            self.id = ExtractiveIndustryFacilityId(self.id)
+
+        if self.facility_type is not None and not isinstance(self.facility_type, ExtractiveIndustryFacilityType):
+            self.facility_type = ExtractiveIndustryFacilityType(self.facility_type)
+
+        if self.operator is not None and not isinstance(self.operator, OrganizationId):
+            self.operator = OrganizationId(self.operator)
+
+        self._normalize_inlined_as_list(slot_name="products", slot_type=ExtractiveIndustryProduct, key_name="id", keyed=True)
+
+        if self.production_capacity is not None and not isinstance(self.production_capacity, Quantity):
+            self.production_capacity = Quantity(**as_dict(self.production_capacity))
+
+        if self.annual_production is not None and not isinstance(self.annual_production, Quantity):
+            self.annual_production = Quantity(**as_dict(self.annual_production))
+
+        if self.reserves is not None and not isinstance(self.reserves, Quantity):
+            self.reserves = Quantity(**as_dict(self.reserves))
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class MiningFacility(ExtractiveIndustryFacility):
+    """
+    A facility where mineral resources are extracted from the earth
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["MiningFacility"]
+    class_class_curie: ClassVar[str] = "linkml_common:MiningFacility"
+    class_name: ClassVar[str] = "MiningFacility"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.MiningFacility
+
+    id: Union[str, MiningFacilityId] = None
+    mining_method: Optional[Union[str, "MiningMethod"]] = None
+    depth: Optional[Union[dict, "Quantity"]] = None
+    area: Optional[Union[dict, "Quantity"]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, MiningFacilityId):
+            self.id = MiningFacilityId(self.id)
+
+        if self.mining_method is not None and not isinstance(self.mining_method, MiningMethod):
+            self.mining_method = MiningMethod(self.mining_method)
+
+        if self.depth is not None and not isinstance(self.depth, Quantity):
+            self.depth = Quantity(**as_dict(self.depth))
+
+        if self.area is not None and not isinstance(self.area, Quantity):
+            self.area = Quantity(**as_dict(self.area))
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class WellFacility(ExtractiveIndustryFacility):
+    """
+    A facility where fluid resources (e.g., oil, gas, water) are extracted from the earth
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["WellFacility"]
+    class_class_curie: ClassVar[str] = "linkml_common:WellFacility"
+    class_name: ClassVar[str] = "WellFacility"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.WellFacility
+
+    id: Union[str, WellFacilityId] = None
+    well_type: Optional[Union[str, "WellType"]] = None
+    depth: Optional[Union[dict, "Quantity"]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, WellFacilityId):
+            self.id = WellFacilityId(self.id)
+
+        if self.well_type is not None and not isinstance(self.well_type, WellType):
+            self.well_type = WellType(self.well_type)
+
+        if self.depth is not None and not isinstance(self.depth, Quantity):
+            self.depth = Quantity(**as_dict(self.depth))
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class QuarryFacility(ExtractiveIndustryFacility):
+    """
+    A facility where stone, sand, or gravel are extracted from the earth
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["QuarryFacility"]
+    class_class_curie: ClassVar[str] = "linkml_common:QuarryFacility"
+    class_name: ClassVar[str] = "QuarryFacility"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.QuarryFacility
+
+    id: Union[str, QuarryFacilityId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, QuarryFacilityId):
+            self.id = QuarryFacilityId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class ExtractiveIndustryEquipment(Equipment):
+    """
+    The equipment used in extractive industry operations
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["ExtractiveIndustryEquipment"]
+    class_class_curie: ClassVar[str] = "linkml_common:ExtractiveIndustryEquipment"
+    class_name: ClassVar[str] = "ExtractiveIndustryEquipment"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.ExtractiveIndustryEquipment
+
+    id: Union[str, ExtractiveIndustryEquipmentId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ExtractiveIndustryEquipmentId):
+            self.id = ExtractiveIndustryEquipmentId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class ExtractiveIndustryProduct(Concept):
+    """
+    A product extracted from an extractive industry facility
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["ExtractiveIndustryProduct"]
+    class_class_curie: ClassVar[str] = "linkml_common:ExtractiveIndustryProduct"
+    class_name: ClassVar[str] = "ExtractiveIndustryProduct"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.ExtractiveIndustryProduct
+
+    id: Union[str, ExtractiveIndustryProductId] = None
+    product_type: Optional[Union[str, "ExtractiveIndustryProductType"]] = None
+    grade: Optional[Union[dict, "SimpleQuantity"]] = None
+    processing_method: Optional[Union[str, EngineeringSpecificationId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ExtractiveIndustryProductId):
+            self.id = ExtractiveIndustryProductId(self.id)
+
+        if self.product_type is not None and not isinstance(self.product_type, ExtractiveIndustryProductType):
+            self.product_type = ExtractiveIndustryProductType(self.product_type)
+
+        if self.grade is not None and not isinstance(self.grade, SimpleQuantity):
+            self.grade = SimpleQuantity(**as_dict(self.grade))
+
+        if self.processing_method is not None and not isinstance(self.processing_method, EngineeringSpecificationId):
+            self.processing_method = EngineeringSpecificationId(self.processing_method)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class ExtractiveIndustryWaste(Concept):
+    """
+    Waste material generated from extractive industry operations
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["ExtractiveIndustryWaste"]
+    class_class_curie: ClassVar[str] = "linkml_common:ExtractiveIndustryWaste"
+    class_name: ClassVar[str] = "ExtractiveIndustryWaste"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.ExtractiveIndustryWaste
+
+    id: Union[str, ExtractiveIndustryWasteId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ExtractiveIndustryWasteId):
+            self.id = ExtractiveIndustryWasteId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
 class EnvironmentalProcess(YAMLRoot):
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -721,6 +1435,30 @@ class EnvironmentalMonitoring(EnvironmentalProcess):
     class_class_curie: ClassVar[str] = "linkml_common:EnvironmentalMonitoring"
     class_name: ClassVar[str] = "EnvironmentalMonitoring"
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.EnvironmentalMonitoring
+
+
+@dataclass
+class CurrencyConcept(Concept):
+    """
+    A currency
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["CurrencyConcept"]
+    class_class_curie: ClassVar[str] = "linkml_common:CurrencyConcept"
+    class_name: ClassVar[str] = "CurrencyConcept"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.CurrencyConcept
+
+    id: Union[str, CurrencyConceptId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, CurrencyConceptId):
+            self.id = CurrencyConceptId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
 
 
 @dataclass
@@ -832,6 +1570,7 @@ class Place(NamedThing):
     id: Union[str, PlaceId] = None
     address: Optional[Union[dict, "PostalAddress"]] = None
     geolocation: Optional[Union[dict, "GeoPointLocation"]] = None
+    bounding_coordinates: Optional[Union[dict, "GeoBoxLocation"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -844,6 +1583,9 @@ class Place(NamedThing):
 
         if self.geolocation is not None and not isinstance(self.geolocation, GeoPointLocation):
             self.geolocation = GeoPointLocation(**as_dict(self.geolocation))
+
+        if self.bounding_coordinates is not None and not isinstance(self.bounding_coordinates, GeoBoxLocation):
+            self.bounding_coordinates = GeoBoxLocation(**as_dict(self.bounding_coordinates))
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -886,7 +1628,7 @@ class Landform(Place):
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Landform
 
     id: Union[str, LandformId] = None
-    geolocation: Union[dict, "GeoPointLocation"] = None
+    geolocation: Optional[Union[dict, "GeoPointLocation"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -894,9 +1636,7 @@ class Landform(Place):
         if not isinstance(self.id, LandformId):
             self.id = LandformId(self.id)
 
-        if self._is_empty(self.geolocation):
-            self.MissingRequiredField("geolocation")
-        if not isinstance(self.geolocation, GeoPointLocation):
+        if self.geolocation is not None and not isinstance(self.geolocation, GeoPointLocation):
             self.geolocation = GeoPointLocation(**as_dict(self.geolocation))
 
         super().__post_init__(**kwargs)
@@ -967,6 +1707,36 @@ class GeoPointLocation(PointLocation):
 
         if self.altitude is not None and not isinstance(self.altitude, Decimal):
             self.altitude = Decimal(self.altitude)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class GeoBoxLocation(Location):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["GeoBoxLocation"]
+    class_class_curie: ClassVar[str] = "linkml_common:GeoBoxLocation"
+    class_name: ClassVar[str] = "GeoBoxLocation"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.GeoBoxLocation
+
+    west_bounding_coordinate: Optional[Decimal] = None
+    east_bounding_coordinate: Optional[Decimal] = None
+    north_bounding_coordinate: Optional[Decimal] = None
+    south_bounding_coordinate: Optional[Decimal] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.west_bounding_coordinate is not None and not isinstance(self.west_bounding_coordinate, Decimal):
+            self.west_bounding_coordinate = Decimal(self.west_bounding_coordinate)
+
+        if self.east_bounding_coordinate is not None and not isinstance(self.east_bounding_coordinate, Decimal):
+            self.east_bounding_coordinate = Decimal(self.east_bounding_coordinate)
+
+        if self.north_bounding_coordinate is not None and not isinstance(self.north_bounding_coordinate, Decimal):
+            self.north_bounding_coordinate = Decimal(self.north_bounding_coordinate)
+
+        if self.south_bounding_coordinate is not None and not isinstance(self.south_bounding_coordinate, Decimal):
+            self.south_bounding_coordinate = Decimal(self.south_bounding_coordinate)
 
         super().__post_init__(**kwargs)
 
@@ -1089,12 +1859,20 @@ class InvestigativeProtocol(Procedure):
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.InvestigativeProtocol
 
     id: Union[str, InvestigativeProtocolId] = None
+    protocols_io_url: Optional[Union[str, URI]] = None
+    classification: Optional[Union[str, ConceptId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, InvestigativeProtocolId):
             self.id = InvestigativeProtocolId(self.id)
+
+        if self.protocols_io_url is not None and not isinstance(self.protocols_io_url, URI):
+            self.protocols_io_url = URI(self.protocols_io_url)
+
+        if self.classification is not None and not isinstance(self.classification, ConceptId):
+            self.classification = ConceptId(self.classification)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -1110,12 +1888,16 @@ class StudyDesign(Procedure):
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.StudyDesign
 
     id: Union[str, StudyDesignId] = None
+    classification: Optional[Union[str, ConceptId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, StudyDesignId):
             self.id = StudyDesignId(self.id)
+
+        if self.classification is not None and not isinstance(self.classification, ConceptId):
+            self.classification = ConceptId(self.classification)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -1261,6 +2043,32 @@ class SimpleQuantity(Quantity):
 
         if self.unit is not None and not isinstance(self.unit, UnitConceptId):
             self.unit = UnitConceptId(self.unit)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class MoneyQuantity(SimpleQuantity):
+    """
+    A quantity of money
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = FHIR["MoneyQuantity"]
+    class_class_curie: ClassVar[str] = "fhir:MoneyQuantity"
+    class_name: ClassVar[str] = "MoneyQuantity"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.MoneyQuantity
+
+    value: Optional[float] = None
+    unit: Optional[Union[str, CurrencyConceptId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.value is not None and not isinstance(self.value, float):
+            self.value = float(self.value)
+
+        if self.unit is not None and not isinstance(self.unit, CurrencyConceptId):
+            self.unit = CurrencyConceptId(self.unit)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -1456,6 +2264,9 @@ class Organization(Agent):
 
 @dataclass
 class HealthcareOrganization(Organization):
+    """
+    An organization that provides healthcare services
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = LINKML_COMMON["HealthcareOrganization"]
@@ -1620,6 +2431,55 @@ class Service(Intangible):
         self.type = str(self.class_name)
 
 
+class FinancialProduct(Service):
+    """
+    A product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be
+    paid interest.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["FinancialProduct"]
+    class_class_curie: ClassVar[str] = "linkml_common:FinancialProduct"
+    class_name: ClassVar[str] = "FinancialProduct"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.FinancialProduct
+
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class FinancialAccount(FinancialProduct):
+    """
+    A bank account
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["FinancialAccount"]
+    class_class_curie: ClassVar[str] = "linkml_common:FinancialAccount"
+    class_name: ClassVar[str] = "FinancialAccount"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.FinancialAccount
+
+    account_number: Optional[str] = None
+    bank: Optional[Union[str, OrganizationId]] = None
+    account_holder: Optional[Union[str, PersonId]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.account_number is not None and not isinstance(self.account_number, str):
+            self.account_number = str(self.account_number)
+
+        if self.bank is not None and not isinstance(self.bank, OrganizationId):
+            self.bank = OrganizationId(self.bank)
+
+        if self.account_holder is not None and not isinstance(self.account_holder, PersonId):
+            self.account_holder = PersonId(self.account_holder)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
 @dataclass
 class Event(NamedThing):
     """
@@ -1677,7 +2537,7 @@ class ClinicalCohortEnrollment(Event):
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.ClinicalCohortEnrollment
 
     id: Union[str, ClinicalCohortEnrollmentId] = None
-    patient: Optional[Union[dict, "Patient"]] = None
+    patient: Optional[Union[dict, Patient]] = None
     cohort: Optional[Union[str, ClinicalCohortId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -1727,6 +2587,9 @@ class EngineeringProcess(Event):
 
 @dataclass
 class HealthcareEncounter(Event):
+    """
+    An interaction between a patient and one or more healthcare providers
+    """
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = LINKML_COMMON["HealthcareEncounter"]
@@ -1735,9 +2598,9 @@ class HealthcareEncounter(Event):
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.HealthcareEncounter
 
     id: Union[str, HealthcareEncounterId] = None
-    patient: Optional[Union[dict, "Patient"]] = None
-    provider: Optional[Union[dict, "HealthcareProvider"]] = None
-    subtype: Optional[Union[str, "HealthcareEncounterClassification"]] = None
+    patient: Optional[Union[dict, Patient]] = None
+    provider: Optional[Union[dict, HealthcareProvider]] = None
+    classification: Optional[Union[str, "HealthcareEncounterClassification"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -1751,8 +2614,8 @@ class HealthcareEncounter(Event):
         if self.provider is not None and not isinstance(self.provider, HealthcareProvider):
             self.provider = HealthcareProvider(**as_dict(self.provider))
 
-        if self.subtype is not None and not isinstance(self.subtype, HealthcareEncounterClassification):
-            self.subtype = HealthcareEncounterClassification(self.subtype)
+        if self.classification is not None and not isinstance(self.classification, HealthcareEncounterClassification):
+            self.classification = HealthcareEncounterClassification(self.classification)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -1768,7 +2631,7 @@ class HealthcareConditionOccurrence(Event):
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.HealthcareConditionOccurrence
 
     id: Union[str, HealthcareConditionOccurrenceId] = None
-    patient: Optional[Union[dict, "Patient"]] = None
+    patient: Optional[Union[dict, Patient]] = None
     observed_during: Optional[Union[str, HealthcareEncounterId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -2160,6 +3023,107 @@ class SampleProcessing(MaterialProcessing):
 
 
 # Enumerations
+class FossilFuelType(EnumDefinitionImpl):
+
+    COAL = PermissibleValue(
+        text="COAL",
+        description="Coal")
+    NATURAL_GAS = PermissibleValue(
+        text="NATURAL_GAS",
+        description="Natural gas")
+    PETROLEUM = PermissibleValue(
+        text="PETROLEUM",
+        description="Petroleum")
+
+    _defn = EnumDefinition(
+        name="FossilFuelType",
+    )
+
+class ExtractiveIndustryFacilityType(EnumDefinitionImpl):
+
+    MINING_FACILITY = PermissibleValue(
+        text="MINING_FACILITY",
+        description="A facility where mineral resources are extracted")
+    WELL_FACILITY = PermissibleValue(
+        text="WELL_FACILITY",
+        description="A facility where fluid resources are extracted")
+    QUARRY_FACILITY = PermissibleValue(
+        text="QUARRY_FACILITY",
+        description="A facility where stone, sand, or gravel are extracted")
+
+    _defn = EnumDefinition(
+        name="ExtractiveIndustryFacilityType",
+    )
+
+class ExtractiveIndustryProductType(EnumDefinitionImpl):
+
+    MINERAL = PermissibleValue(
+        text="MINERAL",
+        description="A solid inorganic substance")
+    METAL = PermissibleValue(
+        text="METAL",
+        description="A solid metallic substance")
+    COAL = PermissibleValue(
+        text="COAL",
+        description="A combustible black or brownish-black sedimentary rock")
+    OIL = PermissibleValue(
+        text="OIL",
+        description="A liquid petroleum resource")
+    GAS = PermissibleValue(
+        text="GAS",
+        description="A gaseous petroleum resource")
+    STONE = PermissibleValue(
+        text="STONE",
+        description="A solid aggregate of minerals")
+    SAND = PermissibleValue(
+        text="SAND",
+        description="A granular material composed of finely divided rock and mineral particles")
+    GRAVEL = PermissibleValue(
+        text="GRAVEL",
+        description="A loose aggregation of rock fragments")
+
+    _defn = EnumDefinition(
+        name="ExtractiveIndustryProductType",
+    )
+
+class MiningMethod(EnumDefinitionImpl):
+
+    UNDERGROUND = PermissibleValue(
+        text="UNDERGROUND",
+        description="Extraction occurs beneath the earth's surface")
+    OPEN_PIT = PermissibleValue(
+        text="OPEN_PIT",
+        description="Extraction occurs on the earth's surface")
+    PLACER = PermissibleValue(
+        text="PLACER",
+        description="Extraction of valuable minerals from alluvial deposits")
+    IN_SITU = PermissibleValue(
+        text="IN_SITU",
+        description="Extraction without removing the ore from its original location")
+
+    _defn = EnumDefinition(
+        name="MiningMethod",
+    )
+
+class WellType(EnumDefinitionImpl):
+
+    OIL = PermissibleValue(
+        text="OIL",
+        description="A well that primarily extracts crude oil")
+    GAS = PermissibleValue(
+        text="GAS",
+        description="A well that primarily extracts natural gas")
+    WATER = PermissibleValue(
+        text="WATER",
+        description="A well that extracts water for various purposes")
+    INJECTION = PermissibleValue(
+        text="INJECTION",
+        description="A well used to inject fluids into underground formations")
+
+    _defn = EnumDefinition(
+        name="WellType",
+    )
+
 class HealthcareEncounterClassification(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
@@ -2232,6 +3196,18 @@ class StudyDesignEnum(EnumDefinitionImpl):
         name="StudyDesignEnum",
     )
 
+class InvestigativeProtocolEnum(EnumDefinitionImpl):
+
+    _defn = EnumDefinition(
+        name="InvestigativeProtocolEnum",
+    )
+
+class SampleProcessingEnum(EnumDefinitionImpl):
+
+    _defn = EnumDefinition(
+        name="SampleProcessingEnum",
+    )
+
 class HumanLanguageCodeEnum(EnumDefinitionImpl):
     """
     An enumeration of languages
@@ -2285,8 +3261,8 @@ slots.description = Slot(uri=SCHEMA.description, name="description", curie=SCHEM
 slots.type = Slot(uri=LINKML_COMMON.type, name="type", curie=LINKML_COMMON.curie('type'),
                    model_uri=LINKML_COMMON.type, domain=None, range=Optional[str])
 
-slots.subtype = Slot(uri=LINKML_COMMON.subtype, name="subtype", curie=LINKML_COMMON.curie('subtype'),
-                   model_uri=LINKML_COMMON.subtype, domain=None, range=Optional[str])
+slots.classification = Slot(uri=LINKML_COMMON.classification, name="classification", curie=LINKML_COMMON.curie('classification'),
+                   model_uri=LINKML_COMMON.classification, domain=None, range=Optional[Union[str, ConceptId]])
 
 slots.ontology_types = Slot(uri=LINKML_COMMON.ontology_types, name="ontology_types", curie=LINKML_COMMON.curie('ontology_types'),
                    model_uri=LINKML_COMMON.ontology_types, domain=None, range=Optional[Union[Union[str, ConceptId], List[Union[str, ConceptId]]]])
@@ -2300,11 +3276,17 @@ slots.subject = Slot(uri=RDF.subject, name="subject", curie=RDF.curie('subject')
 slots.object = Slot(uri=RDF.object, name="object", curie=RDF.curie('object'),
                    model_uri=LINKML_COMMON.object, domain=None, range=Optional[Union[dict, Any]])
 
+slots.located_at_place = Slot(uri=LINKML_COMMON.located_at_place, name="located_at_place", curie=LINKML_COMMON.curie('located_at_place'),
+                   model_uri=LINKML_COMMON.located_at_place, domain=None, range=Optional[Union[str, PlaceId]])
+
 slots.address = Slot(uri=LINKML_COMMON.address, name="address", curie=LINKML_COMMON.curie('address'),
                    model_uri=LINKML_COMMON.address, domain=None, range=Optional[Union[dict, PostalAddress]])
 
 slots.geolocation = Slot(uri=LINKML_COMMON.geolocation, name="geolocation", curie=LINKML_COMMON.curie('geolocation'),
                    model_uri=LINKML_COMMON.geolocation, domain=None, range=Optional[Union[dict, GeoPointLocation]])
+
+slots.bounding_coordinates = Slot(uri=LINKML_COMMON.bounding_coordinates, name="bounding_coordinates", curie=LINKML_COMMON.curie('bounding_coordinates'),
+                   model_uri=LINKML_COMMON.bounding_coordinates, domain=None, range=Optional[Union[dict, GeoBoxLocation]])
 
 slots.primary_email = Slot(uri=SCHEMA.email, name="primary_email", curie=SCHEMA.curie('email'),
                    model_uri=LINKML_COMMON.primary_email, domain=None, range=Optional[str])
@@ -2381,6 +3363,96 @@ slots.engineeringProcess__follows_procedure = Slot(uri=LINKML_COMMON.follows_pro
 slots.engineeringProcess__part_of = Slot(uri=LINKML_COMMON.part_of, name="engineeringProcess__part_of", curie=LINKML_COMMON.curie('part_of'),
                    model_uri=LINKML_COMMON.engineeringProcess__part_of, domain=None, range=Optional[Union[str, EngineeringProcessId]])
 
+slots.powerPlant__plant_type = Slot(uri=LINKML_COMMON.plant_type, name="powerPlant__plant_type", curie=LINKML_COMMON.curie('plant_type'),
+                   model_uri=LINKML_COMMON.powerPlant__plant_type, domain=None, range=Optional[Union[str, PowerPlantTypeId]])
+
+slots.powerPlant__location = Slot(uri=LINKML_COMMON.location, name="powerPlant__location", curie=LINKML_COMMON.curie('location'),
+                   model_uri=LINKML_COMMON.powerPlant__location, domain=None, range=Optional[Union[str, PlaceId]])
+
+slots.powerPlant__operator = Slot(uri=LINKML_COMMON.operator, name="powerPlant__operator", curie=LINKML_COMMON.curie('operator'),
+                   model_uri=LINKML_COMMON.powerPlant__operator, domain=None, range=Optional[Union[str, OrganizationId]])
+
+slots.powerPlant__capacity = Slot(uri=LINKML_COMMON.capacity, name="powerPlant__capacity", curie=LINKML_COMMON.curie('capacity'),
+                   model_uri=LINKML_COMMON.powerPlant__capacity, domain=None, range=Optional[Union[dict, SimpleQuantity]])
+
+slots.powerPlant__commissioning_date = Slot(uri=LINKML_COMMON.commissioning_date, name="powerPlant__commissioning_date", curie=LINKML_COMMON.curie('commissioning_date'),
+                   model_uri=LINKML_COMMON.powerPlant__commissioning_date, domain=None, range=Optional[Union[str, XSDDate]])
+
+slots.powerPlant__decommissioning_date = Slot(uri=LINKML_COMMON.decommissioning_date, name="powerPlant__decommissioning_date", curie=LINKML_COMMON.curie('decommissioning_date'),
+                   model_uri=LINKML_COMMON.powerPlant__decommissioning_date, domain=None, range=Optional[Union[str, XSDDate]])
+
+slots.powerPlant__capex = Slot(uri=LINKML_COMMON.capex, name="powerPlant__capex", curie=LINKML_COMMON.curie('capex'),
+                   model_uri=LINKML_COMMON.powerPlant__capex, domain=None, range=Optional[Union[dict, MoneyQuantity]])
+
+slots.powerPlant__opex = Slot(uri=LINKML_COMMON.opex, name="powerPlant__opex", curie=LINKML_COMMON.curie('opex'),
+                   model_uri=LINKML_COMMON.powerPlant__opex, domain=None, range=Optional[Union[dict, MoneyQuantity]])
+
+slots.fossilFuelPlant__fuel = Slot(uri=LINKML_COMMON.fuel, name="fossilFuelPlant__fuel", curie=LINKML_COMMON.curie('fuel'),
+                   model_uri=LINKML_COMMON.fossilFuelPlant__fuel, domain=None, range=Optional[Union[str, FossilFuelId]])
+
+slots.hydroelectricPlant__dam = Slot(uri=LINKML_COMMON.dam, name="hydroelectricPlant__dam", curie=LINKML_COMMON.curie('dam'),
+                   model_uri=LINKML_COMMON.hydroelectricPlant__dam, domain=None, range=Optional[Union[str, LandformId]])
+
+slots.electricalGrid__plants = Slot(uri=LINKML_COMMON.plants, name="electricalGrid__plants", curie=LINKML_COMMON.curie('plants'),
+                   model_uri=LINKML_COMMON.electricalGrid__plants, domain=None, range=Optional[Union[Union[str, PowerPlantId], List[Union[str, PowerPlantId]]]])
+
+slots.extractiveIndustryFacility__facility_type = Slot(uri=LINKML_COMMON.facility_type, name="extractiveIndustryFacility__facility_type", curie=LINKML_COMMON.curie('facility_type'),
+                   model_uri=LINKML_COMMON.extractiveIndustryFacility__facility_type, domain=None, range=Optional[Union[str, "ExtractiveIndustryFacilityType"]])
+
+slots.extractiveIndustryFacility__operator = Slot(uri=LINKML_COMMON.operator, name="extractiveIndustryFacility__operator", curie=LINKML_COMMON.curie('operator'),
+                   model_uri=LINKML_COMMON.extractiveIndustryFacility__operator, domain=None, range=Optional[Union[str, OrganizationId]])
+
+slots.extractiveIndustryFacility__products = Slot(uri=LINKML_COMMON.products, name="extractiveIndustryFacility__products", curie=LINKML_COMMON.curie('products'),
+                   model_uri=LINKML_COMMON.extractiveIndustryFacility__products, domain=None, range=Optional[Union[Dict[Union[str, ExtractiveIndustryProductId], Union[dict, ExtractiveIndustryProduct]], List[Union[dict, ExtractiveIndustryProduct]]]])
+
+slots.extractiveIndustryFacility__production_capacity = Slot(uri=LINKML_COMMON.production_capacity, name="extractiveIndustryFacility__production_capacity", curie=LINKML_COMMON.curie('production_capacity'),
+                   model_uri=LINKML_COMMON.extractiveIndustryFacility__production_capacity, domain=None, range=Optional[Union[dict, Quantity]])
+
+slots.extractiveIndustryFacility__annual_production = Slot(uri=LINKML_COMMON.annual_production, name="extractiveIndustryFacility__annual_production", curie=LINKML_COMMON.curie('annual_production'),
+                   model_uri=LINKML_COMMON.extractiveIndustryFacility__annual_production, domain=None, range=Optional[Union[dict, Quantity]])
+
+slots.extractiveIndustryFacility__reserves = Slot(uri=LINKML_COMMON.reserves, name="extractiveIndustryFacility__reserves", curie=LINKML_COMMON.curie('reserves'),
+                   model_uri=LINKML_COMMON.extractiveIndustryFacility__reserves, domain=None, range=Optional[Union[dict, Quantity]])
+
+slots.miningFacility__mining_method = Slot(uri=LINKML_COMMON.mining_method, name="miningFacility__mining_method", curie=LINKML_COMMON.curie('mining_method'),
+                   model_uri=LINKML_COMMON.miningFacility__mining_method, domain=None, range=Optional[Union[str, "MiningMethod"]])
+
+slots.miningFacility__depth = Slot(uri=LINKML_COMMON.depth, name="miningFacility__depth", curie=LINKML_COMMON.curie('depth'),
+                   model_uri=LINKML_COMMON.miningFacility__depth, domain=None, range=Optional[Union[dict, Quantity]])
+
+slots.miningFacility__area = Slot(uri=LINKML_COMMON.area, name="miningFacility__area", curie=LINKML_COMMON.curie('area'),
+                   model_uri=LINKML_COMMON.miningFacility__area, domain=None, range=Optional[Union[dict, Quantity]])
+
+slots.wellFacility__well_type = Slot(uri=LINKML_COMMON.well_type, name="wellFacility__well_type", curie=LINKML_COMMON.curie('well_type'),
+                   model_uri=LINKML_COMMON.wellFacility__well_type, domain=None, range=Optional[Union[str, "WellType"]])
+
+slots.wellFacility__depth = Slot(uri=LINKML_COMMON.depth, name="wellFacility__depth", curie=LINKML_COMMON.curie('depth'),
+                   model_uri=LINKML_COMMON.wellFacility__depth, domain=None, range=Optional[Union[dict, Quantity]])
+
+slots.extractiveIndustryProduct__product_type = Slot(uri=LINKML_COMMON.product_type, name="extractiveIndustryProduct__product_type", curie=LINKML_COMMON.curie('product_type'),
+                   model_uri=LINKML_COMMON.extractiveIndustryProduct__product_type, domain=None, range=Optional[Union[str, "ExtractiveIndustryProductType"]])
+
+slots.extractiveIndustryProduct__grade = Slot(uri=LINKML_COMMON.grade, name="extractiveIndustryProduct__grade", curie=LINKML_COMMON.curie('grade'),
+                   model_uri=LINKML_COMMON.extractiveIndustryProduct__grade, domain=None, range=Optional[Union[dict, SimpleQuantity]])
+
+slots.extractiveIndustryProduct__processing_method = Slot(uri=LINKML_COMMON.processing_method, name="extractiveIndustryProduct__processing_method", curie=LINKML_COMMON.curie('processing_method'),
+                   model_uri=LINKML_COMMON.extractiveIndustryProduct__processing_method, domain=None, range=Optional[Union[str, EngineeringSpecificationId]])
+
+slots.moneyQuantity__value = Slot(uri=LINKML_COMMON.value, name="moneyQuantity__value", curie=LINKML_COMMON.curie('value'),
+                   model_uri=LINKML_COMMON.moneyQuantity__value, domain=None, range=Optional[float])
+
+slots.moneyQuantity__unit = Slot(uri=LINKML_COMMON.unit, name="moneyQuantity__unit", curie=LINKML_COMMON.curie('unit'),
+                   model_uri=LINKML_COMMON.moneyQuantity__unit, domain=None, range=Optional[Union[str, CurrencyConceptId]])
+
+slots.financialAccount__account_number = Slot(uri=LINKML_COMMON.account_number, name="financialAccount__account_number", curie=LINKML_COMMON.curie('account_number'),
+                   model_uri=LINKML_COMMON.financialAccount__account_number, domain=None, range=Optional[str])
+
+slots.financialAccount__bank = Slot(uri=LINKML_COMMON.bank, name="financialAccount__bank", curie=LINKML_COMMON.curie('bank'),
+                   model_uri=LINKML_COMMON.financialAccount__bank, domain=None, range=Optional[Union[str, OrganizationId]])
+
+slots.financialAccount__account_holder = Slot(uri=LINKML_COMMON.account_holder, name="financialAccount__account_holder", curie=LINKML_COMMON.curie('account_holder'),
+                   model_uri=LINKML_COMMON.financialAccount__account_holder, domain=None, range=Optional[Union[str, PersonId]])
+
 slots.foodRecipe__ingredients = Slot(uri=LINKML_COMMON.ingredients, name="foodRecipe__ingredients", curie=LINKML_COMMON.curie('ingredients'),
                    model_uri=LINKML_COMMON.foodRecipe__ingredients, domain=None, range=Optional[Union[Union[dict, FoodIngredient], List[Union[dict, FoodIngredient]]]])
 
@@ -2414,6 +3486,18 @@ slots.geoPointLocation__longitude = Slot(uri=LINKML_COMMON.longitude, name="geoP
 slots.geoPointLocation__altitude = Slot(uri=LINKML_COMMON.altitude, name="geoPointLocation__altitude", curie=LINKML_COMMON.curie('altitude'),
                    model_uri=LINKML_COMMON.geoPointLocation__altitude, domain=None, range=Optional[Decimal])
 
+slots.geoBoxLocation__west_bounding_coordinate = Slot(uri=LINKML_COMMON.west_bounding_coordinate, name="geoBoxLocation__west_bounding_coordinate", curie=LINKML_COMMON.curie('west_bounding_coordinate'),
+                   model_uri=LINKML_COMMON.geoBoxLocation__west_bounding_coordinate, domain=None, range=Optional[Decimal])
+
+slots.geoBoxLocation__east_bounding_coordinate = Slot(uri=LINKML_COMMON.east_bounding_coordinate, name="geoBoxLocation__east_bounding_coordinate", curie=LINKML_COMMON.curie('east_bounding_coordinate'),
+                   model_uri=LINKML_COMMON.geoBoxLocation__east_bounding_coordinate, domain=None, range=Optional[Decimal])
+
+slots.geoBoxLocation__north_bounding_coordinate = Slot(uri=LINKML_COMMON.north_bounding_coordinate, name="geoBoxLocation__north_bounding_coordinate", curie=LINKML_COMMON.curie('north_bounding_coordinate'),
+                   model_uri=LINKML_COMMON.geoBoxLocation__north_bounding_coordinate, domain=None, range=Optional[Decimal])
+
+slots.geoBoxLocation__south_bounding_coordinate = Slot(uri=LINKML_COMMON.south_bounding_coordinate, name="geoBoxLocation__south_bounding_coordinate", curie=LINKML_COMMON.curie('south_bounding_coordinate'),
+                   model_uri=LINKML_COMMON.geoBoxLocation__south_bounding_coordinate, domain=None, range=Optional[Decimal])
+
 slots.healthcareEncounter__patient = Slot(uri=LINKML_COMMON.patient, name="healthcareEncounter__patient", curie=LINKML_COMMON.curie('patient'),
                    model_uri=LINKML_COMMON.healthcareEncounter__patient, domain=None, range=Optional[Union[dict, Patient]])
 
@@ -2440,6 +3524,9 @@ slots.investigation__objectives = Slot(uri=LINKML_COMMON.objectives, name="inves
 
 slots.investigation__variables = Slot(uri=LINKML_COMMON.variables, name="investigation__variables", curie=LINKML_COMMON.curie('variables'),
                    model_uri=LINKML_COMMON.investigation__variables, domain=None, range=Optional[Union[Union[dict, Variable], List[Union[dict, Variable]]]])
+
+slots.investigativeProtocol__protocols_io_url = Slot(uri=LINKML_COMMON.protocols_io_url, name="investigativeProtocol__protocols_io_url", curie=LINKML_COMMON.curie('protocols_io_url'),
+                   model_uri=LINKML_COMMON.investigativeProtocol__protocols_io_url, domain=None, range=Optional[Union[str, URI]])
 
 slots.investigativeProcess__follows_procedure = Slot(uri=LINKML_COMMON.follows_procedure, name="investigativeProcess__follows_procedure", curie=LINKML_COMMON.curie('follows_procedure'),
                    model_uri=LINKML_COMMON.investigativeProcess__follows_procedure, domain=None, range=Optional[Union[str, InvestigativeProtocolId]])
@@ -2517,10 +3604,16 @@ slots.plannedProcess__uses_physical_device = Slot(uri=LINKML_COMMON.uses_physica
                    model_uri=LINKML_COMMON.plannedProcess__uses_physical_device, domain=None, range=Optional[Union[str, PhysicalDeviceId]])
 
 slots.Landform_geolocation = Slot(uri=LINKML_COMMON.geolocation, name="Landform_geolocation", curie=LINKML_COMMON.curie('geolocation'),
-                   model_uri=LINKML_COMMON.Landform_geolocation, domain=Landform, range=Union[dict, "GeoPointLocation"])
+                   model_uri=LINKML_COMMON.Landform_geolocation, domain=Landform, range=Optional[Union[dict, "GeoPointLocation"]])
 
-slots.HealthcareEncounter_subtype = Slot(uri=LINKML_COMMON.subtype, name="HealthcareEncounter_subtype", curie=LINKML_COMMON.curie('subtype'),
-                   model_uri=LINKML_COMMON.HealthcareEncounter_subtype, domain=HealthcareEncounter, range=Optional[Union[str, "HealthcareEncounterClassification"]])
+slots.HealthcareEncounter_classification = Slot(uri=LINKML_COMMON.classification, name="HealthcareEncounter_classification", curie=LINKML_COMMON.curie('classification'),
+                   model_uri=LINKML_COMMON.HealthcareEncounter_classification, domain=HealthcareEncounter, range=Optional[Union[str, "HealthcareEncounterClassification"]])
+
+slots.InvestigativeProtocol_classification = Slot(uri=LINKML_COMMON.classification, name="InvestigativeProtocol_classification", curie=LINKML_COMMON.curie('classification'),
+                   model_uri=LINKML_COMMON.InvestigativeProtocol_classification, domain=InvestigativeProtocol, range=Optional[Union[str, ConceptId]])
+
+slots.StudyDesign_classification = Slot(uri=LINKML_COMMON.classification, name="StudyDesign_classification", curie=LINKML_COMMON.curie('classification'),
+                   model_uri=LINKML_COMMON.StudyDesign_classification, domain=StudyDesign, range=Optional[Union[str, ConceptId]])
 
 slots.UnitConversionOperation_inputs = Slot(uri=LINKML_COMMON.inputs, name="UnitConversionOperation_inputs", curie=LINKML_COMMON.curie('inputs'),
                    model_uri=LINKML_COMMON.UnitConversionOperation_inputs, domain=UnitConversionOperation, range=Optional[Union[Union[dict, Quantity], List[Union[dict, Quantity]]]])

@@ -31,6 +31,7 @@ classes:
       - omopschema:CARE_SITE
 
   HealthcareEncounter:
+    description: An interaction between a patient and one or more healthcare providers
     is_a: Event
     attributes:
       patient:
@@ -38,12 +39,13 @@ classes:
       provider:
         range: HealthcareProvider
     slot_usage:
-      subtype:
+      classification:
         range: HealthcareEncounterClassification
     exact_mappings:
       - omopschema:VISIT_OCCURRENCE
 
   HealthcareOrganization:
+    description: An organization that provides healthcare services
     is_a: Organization
 
   HealthcareRole:

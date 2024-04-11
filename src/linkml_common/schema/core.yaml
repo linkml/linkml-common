@@ -17,6 +17,8 @@ prefixes:
   fhir: http://hl7.org/fhir/
   rdfs: http://www.w3.org/2000/01/rdf-schema#
   rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+  dcterms: http://purl.org/dc/terms/
+  bibo: http://purl.org/ontology/bibo/
 default_prefix: linkml_common
 default_range: string
 
@@ -40,7 +42,7 @@ classes:
       - id
       - name
       - type
-      - subtype
+      - classification
       - ontology_types
       - description
 
@@ -154,10 +156,14 @@ slots:
   type:
     range: string
     designates_type: true
-    description: A type for a thing
-  subtype:
-    range: string
-    description: An enum with a more specific type
+    description: A type for a thing. The range of this should be a class within the schema.
+      It is intended for schema-based classification. Anything beneath the shoreline of the
+      schema should use `classification`.
+  classification:
+    range: Concept
+    description: A precise classification of the thing, using a concept from an ontology,
+      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict
+      the range of values which this slot can take, using `values_from`, or bindings.
   ontology_types:
     range: Concept
     multivalued: true

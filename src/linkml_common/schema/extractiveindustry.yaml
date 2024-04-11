@@ -1,0 +1,121 @@
+id: https://w3id.org/linkml-common/extractiveindustry
+name: linkml-common-extractiveindustry
+title: linkml-common-extractiveindustry
+description: |-
+  LinkML Common module for representing data modeling elements in the domain of extractive industry
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  OBI: http://purl.obolibrary.org/obo/OBI_
+  fhir: http://hl7.org/fhir/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - measurements
+  - geography
+  - engineering
+  - civilengineering
+  - social
+
+classes:
+  ExtractiveIndustryFacility:
+    is_a: Facility
+    description: A facility where natural resources are extracted from the earth
+    attributes:
+      facility_type:
+        range: ExtractiveIndustryFacilityType
+      operator:
+        range: Organization
+      products:
+        range: ExtractiveIndustryProduct
+        multivalued: true
+        inlined_as_list: true
+      production_capacity:
+        range: SimpleQuantity
+      annual_production:
+        range: SimpleQuantity
+      reserves:
+        range: SimpleQuantity
+
+  MiningFacility:
+    is_a: ExtractiveIndustryFacility
+    description: A facility where mineral resources are extracted from the earth
+    attributes:
+      mining_method:
+        range: MiningMethod
+      depth:
+        range: SimpleQuantity
+      area:
+        range: SimpleQuantity
+
+  WellFacility:
+    is_a: ExtractiveIndustryFacility
+    description: A facility where fluid resources (e.g., oil, gas, water) are extracted from the earth
+    attributes:
+      well_type:
+        range: WellType
+      depth:
+        range: SimpleQuantity
+
+  QuarryFacility:
+    is_a: ExtractiveIndustryFacility
+    description: A facility where stone, sand, or gravel are extracted from the earth
+
+  ExtractiveIndustryEquipment:
+    is_a: Equipment
+    description: The equipment used in extractive industry operations
+
+  ExtractiveIndustryProduct:
+    is_a: Concept
+    description: A product extracted from an extractive industry facility
+    attributes:
+      product_type:
+        range: ExtractiveIndustryProductType
+      grade:
+        range: SimpleQuantity
+      processing_method:
+        range: EngineeringSpecification
+
+  ExtractiveIndustryWaste:
+    is_a: Concept
+    description: Waste material generated from extractive industry operations
+
+enums:
+  ExtractiveIndustryFacilityType:
+    permissible_values:
+      MINING_FACILITY: A facility where mineral resources are extracted
+      WELL_FACILITY: A facility where fluid resources are extracted
+      QUARRY_FACILITY: A facility where stone, sand, or gravel are extracted
+
+  ExtractiveIndustryProductType:
+    permissible_values:
+      MINERAL: A solid inorganic substance
+      METAL: A solid metallic substance
+      COAL: A combustible black or brownish-black sedimentary rock
+      OIL: A liquid petroleum resource
+      GAS: A gaseous petroleum resource
+      STONE: A solid aggregate of minerals
+      SAND: A granular material composed of finely divided rock and mineral particles
+      GRAVEL: A loose aggregation of rock fragments
+
+  MiningMethod:
+    permissible_values:
+      UNDERGROUND: Extraction occurs beneath the earth's surface
+      OPEN_PIT: Extraction occurs on the earth's surface
+      PLACER: Extraction of valuable minerals from alluvial deposits
+      IN_SITU: Extraction without removing the ore from its original location
+
+  WellType:
+    permissible_values:
+      OIL: A well that primarily extracts crude oil
+      GAS: A well that primarily extracts natural gas
+      WATER: A well that extracts water for various purposes
+      INJECTION: A well used to inject fluids into underground formations

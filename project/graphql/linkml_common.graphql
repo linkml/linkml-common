@@ -3,7 +3,7 @@ type Agent
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -17,7 +17,7 @@ type AutomatedAgent
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -27,7 +27,38 @@ type BasicFoodType
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type Building
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    locatedAtPlace: Place
+  }
+
+type BuiltEnvironmentFeature
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type BuiltSystem
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -37,7 +68,7 @@ type ClinicalCohort
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     definition: ClinicalCohortDefinition
@@ -48,7 +79,7 @@ type ClinicalCohortDefinition
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -58,7 +89,7 @@ type ClinicalCohortEnrollment
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -81,7 +112,7 @@ type CompositeFoodType
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -91,7 +122,7 @@ type Concept
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -101,7 +132,7 @@ type CreativeWork
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     title: String
@@ -113,12 +144,22 @@ type CreativeWork
     keywords: [String]
   }
 
+type CurrencyConcept
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+  }
+
 type DataGenerationFromSample
   {
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -136,7 +177,7 @@ type Dataset
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     title: String
@@ -160,12 +201,23 @@ type Duration
     hasQuantityKind: QuantityKind
   }
 
+type ElectricalGrid
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    plants: [PowerPlant]
+  }
+
 type EngineeringMaterialProcessing
   {
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -182,7 +234,7 @@ type EngineeringProcess
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -199,7 +251,7 @@ type EngineeringSpecification
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -222,11 +274,22 @@ type EnvironmentalSite
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     address: PostalAddress
     geolocation: GeoPointLocation
+    boundingCoordinates: GeoBoxLocation
+  }
+
+type Equipment
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
   }
 
 type Event
@@ -234,7 +297,7 @@ type Event
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -242,6 +305,80 @@ type Event
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+  }
+
+type ExtractiveIndustryEquipment
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type ExtractiveIndustryFacility
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    locatedAtPlace: Place
+    facilityType: ExtractiveIndustryFacilityType
+    operator: Organization
+    products: [ExtractiveIndustryProduct]
+    productionCapacity: Quantity
+    annualProduction: Quantity
+    reserves: Quantity
+  }
+
+type ExtractiveIndustryProduct
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    productType: ExtractiveIndustryProductType
+    grade: SimpleQuantity
+    processingMethod: EngineeringSpecification
+  }
+
+type ExtractiveIndustryWaste
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type Facility
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    locatedAtPlace: Place
+  }
+
+type FinancialAccount
+  {
+    type: String
+    accountNumber: String
+    bank: Organization
+    accountHolder: Person
+  }
+
+type FinancialProduct
+  {
+    type: String
   }
 
 type FoodIngredient
@@ -255,7 +392,7 @@ type FoodProcessing
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -272,7 +409,7 @@ type FoodRecipe
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     ingredients: [FoodIngredient]
@@ -284,9 +421,47 @@ type FoodTypeConcept
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
+  }
+
+type FossilFuel
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+  }
+
+type FossilFuelPlant
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    locatedAtPlace: Place
+    plantType: PowerPlantType
+    location: Place
+    operator: Organization
+    capacity: SimpleQuantity
+    commissioningDate: Date
+    decommissioningDate: Date
+    capex: MoneyQuantity
+    opex: MoneyQuantity
+    fuel: FossilFuel
+  }
+
+type GeoBoxLocation
+  {
+    westBoundingCoordinate: Decimal
+    eastBoundingCoordinate: Decimal
+    northBoundingCoordinate: Decimal
+    southBoundingCoordinate: Decimal
   }
 
 type GeoPointLocation
@@ -301,7 +476,7 @@ type HealthcareConditionOccurrence
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -327,7 +502,7 @@ type HealthcareEncounter
     hasDuration: Duration
     patient: Patient
     provider: HealthcareProvider
-    subtype: HealthcareEncounterClassification
+    classification: HealthcareEncounterClassification
   }
 
 type HealthcareOrganization
@@ -335,7 +510,7 @@ type HealthcareOrganization
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -359,11 +534,32 @@ type HealthcareSite
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     address: PostalAddress
     geolocation: GeoPointLocation
+    boundingCoordinates: GeoBoxLocation
+  }
+
+type HydroelectricPlant
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    locatedAtPlace: Place
+    plantType: PowerPlantType
+    location: Place
+    operator: Organization
+    capacity: SimpleQuantity
+    commissioningDate: Date
+    decommissioningDate: Date
+    capex: MoneyQuantity
+    opex: MoneyQuantity
+    dam: Landform
   }
 
 type InformationEntity
@@ -371,7 +567,7 @@ type InformationEntity
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     describes: Any
@@ -387,7 +583,7 @@ type Investigation
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     objectives: String
@@ -399,7 +595,7 @@ type InvestigativeProcess
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -417,9 +613,10 @@ type InvestigativeProtocol
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
     ontologyTypes: [Concept]
     description: String
+    protocolsIoUrl: Uri
+    classification: Concept
   }
 
 type Landform
@@ -427,11 +624,12 @@ type Landform
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     address: PostalAddress
-    geolocation: GeoPointLocation!
+    boundingCoordinates: GeoBoxLocation
+    geolocation: GeoPointLocation
   }
 
 type LifeEvent
@@ -439,7 +637,7 @@ type LifeEvent
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -458,7 +656,7 @@ type MaterialCollection
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -475,7 +673,7 @@ type MaterialProcessing
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -502,14 +700,61 @@ type Measurement
     variableMeasured: Variable
   }
 
+type MiningFacility
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    locatedAtPlace: Place
+    facilityType: ExtractiveIndustryFacilityType
+    operator: Organization
+    products: [ExtractiveIndustryProduct]
+    productionCapacity: Quantity
+    annualProduction: Quantity
+    reserves: Quantity
+    miningMethod: MiningMethod
+    depth: Quantity
+    area: Quantity
+  }
+
+type MoneyQuantity
+  {
+    type: String
+    hasQuantityKind: QuantityKind
+    value: Float
+    unit: CurrencyConcept
+  }
+
 type NamedThing
   {
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
+  }
+
+type NuclearPlant
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    locatedAtPlace: Place
+    plantType: PowerPlantType
+    location: Place
+    operator: Organization
+    capacity: SimpleQuantity
+    commissioningDate: Date
+    decommissioningDate: Date
+    capex: MoneyQuantity
+    opex: MoneyQuantity
   }
 
 type Observation
@@ -522,7 +767,7 @@ type Organization
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -538,7 +783,7 @@ type Person
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     primaryEmail: String
@@ -552,7 +797,7 @@ type PhysicalDevice
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -562,11 +807,12 @@ type Place
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     address: PostalAddress
     geolocation: GeoPointLocation
+    boundingCoordinates: GeoBoxLocation
   }
 
 type PlannedProcess
@@ -574,7 +820,7 @@ type PlannedProcess
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -601,12 +847,41 @@ type PostalAddress
     country: String
   }
 
+type PowerPlant
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    locatedAtPlace: Place
+    plantType: PowerPlantType
+    location: Place
+    operator: Organization
+    capacity: SimpleQuantity
+    commissioningDate: Date
+    decommissioningDate: Date
+    capex: MoneyQuantity
+    opex: MoneyQuantity
+  }
+
+type PowerPlantType
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+  }
+
 type Procedure
   {
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -616,7 +891,7 @@ type Publication
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     title: String
@@ -639,7 +914,7 @@ type QuantityKind
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -649,6 +924,23 @@ type QuantityRange
     type: String
     lowerBound: Quantity
     upperBound: Quantity
+  }
+
+type QuarryFacility
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    locatedAtPlace: Place
+    facilityType: ExtractiveIndustryFacilityType
+    operator: Organization
+    products: [ExtractiveIndustryProduct]
+    productionCapacity: Quantity
+    annualProduction: Quantity
+    reserves: Quantity
   }
 
 type Ratio
@@ -664,7 +956,7 @@ type RawMaterial
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -672,6 +964,25 @@ type RawMaterial
 interface Relationship
   {
     type: String
+  }
+
+type RenewablePlant
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    locatedAtPlace: Place
+    plantType: PowerPlantType
+    location: Place
+    operator: Organization
+    capacity: SimpleQuantity
+    commissioningDate: Date
+    decommissioningDate: Date
+    capex: MoneyQuantity
+    opex: MoneyQuantity
   }
 
 interface Role
@@ -684,7 +995,7 @@ type SampleCollectionProcess
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -704,7 +1015,7 @@ type SampleMaterial
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -714,7 +1025,7 @@ type SampleProcessing
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
     startsAt: TimePoint
@@ -739,12 +1050,31 @@ type SimpleQuantity
     unit: UnitConcept
   }
 
+type SolarPlant
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    locatedAtPlace: Place
+    plantType: PowerPlantType
+    location: Place
+    operator: Organization
+    capacity: SimpleQuantity
+    commissioningDate: Date
+    decommissioningDate: Date
+    capex: MoneyQuantity
+    opex: MoneyQuantity
+  }
+
 type Specification
   {
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -754,9 +1084,9 @@ type StudyDesign
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
     ontologyTypes: [Concept]
     description: String
+    classification: Concept
   }
 
 type TemporalInterval
@@ -798,7 +1128,7 @@ type UnitConcept
     id: Uriorcurie!
     name: String
     type: String
-    subtype: String
+    classification: Concept
     ontologyTypes: [Concept]
     description: String
   }
@@ -815,5 +1145,43 @@ type Variable
   {
     type: String
     allowedUnits: [UnitConcept]
+  }
+
+type WellFacility
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    locatedAtPlace: Place
+    facilityType: ExtractiveIndustryFacilityType
+    operator: Organization
+    products: [ExtractiveIndustryProduct]
+    productionCapacity: Quantity
+    annualProduction: Quantity
+    reserves: Quantity
+    wellType: WellType
+    depth: Quantity
+  }
+
+type WindFarm
+  {
+    id: Uriorcurie!
+    name: String
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    locatedAtPlace: Place
+    plantType: PowerPlantType
+    location: Place
+    operator: Organization
+    capacity: SimpleQuantity
+    commissioningDate: Date
+    decommissioningDate: Date
+    capex: MoneyQuantity
+    opex: MoneyQuantity
   }
 

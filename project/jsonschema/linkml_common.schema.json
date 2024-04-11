@@ -4,6 +4,10 @@
             "additionalProperties": false,
             "description": "Represents an Agent",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -22,12 +26,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Agent"
                     ],
@@ -56,6 +56,10 @@
             "additionalProperties": false,
             "description": "Represents an Automated Agent",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -74,12 +78,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "AutomatedAgent"
                     ],
@@ -96,6 +96,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -114,12 +118,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "BasicFoodType"
                     ],
@@ -130,6 +130,130 @@
                 "id"
             ],
             "title": "BasicFoodType",
+            "type": "object"
+        },
+        "Building": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "located_at_place": {
+                    "description": "The place where the entity is located",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "Building"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Building",
+            "type": "object"
+        },
+        "BuiltEnvironmentFeature": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "BuiltEnvironmentFeature"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "BuiltEnvironmentFeature",
+            "type": "object"
+        },
+        "BuiltSystem": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "BuiltSystem"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "BuiltSystem",
             "type": "object"
         },
         "CaseOrControlEnum": {
@@ -145,6 +269,10 @@
             "additionalProperties": false,
             "description": "A group of patients who share a common set of characteristics",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "definition": {
                     "type": "string"
                 },
@@ -166,12 +294,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "ClinicalCohort"
                     ],
@@ -188,6 +312,10 @@
             "additionalProperties": false,
             "description": "A definition of a clinical cohort",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -206,12 +334,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "ClinicalCohortDefinition"
                     ],
@@ -228,6 +352,10 @@
             "additionalProperties": false,
             "description": "An event relating a patient to a clinical cohort",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "cohort": {
                     "type": "string"
                 },
@@ -267,12 +395,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "ClinicalCohortEnrollment"
                     ],
@@ -303,22 +427,13 @@
                                 "$ref": "#/$defs/Observation"
                             },
                             {
-                                "$ref": "#/$defs/Variable"
-                            },
-                            {
                                 "$ref": "#/$defs/PostalAddress"
                             },
                             {
+                                "$ref": "#/$defs/Variable"
+                            },
+                            {
                                 "$ref": "#/$defs/Measurement"
-                            },
-                            {
-                                "$ref": "#/$defs/TimePointOrTemporalInterval"
-                            },
-                            {
-                                "$ref": "#/$defs/Quantity"
-                            },
-                            {
-                                "$ref": "#/$defs/QuantityRange"
                             },
                             {
                                 "$ref": "#/$defs/Collection"
@@ -328,6 +443,36 @@
                             },
                             {
                                 "$ref": "#/$defs/DataStructure"
+                            },
+                            {
+                                "$ref": "#/$defs/Quantity"
+                            },
+                            {
+                                "$ref": "#/$defs/QuantityRange"
+                            },
+                            {
+                                "$ref": "#/$defs/TimePointOrTemporalInterval"
+                            },
+                            {
+                                "$ref": "#/$defs/TemporalInterval"
+                            },
+                            {
+                                "$ref": "#/$defs/TimePoint"
+                            },
+                            {
+                                "$ref": "#/$defs/SimpleQuantity"
+                            },
+                            {
+                                "$ref": "#/$defs/Ratio"
+                            },
+                            {
+                                "$ref": "#/$defs/Duration"
+                            },
+                            {
+                                "$ref": "#/$defs/FoodIngredient"
+                            },
+                            {
+                                "$ref": "#/$defs/MoneyQuantity"
                             },
                             {
                                 "$ref": "#/$defs/FinancialProduct"
@@ -346,30 +491,6 @@
                             },
                             {
                                 "$ref": "#/$defs/Patient"
-                            },
-                            {
-                                "$ref": "#/$defs/Duration"
-                            },
-                            {
-                                "$ref": "#/$defs/SimpleQuantity"
-                            },
-                            {
-                                "$ref": "#/$defs/Ratio"
-                            },
-                            {
-                                "$ref": "#/$defs/FoodIngredient"
-                            },
-                            {
-                                "$ref": "#/$defs/MoneyQuantity"
-                            },
-                            {
-                                "$ref": "#/$defs/TemporalInterval"
-                            },
-                            {
-                                "$ref": "#/$defs/TimePoint"
-                            },
-                            {
-                                "$ref": "#/$defs/Event"
                             },
                             {
                                 "$ref": "#/$defs/Concept"
@@ -396,16 +517,67 @@
                                 "$ref": "#/$defs/SampleMaterial"
                             },
                             {
-                                "$ref": "#/$defs/Place"
-                            },
-                            {
-                                "$ref": "#/$defs/RawMaterial"
+                                "$ref": "#/$defs/BuiltEnvironmentFeature"
                             },
                             {
                                 "$ref": "#/$defs/ClinicalCohort"
                             },
                             {
                                 "$ref": "#/$defs/ClinicalCohortDefinition"
+                            },
+                            {
+                                "$ref": "#/$defs/RawMaterial"
+                            },
+                            {
+                                "$ref": "#/$defs/Equipment"
+                            },
+                            {
+                                "$ref": "#/$defs/Place"
+                            },
+                            {
+                                "$ref": "#/$defs/Event"
+                            },
+                            {
+                                "$ref": "#/$defs/LifeEvent"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareEncounter"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareConditionOccurrence"
+                            },
+                            {
+                                "$ref": "#/$defs/ClinicalCohortEnrollment"
+                            },
+                            {
+                                "$ref": "#/$defs/EngineeringProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/PlannedProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/InvestigativeProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/MaterialCollection"
+                            },
+                            {
+                                "$ref": "#/$defs/MaterialProcessing"
+                            },
+                            {
+                                "$ref": "#/$defs/SampleProcessing"
+                            },
+                            {
+                                "$ref": "#/$defs/EngineeringMaterialProcessing"
+                            },
+                            {
+                                "$ref": "#/$defs/FoodProcessing"
+                            },
+                            {
+                                "$ref": "#/$defs/SampleCollectionProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/DataGenerationFromSample"
                             },
                             {
                                 "$ref": "#/$defs/HealthcareSite"
@@ -417,10 +589,58 @@
                                 "$ref": "#/$defs/EnvironmentalSite"
                             },
                             {
-                                "$ref": "#/$defs/Dataset"
+                                "$ref": "#/$defs/ExtractiveIndustryEquipment"
+                            },
+                            {
+                                "$ref": "#/$defs/Facility"
+                            },
+                            {
+                                "$ref": "#/$defs/BuiltSystem"
+                            },
+                            {
+                                "$ref": "#/$defs/ElectricalGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/Building"
+                            },
+                            {
+                                "$ref": "#/$defs/ExtractiveIndustryFacility"
+                            },
+                            {
+                                "$ref": "#/$defs/MiningFacility"
+                            },
+                            {
+                                "$ref": "#/$defs/WellFacility"
+                            },
+                            {
+                                "$ref": "#/$defs/QuarryFacility"
+                            },
+                            {
+                                "$ref": "#/$defs/PowerPlant"
+                            },
+                            {
+                                "$ref": "#/$defs/FossilFuelPlant"
+                            },
+                            {
+                                "$ref": "#/$defs/NuclearPlant"
+                            },
+                            {
+                                "$ref": "#/$defs/RenewablePlant"
+                            },
+                            {
+                                "$ref": "#/$defs/HydroelectricPlant"
+                            },
+                            {
+                                "$ref": "#/$defs/SolarPlant"
+                            },
+                            {
+                                "$ref": "#/$defs/WindFarm"
                             },
                             {
                                 "$ref": "#/$defs/Publication"
+                            },
+                            {
+                                "$ref": "#/$defs/Dataset"
                             },
                             {
                                 "$ref": "#/$defs/Person"
@@ -444,10 +664,10 @@
                                 "$ref": "#/$defs/StudyDesign"
                             },
                             {
-                                "$ref": "#/$defs/FoodRecipe"
+                                "$ref": "#/$defs/EngineeringSpecification"
                             },
                             {
-                                "$ref": "#/$defs/EngineeringSpecification"
+                                "$ref": "#/$defs/FoodRecipe"
                             },
                             {
                                 "$ref": "#/$defs/QuantityKind"
@@ -456,65 +676,35 @@
                                 "$ref": "#/$defs/UnitConcept"
                             },
                             {
-                                "$ref": "#/$defs/FoodTypeConcept"
+                                "$ref": "#/$defs/CurrencyConcept"
                             },
                             {
-                                "$ref": "#/$defs/CurrencyConcept"
+                                "$ref": "#/$defs/PowerPlantType"
+                            },
+                            {
+                                "$ref": "#/$defs/FossilFuel"
+                            },
+                            {
+                                "$ref": "#/$defs/ExtractiveIndustryProduct"
+                            },
+                            {
+                                "$ref": "#/$defs/ExtractiveIndustryWaste"
+                            },
+                            {
+                                "$ref": "#/$defs/FoodTypeConcept"
                             },
                             {
                                 "$ref": "#/$defs/BasicFoodType"
                             },
                             {
                                 "$ref": "#/$defs/CompositeFoodType"
-                            },
-                            {
-                                "$ref": "#/$defs/LifeEvent"
-                            },
-                            {
-                                "$ref": "#/$defs/PlannedProcess"
-                            },
-                            {
-                                "$ref": "#/$defs/HealthcareEncounter"
-                            },
-                            {
-                                "$ref": "#/$defs/HealthcareConditionOccurrence"
-                            },
-                            {
-                                "$ref": "#/$defs/EngineeringProcess"
-                            },
-                            {
-                                "$ref": "#/$defs/ClinicalCohortEnrollment"
-                            },
-                            {
-                                "$ref": "#/$defs/InvestigativeProcess"
-                            },
-                            {
-                                "$ref": "#/$defs/MaterialCollection"
-                            },
-                            {
-                                "$ref": "#/$defs/MaterialProcessing"
-                            },
-                            {
-                                "$ref": "#/$defs/SampleProcessing"
-                            },
-                            {
-                                "$ref": "#/$defs/FoodProcessing"
-                            },
-                            {
-                                "$ref": "#/$defs/EngineeringMaterialProcessing"
-                            },
-                            {
-                                "$ref": "#/$defs/SampleCollectionProcess"
-                            },
-                            {
-                                "$ref": "#/$defs/DataGenerationFromSample"
                             }
                         ]
                     },
                     "type": "array"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Collection"
                     ],
@@ -528,6 +718,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -546,12 +740,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "CompositeFoodType"
                     ],
@@ -568,6 +758,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -586,12 +780,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Concept"
                     ],
@@ -610,6 +800,10 @@
             "properties": {
                 "abstract": {
                     "description": "A summary of the item",
+                    "type": "string"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
                     "type": "string"
                 },
                 "contacts": {
@@ -662,16 +856,12 @@
                     "description": "Information about rights held in and over the item",
                     "type": "string"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "title": {
                     "description": "The title of the item",
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "CreativeWork"
                     ],
@@ -688,6 +878,10 @@
             "additionalProperties": false,
             "description": "A currency",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -706,12 +900,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "CurrencyConcept"
                     ],
@@ -728,6 +918,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -767,12 +961,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "DataGenerationFromSample"
                     ],
@@ -793,7 +983,7 @@
             "description": "",
             "properties": {
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "DataStructure"
                     ],
@@ -809,6 +999,10 @@
             "properties": {
                 "abstract": {
                     "description": "A summary of the item",
+                    "type": "string"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
                     "type": "string"
                 },
                 "collected_as_part_of": {
@@ -867,16 +1061,12 @@
                     "description": "Information about rights held in and over the item",
                     "type": "string"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "title": {
                     "description": "The title of the item",
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Dataset"
                     ],
@@ -898,7 +1088,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Duration"
                     ],
@@ -908,10 +1098,60 @@
             "title": "Duration",
             "type": "object"
         },
+        "ElectricalGrid": {
+            "additionalProperties": false,
+            "description": "A network of electrical transmission lines",
+            "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "plants": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "ElectricalGrid"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ElectricalGrid",
+            "type": "object"
+        },
         "EngineeringMaterialProcessing": {
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -948,12 +1188,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "EngineeringMaterialProcessing"
                     ],
@@ -973,6 +1209,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1012,12 +1252,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "EngineeringProcess"
                     ],
@@ -1034,6 +1270,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1052,12 +1292,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "EngineeringSpecification"
                     ],
@@ -1089,6 +1325,14 @@
                 "address": {
                     "$ref": "#/$defs/PostalAddress"
                 },
+                "bounding_coordinates": {
+                    "$ref": "#/$defs/GeoBoxLocation",
+                    "description": "The bounding coordinates of the place"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1111,12 +1355,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "EnvironmentalSite"
                     ],
@@ -1129,10 +1369,54 @@
             "title": "EnvironmentalSite",
             "type": "object"
         },
+        "Equipment": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "Equipment"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Equipment",
+            "type": "object"
+        },
         "Event": {
             "additionalProperties": false,
             "description": "A thing that happens",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1166,12 +1450,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Event"
                     ],
@@ -1182,6 +1462,333 @@
                 "id"
             ],
             "title": "Event",
+            "type": "object"
+        },
+        "ExtractiveIndustryEquipment": {
+            "additionalProperties": false,
+            "description": "The equipment used in extractive industry operations",
+            "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "ExtractiveIndustryEquipment"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ExtractiveIndustryEquipment",
+            "type": "object"
+        },
+        "ExtractiveIndustryFacility": {
+            "additionalProperties": false,
+            "description": "A facility where natural resources are extracted from the earth",
+            "properties": {
+                "annual_production": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "facility_type": {
+                    "$ref": "#/$defs/ExtractiveIndustryFacilityType"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "located_at_place": {
+                    "description": "The place where the entity is located",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "production_capacity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "products": {
+                    "items": {
+                        "$ref": "#/$defs/ExtractiveIndustryProduct"
+                    },
+                    "type": "array"
+                },
+                "reserves": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "ExtractiveIndustryFacility"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ExtractiveIndustryFacility",
+            "type": "object"
+        },
+        "ExtractiveIndustryFacilityType": {
+            "description": "",
+            "enum": [
+                "MINING_FACILITY",
+                "WELL_FACILITY",
+                "QUARRY_FACILITY"
+            ],
+            "title": "ExtractiveIndustryFacilityType",
+            "type": "string"
+        },
+        "ExtractiveIndustryProduct": {
+            "additionalProperties": false,
+            "description": "A product extracted from an extractive industry facility",
+            "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "grade": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "processing_method": {
+                    "type": "string"
+                },
+                "product_type": {
+                    "$ref": "#/$defs/ExtractiveIndustryProductType"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "ExtractiveIndustryProduct"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ExtractiveIndustryProduct",
+            "type": "object"
+        },
+        "ExtractiveIndustryProductType": {
+            "description": "",
+            "enum": [
+                "MINERAL",
+                "METAL",
+                "COAL",
+                "OIL",
+                "GAS",
+                "STONE",
+                "SAND",
+                "GRAVEL"
+            ],
+            "title": "ExtractiveIndustryProductType",
+            "type": "string"
+        },
+        "ExtractiveIndustryWaste": {
+            "additionalProperties": false,
+            "description": "Waste material generated from extractive industry operations",
+            "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "ExtractiveIndustryWaste"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ExtractiveIndustryWaste",
+            "type": "object"
+        },
+        "Facility": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "located_at_place": {
+                    "description": "The place where the entity is located",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "Facility"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Facility",
             "type": "object"
         },
         "FinancialAccount": {
@@ -1201,7 +1808,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "FinancialAccount"
                     ],
@@ -1216,7 +1823,7 @@
             "description": "A product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be paid interest.",
             "properties": {
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "FinancialProduct"
                     ],
@@ -1235,7 +1842,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "FoodIngredient"
                     ],
@@ -1249,6 +1856,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1285,12 +1896,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "FoodProcessing"
                     ],
@@ -1310,6 +1917,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1340,12 +1951,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "FoodRecipe"
                     ],
@@ -1362,6 +1969,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1380,12 +1991,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "FoodTypeConcept"
                     ],
@@ -1396,6 +2003,162 @@
                 "id"
             ],
             "title": "FoodTypeConcept",
+            "type": "object"
+        },
+        "FossilFuel": {
+            "additionalProperties": false,
+            "description": "A type of fossil fuel",
+            "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "FossilFuel"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "FossilFuel",
+            "type": "object"
+        },
+        "FossilFuelPlant": {
+            "additionalProperties": false,
+            "description": "A power plant that uses fossil fuels",
+            "properties": {
+                "capacity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "capex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Capital expenditure for the plant"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "commissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "decommissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "fuel": {
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "located_at_place": {
+                    "description": "The place where the entity is located",
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "opex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Operating expense for the plant"
+                },
+                "plant_type": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "FossilFuelPlant"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "FossilFuelPlant",
+            "type": "object"
+        },
+        "FossilFuelType": {
+            "description": "",
+            "enum": [
+                "COAL",
+                "NATURAL_GAS",
+                "PETROLEUM"
+            ],
+            "title": "FossilFuelType",
+            "type": "string"
+        },
+        "GeoBoxLocation": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "east_bounding_coordinate": {
+                    "description": "The easternmost coordinate of the location",
+                    "type": "number"
+                },
+                "north_bounding_coordinate": {
+                    "description": "The northernmost coordinate of the location",
+                    "type": "number"
+                },
+                "south_bounding_coordinate": {
+                    "description": "The southernmost coordinate of the location",
+                    "type": "number"
+                },
+                "west_bounding_coordinate": {
+                    "description": "The westernmost coordinate of the location",
+                    "type": "number"
+                }
+            },
+            "title": "GeoBoxLocation",
             "type": "object"
         },
         "GeoPointLocation": {
@@ -1422,6 +2185,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1461,12 +2228,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "HealthcareConditionOccurrence"
                     ],
@@ -1481,8 +2244,12 @@
         },
         "HealthcareEncounter": {
             "additionalProperties": false,
-            "description": "",
+            "description": "An interaction between a patient and one or more healthcare providers",
             "properties": {
+                "classification": {
+                    "$ref": "#/$defs/HealthcareEncounterClassification",
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings."
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1522,12 +2289,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "$ref": "#/$defs/HealthcareEncounterClassification",
-                    "description": "An enum with a more specific type"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "HealthcareEncounter"
                     ],
@@ -1560,8 +2323,12 @@
         },
         "HealthcareOrganization": {
             "additionalProperties": false,
-            "description": "",
+            "description": "An organization that provides healthcare services",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1580,12 +2347,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "HealthcareOrganization"
                     ],
@@ -1612,7 +2375,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "HealthcareProvider"
                     ],
@@ -1630,7 +2393,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "HealthcareRole"
                     ],
@@ -1646,6 +2409,14 @@
             "properties": {
                 "address": {
                     "$ref": "#/$defs/PostalAddress"
+                },
+                "bounding_coordinates": {
+                    "$ref": "#/$defs/GeoBoxLocation",
+                    "description": "The bounding coordinates of the place"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
                 },
                 "description": {
                     "description": "A human-readable description for a thing",
@@ -1669,12 +2440,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "HealthcareSite"
                     ],
@@ -1692,10 +2459,97 @@
             "title": "HumanLanguageCodeEnum",
             "type": "string"
         },
+        "HydroelectricPlant": {
+            "additionalProperties": false,
+            "description": "A hydroelectric power plant",
+            "properties": {
+                "capacity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "capex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Capital expenditure for the plant"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "commissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "dam": {
+                    "description": "The dam used by the hydroelectric plant",
+                    "type": "string"
+                },
+                "decommissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "located_at_place": {
+                    "description": "The place where the entity is located",
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "opex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Operating expense for the plant"
+                },
+                "plant_type": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "HydroelectricPlant"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "HydroelectricPlant",
+            "type": "object"
+        },
         "InformationEntity": {
             "additionalProperties": false,
             "description": "An entity that describes some information",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "describes": {
                     "$ref": "#/$defs/Any",
                     "description": "The thing that is being described"
@@ -1718,12 +2572,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "InformationEntity"
                     ],
@@ -1741,7 +2591,7 @@
             "description": "An entity that is not a physical object, process, or information",
             "properties": {
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Intangible"
                     ],
@@ -1755,6 +2605,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1776,12 +2630,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Investigation"
                     ],
@@ -1804,6 +2654,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1843,12 +2697,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "InvestigativeProcess"
                     ],
@@ -1868,6 +2718,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1886,12 +2740,11 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
+                "protocols_io_url": {
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "InvestigativeProtocol"
                     ],
@@ -1904,12 +2757,25 @@
             "title": "InvestigativeProtocol",
             "type": "object"
         },
+        "InvestigativeProtocolEnum": {
+            "description": "",
+            "title": "InvestigativeProtocolEnum",
+            "type": "string"
+        },
         "Landform": {
             "additionalProperties": false,
             "description": "A natural feature of the solid surface of the Earth or other planetary body",
             "properties": {
                 "address": {
                     "$ref": "#/$defs/PostalAddress"
+                },
+                "bounding_coordinates": {
+                    "$ref": "#/$defs/GeoBoxLocation",
+                    "description": "The bounding coordinates of the place"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
                 },
                 "description": {
                     "description": "A human-readable description for a thing",
@@ -1933,12 +2799,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Landform"
                     ],
@@ -1946,7 +2808,6 @@
                 }
             },
             "required": [
-                "geolocation",
                 "id"
             ],
             "title": "Landform",
@@ -1956,6 +2817,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1989,12 +2854,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "LifeEvent"
                     ],
@@ -2011,6 +2872,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -2047,12 +2912,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "MaterialCollection"
                     ],
@@ -2072,6 +2933,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -2108,12 +2973,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "MaterialProcessing"
                     ],
@@ -2175,13 +3036,13 @@
                             "$ref": "#/$defs/Quantity"
                         },
                         {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
                         },
                         {
                             "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
                         },
                         {
                             "$ref": "#/$defs/FoodIngredient"
@@ -2193,7 +3054,7 @@
                     "description": "The quantity being measured"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Measurement"
                     ],
@@ -2207,6 +3068,186 @@
             "title": "Measurement",
             "type": "object"
         },
+        "MiningFacility": {
+            "additionalProperties": false,
+            "description": "A facility where mineral resources are extracted from the earth",
+            "properties": {
+                "annual_production": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "area": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "depth": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "facility_type": {
+                    "$ref": "#/$defs/ExtractiveIndustryFacilityType"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "located_at_place": {
+                    "description": "The place where the entity is located",
+                    "type": "string"
+                },
+                "mining_method": {
+                    "$ref": "#/$defs/MiningMethod"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "production_capacity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "products": {
+                    "items": {
+                        "$ref": "#/$defs/ExtractiveIndustryProduct"
+                    },
+                    "type": "array"
+                },
+                "reserves": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "MiningFacility"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "MiningFacility",
+            "type": "object"
+        },
+        "MiningMethod": {
+            "description": "",
+            "enum": [
+                "UNDERGROUND",
+                "OPEN_PIT",
+                "PLACER",
+                "IN_SITU"
+            ],
+            "title": "MiningMethod",
+            "type": "string"
+        },
         "MoneyQuantity": {
             "additionalProperties": false,
             "description": "A quantity of money",
@@ -2216,7 +3257,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "MoneyQuantity"
                     ],
@@ -2238,6 +3279,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -2256,12 +3301,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "NamedThing"
                     ],
@@ -2274,12 +3315,91 @@
             "title": "NamedThing",
             "type": "object"
         },
+        "NuclearPlant": {
+            "additionalProperties": false,
+            "description": "A nuclear power plant",
+            "properties": {
+                "capacity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "capex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Capital expenditure for the plant"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "commissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "decommissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "located_at_place": {
+                    "description": "The place where the entity is located",
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "opex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Operating expense for the plant"
+                },
+                "plant_type": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "NuclearPlant"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "NuclearPlant",
+            "type": "object"
+        },
         "Observation": {
             "additionalProperties": false,
             "description": "A statement about the state of something",
             "properties": {
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Observation"
                     ],
@@ -2293,6 +3413,10 @@
             "additionalProperties": false,
             "description": "Represents an Organization",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -2311,12 +3435,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Organization"
                     ],
@@ -2337,7 +3457,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Patient"
                     ],
@@ -2358,6 +3478,10 @@
                 "birth_date": {
                     "description": "Date on which a person is born",
                     "format": "date",
+                    "type": "string"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
                     "type": "string"
                 },
                 "description": {
@@ -2383,12 +3507,8 @@
                     "pattern": "^\\S+@[\\S+\\.]+\\S+",
                     "type": "string"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Person"
                     ],
@@ -2419,6 +3539,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -2437,12 +3561,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "PhysicalDevice"
                     ],
@@ -2461,6 +3581,14 @@
             "properties": {
                 "address": {
                     "$ref": "#/$defs/PostalAddress"
+                },
+                "bounding_coordinates": {
+                    "$ref": "#/$defs/GeoBoxLocation",
+                    "description": "The bounding coordinates of the place"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
                 },
                 "description": {
                     "description": "A human-readable description for a thing",
@@ -2484,12 +3612,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Place"
                     ],
@@ -2506,6 +3630,10 @@
             "additionalProperties": false,
             "description": "A process that follows a defined procedure or plan",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -2542,12 +3670,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "PlannedProcess"
                     ],
@@ -2597,7 +3721,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "PostalAddress"
                     ],
@@ -2607,10 +3731,93 @@
             "title": "PostalAddress",
             "type": "object"
         },
-        "Procedure": {
+        "PowerPlant": {
             "additionalProperties": false,
-            "description": "A canonical series of actions conducted in a certain order or manner",
+            "description": "A facility for generating electrical power",
             "properties": {
+                "capacity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "capex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Capital expenditure for the plant"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "commissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "decommissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "located_at_place": {
+                    "description": "The place where the entity is located",
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "opex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Operating expense for the plant"
+                },
+                "plant_type": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "PowerPlant"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "PowerPlant",
+            "type": "object"
+        },
+        "PowerPlantType": {
+            "additionalProperties": false,
+            "description": "The type of power plant",
+            "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -2629,12 +3836,48 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "PowerPlantType"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "PowerPlantType",
+            "type": "object"
+        },
+        "Procedure": {
+            "additionalProperties": false,
+            "description": "A canonical series of actions conducted in a certain order or manner",
+            "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
                     "type": "string"
                 },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Procedure"
                     ],
@@ -2653,6 +3896,10 @@
             "properties": {
                 "abstract": {
                     "description": "A summary of the item",
+                    "type": "string"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
                     "type": "string"
                 },
                 "contacts": {
@@ -2705,16 +3952,12 @@
                     "description": "Information about rights held in and over the item",
                     "type": "string"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "title": {
                     "description": "The title of the item",
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Publication"
                     ],
@@ -2736,7 +3979,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Quantity"
                     ],
@@ -2750,6 +3993,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -2768,12 +4015,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "QuantityKind"
                     ],
@@ -2796,13 +4039,13 @@
                             "$ref": "#/$defs/Quantity"
                         },
                         {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
                         },
                         {
                             "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
                         },
                         {
                             "$ref": "#/$defs/FoodIngredient"
@@ -2814,7 +4057,7 @@
                     "description": "The lower bound of the range"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "QuantityRange"
                     ],
@@ -2826,13 +4069,13 @@
                             "$ref": "#/$defs/Quantity"
                         },
                         {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
                         },
                         {
                             "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
                         },
                         {
                             "$ref": "#/$defs/FoodIngredient"
@@ -2847,6 +4090,128 @@
             "title": "QuantityRange",
             "type": "object"
         },
+        "QuarryFacility": {
+            "additionalProperties": false,
+            "description": "A facility where stone, sand, or gravel are extracted from the earth",
+            "properties": {
+                "annual_production": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "facility_type": {
+                    "$ref": "#/$defs/ExtractiveIndustryFacilityType"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "located_at_place": {
+                    "description": "The place where the entity is located",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "production_capacity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "products": {
+                    "items": {
+                        "$ref": "#/$defs/ExtractiveIndustryProduct"
+                    },
+                    "type": "array"
+                },
+                "reserves": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "QuarryFacility"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "QuarryFacility",
+            "type": "object"
+        },
         "Ratio": {
             "additionalProperties": false,
             "description": "A tuple of two quantities",
@@ -2857,13 +4222,13 @@
                             "$ref": "#/$defs/Quantity"
                         },
                         {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
                         },
                         {
                             "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
                         },
                         {
                             "$ref": "#/$defs/FoodIngredient"
@@ -2884,13 +4249,13 @@
                             "$ref": "#/$defs/Quantity"
                         },
                         {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
                         },
                         {
                             "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
                         },
                         {
                             "$ref": "#/$defs/FoodIngredient"
@@ -2902,7 +4267,7 @@
                     "description": "The numerator of the ratio"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Ratio"
                     ],
@@ -2916,6 +4281,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -2934,12 +4303,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "RawMaterial"
                     ],
@@ -2962,10 +4327,93 @@
             "title": "RelativeTimeEnum",
             "type": "string"
         },
+        "RenewablePlant": {
+            "additionalProperties": false,
+            "description": "A power plant that uses renewable energy sources",
+            "properties": {
+                "capacity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "capex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Capital expenditure for the plant"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "commissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "decommissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "located_at_place": {
+                    "description": "The place where the entity is located",
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "opex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Operating expense for the plant"
+                },
+                "plant_type": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "RenewablePlant"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "RenewablePlant",
+            "type": "object"
+        },
         "SampleCollectionProcess": {
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "collected_from": {
                     "type": "string"
                 },
@@ -3011,12 +4459,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "SampleCollectionProcess"
                     ],
@@ -3036,6 +4480,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -3054,12 +4502,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "SampleMaterial"
                     ],
@@ -3076,6 +4520,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -3112,12 +4560,8 @@
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "SampleProcessing"
                     ],
@@ -3133,12 +4577,17 @@
             "title": "SampleProcessing",
             "type": "object"
         },
+        "SampleProcessingEnum": {
+            "description": "",
+            "title": "SampleProcessingEnum",
+            "type": "string"
+        },
         "Service": {
             "additionalProperties": false,
             "description": "A service provided by an organization",
             "properties": {
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Service"
                     ],
@@ -3157,7 +4606,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "SimpleQuantity"
                     ],
@@ -3174,10 +4623,93 @@
             "title": "SimpleQuantity",
             "type": "object"
         },
+        "SolarPlant": {
+            "additionalProperties": false,
+            "description": "A solar power plant",
+            "properties": {
+                "capacity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "capex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Capital expenditure for the plant"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "commissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "decommissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "located_at_place": {
+                    "description": "The place where the entity is located",
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "opex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Operating expense for the plant"
+                },
+                "plant_type": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "SolarPlant"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "SolarPlant",
+            "type": "object"
+        },
         "Specification": {
             "additionalProperties": false,
             "description": "A specification of a thing",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -3196,12 +4728,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Specification"
                     ],
@@ -3218,6 +4746,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -3236,12 +4768,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "StudyDesign"
                     ],
@@ -3270,7 +4798,7 @@
                     "$ref": "#/$defs/TimePoint"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "TemporalInterval"
                     ],
@@ -3302,7 +4830,7 @@
                     ]
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "TemporalRelationship"
                     ],
@@ -3342,7 +4870,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "TimePoint"
                     ],
@@ -3366,7 +4894,7 @@
                     "$ref": "#/$defs/TimePoint"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "TimePointOrTemporalInterval"
                     ],
@@ -3380,6 +4908,10 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -3398,12 +4930,8 @@
                     },
                     "type": "array"
                 },
-                "subtype": {
-                    "description": "An enum with a more specific type",
-                    "type": "string"
-                },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "UnitConcept"
                     ],
@@ -3435,13 +4963,13 @@
                                 "$ref": "#/$defs/Quantity"
                             },
                             {
-                                "$ref": "#/$defs/Duration"
-                            },
-                            {
                                 "$ref": "#/$defs/SimpleQuantity"
                             },
                             {
                                 "$ref": "#/$defs/Ratio"
+                            },
+                            {
+                                "$ref": "#/$defs/Duration"
                             },
                             {
                                 "$ref": "#/$defs/FoodIngredient"
@@ -3462,13 +4990,13 @@
                                 "$ref": "#/$defs/Quantity"
                             },
                             {
-                                "$ref": "#/$defs/Duration"
-                            },
-                            {
                                 "$ref": "#/$defs/SimpleQuantity"
                             },
                             {
                                 "$ref": "#/$defs/Ratio"
+                            },
+                            {
+                                "$ref": "#/$defs/Duration"
                             },
                             {
                                 "$ref": "#/$defs/FoodIngredient"
@@ -3504,7 +5032,7 @@
                     "type": "array"
                 },
                 "type": {
-                    "description": "A type for a thing",
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
                         "Variable"
                     ],
@@ -3512,6 +5040,243 @@
                 }
             },
             "title": "Variable",
+            "type": "object"
+        },
+        "WellFacility": {
+            "additionalProperties": false,
+            "description": "A facility where fluid resources (e.g., oil, gas, water) are extracted from the earth",
+            "properties": {
+                "annual_production": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "depth": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "facility_type": {
+                    "$ref": "#/$defs/ExtractiveIndustryFacilityType"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "located_at_place": {
+                    "description": "The place where the entity is located",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "production_capacity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "products": {
+                    "items": {
+                        "$ref": "#/$defs/ExtractiveIndustryProduct"
+                    },
+                    "type": "array"
+                },
+                "reserves": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "WellFacility"
+                    ],
+                    "type": "string"
+                },
+                "well_type": {
+                    "$ref": "#/$defs/WellType"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "WellFacility",
+            "type": "object"
+        },
+        "WellType": {
+            "description": "",
+            "enum": [
+                "OIL",
+                "GAS",
+                "WATER",
+                "INJECTION"
+            ],
+            "title": "WellType",
+            "type": "string"
+        },
+        "WindFarm": {
+            "additionalProperties": false,
+            "description": "A wind farm",
+            "properties": {
+                "capacity": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        }
+                    ]
+                },
+                "capex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Capital expenditure for the plant"
+                },
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "commissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "decommissioning_date": {
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "located_at_place": {
+                    "description": "The place where the entity is located",
+                    "type": "string"
+                },
+                "location": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "operator": {
+                    "type": "string"
+                },
+                "opex": {
+                    "$ref": "#/$defs/MoneyQuantity",
+                    "description": "Operating expense for the plant"
+                },
+                "plant_type": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "WindFarm"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "WindFarm",
             "type": "object"
         }
     },

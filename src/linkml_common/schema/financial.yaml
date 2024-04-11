@@ -1,5 +1,5 @@
 id: https://w3id.org/linkml-common/financial
-name: linkml-common-financial
+name: financial
 title: linkml-common-financial
 description: |-
   Common Data Model Elements
@@ -21,6 +21,7 @@ default_range: string
 imports:
   - linkml:types
   - quantities
+  - social
 
 classes:
 
@@ -28,7 +29,7 @@ classes:
     description: >-
       A quantity of money
     class_uri: fhir:MoneyQuantity
-    is_a: Quantity
+    is_a: SimpleQuantity
     attributes:
       value:
         range: float

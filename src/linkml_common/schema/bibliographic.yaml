@@ -1,6 +1,6 @@
-id: https://w3id.org/linkml-common/financial
-name: linkml-common-financial
-title: linkml-common-financial
+id: https://w3id.org/linkml-common/bibliographic
+name: linkml-common-bibliographic
+title: linkml-common-bibliographic
 description: |-
   Common Data Model Elements: Bibliographic and Publishing Data
 license: MIT

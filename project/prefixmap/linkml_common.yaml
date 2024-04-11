@@ -10,7 +10,7 @@
    "dcterms": "http://purl.org/dc/terms/",
    "example": "https://example.org/",
    "fhir": "http://hl7.org/fhir/",
-   "fibo": "http://example.org/UNKNOWN/fibo/",
+   "fibo": "https://spec.edmcouncil.org/fibo/ontology/FBC",
    "fibo.DatesAndTimes": "https://www.omg.org/spec/Commons/DatesAndTimes/",
    "fibo.QuantitiesAndUnits": "https://www.omg.org/spec/Commons/QuantitiesAndUnits/",
    "fibo.commons.PartiesAndSituations": "https://spec.edmcouncil.org/fibo/ontology/FBC/ommons/PartiesAndSituations/",
@@ -31,6 +31,9 @@
    },
    "Intangible": {
       "@id": "schema:Intangible"
+   },
+   "MoneyQuantity": {
+      "@id": "fhir:MoneyQuantity"
    },
    "Place": {
       "@id": "schema:Place"

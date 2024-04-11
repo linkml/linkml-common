@@ -1,0 +1,103 @@
+id: https://w3id.org/linkml-common/energytechnology
+name: energytechnology
+title: Energy Technology Model
+description: A data model for representing energy technology
+license: MIT
+prefixes:
+  linkml_common: https://w3id.org/linkml-common/
+  linkml: https://w3id.org/linkml/
+default_prefix: linkml_common
+default_range: string
+
+imports:
+  - linkml:types
+  - core
+  - geography
+  - quantities
+  - engineering
+  - civilengineering
+  - social
+  - financial
+
+classes:
+
+  PowerPlant:
+    is_a: Building
+    description: A facility for generating electrical power
+    attributes:
+      plant_type:
+        range: PowerPlantType
+      location:
+        range: Place
+      operator:
+        range: Organization
+      capacity:
+        range: SimpleQuantity
+      commissioning_date:
+        range: date
+      decommissioning_date:
+        range: date
+      capex:
+        range: MoneyQuantity
+        description: Capital expenditure for the plant
+      opex:
+        range: MoneyQuantity
+        description: Operating expense for the plant
+
+  PowerPlantType:
+    is_a: Concept
+    description: The type of power plant
+
+  FossilFuelPlant:
+    is_a: PowerPlant
+    description: A power plant that uses fossil fuels
+    attributes:
+      fuel:
+        range: FossilFuel
+
+  NuclearPlant:
+    is_a: PowerPlant
+    description: A nuclear power plant
+
+  RenewablePlant:
+    is_a: PowerPlant
+    description: A power plant that uses renewable energy sources
+
+  HydroelectricPlant:
+    is_a: RenewablePlant
+    description: A hydroelectric power plant
+    attributes:
+      dam:
+        range: Landform
+        description: The dam used by the hydroelectric plant
+
+  SolarPlant:
+    is_a: RenewablePlant
+    description: A solar power plant
+
+  WindFarm:
+    is_a: RenewablePlant
+    description: A wind farm
+
+  FossilFuel:
+    is_a: Concept
+    description: A type of fossil fuel
+
+  ElectricalGrid:
+    is_a: BuiltSystem
+    description: A network of electrical transmission lines
+    attributes:
+      plants:
+        range: PowerPlant
+        multivalued: true
+
+enums:
+
+  FossilFuelType:
+    permissible_values:
+      COAL:
+        description: Coal
+      NATURAL_GAS:
+        description: Natural gas
+      PETROLEUM:
+        description: Petroleum

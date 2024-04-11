@@ -4,7 +4,7 @@ message Agent
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -14,7 +14,7 @@ message AutomatedAgent
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -23,7 +23,35 @@ message BasicFoodType
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message Building
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  place locatedAtPlace = 0
+ }
+message BuiltEnvironmentFeature
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message BuiltSystem
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -33,7 +61,7 @@ message ClinicalCohort
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   clinicalCohortDefinition definition = 0
@@ -44,7 +72,7 @@ message ClinicalCohortDefinition
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -54,7 +82,7 @@ message ClinicalCohortEnrollment
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -76,7 +104,7 @@ message CompositeFoodType
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -85,7 +113,7 @@ message Concept
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -95,7 +123,7 @@ message CreativeWork
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   string title = 0
@@ -106,12 +134,22 @@ message CreativeWork
  repeated  agent contacts = 0
  repeated  string keywords = 0
  }
+// A currency
+message CurrencyConcept
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
 message DataGenerationFromSample
  {
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -128,7 +166,7 @@ message Dataset
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   string title = 0
@@ -150,12 +188,23 @@ message Duration
   string type = 0
   quantityKind hasQuantityKind = 0
  }
+// A network of electrical transmission lines
+message ElectricalGrid
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ repeated  powerPlant plants = 0
+ }
 message EngineeringMaterialProcessing
  {
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -171,7 +220,7 @@ message EngineeringProcess
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -187,7 +236,7 @@ message EngineeringSpecification
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -197,11 +246,21 @@ message EnvironmentalSite
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   postalAddress address = 0
   geoPointLocation geolocation = 0
+  geoBoxLocation boundingCoordinates = 0
+ }
+message Equipment
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
  }
 // A thing that happens
 message Event
@@ -209,7 +268,7 @@ message Event
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -217,6 +276,79 @@ message Event
   timePoint happensAt = 0
   temporalInterval hasInterval = 0
   duration hasDuration = 0
+ }
+// The equipment used in extractive industry operations
+message ExtractiveIndustryEquipment
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+// A facility where natural resources are extracted from the earth
+message ExtractiveIndustryFacility
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  place locatedAtPlace = 0
+  extractiveIndustryFacilityType facilityType = 0
+  organization operator = 0
+ repeated  extractiveIndustryProduct products = 0
+  quantity productionCapacity = 0
+  quantity annualProduction = 0
+  quantity reserves = 0
+ }
+// A product extracted from an extractive industry facility
+message ExtractiveIndustryProduct
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  extractiveIndustryProductType productType = 0
+  simpleQuantity grade = 0
+  engineeringSpecification processingMethod = 0
+ }
+// Waste material generated from extractive industry operations
+message ExtractiveIndustryWaste
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+message Facility
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  place locatedAtPlace = 0
+ }
+// A bank account
+message FinancialAccount
+ {
+  string type = 0
+  string accountNumber = 0
+  organization bank = 0
+  person accountHolder = 0
+ }
+// A product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be paid interest.
+message FinancialProduct
+ {
+  string type = 0
  }
 message FoodIngredient
  {
@@ -228,7 +360,7 @@ message FoodProcessing
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -244,7 +376,7 @@ message FoodRecipe
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  repeated  foodIngredient ingredients = 0
@@ -255,9 +387,46 @@ message FoodTypeConcept
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
+ }
+// A type of fossil fuel
+message FossilFuel
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
+// A power plant that uses fossil fuels
+message FossilFuelPlant
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  place locatedAtPlace = 0
+  powerPlantType plantType = 0
+  place location = 0
+  organization operator = 0
+  simpleQuantity capacity = 0
+  date commissioningDate = 0
+  date decommissioningDate = 0
+  moneyQuantity capex = 0
+  moneyQuantity opex = 0
+  fossilFuel fuel = 0
+ }
+message GeoBoxLocation
+ {
+  decimal westBoundingCoordinate = 0
+  decimal eastBoundingCoordinate = 0
+  decimal northBoundingCoordinate = 0
+  decimal southBoundingCoordinate = 0
  }
 message GeoPointLocation
  {
@@ -270,7 +439,7 @@ message HealthcareConditionOccurrence
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -281,6 +450,7 @@ message HealthcareConditionOccurrence
   patient patient = 0
   healthcareEncounter observedDuring = 0
  }
+// An interaction between a patient and one or more healthcare providers
 message HealthcareEncounter
  {
   uriorcurie id = 0
@@ -295,14 +465,15 @@ message HealthcareEncounter
   duration hasDuration = 0
   patient patient = 0
   healthcareProvider provider = 0
-  healthcareEncounterClassification subtype = 0
+  healthcareEncounterClassification classification = 0
  }
+// An organization that provides healthcare services
 message HealthcareOrganization
  {
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -323,11 +494,32 @@ message HealthcareSite
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   postalAddress address = 0
   geoPointLocation geolocation = 0
+  geoBoxLocation boundingCoordinates = 0
+ }
+// A hydroelectric power plant
+message HydroelectricPlant
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  place locatedAtPlace = 0
+  powerPlantType plantType = 0
+  place location = 0
+  organization operator = 0
+  simpleQuantity capacity = 0
+  date commissioningDate = 0
+  date decommissioningDate = 0
+  moneyQuantity capex = 0
+  moneyQuantity opex = 0
+  landform dam = 0
  }
 // An entity that describes some information
 message InformationEntity
@@ -335,7 +527,7 @@ message InformationEntity
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   any describes = 0
@@ -350,7 +542,7 @@ message Investigation
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   string objectives = 0
@@ -361,7 +553,7 @@ message InvestigativeProcess
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -378,9 +570,10 @@ message InvestigativeProtocol
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
  repeated  concept ontologyTypes = 0
   string description = 0
+  uri protocolsIoUrl = 0
+  concept classification = 0
  }
 // A natural feature of the solid surface of the Earth or other planetary body
 message Landform
@@ -388,10 +581,11 @@ message Landform
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   postalAddress address = 0
+  geoBoxLocation boundingCoordinates = 0
   geoPointLocation geolocation = 0
  }
 message LifeEvent
@@ -399,7 +593,7 @@ message LifeEvent
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -413,7 +607,7 @@ message MaterialCollection
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -429,7 +623,7 @@ message MaterialProcessing
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -454,14 +648,61 @@ message Measurement
   quantity quantityMeasured = 0
   variable variableMeasured = 0
  }
+// A facility where mineral resources are extracted from the earth
+message MiningFacility
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  place locatedAtPlace = 0
+  extractiveIndustryFacilityType facilityType = 0
+  organization operator = 0
+ repeated  extractiveIndustryProduct products = 0
+  quantity productionCapacity = 0
+  quantity annualProduction = 0
+  quantity reserves = 0
+  miningMethod miningMethod = 0
+  quantity depth = 0
+  quantity area = 0
+ }
+// A quantity of money
+message MoneyQuantity
+ {
+  string type = 0
+  quantityKind hasQuantityKind = 0
+  float value = 0
+  currencyConcept unit = 0
+ }
 message NamedThing
  {
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
+ }
+// A nuclear power plant
+message NuclearPlant
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  place locatedAtPlace = 0
+  powerPlantType plantType = 0
+  place location = 0
+  organization operator = 0
+  simpleQuantity capacity = 0
+  date commissioningDate = 0
+  date decommissioningDate = 0
+  moneyQuantity capex = 0
+  moneyQuantity opex = 0
  }
 // A statement about the state of something
 message Observation
@@ -474,7 +715,7 @@ message Organization
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -489,7 +730,7 @@ message Person
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   string primaryEmail = 0
@@ -502,7 +743,7 @@ message PhysicalDevice
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -512,11 +753,12 @@ message Place
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   postalAddress address = 0
   geoPointLocation geolocation = 0
+  geoBoxLocation boundingCoordinates = 0
  }
 // A process that follows a defined procedure or plan
 message PlannedProcess
@@ -524,7 +766,7 @@ message PlannedProcess
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -546,13 +788,42 @@ message PostalAddress
   string postalCode = 0
   string country = 0
  }
+// A facility for generating electrical power
+message PowerPlant
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  place locatedAtPlace = 0
+  powerPlantType plantType = 0
+  place location = 0
+  organization operator = 0
+  simpleQuantity capacity = 0
+  date commissioningDate = 0
+  date decommissioningDate = 0
+  moneyQuantity capex = 0
+  moneyQuantity opex = 0
+ }
+// The type of power plant
+message PowerPlantType
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+ }
 // A canonical series of actions conducted in a certain order or manner
 message Procedure
  {
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -561,7 +832,7 @@ message Publication
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   string title = 0
@@ -582,7 +853,7 @@ message QuantityKind
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -592,6 +863,23 @@ message QuantityRange
   string type = 0
   quantity lowerBound = 0
   quantity upperBound = 0
+ }
+// A facility where stone, sand, or gravel are extracted from the earth
+message QuarryFacility
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  place locatedAtPlace = 0
+  extractiveIndustryFacilityType facilityType = 0
+  organization operator = 0
+ repeated  extractiveIndustryProduct products = 0
+  quantity productionCapacity = 0
+  quantity annualProduction = 0
+  quantity reserves = 0
  }
 // A tuple of two quantities
 message Ratio
@@ -606,16 +894,35 @@ message RawMaterial
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
+ }
+// A power plant that uses renewable energy sources
+message RenewablePlant
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  place locatedAtPlace = 0
+  powerPlantType plantType = 0
+  place location = 0
+  organization operator = 0
+  simpleQuantity capacity = 0
+  date commissioningDate = 0
+  date decommissioningDate = 0
+  moneyQuantity capex = 0
+  moneyQuantity opex = 0
  }
 message SampleCollectionProcess
  {
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -634,7 +941,7 @@ message SampleMaterial
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -643,7 +950,7 @@ message SampleProcessing
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   timePoint startsAt = 0
@@ -667,13 +974,32 @@ message SimpleQuantity
   float value = 0
   unitConcept unit = 0
  }
+// A solar power plant
+message SolarPlant
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  place locatedAtPlace = 0
+  powerPlantType plantType = 0
+  place location = 0
+  organization operator = 0
+  simpleQuantity capacity = 0
+  date commissioningDate = 0
+  date decommissioningDate = 0
+  moneyQuantity capex = 0
+  moneyQuantity opex = 0
+ }
 // A specification of a thing
 message Specification
  {
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -682,9 +1008,9 @@ message StudyDesign
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
  repeated  concept ontologyTypes = 0
   string description = 0
+  concept classification = 0
  }
 // A period of time
 message TemporalInterval
@@ -724,7 +1050,7 @@ message UnitConcept
   uriorcurie id = 0
   string name = 0
   string type = 0
-  string subtype = 0
+  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
  }
@@ -740,4 +1066,42 @@ message Variable
  {
   string type = 0
  repeated  unitConcept allowedUnits = 0
+ }
+// A facility where fluid resources (e.g., oil, gas, water) are extracted from the earth
+message WellFacility
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  place locatedAtPlace = 0
+  extractiveIndustryFacilityType facilityType = 0
+  organization operator = 0
+ repeated  extractiveIndustryProduct products = 0
+  quantity productionCapacity = 0
+  quantity annualProduction = 0
+  quantity reserves = 0
+  wellType wellType = 0
+  quantity depth = 0
+ }
+// A wind farm
+message WindFarm
+ {
+  uriorcurie id = 0
+  string name = 0
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  place locatedAtPlace = 0
+  powerPlantType plantType = 0
+  place location = 0
+  organization operator = 0
+  simpleQuantity capacity = 0
+  date commissioningDate = 0
+  date decommissioningDate = 0
+  moneyQuantity capex = 0
+  moneyQuantity opex = 0
  }

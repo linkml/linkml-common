@@ -22,9 +22,12 @@ imports:
   - core
   - bibliographic
   - datasets
+  - civilengineering
   - clinicalresearch
   - computational
   - engineering
+  - energytechnology
+  - extractiveindustry
   - environmental
   - financial
   - foods
@@ -35,4 +38,5 @@ imports:
   - quantities
   - social
   - time
+
 

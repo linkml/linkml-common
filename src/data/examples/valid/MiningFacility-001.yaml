@@ -1,0 +1,30 @@
+id: XF001
+name: Example Coal Mine
+type: MiningFacility
+facility_type: MINING_FACILITY
+mining_method: UNDERGROUND
+operator: ORG001
+products:
+  - id: PROD001
+    type: ExtractiveIndustryProduct
+    product_type: COAL
+    grade:
+      value: 0.7
+      unit: PERCENT
+    processing_method: PM001
+production_capacity:
+  value: 5000000
+  unit: TONS_PER_YEAR
+annual_production:
+  value: 4500000
+  unit: TONS
+reserves:
+  value: 500000000
+  unit: TONS
+depth:
+  value: 500
+  unit: METERS
+area:
+  value: 10000
+  unit: SQUARE_METERS
+located_at_place: LOC001
