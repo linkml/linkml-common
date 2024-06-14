@@ -1,11 +1,27 @@
 type Agent
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
+  }
+
+type AggregatePrediction implements OutcomeStatistics
+  {
+    type: String
+    variablePredicted: Variable
+    predictedValue: Any
+    expectedValue: Any
+    truePositiveCount: CountScalar
+    falsePositiveCount: CountScalar
+    trueNegativeCount: CountScalar
+    falseNegativeCount: CountScalar
+    recall: Float
+    precision: Float
+    f1Score: Float
+    accuracy: Float
   }
 
 type Any
@@ -14,127 +30,139 @@ type Any
 
 type AutomatedAgent
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
   }
 
 type BasicFoodType
   {
+    type: String
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
   }
 
 type Building
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     locatedAtPlace: Place
   }
 
 type BuiltEnvironmentFeature
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
   }
 
 type BuiltSystem
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
   }
 
 type ClinicalCohort
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     definition: ClinicalCohortDefinition
   }
 
 type ClinicalCohortDefinition
   {
+    type: String
+    describes: Any
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
   }
 
 type ClinicalCohortEnrollment
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     patient: Patient
     cohort: ClinicalCohort
   }
 
-type Collection
-  {
-    type: String
-    members: [Entity]
-  }
-
 type CompositeFoodType
   {
+    type: String
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
   }
 
-type Concept
+type ComputationalPlannedProcess
   {
+    type: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
+    isOngoingAsOf: TimePoint
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
+    followsProcedure: Procedure
+    usesPhysicalDevice: PhysicalDevice
+    usesConfiguration: PlannedProcessConfiguration
+    inputs: [Any]
+    outputs: [Any]
+    parts: [ComputationalPlannedProcess]
+    immediatePrecedingSteps: [ComputationalPlannedProcess]
   }
 
-type CreativeWork
+type Concept implements Identified
   {
+    type: String
     id: Uriorcurie!
     name: String
+  }
+
+interface CreationMetadata
+  {
+    title: String
+    abstract: String
+    rights: String
+    creators: [Agent]
+    contributors: [Agent]
+    contacts: [Agent]
+    keywords: [String]
+  }
+
+type CreativeWork implements CreationMetadata
+  {
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     title: String
     abstract: String
     rights: String
@@ -146,40 +174,35 @@ type CreativeWork
 
 type CurrencyConcept
   {
+    type: String
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
   }
 
 type DataGenerationFromSample
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     usesPhysicalDevice: PhysicalDevice
+    usesConfiguration: PlannedProcessConfiguration
     followsProcedure: InvestigativeProtocol
     partOf: Investigation
   }
 
-type Dataset
+type Dataset implements CreationMetadata
   {
+    type: String
+    describes: Any
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
+    collectedAsPartOf: [Investigation]
     title: String
     abstract: String
     rights: String
@@ -187,7 +210,6 @@ type Dataset
     contributors: [Agent]
     contacts: [Agent]
     keywords: [String]
-    collectedAsPartOf: [Investigation]
   }
 
 type DataStructure
@@ -203,80 +225,73 @@ type Duration
 
 type ElectricalGrid
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     plants: [PowerPlant]
   }
 
 type EngineeringMaterialProcessing
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     followsProcedure: Procedure
     usesPhysicalDevice: PhysicalDevice
+    usesConfiguration: PlannedProcessConfiguration
   }
 
 type EngineeringProcess
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     followsProcedure: EngineeringSpecification
     partOf: EngineeringProcess
   }
 
 type EngineeringSpecification
   {
+    type: String
+    describes: Any
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
   }
 
-interface Entity
+type Entity implements Typed
   {
     type: String
   }
 
-type EnvironmentalMonitoring
+type EntitySet
   {
-  }
-
-type EnvironmentalProcess
-  {
+    type: String
+    members: [Entity]
   }
 
 type EnvironmentalSite
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     address: PostalAddress
     geolocation: GeoPointLocation
     boundingCoordinates: GeoBoxLocation
@@ -284,64 +299,72 @@ type EnvironmentalSite
 
 type Equipment
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
   }
 
-type Event
+type Event implements Identified
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
+  }
+
+type ExecutionOfProcedure
+  {
+    type: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
   }
 
 type ExtractiveIndustryEquipment
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
   }
 
 type ExtractiveIndustryFacility
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     locatedAtPlace: Place
     facilityType: ExtractiveIndustryFacilityType
     operator: Organization
     products: [ExtractiveIndustryProduct]
-    productionCapacity: Quantity
-    annualProduction: Quantity
-    reserves: Quantity
+    productionCapacity: SimpleQuantity
+    annualProduction: SimpleQuantity
+    reserves: SimpleQuantity
   }
 
 type ExtractiveIndustryProduct
   {
+    type: String
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     productType: ExtractiveIndustryProductType
     grade: SimpleQuantity
     processingMethod: EngineeringSpecification
@@ -349,22 +372,19 @@ type ExtractiveIndustryProduct
 
 type ExtractiveIndustryWaste
   {
+    type: String
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
   }
 
 type Facility
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     locatedAtPlace: Place
   }
 
@@ -374,6 +394,17 @@ type FinancialAccount
     accountNumber: String
     bank: Organization
     accountHolder: Person
+  }
+
+type FinancialOrganization
+  {
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    id: Uriorcurie!
+    name: String
+    providesServices: [Service]
   }
 
 type FinancialProduct
@@ -389,61 +420,45 @@ type FoodIngredient
 
 type FoodProcessing
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     followsProcedure: Procedure
     usesPhysicalDevice: PhysicalDevice
+    usesConfiguration: PlannedProcessConfiguration
   }
 
 type FoodRecipe
   {
+    type: String
+    describes: Any
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     ingredients: [FoodIngredient]
     steps: [FoodProcessing]
   }
 
 type FoodTypeConcept
   {
+    type: String
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
-  }
-
-type FossilFuel
-  {
-    id: Uriorcurie!
-    name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
   }
 
 type FossilFuelPlant
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     locatedAtPlace: Place
     plantType: PowerPlantType
     location: Place
@@ -453,11 +468,12 @@ type FossilFuelPlant
     decommissioningDate: Date
     capex: MoneyQuantity
     opex: MoneyQuantity
-    fuel: FossilFuel
+    fuel: FossilFuelType
   }
 
 type GeoBoxLocation
   {
+    type: String
     westBoundingCoordinate: Decimal
     eastBoundingCoordinate: Decimal
     northBoundingCoordinate: Decimal
@@ -466,6 +482,7 @@ type GeoBoxLocation
 
 type GeoPointLocation
   {
+    type: String
     latitude: Decimal
     longitude: Decimal
     altitude: Decimal
@@ -473,33 +490,30 @@ type GeoPointLocation
 
 type HealthcareConditionOccurrence
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     patient: Patient
     observedDuring: HealthcareEncounter
   }
 
 type HealthcareEncounter
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     patient: Patient
     provider: HealthcareProvider
     classification: HealthcareEncounterClassification
@@ -507,12 +521,13 @@ type HealthcareEncounter
 
 type HealthcareOrganization
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
+    providesServices: [Service]
   }
 
 type HealthcareProvider
@@ -531,12 +546,12 @@ type HealthcareRole
 
 type HealthcareSite
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     address: PostalAddress
     geolocation: GeoPointLocation
     boundingCoordinates: GeoBoxLocation
@@ -544,12 +559,12 @@ type HealthcareSite
 
 type HydroelectricPlant
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     locatedAtPlace: Place
     plantType: PowerPlantType
     location: Place
@@ -562,15 +577,18 @@ type HydroelectricPlant
     dam: Landform
   }
 
-type InformationEntity
+interface Identified
   {
     id: Uriorcurie!
     name: String
+  }
+
+type InformationEntity implements Identified
+  {
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     describes: Any
+    id: Uriorcurie!
+    name: String
   }
 
 type Intangible
@@ -580,53 +598,54 @@ type Intangible
 
 type Investigation
   {
+    type: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
+    isOngoingAsOf: TimePoint
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     objectives: String
     variables: [Variable]
   }
 
 type InvestigativeProcess
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     usesPhysicalDevice: PhysicalDevice
+    usesConfiguration: PlannedProcessConfiguration
     followsProcedure: InvestigativeProtocol
     partOf: Investigation
   }
 
 type InvestigativeProtocol
   {
+    type: String
+    describes: Any
     id: Uriorcurie!
     name: String
-    type: String
-    ontologyTypes: [Concept]
-    description: String
     protocolsIoUrl: Uri
     classification: Concept
   }
 
 type Landform
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     address: PostalAddress
     boundingCoordinates: GeoBoxLocation
     geolocation: GeoPointLocation
@@ -634,90 +653,87 @@ type Landform
 
 type LifeEvent
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
   }
 
 interface Location
   {
+    type: String
   }
 
 type MaterialCollection
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     followsProcedure: Procedure
     usesPhysicalDevice: PhysicalDevice
+    usesConfiguration: PlannedProcessConfiguration
   }
 
 type MaterialProcessing
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     followsProcedure: Procedure
     usesPhysicalDevice: PhysicalDevice
-  }
-
-type MathematicalOperation
-  {
-    inputs: [Any]
-    outputs: [Any]
-    parts: [MathematicalOperation]
-    immediatePrecedingSteps: [MathematicalOperation]
+    usesConfiguration: PlannedProcessConfiguration
   }
 
 type Measurement
   {
     type: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     quantityMeasured: Quantity
     variableMeasured: Variable
   }
 
 type MiningFacility
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     locatedAtPlace: Place
     facilityType: ExtractiveIndustryFacilityType
     operator: Organization
     products: [ExtractiveIndustryProduct]
-    productionCapacity: Quantity
-    annualProduction: Quantity
-    reserves: Quantity
+    productionCapacity: SimpleQuantity
+    annualProduction: SimpleQuantity
+    reserves: SimpleQuantity
     miningMethod: MiningMethod
-    depth: Quantity
-    area: Quantity
+    depth: SimpleQuantity
+    area: SimpleQuantity
   }
 
 type MoneyQuantity
@@ -728,24 +744,24 @@ type MoneyQuantity
     unit: CurrencyConcept
   }
 
-type NamedThing
+type NamedThing implements Identified
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
   }
 
 type NuclearPlant
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     locatedAtPlace: Place
     plantType: PowerPlantType
     location: Place
@@ -760,16 +776,37 @@ type NuclearPlant
 type Observation
   {
     type: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
   }
 
 type Organization
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
+    providesServices: [Service]
+  }
+
+interface OutcomeStatistics
+  {
+    truePositiveCount: CountScalar
+    falsePositiveCount: CountScalar
+    trueNegativeCount: CountScalar
+    falseNegativeCount: CountScalar
+    recall: Float
+    precision: Float
+    f1Score: Float
+    accuracy: Float
   }
 
 type Patient
@@ -780,12 +817,12 @@ type Patient
 
 type Person
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     primaryEmail: String
     birthDate: Date
     ageInYears: Integer
@@ -794,22 +831,22 @@ type Person
 
 type PhysicalDevice
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
   }
 
 type Place
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     address: PostalAddress
     geolocation: GeoPointLocation
     boundingCoordinates: GeoBoxLocation
@@ -817,23 +854,28 @@ type Place
 
 type PlannedProcess
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     followsProcedure: Procedure
     usesPhysicalDevice: PhysicalDevice
+    usesConfiguration: PlannedProcessConfiguration
+  }
+
+type PlannedProcessConfiguration
+  {
+    type: String
   }
 
 type PointLocation
   {
+    type: String
   }
 
 type PostalAddress
@@ -849,12 +891,12 @@ type PostalAddress
 
 type PowerPlant
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     locatedAtPlace: Place
     plantType: PowerPlantType
     location: Place
@@ -868,39 +910,48 @@ type PowerPlant
 
 type PowerPlantType
   {
+    type: String
     id: Uriorcurie!
     name: String
+  }
+
+type Prediction
+  {
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
+    variablePredicted: Variable
+    predictedValue: Any
+    expectedValue: Any
+  }
+
+type PredictionSummaryStatistics implements OutcomeStatistics
+  {
+    type: String
+    predictions: [Prediction]
+    usesDataset: Dataset
+    truePositiveCount: CountScalar
+    falsePositiveCount: CountScalar
+    trueNegativeCount: CountScalar
+    falseNegativeCount: CountScalar
+    recall: Float
+    precision: Float
+    f1Score: Float
+    accuracy: Float
   }
 
 type Procedure
   {
+    type: String
+    describes: Any
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
   }
 
 type Publication
   {
+    type: String
+    describes: Any
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
-    title: String
-    abstract: String
-    rights: String
-    creators: [Agent]
-    contributors: [Agent]
-    contacts: [Agent]
-    keywords: [String]
   }
 
 type Quantity
@@ -911,12 +962,9 @@ type Quantity
 
 type QuantityKind
   {
+    type: String
     id: Uriorcurie!
     name: String
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
   }
 
 type QuantityRange
@@ -928,19 +976,19 @@ type QuantityRange
 
 type QuarryFacility
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     locatedAtPlace: Place
     facilityType: ExtractiveIndustryFacilityType
     operator: Organization
     products: [ExtractiveIndustryProduct]
-    productionCapacity: Quantity
-    annualProduction: Quantity
-    reserves: Quantity
+    productionCapacity: SimpleQuantity
+    annualProduction: SimpleQuantity
+    reserves: SimpleQuantity
   }
 
 type Ratio
@@ -953,12 +1001,12 @@ type Ratio
 
 type RawMaterial
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
   }
 
 interface Relationship
@@ -968,12 +1016,12 @@ interface Relationship
 
 type RenewablePlant
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     locatedAtPlace: Place
     plantType: PowerPlantType
     location: Place
@@ -992,18 +1040,17 @@ interface Role
 
 type SampleCollectionProcess
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     usesPhysicalDevice: PhysicalDevice
+    usesConfiguration: PlannedProcessConfiguration
     followsProcedure: InvestigativeProtocol
     partOf: Investigation
     materialCollected: SampleMaterial
@@ -1012,34 +1059,42 @@ type SampleCollectionProcess
 
 type SampleMaterial
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
   }
 
 type SampleProcessing
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
     startsAt: TimePoint
     endsAt: TimePoint
     happensAt: TimePoint
     hasInterval: TemporalInterval
     hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
     followsProcedure: Procedure
     usesPhysicalDevice: PhysicalDevice
+    usesConfiguration: PlannedProcessConfiguration
   }
 
 type Service
   {
     type: String
+  }
+
+type SimplePrediction
+  {
+    type: String
+    variablePredicted: Variable
+    predictedValue: Any
+    outcome: OutcomeType
+    expectedValue: String
   }
 
 type SimpleQuantity
@@ -1052,12 +1107,12 @@ type SimpleQuantity
 
 type SolarPlant
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     locatedAtPlace: Place
     plantType: PowerPlantType
     location: Place
@@ -1071,21 +1126,23 @@ type SolarPlant
 
 type Specification
   {
+    type: String
+    describes: Any
     id: Uriorcurie!
     name: String
+  }
+
+type StructuredValue
+  {
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
   }
 
 type StudyDesign
   {
+    type: String
+    describes: Any
     id: Uriorcurie!
     name: String
-    type: String
-    ontologyTypes: [Concept]
-    description: String
     classification: Concept
   }
 
@@ -1123,22 +1180,16 @@ type TimePointOrTemporalInterval
     endsAt: TimePoint
   }
 
-type UnitConcept
+interface Typed
   {
-    id: Uriorcurie!
-    name: String
     type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
   }
 
-type UnitConversionOperation
+type UnitConcept
   {
-    parts: [MathematicalOperation]
-    immediatePrecedingSteps: [MathematicalOperation]
-    inputs: [Quantity]
-    outputs: [Quantity]
+    type: String
+    id: Uriorcurie!
+    name: String
   }
 
 type Variable
@@ -1149,31 +1200,31 @@ type Variable
 
 type WellFacility
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     locatedAtPlace: Place
     facilityType: ExtractiveIndustryFacilityType
     operator: Organization
     products: [ExtractiveIndustryProduct]
-    productionCapacity: Quantity
-    annualProduction: Quantity
-    reserves: Quantity
+    productionCapacity: SimpleQuantity
+    annualProduction: SimpleQuantity
+    reserves: SimpleQuantity
     wellType: WellType
-    depth: Quantity
+    depth: SimpleQuantity
   }
 
 type WindFarm
   {
-    id: Uriorcurie!
-    name: String
     type: String
     classification: Concept
     ontologyTypes: [Concept]
     description: String
+    id: Uriorcurie!
+    name: String
     locatedAtPlace: Place
     plantType: PowerPlantType
     location: Place

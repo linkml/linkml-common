@@ -40,6 +40,66 @@
             "title": "Agent",
             "type": "object"
         },
+        "AggregatePrediction": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "accuracy": {
+                    "description": "Accuracy is calculated as (TP + TN) / (TP + FP + TN + FN)",
+                    "type": "number"
+                },
+                "expected_value": {
+                    "$ref": "#/$defs/Any"
+                },
+                "f1_score": {
+                    "description": "F1 Score is the harmonic mean of precision and recall",
+                    "type": "number"
+                },
+                "false_negative_count": {
+                    "description": "Total number of false negatives (FN)",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "false_positive_count": {
+                    "description": "Total number of false positives (FP)",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "precision": {
+                    "description": "Precision is calculated as TP / (TP + FP)",
+                    "type": "number"
+                },
+                "predicted_value": {
+                    "$ref": "#/$defs/Any"
+                },
+                "recall": {
+                    "description": "Recall is calculated as TP / (TP + FN)",
+                    "type": "number"
+                },
+                "true_negative_count": {
+                    "description": "Total number of true negatives (TN)",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "true_positive_count": {
+                    "description": "Total number of true positives (TP)",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "AggregatePrediction"
+                    ],
+                    "type": "string"
+                },
+                "variable_predicted": {
+                    "$ref": "#/$defs/Variable"
+                }
+            },
+            "title": "AggregatePrediction",
+            "type": "object"
+        },
         "Any": {
             "additionalProperties": true,
             "description": "",
@@ -96,14 +156,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -111,12 +163,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -312,13 +358,9 @@
             "additionalProperties": false,
             "description": "A definition of a clinical cohort",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
+                "describes": {
+                    "$ref": "#/$defs/Any",
+                    "description": "The thing that is being described"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -327,12 +369,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -352,15 +388,7 @@
             "additionalProperties": false,
             "description": "An event relating a patient to a clinical cohort",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
                 "cohort": {
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
                     "type": "string"
                 },
                 "ends_at": {
@@ -379,15 +407,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "patient": {
                     "$ref": "#/$defs/Patient"
@@ -409,323 +434,10 @@
             "title": "ClinicalCohortEnrollment",
             "type": "object"
         },
-        "Collection": {
-            "additionalProperties": false,
-            "description": "A group of things. The collection may be heterogeneous or homogeneous.",
-            "properties": {
-                "members": {
-                    "description": "The members of the collection",
-                    "items": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/NamedThing"
-                            },
-                            {
-                                "$ref": "#/$defs/Intangible"
-                            },
-                            {
-                                "$ref": "#/$defs/Observation"
-                            },
-                            {
-                                "$ref": "#/$defs/PostalAddress"
-                            },
-                            {
-                                "$ref": "#/$defs/Variable"
-                            },
-                            {
-                                "$ref": "#/$defs/Measurement"
-                            },
-                            {
-                                "$ref": "#/$defs/Collection"
-                            },
-                            {
-                                "$ref": "#/$defs/Service"
-                            },
-                            {
-                                "$ref": "#/$defs/DataStructure"
-                            },
-                            {
-                                "$ref": "#/$defs/Quantity"
-                            },
-                            {
-                                "$ref": "#/$defs/QuantityRange"
-                            },
-                            {
-                                "$ref": "#/$defs/TimePointOrTemporalInterval"
-                            },
-                            {
-                                "$ref": "#/$defs/TemporalInterval"
-                            },
-                            {
-                                "$ref": "#/$defs/TimePoint"
-                            },
-                            {
-                                "$ref": "#/$defs/SimpleQuantity"
-                            },
-                            {
-                                "$ref": "#/$defs/Ratio"
-                            },
-                            {
-                                "$ref": "#/$defs/Duration"
-                            },
-                            {
-                                "$ref": "#/$defs/FoodIngredient"
-                            },
-                            {
-                                "$ref": "#/$defs/MoneyQuantity"
-                            },
-                            {
-                                "$ref": "#/$defs/FinancialProduct"
-                            },
-                            {
-                                "$ref": "#/$defs/FinancialAccount"
-                            },
-                            {
-                                "$ref": "#/$defs/TemporalRelationship"
-                            },
-                            {
-                                "$ref": "#/$defs/HealthcareRole"
-                            },
-                            {
-                                "$ref": "#/$defs/HealthcareProvider"
-                            },
-                            {
-                                "$ref": "#/$defs/Patient"
-                            },
-                            {
-                                "$ref": "#/$defs/Concept"
-                            },
-                            {
-                                "$ref": "#/$defs/InformationEntity"
-                            },
-                            {
-                                "$ref": "#/$defs/PhysicalDevice"
-                            },
-                            {
-                                "$ref": "#/$defs/Specification"
-                            },
-                            {
-                                "$ref": "#/$defs/Agent"
-                            },
-                            {
-                                "$ref": "#/$defs/CreativeWork"
-                            },
-                            {
-                                "$ref": "#/$defs/Investigation"
-                            },
-                            {
-                                "$ref": "#/$defs/SampleMaterial"
-                            },
-                            {
-                                "$ref": "#/$defs/BuiltEnvironmentFeature"
-                            },
-                            {
-                                "$ref": "#/$defs/ClinicalCohort"
-                            },
-                            {
-                                "$ref": "#/$defs/ClinicalCohortDefinition"
-                            },
-                            {
-                                "$ref": "#/$defs/RawMaterial"
-                            },
-                            {
-                                "$ref": "#/$defs/Equipment"
-                            },
-                            {
-                                "$ref": "#/$defs/Place"
-                            },
-                            {
-                                "$ref": "#/$defs/Event"
-                            },
-                            {
-                                "$ref": "#/$defs/LifeEvent"
-                            },
-                            {
-                                "$ref": "#/$defs/HealthcareEncounter"
-                            },
-                            {
-                                "$ref": "#/$defs/HealthcareConditionOccurrence"
-                            },
-                            {
-                                "$ref": "#/$defs/ClinicalCohortEnrollment"
-                            },
-                            {
-                                "$ref": "#/$defs/EngineeringProcess"
-                            },
-                            {
-                                "$ref": "#/$defs/PlannedProcess"
-                            },
-                            {
-                                "$ref": "#/$defs/InvestigativeProcess"
-                            },
-                            {
-                                "$ref": "#/$defs/MaterialCollection"
-                            },
-                            {
-                                "$ref": "#/$defs/MaterialProcessing"
-                            },
-                            {
-                                "$ref": "#/$defs/SampleProcessing"
-                            },
-                            {
-                                "$ref": "#/$defs/EngineeringMaterialProcessing"
-                            },
-                            {
-                                "$ref": "#/$defs/FoodProcessing"
-                            },
-                            {
-                                "$ref": "#/$defs/SampleCollectionProcess"
-                            },
-                            {
-                                "$ref": "#/$defs/DataGenerationFromSample"
-                            },
-                            {
-                                "$ref": "#/$defs/HealthcareSite"
-                            },
-                            {
-                                "$ref": "#/$defs/Landform"
-                            },
-                            {
-                                "$ref": "#/$defs/EnvironmentalSite"
-                            },
-                            {
-                                "$ref": "#/$defs/ExtractiveIndustryEquipment"
-                            },
-                            {
-                                "$ref": "#/$defs/Facility"
-                            },
-                            {
-                                "$ref": "#/$defs/BuiltSystem"
-                            },
-                            {
-                                "$ref": "#/$defs/ElectricalGrid"
-                            },
-                            {
-                                "$ref": "#/$defs/Building"
-                            },
-                            {
-                                "$ref": "#/$defs/ExtractiveIndustryFacility"
-                            },
-                            {
-                                "$ref": "#/$defs/MiningFacility"
-                            },
-                            {
-                                "$ref": "#/$defs/WellFacility"
-                            },
-                            {
-                                "$ref": "#/$defs/QuarryFacility"
-                            },
-                            {
-                                "$ref": "#/$defs/PowerPlant"
-                            },
-                            {
-                                "$ref": "#/$defs/FossilFuelPlant"
-                            },
-                            {
-                                "$ref": "#/$defs/NuclearPlant"
-                            },
-                            {
-                                "$ref": "#/$defs/RenewablePlant"
-                            },
-                            {
-                                "$ref": "#/$defs/HydroelectricPlant"
-                            },
-                            {
-                                "$ref": "#/$defs/SolarPlant"
-                            },
-                            {
-                                "$ref": "#/$defs/WindFarm"
-                            },
-                            {
-                                "$ref": "#/$defs/Publication"
-                            },
-                            {
-                                "$ref": "#/$defs/Dataset"
-                            },
-                            {
-                                "$ref": "#/$defs/Person"
-                            },
-                            {
-                                "$ref": "#/$defs/Organization"
-                            },
-                            {
-                                "$ref": "#/$defs/AutomatedAgent"
-                            },
-                            {
-                                "$ref": "#/$defs/HealthcareOrganization"
-                            },
-                            {
-                                "$ref": "#/$defs/Procedure"
-                            },
-                            {
-                                "$ref": "#/$defs/InvestigativeProtocol"
-                            },
-                            {
-                                "$ref": "#/$defs/StudyDesign"
-                            },
-                            {
-                                "$ref": "#/$defs/EngineeringSpecification"
-                            },
-                            {
-                                "$ref": "#/$defs/FoodRecipe"
-                            },
-                            {
-                                "$ref": "#/$defs/QuantityKind"
-                            },
-                            {
-                                "$ref": "#/$defs/UnitConcept"
-                            },
-                            {
-                                "$ref": "#/$defs/CurrencyConcept"
-                            },
-                            {
-                                "$ref": "#/$defs/PowerPlantType"
-                            },
-                            {
-                                "$ref": "#/$defs/FossilFuel"
-                            },
-                            {
-                                "$ref": "#/$defs/ExtractiveIndustryProduct"
-                            },
-                            {
-                                "$ref": "#/$defs/ExtractiveIndustryWaste"
-                            },
-                            {
-                                "$ref": "#/$defs/FoodTypeConcept"
-                            },
-                            {
-                                "$ref": "#/$defs/BasicFoodType"
-                            },
-                            {
-                                "$ref": "#/$defs/CompositeFoodType"
-                            }
-                        ]
-                    },
-                    "type": "array"
-                },
-                "type": {
-                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
-                    "enum": [
-                        "Collection"
-                    ],
-                    "type": "string"
-                }
-            },
-            "title": "Collection",
-            "type": "object"
-        },
         "CompositeFoodType": {
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -733,12 +445,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -754,18 +460,91 @@
             "title": "CompositeFoodType",
             "type": "object"
         },
+        "ComputationalPlannedProcess": {
+            "additionalProperties": false,
+            "description": "Application of a mathematical operation to one or more inputs to produce one or more outputs",
+            "properties": {
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "follows_procedure": {
+                    "type": "string"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "immediate_preceding_steps": {
+                    "description": "The steps that immediately precede this step",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "inputs": {
+                    "description": "The inputs to the operation",
+                    "items": {
+                        "$ref": "#/$defs/Any"
+                    },
+                    "type": "array"
+                },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "outputs": {
+                    "description": "The outputs of the operation",
+                    "items": {
+                        "$ref": "#/$defs/Any"
+                    },
+                    "type": "array"
+                },
+                "parts": {
+                    "description": "The parts of the process",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "ComputationalPlannedProcess"
+                    ],
+                    "type": "string"
+                },
+                "uses_configuration": {
+                    "$ref": "#/$defs/PlannedProcessConfiguration"
+                },
+                "uses_physical_device": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ComputationalPlannedProcess",
+            "type": "object"
+        },
         "Concept": {
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -773,12 +552,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -878,14 +651,6 @@
             "additionalProperties": false,
             "description": "A currency",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -893,12 +658,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -918,14 +677,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
@@ -945,15 +696,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "part_of": {
                     "type": "string"
@@ -967,6 +715,9 @@
                         "DataGenerationFromSample"
                     ],
                     "type": "string"
+                },
+                "uses_configuration": {
+                    "$ref": "#/$defs/PlannedProcessConfiguration"
                 },
                 "uses_physical_device": {
                     "type": "string"
@@ -1001,10 +752,6 @@
                     "description": "A summary of the item",
                     "type": "string"
                 },
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
                 "collected_as_part_of": {
                     "items": {
                         "type": "string"
@@ -1032,9 +779,9 @@
                     },
                     "type": "array"
                 },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
+                "describes": {
+                    "$ref": "#/$defs/Any",
+                    "description": "The thing that is being described"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -1050,12 +797,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "rights": {
                     "description": "Information about rights held in and over the item",
@@ -1148,14 +889,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
@@ -1175,15 +908,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
@@ -1194,6 +924,9 @@
                         "EngineeringMaterialProcessing"
                     ],
                     "type": "string"
+                },
+                "uses_configuration": {
+                    "$ref": "#/$defs/PlannedProcessConfiguration"
                 },
                 "uses_physical_device": {
                     "type": "string"
@@ -1209,14 +942,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
@@ -1236,15 +961,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "part_of": {
                     "type": "string"
@@ -1270,13 +992,9 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
+                "describes": {
+                    "$ref": "#/$defs/Any",
+                    "description": "The thing that is being described"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -1285,12 +1003,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -1306,16 +1018,342 @@
             "title": "EngineeringSpecification",
             "type": "object"
         },
-        "EnvironmentalMonitoring": {
+        "EntitySet": {
             "additionalProperties": false,
-            "description": "",
-            "title": "EnvironmentalMonitoring",
-            "type": "object"
-        },
-        "EnvironmentalProcess": {
-            "additionalProperties": false,
-            "description": "",
-            "title": "EnvironmentalProcess",
+            "description": "A group of things. The collection may be heterogeneous or homogeneous.",
+            "properties": {
+                "members": {
+                    "description": "The members of the collection",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/Intangible"
+                            },
+                            {
+                                "$ref": "#/$defs/NamedThing"
+                            },
+                            {
+                                "$ref": "#/$defs/Event"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareEncounter"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareConditionOccurrence"
+                            },
+                            {
+                                "$ref": "#/$defs/Investigation"
+                            },
+                            {
+                                "$ref": "#/$defs/ClinicalCohortEnrollment"
+                            },
+                            {
+                                "$ref": "#/$defs/EngineeringProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/Observation"
+                            },
+                            {
+                                "$ref": "#/$defs/LifeEvent"
+                            },
+                            {
+                                "$ref": "#/$defs/ExecutionOfProcedure"
+                            },
+                            {
+                                "$ref": "#/$defs/PlannedProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/InvestigativeProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/ComputationalPlannedProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/MaterialCollection"
+                            },
+                            {
+                                "$ref": "#/$defs/MaterialProcessing"
+                            },
+                            {
+                                "$ref": "#/$defs/SampleProcessing"
+                            },
+                            {
+                                "$ref": "#/$defs/EngineeringMaterialProcessing"
+                            },
+                            {
+                                "$ref": "#/$defs/FoodProcessing"
+                            },
+                            {
+                                "$ref": "#/$defs/SampleCollectionProcess"
+                            },
+                            {
+                                "$ref": "#/$defs/DataGenerationFromSample"
+                            },
+                            {
+                                "$ref": "#/$defs/Measurement"
+                            },
+                            {
+                                "$ref": "#/$defs/PhysicalDevice"
+                            },
+                            {
+                                "$ref": "#/$defs/BuiltEnvironmentFeature"
+                            },
+                            {
+                                "$ref": "#/$defs/SampleMaterial"
+                            },
+                            {
+                                "$ref": "#/$defs/ClinicalCohort"
+                            },
+                            {
+                                "$ref": "#/$defs/RawMaterial"
+                            },
+                            {
+                                "$ref": "#/$defs/Equipment"
+                            },
+                            {
+                                "$ref": "#/$defs/Place"
+                            },
+                            {
+                                "$ref": "#/$defs/Agent"
+                            },
+                            {
+                                "$ref": "#/$defs/CreativeWork"
+                            },
+                            {
+                                "$ref": "#/$defs/Person"
+                            },
+                            {
+                                "$ref": "#/$defs/Organization"
+                            },
+                            {
+                                "$ref": "#/$defs/AutomatedAgent"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareOrganization"
+                            },
+                            {
+                                "$ref": "#/$defs/FinancialOrganization"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareSite"
+                            },
+                            {
+                                "$ref": "#/$defs/Landform"
+                            },
+                            {
+                                "$ref": "#/$defs/EnvironmentalSite"
+                            },
+                            {
+                                "$ref": "#/$defs/ExtractiveIndustryEquipment"
+                            },
+                            {
+                                "$ref": "#/$defs/Facility"
+                            },
+                            {
+                                "$ref": "#/$defs/BuiltSystem"
+                            },
+                            {
+                                "$ref": "#/$defs/ElectricalGrid"
+                            },
+                            {
+                                "$ref": "#/$defs/Building"
+                            },
+                            {
+                                "$ref": "#/$defs/ExtractiveIndustryFacility"
+                            },
+                            {
+                                "$ref": "#/$defs/MiningFacility"
+                            },
+                            {
+                                "$ref": "#/$defs/WellFacility"
+                            },
+                            {
+                                "$ref": "#/$defs/QuarryFacility"
+                            },
+                            {
+                                "$ref": "#/$defs/PowerPlant"
+                            },
+                            {
+                                "$ref": "#/$defs/FossilFuelPlant"
+                            },
+                            {
+                                "$ref": "#/$defs/NuclearPlant"
+                            },
+                            {
+                                "$ref": "#/$defs/RenewablePlant"
+                            },
+                            {
+                                "$ref": "#/$defs/HydroelectricPlant"
+                            },
+                            {
+                                "$ref": "#/$defs/SolarPlant"
+                            },
+                            {
+                                "$ref": "#/$defs/WindFarm"
+                            },
+                            {
+                                "$ref": "#/$defs/Concept"
+                            },
+                            {
+                                "$ref": "#/$defs/InformationEntity"
+                            },
+                            {
+                                "$ref": "#/$defs/StructuredValue"
+                            },
+                            {
+                                "$ref": "#/$defs/EntitySet"
+                            },
+                            {
+                                "$ref": "#/$defs/DataStructure"
+                            },
+                            {
+                                "$ref": "#/$defs/Quantity"
+                            },
+                            {
+                                "$ref": "#/$defs/QuantityRange"
+                            },
+                            {
+                                "$ref": "#/$defs/Service"
+                            },
+                            {
+                                "$ref": "#/$defs/Variable"
+                            },
+                            {
+                                "$ref": "#/$defs/TimePointOrTemporalInterval"
+                            },
+                            {
+                                "$ref": "#/$defs/PlannedProcessConfiguration"
+                            },
+                            {
+                                "$ref": "#/$defs/Prediction"
+                            },
+                            {
+                                "$ref": "#/$defs/PredictionSummaryStatistics"
+                            },
+                            {
+                                "$ref": "#/$defs/SimplePrediction"
+                            },
+                            {
+                                "$ref": "#/$defs/AggregatePrediction"
+                            },
+                            {
+                                "$ref": "#/$defs/TemporalInterval"
+                            },
+                            {
+                                "$ref": "#/$defs/TimePoint"
+                            },
+                            {
+                                "$ref": "#/$defs/FinancialProduct"
+                            },
+                            {
+                                "$ref": "#/$defs/FinancialAccount"
+                            },
+                            {
+                                "$ref": "#/$defs/SimpleQuantity"
+                            },
+                            {
+                                "$ref": "#/$defs/Ratio"
+                            },
+                            {
+                                "$ref": "#/$defs/Duration"
+                            },
+                            {
+                                "$ref": "#/$defs/FoodIngredient"
+                            },
+                            {
+                                "$ref": "#/$defs/MoneyQuantity"
+                            },
+                            {
+                                "$ref": "#/$defs/TemporalRelationship"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareRole"
+                            },
+                            {
+                                "$ref": "#/$defs/HealthcareProvider"
+                            },
+                            {
+                                "$ref": "#/$defs/Patient"
+                            },
+                            {
+                                "$ref": "#/$defs/PostalAddress"
+                            },
+                            {
+                                "$ref": "#/$defs/PointLocation"
+                            },
+                            {
+                                "$ref": "#/$defs/GeoBoxLocation"
+                            },
+                            {
+                                "$ref": "#/$defs/GeoPointLocation"
+                            },
+                            {
+                                "$ref": "#/$defs/Specification"
+                            },
+                            {
+                                "$ref": "#/$defs/Publication"
+                            },
+                            {
+                                "$ref": "#/$defs/Dataset"
+                            },
+                            {
+                                "$ref": "#/$defs/ClinicalCohortDefinition"
+                            },
+                            {
+                                "$ref": "#/$defs/Procedure"
+                            },
+                            {
+                                "$ref": "#/$defs/InvestigativeProtocol"
+                            },
+                            {
+                                "$ref": "#/$defs/StudyDesign"
+                            },
+                            {
+                                "$ref": "#/$defs/EngineeringSpecification"
+                            },
+                            {
+                                "$ref": "#/$defs/FoodRecipe"
+                            },
+                            {
+                                "$ref": "#/$defs/QuantityKind"
+                            },
+                            {
+                                "$ref": "#/$defs/UnitConcept"
+                            },
+                            {
+                                "$ref": "#/$defs/CurrencyConcept"
+                            },
+                            {
+                                "$ref": "#/$defs/PowerPlantType"
+                            },
+                            {
+                                "$ref": "#/$defs/ExtractiveIndustryProduct"
+                            },
+                            {
+                                "$ref": "#/$defs/ExtractiveIndustryWaste"
+                            },
+                            {
+                                "$ref": "#/$defs/FoodTypeConcept"
+                            },
+                            {
+                                "$ref": "#/$defs/BasicFoodType"
+                            },
+                            {
+                                "$ref": "#/$defs/CompositeFoodType"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "EntitySet"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "EntitySet",
             "type": "object"
         },
         "EnvironmentalSite": {
@@ -1413,14 +1451,6 @@
             "additionalProperties": false,
             "description": "A thing that happens",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
@@ -1437,15 +1467,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
@@ -1462,6 +1489,50 @@
                 "id"
             ],
             "title": "Event",
+            "type": "object"
+        },
+        "ExecutionOfProcedure": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "ExecutionOfProcedure"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ExecutionOfProcedure",
             "type": "object"
         },
         "ExtractiveIndustryEquipment": {
@@ -1511,19 +1582,7 @@
                 "annual_production": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -1565,19 +1624,7 @@
                 "production_capacity": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -1593,19 +1640,7 @@
                 "reserves": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -1640,14 +1675,6 @@
             "additionalProperties": false,
             "description": "A product extracted from an extractive industry facility",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "grade": {
                     "anyOf": [
                         {
@@ -1665,12 +1692,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "processing_method": {
                     "type": "string"
@@ -1711,14 +1732,6 @@
             "additionalProperties": false,
             "description": "Waste material generated from extractive industry operations",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -1726,12 +1739,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -1818,6 +1825,62 @@
             "title": "FinancialAccount",
             "type": "object"
         },
+        "FinancialOrganization": {
+            "additionalProperties": false,
+            "description": "An organization that provides financial services",
+            "properties": {
+                "classification": {
+                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "ontology_types": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "provides_services": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/Service"
+                            },
+                            {
+                                "$ref": "#/$defs/FinancialProduct"
+                            },
+                            {
+                                "$ref": "#/$defs/FinancialAccount"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "FinancialOrganization"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "FinancialOrganization",
+            "type": "object"
+        },
         "FinancialProduct": {
             "additionalProperties": false,
             "description": "A product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be paid interest.",
@@ -1832,6 +1895,11 @@
             },
             "title": "FinancialProduct",
             "type": "object"
+        },
+        "FinanicialOrganizationEnum": {
+            "description": "",
+            "title": "FinanicialOrganizationEnum",
+            "type": "string"
         },
         "FoodIngredient": {
             "additionalProperties": false,
@@ -1856,14 +1924,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
@@ -1883,15 +1943,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
@@ -1902,6 +1959,9 @@
                         "FoodProcessing"
                     ],
                     "type": "string"
+                },
+                "uses_configuration": {
+                    "$ref": "#/$defs/PlannedProcessConfiguration"
                 },
                 "uses_physical_device": {
                     "type": "string"
@@ -1917,13 +1977,9 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
+                "describes": {
+                    "$ref": "#/$defs/Any",
+                    "description": "The thing that is being described"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -1938,12 +1994,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "steps": {
                     "items": {
@@ -1969,14 +2019,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -1984,12 +2026,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -2003,46 +2039,6 @@
                 "id"
             ],
             "title": "FoodTypeConcept",
-            "type": "object"
-        },
-        "FossilFuel": {
-            "additionalProperties": false,
-            "description": "A type of fossil fuel",
-            "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "type": {
-                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
-                    "enum": [
-                        "FossilFuel"
-                    ],
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id"
-            ],
-            "title": "FossilFuel",
             "type": "object"
         },
         "FossilFuelPlant": {
@@ -2080,7 +2076,7 @@
                     "type": "string"
                 },
                 "fuel": {
-                    "type": "string"
+                    "$ref": "#/$defs/FossilFuelType"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -2153,6 +2149,13 @@
                     "description": "The southernmost coordinate of the location",
                     "type": "number"
                 },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "GeoBoxLocation"
+                    ],
+                    "type": "string"
+                },
                 "west_bounding_coordinate": {
                     "description": "The westernmost coordinate of the location",
                     "type": "number"
@@ -2176,6 +2179,13 @@
                 "longitude": {
                     "description": "The longitude of the location",
                     "type": "number"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "GeoPointLocation"
+                    ],
+                    "type": "string"
                 }
             },
             "title": "GeoPointLocation",
@@ -2185,14 +2195,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
@@ -2209,18 +2211,15 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
                 },
                 "observed_during": {
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "patient": {
                     "$ref": "#/$defs/Patient"
@@ -2246,14 +2245,6 @@
             "additionalProperties": false,
             "description": "An interaction between a patient and one or more healthcare providers",
             "properties": {
-                "classification": {
-                    "$ref": "#/$defs/HealthcareEncounterClassification",
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings."
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
@@ -2270,15 +2261,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "patient": {
                     "$ref": "#/$defs/Patient"
@@ -2344,6 +2332,22 @@
                 "ontology_types": {
                     "items": {
                         "type": "string"
+                    },
+                    "type": "array"
+                },
+                "provides_services": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/Service"
+                            },
+                            {
+                                "$ref": "#/$defs/FinancialProduct"
+                            },
+                            {
+                                "$ref": "#/$defs/FinancialAccount"
+                            }
+                        ]
                     },
                     "type": "array"
                 },
@@ -2546,17 +2550,9 @@
             "additionalProperties": false,
             "description": "An entity that describes some information",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
                 "describes": {
                     "$ref": "#/$defs/Any",
                     "description": "The thing that is being described"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -2565,12 +2561,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -2605,17 +2595,24 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
                 },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
+                },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
                 },
                 "name": {
                     "description": "A human-readable name for a thing",
@@ -2624,11 +2621,8 @@
                 "objectives": {
                     "type": "string"
                 },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -2654,14 +2648,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
@@ -2681,15 +2667,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "part_of": {
                     "type": "string"
@@ -2703,6 +2686,9 @@
                         "InvestigativeProcess"
                     ],
                     "type": "string"
+                },
+                "uses_configuration": {
+                    "$ref": "#/$defs/PlannedProcessConfiguration"
                 },
                 "uses_physical_device": {
                     "type": "string"
@@ -2718,13 +2704,9 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
+                "describes": {
+                    "$ref": "#/$defs/Any",
+                    "description": "The thing that is being described"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -2733,12 +2715,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "protocols_io_url": {
                     "type": "string"
@@ -2817,14 +2793,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
@@ -2841,15 +2809,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
@@ -2872,14 +2837,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
@@ -2899,15 +2856,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
@@ -2918,6 +2872,9 @@
                         "MaterialCollection"
                     ],
                     "type": "string"
+                },
+                "uses_configuration": {
+                    "$ref": "#/$defs/PlannedProcessConfiguration"
                 },
                 "uses_physical_device": {
                     "type": "string"
@@ -2933,14 +2890,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
@@ -2960,15 +2909,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
@@ -2980,6 +2926,9 @@
                     ],
                     "type": "string"
                 },
+                "uses_configuration": {
+                    "$ref": "#/$defs/PlannedProcessConfiguration"
+                },
                 "uses_physical_device": {
                     "type": "string"
                 }
@@ -2990,46 +2939,33 @@
             "title": "MaterialProcessing",
             "type": "object"
         },
-        "MathematicalOperation": {
-            "additionalProperties": false,
-            "description": "Application of a mathematical operation to one or more inputs to produce one or more outputs",
-            "properties": {
-                "immediate_preceding_steps": {
-                    "description": "The steps that immediately precede this step",
-                    "items": {
-                        "$ref": "#/$defs/MathematicalOperation"
-                    },
-                    "type": "array"
-                },
-                "inputs": {
-                    "description": "The inputs to the operation",
-                    "items": {
-                        "$ref": "#/$defs/Any"
-                    },
-                    "type": "array"
-                },
-                "outputs": {
-                    "description": "The outputs of the operation",
-                    "items": {
-                        "$ref": "#/$defs/Any"
-                    },
-                    "type": "array"
-                },
-                "parts": {
-                    "description": "The parts of the process",
-                    "items": {
-                        "$ref": "#/$defs/MathematicalOperation"
-                    },
-                    "type": "array"
-                }
-            },
-            "title": "MathematicalOperation",
-            "type": "object"
-        },
         "Measurement": {
             "additionalProperties": false,
             "description": "",
             "properties": {
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
                 "quantity_measured": {
                     "anyOf": [
                         {
@@ -3053,6 +2989,9 @@
                     ],
                     "description": "The quantity being measured"
                 },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
@@ -3065,6 +3004,9 @@
                     "description": "The variable being measured"
                 }
             },
+            "required": [
+                "id"
+            ],
             "title": "Measurement",
             "type": "object"
         },
@@ -3075,19 +3017,7 @@
                 "annual_production": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -3097,19 +3027,7 @@
                 "area": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -3123,19 +3041,7 @@
                 "depth": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -3176,19 +3082,7 @@
                 "production_capacity": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -3204,19 +3098,7 @@
                 "reserves": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -3398,6 +3280,32 @@
             "additionalProperties": false,
             "description": "A statement about the state of something",
             "properties": {
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
@@ -3406,6 +3314,9 @@
                     "type": "string"
                 }
             },
+            "required": [
+                "id"
+            ],
             "title": "Observation",
             "type": "object"
         },
@@ -3435,6 +3346,22 @@
                     },
                     "type": "array"
                 },
+                "provides_services": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/Service"
+                            },
+                            {
+                                "$ref": "#/$defs/FinancialProduct"
+                            },
+                            {
+                                "$ref": "#/$defs/FinancialAccount"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
                     "enum": [
@@ -3448,6 +3375,17 @@
             ],
             "title": "Organization",
             "type": "object"
+        },
+        "OutcomeType": {
+            "description": "",
+            "enum": [
+                "TP",
+                "FP",
+                "TN",
+                "FN"
+            ],
+            "title": "OutcomeType",
+            "type": "string"
         },
         "Patient": {
             "additionalProperties": false,
@@ -3630,14 +3568,6 @@
             "additionalProperties": false,
             "description": "A process that follows a defined procedure or plan",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
@@ -3657,15 +3587,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
@@ -3677,6 +3604,9 @@
                     ],
                     "type": "string"
                 },
+                "uses_configuration": {
+                    "$ref": "#/$defs/PlannedProcessConfiguration"
+                },
                 "uses_physical_device": {
                     "type": "string"
                 }
@@ -3687,9 +3617,33 @@
             "title": "PlannedProcess",
             "type": "object"
         },
+        "PlannedProcessConfiguration": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "PlannedProcessConfiguration"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "PlannedProcessConfiguration",
+            "type": "object"
+        },
         "PointLocation": {
             "additionalProperties": false,
             "description": "",
+            "properties": {
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "PointLocation"
+                    ],
+                    "type": "string"
+                }
+            },
             "title": "PointLocation",
             "type": "object"
         },
@@ -3814,14 +3768,6 @@
             "additionalProperties": false,
             "description": "The type of power plant",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -3829,12 +3775,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -3850,17 +3790,107 @@
             "title": "PowerPlantType",
             "type": "object"
         },
+        "Prediction": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "expected_value": {
+                    "$ref": "#/$defs/Any"
+                },
+                "predicted_value": {
+                    "$ref": "#/$defs/Any"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "Prediction"
+                    ],
+                    "type": "string"
+                },
+                "variable_predicted": {
+                    "$ref": "#/$defs/Variable"
+                }
+            },
+            "title": "Prediction",
+            "type": "object"
+        },
+        "PredictionSummaryStatistics": {
+            "additionalProperties": false,
+            "description": "A class for collecting totals of various outcomes.",
+            "properties": {
+                "accuracy": {
+                    "description": "Accuracy is calculated as (TP + TN) / (TP + FP + TN + FN)",
+                    "type": "number"
+                },
+                "f1_score": {
+                    "description": "F1 Score is the harmonic mean of precision and recall",
+                    "type": "number"
+                },
+                "false_negative_count": {
+                    "description": "Total number of false negatives (FN)",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "false_positive_count": {
+                    "description": "Total number of false positives (FP)",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "precision": {
+                    "description": "Precision is calculated as TP / (TP + FP)",
+                    "type": "number"
+                },
+                "predictions": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/$defs/Prediction"
+                            },
+                            {
+                                "$ref": "#/$defs/SimplePrediction"
+                            },
+                            {
+                                "$ref": "#/$defs/AggregatePrediction"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                },
+                "recall": {
+                    "description": "Recall is calculated as TP / (TP + FN)",
+                    "type": "number"
+                },
+                "true_negative_count": {
+                    "description": "Total number of true negatives (TN)",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "true_positive_count": {
+                    "description": "Total number of true positives (TP)",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "PredictionSummaryStatistics"
+                    ],
+                    "type": "string"
+                },
+                "uses_dataset": {
+                    "type": "string"
+                }
+            },
+            "title": "PredictionSummaryStatistics",
+            "type": "object"
+        },
         "Procedure": {
             "additionalProperties": false,
             "description": "A canonical series of actions conducted in a certain order or manner",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
+                "describes": {
+                    "$ref": "#/$defs/Any",
+                    "description": "The thing that is being described"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -3869,12 +3899,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -3894,66 +3918,16 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "abstract": {
-                    "description": "A summary of the item",
-                    "type": "string"
-                },
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "contacts": {
-                    "description": "A contact point for a person or organization",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "contributors": {
-                    "description": "A person or organization that contributed to the creation of the work",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "creators": {
-                    "description": "The person or organization who created the work",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
+                "describes": {
+                    "$ref": "#/$defs/Any",
+                    "description": "The thing that is being described"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "keywords": {
-                    "description": "Keywords or tags used to describe this item",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "name": {
                     "description": "A human-readable name for a thing",
-                    "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "rights": {
-                    "description": "Information about rights held in and over the item",
-                    "type": "string"
-                },
-                "title": {
-                    "description": "The title of the item",
                     "type": "string"
                 },
                 "type": {
@@ -3993,14 +3967,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -4008,12 +3974,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -4097,19 +4057,7 @@
                 "annual_production": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -4151,19 +4099,7 @@
                 "production_capacity": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -4179,19 +4115,7 @@
                 "reserves": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -4410,15 +4334,7 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
                 "collected_from": {
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
                     "type": "string"
                 },
                 "ends_at": {
@@ -4440,18 +4356,15 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "material_collected": {
                     "type": "string"
                 },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "part_of": {
                     "type": "string"
@@ -4465,6 +4378,9 @@
                         "SampleCollectionProcess"
                     ],
                     "type": "string"
+                },
+                "uses_configuration": {
+                    "$ref": "#/$defs/PlannedProcessConfiguration"
                 },
                 "uses_physical_device": {
                     "type": "string"
@@ -4520,14 +4436,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "ends_at": {
                     "$ref": "#/$defs/TimePoint"
                 },
@@ -4547,15 +4455,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
@@ -4566,6 +4471,9 @@
                         "SampleProcessing"
                     ],
                     "type": "string"
+                },
+                "uses_configuration": {
+                    "$ref": "#/$defs/PlannedProcessConfiguration"
                 },
                 "uses_physical_device": {
                     "type": "string"
@@ -4595,6 +4503,44 @@
                 }
             },
             "title": "Service",
+            "type": "object"
+        },
+        "SimplePrediction": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "expected_value": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "type": "string"
+                },
+                "outcome": {
+                    "$ref": "#/$defs/OutcomeType"
+                },
+                "predicted_value": {
+                    "$ref": "#/$defs/Any"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "SimplePrediction"
+                    ],
+                    "type": "string"
+                },
+                "variable_predicted": {
+                    "$ref": "#/$defs/Variable"
+                }
+            },
+            "title": "SimplePrediction",
             "type": "object"
         },
         "SimpleQuantity": {
@@ -4706,13 +4652,9 @@
             "additionalProperties": false,
             "description": "A specification of a thing",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
+                "describes": {
+                    "$ref": "#/$defs/Any",
+                    "description": "The thing that is being described"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -4721,12 +4663,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -4742,17 +4678,28 @@
             "title": "Specification",
             "type": "object"
         },
+        "StructuredValue": {
+            "additionalProperties": false,
+            "description": "A value that is a structured collection of other values",
+            "properties": {
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "StructuredValue"
+                    ],
+                    "type": "string"
+                }
+            },
+            "title": "StructuredValue",
+            "type": "object"
+        },
         "StudyDesign": {
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
+                "describes": {
+                    "$ref": "#/$defs/Any",
+                    "description": "The thing that is being described"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
@@ -4761,12 +4708,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -4908,14 +4849,6 @@
             "additionalProperties": false,
             "description": "",
             "properties": {
-                "classification": {
-                    "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -4923,12 +4856,6 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
-                },
-                "ontology_types": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
                 },
                 "type": {
                     "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
@@ -4942,82 +4869,6 @@
                 "id"
             ],
             "title": "UnitConcept",
-            "type": "object"
-        },
-        "UnitConversionOperation": {
-            "additionalProperties": false,
-            "description": "A unit conversion operation",
-            "properties": {
-                "immediate_preceding_steps": {
-                    "description": "The steps that immediately precede this step",
-                    "items": {
-                        "$ref": "#/$defs/MathematicalOperation"
-                    },
-                    "type": "array"
-                },
-                "inputs": {
-                    "description": "The input unit",
-                    "items": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Quantity"
-                            },
-                            {
-                                "$ref": "#/$defs/SimpleQuantity"
-                            },
-                            {
-                                "$ref": "#/$defs/Ratio"
-                            },
-                            {
-                                "$ref": "#/$defs/Duration"
-                            },
-                            {
-                                "$ref": "#/$defs/FoodIngredient"
-                            },
-                            {
-                                "$ref": "#/$defs/MoneyQuantity"
-                            }
-                        ]
-                    },
-                    "maxItems": 1,
-                    "type": "array"
-                },
-                "outputs": {
-                    "description": "The output unit",
-                    "items": {
-                        "anyOf": [
-                            {
-                                "$ref": "#/$defs/Quantity"
-                            },
-                            {
-                                "$ref": "#/$defs/SimpleQuantity"
-                            },
-                            {
-                                "$ref": "#/$defs/Ratio"
-                            },
-                            {
-                                "$ref": "#/$defs/Duration"
-                            },
-                            {
-                                "$ref": "#/$defs/FoodIngredient"
-                            },
-                            {
-                                "$ref": "#/$defs/MoneyQuantity"
-                            }
-                        ]
-                    },
-                    "maxItems": 1,
-                    "type": "array"
-                },
-                "parts": {
-                    "description": "The parts of the process",
-                    "items": {
-                        "$ref": "#/$defs/MathematicalOperation"
-                    },
-                    "type": "array"
-                }
-            },
-            "title": "UnitConversionOperation",
             "type": "object"
         },
         "Variable": {
@@ -5049,19 +4900,7 @@
                 "annual_production": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -5075,19 +4914,7 @@
                 "depth": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -5125,19 +4952,7 @@
                 "production_capacity": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"
@@ -5153,19 +4968,7 @@
                 "reserves": {
                     "anyOf": [
                         {
-                            "$ref": "#/$defs/Quantity"
-                        },
-                        {
                             "$ref": "#/$defs/SimpleQuantity"
-                        },
-                        {
-                            "$ref": "#/$defs/Ratio"
-                        },
-                        {
-                            "$ref": "#/$defs/Duration"
-                        },
-                        {
-                            "$ref": "#/$defs/FoodIngredient"
                         },
                         {
                             "$ref": "#/$defs/MoneyQuantity"

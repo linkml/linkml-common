@@ -20,6 +20,7 @@ default_range: string
 imports:
   - linkml:types
   - social
+  - plannedprocess
 
 classes:
 

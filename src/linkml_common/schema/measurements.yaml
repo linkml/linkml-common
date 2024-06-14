@@ -34,7 +34,7 @@ classes:
         description: The variable being measured
 
   Variable:
-    is_a: Entity
+    is_a: Intangible
     attributes:
       allowed_units:
         description: The units that are allowed for this variable

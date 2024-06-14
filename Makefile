@@ -14,12 +14,9 @@ SOURCE_SCHEMA_DIR = $(dir $(SOURCE_SCHEMA_PATH))
 SRC = src
 DEST = project
 PYMODEL = $(SRC)/$(SCHEMA_NAME)/datamodel
+PYMODEL = $(SRC)/$(SCHEMA_NAME)/datamodel
 DOCDIR = docs
 EXAMPLEDIR = examples
-SHEET_MODULE = personinfo_enums
-SHEET_ID = $(shell ${SHELL} ./utils/get-value.sh google_sheet_id)
-SHEET_TABS = $(shell ${SHELL} ./utils/get-value.sh google_sheet_tabs)
-SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
 
 # environment variables
 include config.env
@@ -89,7 +86,7 @@ update-linkml:
 create-data-harmonizer:
 	npm init data-harmonizer $(SOURCE_SCHEMA_PATH)
 
-all: site
+all: site test
 site: gen-project gendoc
 %.yaml: gen-project
 deploy: all mkd-gh-deploy
@@ -97,20 +94,31 @@ deploy: all mkd-gh-deploy
 compile-sheets:
 	$(RUN) sheets2linkml --gsheet-id $(SHEET_ID) $(SHEET_TABS) > $(SHEET_MODULE_PATH).tmp && mv $(SHEET_MODULE_PATH).tmp $(SHEET_MODULE_PATH)
 
+
 # In future this will be done by conversion
 gen-examples:
 	cp src/data/examples/* $(EXAMPLEDIR)
 
 # generates all project files
 
-gen-project: $(PYMODEL)
+gen-project: gen-datamodels
 	$(RUN) gen-project ${GEN_PARGS} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+
+MODULE_YAMLS = $(shell ls $(SOURCE_SCHEMA_DIR)*.yaml)
+gen-datamodels: $(patsubst src/linkml_common/schema/%.yaml, src/linkml_common/datamodel/%.py, $(MODULE_YAMLS))
+
+$(PYMODEL)/%.py: $(SOURCE_SCHEMA_DIR)/%.yaml
+	$(RUN) gen-pydantic --no-mergeimports $< > $@.tmp && mv $@.tmp $@
+
+
 
 
 test: test-schema test-python test-examples
 
 test-schema:
 	$(RUN) gen-project ${GEN_PARGS} -d tmp $(SOURCE_SCHEMA_PATH)
+
+
 
 test-python:
 	$(RUN) python -m unittest discover

@@ -15,6 +15,7 @@ prefixes:
   schema: http://schema.org/
   OBI: http://purl.obolibrary.org/obo/OBI_
   fhir: http://hl7.org/fhir/
+  nmdcschema: https://w3id.org/nmdc/
 default_prefix: linkml_common
 default_range: string
 
@@ -27,7 +28,7 @@ imports:
 classes:
 
   Investigation:
-    is_a: NamedThing
+    is_a: Event
     implements:
       - patterns:Composable
     attributes:

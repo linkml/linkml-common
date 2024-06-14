@@ -34,7 +34,7 @@ classes:
 
   ClinicalCohortDefinition:
     description: A definition of a clinical cohort
-    is_a: NamedThing
+    is_a: InformationEntity
     exact_mappings:
       - omopschema:COHORT_DEFINITION
 

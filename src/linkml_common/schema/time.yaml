@@ -27,13 +27,16 @@ classes:
 
   Event:
     description: A thing that happens
-    is_a: NamedThing
+    is_a: Entity
+    mixins:
+      - Identified
     slots:
       - starts_at
       - ends_at
       - happens_at
       - has_interval
       - has_duration
+      - is_ongoing_as_of
 
 
   TimePointOrTemporalInterval:
@@ -116,6 +119,9 @@ slots:
 
   has_duration:
     range: Duration
+
+  is_ongoing_as_of:
+    range: TimePoint
 
 enums:
 

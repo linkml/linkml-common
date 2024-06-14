@@ -21,6 +21,7 @@ default_range: string
 imports:
   - linkml:types
   - core
+  - geography
   - social
 
 classes:

@@ -25,7 +25,9 @@ imports:
 classes:
 
   Dataset:
-    is_a: CreativeWork
+    is_a: InformationEntity
+    mixins:
+      - CreationMetadata
     attributes:
       collected_as_part_of:
         range: Investigation

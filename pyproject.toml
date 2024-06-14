@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "linkml_common"
-version = "0.1.0"
+version = "0.0.0.post6.dev0+1ddd04b"
 description = "Common Data Model Elements"
 authors = ["LinkML Common <my-name@my-org.org>"]
 license = "MIT"
@@ -18,7 +18,7 @@ linkml = "^1.7.6"
 schema-automator = "^0.4.0"
 
 [tool.poetry-dynamic-versioning]
-enable = true
+enable = false
 vcs = "git"
 style = "pep440"
 

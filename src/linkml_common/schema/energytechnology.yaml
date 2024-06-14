@@ -18,6 +18,7 @@ imports:
   - civilengineering
   - social
   - financial
+  - measurements
 
 classes:
 
@@ -53,7 +54,7 @@ classes:
     description: A power plant that uses fossil fuels
     attributes:
       fuel:
-        range: FossilFuel
+        range: FossilFuelType
 
   NuclearPlant:
     is_a: PowerPlant
@@ -78,10 +79,6 @@ classes:
   WindFarm:
     is_a: RenewablePlant
     description: A wind farm
-
-  FossilFuel:
-    is_a: Concept
-    description: A type of fossil fuel
 
   ElectricalGrid:
     is_a: BuiltSystem

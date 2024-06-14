@@ -1,5 +1,5 @@
 # Auto generated from linkml_common.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-04-09T19:01:35
+# Generation date: 2024-06-13T22:20:01
 # Schema: linkml-common
 #
 # id: https://w3id.org/linkml/linkml-common
@@ -37,8 +37,8 @@ ENVO = CurieNamespace('ENVO', 'http://purl.obolibrary.org/obo/ENVO_')
 IAO = CurieNamespace('IAO', 'http://purl.obolibrary.org/obo/IAO_')
 OBI = CurieNamespace('OBI', 'http://purl.obolibrary.org/obo/OBI_')
 PATO = CurieNamespace('PATO', 'http://purl.obolibrary.org/obo/PATO_')
-UCUM = CurieNamespace('UCUM', 'http://example.org/UNKNOWN/UCUM/')
-UO = CurieNamespace('UO', 'http://example.org/UNKNOWN/UO/')
+UCUM = CurieNamespace('UCUM', 'http://unitsofmeasure.org/')
+UO = CurieNamespace('UO', 'http://purl.obolibrary.org/obo/UO_')
 BIOLINK = CurieNamespace('biolink', 'https://w3id.org/biolink/')
 DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
 EXAMPLE = CurieNamespace('example', 'https://example.org/')
@@ -49,28 +49,39 @@ FIBO_QUANTITIESANDUNITS = CurieNamespace('fibo_QuantitiesAndUnits', 'https://www
 FIBO_COMMONS_PARTIESANDSITUATIONS = CurieNamespace('fibo_commons_PartiesAndSituations', 'https://spec.edmcouncil.org/fibo/ontology/FBC/ommons/PartiesAndSituations/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 LINKML_COMMON = CurieNamespace('linkml_common', 'https://w3id.org/linkml-common/')
-NMDCSCHEMA = CurieNamespace('nmdcschema', 'http://example.org/UNKNOWN/nmdcschema/')
+NMDCSCHEMA = CurieNamespace('nmdcschema', 'https://w3id.org/nmdc/')
 OMOPSCHEMA = CurieNamespace('omopschema', 'http://example.org/omop/')
 PROV = CurieNamespace('prov', 'http://www.w3.org/ns/prov#')
 QUDT = CurieNamespace('qudt', 'http://qudt.org/vocab/unit/')
 RDF = CurieNamespace('rdf', 'http://www.w3.org/1999/02/22-rdf-syntax-ns#')
 RDFS = CurieNamespace('rdfs', 'http://www.w3.org/2000/01/rdf-schema#')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
+XSD = CurieNamespace('xsd', 'http://www.w3.org/2001/XMLSchema#')
 DEFAULT_ = LINKML_COMMON
 
 
 # Types
+class CountScalar(Integer):
+    type_class_uri = XSD["integer"]
+    type_class_curie = "xsd:integer"
+    type_name = "CountScalar"
+    type_model_uri = LINKML_COMMON.CountScalar
+
 
 # Class references
+class IdentifiedId(URIorCURIE):
+    pass
+
+
 class NamedThingId(URIorCURIE):
     pass
 
 
-class ConceptId(NamedThingId):
+class ConceptId(URIorCURIE):
     pass
 
 
-class InformationEntityId(NamedThingId):
+class InformationEntityId(URIorCURIE):
     pass
 
 
@@ -78,11 +89,19 @@ class PhysicalDeviceId(NamedThingId):
     pass
 
 
-class SpecificationId(NamedThingId):
+class SpecificationId(InformationEntityId):
     pass
 
 
 class ProcedureId(SpecificationId):
+    pass
+
+
+class PublicationId(InformationEntityId):
+    pass
+
+
+class DatasetId(InformationEntityId):
     pass
 
 
@@ -106,7 +125,7 @@ class ClinicalCohortId(NamedThingId):
     pass
 
 
-class ClinicalCohortDefinitionId(NamedThingId):
+class ClinicalCohortDefinitionId(InformationEntityId):
     pass
 
 
@@ -151,10 +170,6 @@ class SolarPlantId(RenewablePlantId):
 
 
 class WindFarmId(RenewablePlantId):
-    pass
-
-
-class FossilFuelId(ConceptId):
     pass
 
 
@@ -226,10 +241,6 @@ class HealthcareSiteId(PlaceId):
     pass
 
 
-class InvestigationId(NamedThingId):
-    pass
-
-
 class InvestigativeProtocolId(ProcedureId):
     pass
 
@@ -262,6 +273,10 @@ class OrganizationId(AgentId):
     pass
 
 
+class FinancialOrganizationId(OrganizationId):
+    pass
+
+
 class HealthcareOrganizationId(OrganizationId):
     pass
 
@@ -274,15 +289,7 @@ class CreativeWorkId(NamedThingId):
     pass
 
 
-class PublicationId(CreativeWorkId):
-    pass
-
-
-class DatasetId(CreativeWorkId):
-    pass
-
-
-class EventId(NamedThingId):
+class EventId(URIorCURIE):
     pass
 
 
@@ -302,11 +309,27 @@ class HealthcareConditionOccurrenceId(EventId):
     pass
 
 
+class InvestigationId(EventId):
+    pass
+
+
+class ObservationId(EventId):
+    pass
+
+
+class MeasurementId(ObservationId):
+    pass
+
+
 class LifeEventId(EventId):
     pass
 
 
-class PlannedProcessId(EventId):
+class ExecutionOfProcedureId(EventId):
+    pass
+
+
+class PlannedProcessId(ExecutionOfProcedureId):
     pass
 
 
@@ -319,6 +342,10 @@ class SampleCollectionProcessId(InvestigativeProcessId):
 
 
 class DataGenerationFromSampleId(InvestigativeProcessId):
+    pass
+
+
+class ComputationalPlannedProcessId(PlannedProcessId):
     pass
 
 
@@ -340,6 +367,64 @@ class FoodProcessingId(MaterialProcessingId):
 
 class SampleProcessingId(MaterialProcessingId):
     pass
+
+
+@dataclass
+class Identified(YAMLRoot):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Identified"]
+    class_class_curie: ClassVar[str] = "linkml_common:Identified"
+    class_name: ClassVar[str] = "Identified"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Identified
+
+    id: Union[str, IdentifiedId] = None
+    name: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, IdentifiedId):
+            self.id = IdentifiedId(self.id)
+
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Typed(YAMLRoot):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Typed"]
+    class_class_curie: ClassVar[str] = "linkml_common:Typed"
+    class_name: ClassVar[str] = "Typed"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Typed
+
+    type: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        self.type = str(self.class_name)
+
+        super().__post_init__(**kwargs)
+
+
+    def __new__(cls, *args, **kwargs):
+
+        type_designator = "type"
+        if not type_designator in kwargs:
+            return super().__new__(cls,*args,**kwargs)
+        else:
+            type_designator_value = kwargs[type_designator]
+            target_cls = cls._class_for("class_name", type_designator_value)
+
+
+            if target_cls is None:
+                raise ValueError(f"Wrong type designator value: class {cls.__name__} "
+                                 f"has no subclass with ['class_name']='{kwargs[type_designator]}'")
+            return super().__new__(target_cls,*args,**kwargs)
+
 
 
 @dataclass
@@ -379,6 +464,24 @@ class Entity(YAMLRoot):
 
 
 
+class Intangible(Entity):
+    """
+    An entity that is not a physical object, process, or information
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = SCHEMA["Intangible"]
+    class_class_curie: ClassVar[str] = "schema:Intangible"
+    class_name: ClassVar[str] = "Intangible"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Intangible
+
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
 @dataclass
 class NamedThing(Entity):
     _inherited_slots: ClassVar[List[str]] = []
@@ -389,22 +492,16 @@ class NamedThing(Entity):
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.NamedThing
 
     id: Union[str, NamedThingId] = None
-    name: Optional[str] = None
-    type: Optional[str] = None
     classification: Optional[Union[str, ConceptId]] = None
     ontology_types: Optional[Union[Union[str, ConceptId], List[Union[str, ConceptId]]]] = empty_list()
     description: Optional[str] = None
+    name: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, NamedThingId):
             self.id = NamedThingId(self.id)
-
-        if self.name is not None and not isinstance(self.name, str):
-            self.name = str(self.name)
-
-        self.type = str(self.class_name)
 
         if self.classification is not None and not isinstance(self.classification, ConceptId):
             self.classification = ConceptId(self.classification)
@@ -416,28 +513,15 @@ class NamedThing(Entity):
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
 
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
         super().__post_init__(**kwargs)
-
-
-    def __new__(cls, *args, **kwargs):
-
-        type_designator = "type"
-        if not type_designator in kwargs:
-            return super().__new__(cls,*args,**kwargs)
-        else:
-            type_designator_value = kwargs[type_designator]
-            target_cls = cls._class_for("class_name", type_designator_value)
-
-
-            if target_cls is None:
-                raise ValueError(f"Wrong type designator value: class {cls.__name__} "
-                                 f"has no subclass with ['class_name']='{kwargs[type_designator]}'")
-            return super().__new__(target_cls,*args,**kwargs)
-
+        self.type = str(self.class_name)
 
 
 @dataclass
-class Concept(NamedThing):
+class Concept(Intangible):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Concept"]
@@ -446,6 +530,7 @@ class Concept(NamedThing):
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Concept
 
     id: Union[str, ConceptId] = None
+    name: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -453,12 +538,15 @@ class Concept(NamedThing):
         if not isinstance(self.id, ConceptId):
             self.id = ConceptId(self.id)
 
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
+
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
 
 
 @dataclass
-class InformationEntity(NamedThing):
+class InformationEntity(Intangible):
     """
     An entity that describes some information
     """
@@ -471,12 +559,16 @@ class InformationEntity(NamedThing):
 
     id: Union[str, InformationEntityId] = None
     describes: Optional[Union[dict, "Any"]] = None
+    name: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, InformationEntityId):
             self.id = InformationEntityId(self.id)
+
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -503,16 +595,16 @@ class PhysicalDevice(NamedThing):
         self.type = str(self.class_name)
 
 
-class Intangible(Entity):
+class StructuredValue(Intangible):
     """
-    An entity that is not a physical object, process, or information
+    A value that is a structured collection of other values
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = SCHEMA["Intangible"]
-    class_class_curie: ClassVar[str] = "schema:Intangible"
-    class_name: ClassVar[str] = "Intangible"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Intangible
+    class_class_uri: ClassVar[URIRef] = SCHEMA["StructuredValue"]
+    class_class_curie: ClassVar[str] = "schema:StructuredValue"
+    class_name: ClassVar[str] = "StructuredValue"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.StructuredValue
 
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
@@ -551,13 +643,19 @@ class Relationship(Intangible):
         self.type = str(self.class_name)
 
 
-class Location(YAMLRoot):
+class Location(StructuredValue):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Location"]
     class_class_curie: ClassVar[str] = "linkml_common:Location"
     class_name: ClassVar[str] = "Location"
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Location
+
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
 
 
 class PointLocation(Location):
@@ -569,18 +667,6 @@ class PointLocation(Location):
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.PointLocation
 
 
-class Observation(Entity):
-    """
-    A statement about the state of something
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Observation"]
-    class_class_curie: ClassVar[str] = "linkml_common:Observation"
-    class_name: ClassVar[str] = "Observation"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Observation
-
-
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
 
         super().__post_init__(**kwargs)
@@ -588,7 +674,7 @@ class Observation(Entity):
 
 
 @dataclass
-class Specification(NamedThing):
+class Specification(InformationEntity):
     """
     A specification of a thing
     """
@@ -636,45 +722,16 @@ class Procedure(Specification):
 
 
 @dataclass
-class MathematicalOperation(YAMLRoot):
-    """
-    Application of a mathematical operation to one or more inputs to produce one or more outputs
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["MathematicalOperation"]
-    class_class_curie: ClassVar[str] = "linkml_common:MathematicalOperation"
-    class_name: ClassVar[str] = "MathematicalOperation"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.MathematicalOperation
-
-    inputs: Optional[Union[Union[dict, "Any"], List[Union[dict, "Any"]]]] = empty_list()
-    outputs: Optional[Union[Union[dict, "Any"], List[Union[dict, "Any"]]]] = empty_list()
-    parts: Optional[Union[Union[dict, "MathematicalOperation"], List[Union[dict, "MathematicalOperation"]]]] = empty_list()
-    immediate_preceding_steps: Optional[Union[Union[dict, "MathematicalOperation"], List[Union[dict, "MathematicalOperation"]]]] = empty_list()
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if not isinstance(self.parts, list):
-            self.parts = [self.parts] if self.parts is not None else []
-        self.parts = [v if isinstance(v, MathematicalOperation) else MathematicalOperation(**as_dict(v)) for v in self.parts]
-
-        if not isinstance(self.immediate_preceding_steps, list):
-            self.immediate_preceding_steps = [self.immediate_preceding_steps] if self.immediate_preceding_steps is not None else []
-        self.immediate_preceding_steps = [v if isinstance(v, MathematicalOperation) else MathematicalOperation(**as_dict(v)) for v in self.immediate_preceding_steps]
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
-class Collection(Intangible):
+class EntitySet(Intangible):
     """
     A group of things. The collection may be heterogeneous or homogeneous.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Collection"]
-    class_class_curie: ClassVar[str] = "linkml_common:Collection"
-    class_name: ClassVar[str] = "Collection"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Collection
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["EntitySet"]
+    class_class_curie: ClassVar[str] = "linkml_common:EntitySet"
+    class_name: ClassVar[str] = "EntitySet"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.EntitySet
 
     members: Optional[Union[Union[dict, Entity], List[Union[dict, Entity]]]] = empty_list()
 
@@ -688,6 +745,85 @@ class Collection(Intangible):
 
 
 Any = Any
+
+@dataclass
+class Publication(InformationEntity):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Publication"]
+    class_class_curie: ClassVar[str] = "linkml_common:Publication"
+    class_name: ClassVar[str] = "Publication"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Publication
+
+    id: Union[str, PublicationId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, PublicationId):
+            self.id = PublicationId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class Dataset(InformationEntity):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Dataset"]
+    class_class_curie: ClassVar[str] = "linkml_common:Dataset"
+    class_name: ClassVar[str] = "Dataset"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Dataset
+
+    id: Union[str, DatasetId] = None
+    collected_as_part_of: Optional[Union[Union[str, InvestigationId], List[Union[str, InvestigationId]]]] = empty_list()
+    title: Optional[str] = None
+    abstract: Optional[str] = None
+    rights: Optional[str] = None
+    creators: Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]] = empty_list()
+    contributors: Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]] = empty_list()
+    contacts: Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]] = empty_list()
+    keywords: Optional[Union[str, List[str]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, DatasetId):
+            self.id = DatasetId(self.id)
+
+        if not isinstance(self.collected_as_part_of, list):
+            self.collected_as_part_of = [self.collected_as_part_of] if self.collected_as_part_of is not None else []
+        self.collected_as_part_of = [v if isinstance(v, InvestigationId) else InvestigationId(v) for v in self.collected_as_part_of]
+
+        if self.title is not None and not isinstance(self.title, str):
+            self.title = str(self.title)
+
+        if self.abstract is not None and not isinstance(self.abstract, str):
+            self.abstract = str(self.abstract)
+
+        if self.rights is not None and not isinstance(self.rights, str):
+            self.rights = str(self.rights)
+
+        if not isinstance(self.creators, list):
+            self.creators = [self.creators] if self.creators is not None else []
+        self.creators = [v if isinstance(v, AgentId) else AgentId(v) for v in self.creators]
+
+        if not isinstance(self.contributors, list):
+            self.contributors = [self.contributors] if self.contributors is not None else []
+        self.contributors = [v if isinstance(v, AgentId) else AgentId(v) for v in self.contributors]
+
+        if not isinstance(self.contacts, list):
+            self.contacts = [self.contacts] if self.contacts is not None else []
+        self.contacts = [v if isinstance(v, AgentId) else AgentId(v) for v in self.contacts]
+
+        if not isinstance(self.keywords, list):
+            self.keywords = [self.keywords] if self.keywords is not None else []
+        self.keywords = [v if isinstance(v, str) else str(v) for v in self.keywords]
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
 
 @dataclass
 class BuiltEnvironmentFeature(NamedThing):
@@ -810,7 +946,7 @@ class ClinicalCohort(NamedThing):
 
 
 @dataclass
-class ClinicalCohortDefinition(NamedThing):
+class ClinicalCohortDefinition(InformationEntity):
     """
     A definition of a clinical cohort
     """
@@ -1004,7 +1140,7 @@ class FossilFuelPlant(PowerPlant):
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.FossilFuelPlant
 
     id: Union[str, FossilFuelPlantId] = None
-    fuel: Optional[Union[str, FossilFuelId]] = None
+    fuel: Optional[Union[str, "FossilFuelType"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -1012,8 +1148,8 @@ class FossilFuelPlant(PowerPlant):
         if not isinstance(self.id, FossilFuelPlantId):
             self.id = FossilFuelPlantId(self.id)
 
-        if self.fuel is not None and not isinstance(self.fuel, FossilFuelId):
-            self.fuel = FossilFuelId(self.fuel)
+        if self.fuel is not None and not isinstance(self.fuel, FossilFuelType):
+            self.fuel = FossilFuelType(self.fuel)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -1144,30 +1280,6 @@ class WindFarm(RenewablePlant):
 
 
 @dataclass
-class FossilFuel(Concept):
-    """
-    A type of fossil fuel
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["FossilFuel"]
-    class_class_curie: ClassVar[str] = "linkml_common:FossilFuel"
-    class_name: ClassVar[str] = "FossilFuel"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.FossilFuel
-
-    id: Union[str, FossilFuelId] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, FossilFuelId):
-            self.id = FossilFuelId(self.id)
-
-        super().__post_init__(**kwargs)
-        self.type = str(self.class_name)
-
-
-@dataclass
 class ElectricalGrid(BuiltSystem):
     """
     A network of electrical transmission lines
@@ -1212,9 +1324,9 @@ class ExtractiveIndustryFacility(Facility):
     facility_type: Optional[Union[str, "ExtractiveIndustryFacilityType"]] = None
     operator: Optional[Union[str, OrganizationId]] = None
     products: Optional[Union[Dict[Union[str, ExtractiveIndustryProductId], Union[dict, "ExtractiveIndustryProduct"]], List[Union[dict, "ExtractiveIndustryProduct"]]]] = empty_dict()
-    production_capacity: Optional[Union[dict, "Quantity"]] = None
-    annual_production: Optional[Union[dict, "Quantity"]] = None
-    reserves: Optional[Union[dict, "Quantity"]] = None
+    production_capacity: Optional[Union[dict, "SimpleQuantity"]] = None
+    annual_production: Optional[Union[dict, "SimpleQuantity"]] = None
+    reserves: Optional[Union[dict, "SimpleQuantity"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -1230,14 +1342,14 @@ class ExtractiveIndustryFacility(Facility):
 
         self._normalize_inlined_as_list(slot_name="products", slot_type=ExtractiveIndustryProduct, key_name="id", keyed=True)
 
-        if self.production_capacity is not None and not isinstance(self.production_capacity, Quantity):
-            self.production_capacity = Quantity(**as_dict(self.production_capacity))
+        if self.production_capacity is not None and not isinstance(self.production_capacity, SimpleQuantity):
+            self.production_capacity = SimpleQuantity(**as_dict(self.production_capacity))
 
-        if self.annual_production is not None and not isinstance(self.annual_production, Quantity):
-            self.annual_production = Quantity(**as_dict(self.annual_production))
+        if self.annual_production is not None and not isinstance(self.annual_production, SimpleQuantity):
+            self.annual_production = SimpleQuantity(**as_dict(self.annual_production))
 
-        if self.reserves is not None and not isinstance(self.reserves, Quantity):
-            self.reserves = Quantity(**as_dict(self.reserves))
+        if self.reserves is not None and not isinstance(self.reserves, SimpleQuantity):
+            self.reserves = SimpleQuantity(**as_dict(self.reserves))
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -1257,8 +1369,8 @@ class MiningFacility(ExtractiveIndustryFacility):
 
     id: Union[str, MiningFacilityId] = None
     mining_method: Optional[Union[str, "MiningMethod"]] = None
-    depth: Optional[Union[dict, "Quantity"]] = None
-    area: Optional[Union[dict, "Quantity"]] = None
+    depth: Optional[Union[dict, "SimpleQuantity"]] = None
+    area: Optional[Union[dict, "SimpleQuantity"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -1269,11 +1381,11 @@ class MiningFacility(ExtractiveIndustryFacility):
         if self.mining_method is not None and not isinstance(self.mining_method, MiningMethod):
             self.mining_method = MiningMethod(self.mining_method)
 
-        if self.depth is not None and not isinstance(self.depth, Quantity):
-            self.depth = Quantity(**as_dict(self.depth))
+        if self.depth is not None and not isinstance(self.depth, SimpleQuantity):
+            self.depth = SimpleQuantity(**as_dict(self.depth))
 
-        if self.area is not None and not isinstance(self.area, Quantity):
-            self.area = Quantity(**as_dict(self.area))
+        if self.area is not None and not isinstance(self.area, SimpleQuantity):
+            self.area = SimpleQuantity(**as_dict(self.area))
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -1293,7 +1405,7 @@ class WellFacility(ExtractiveIndustryFacility):
 
     id: Union[str, WellFacilityId] = None
     well_type: Optional[Union[str, "WellType"]] = None
-    depth: Optional[Union[dict, "Quantity"]] = None
+    depth: Optional[Union[dict, "SimpleQuantity"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -1304,8 +1416,8 @@ class WellFacility(ExtractiveIndustryFacility):
         if self.well_type is not None and not isinstance(self.well_type, WellType):
             self.well_type = WellType(self.well_type)
 
-        if self.depth is not None and not isinstance(self.depth, Quantity):
-            self.depth = Quantity(**as_dict(self.depth))
+        if self.depth is not None and not isinstance(self.depth, SimpleQuantity):
+            self.depth = SimpleQuantity(**as_dict(self.depth))
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -1417,24 +1529,6 @@ class ExtractiveIndustryWaste(Concept):
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
-
-
-class EnvironmentalProcess(YAMLRoot):
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["EnvironmentalProcess"]
-    class_class_curie: ClassVar[str] = "linkml_common:EnvironmentalProcess"
-    class_name: ClassVar[str] = "EnvironmentalProcess"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.EnvironmentalProcess
-
-
-class EnvironmentalMonitoring(EnvironmentalProcess):
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["EnvironmentalMonitoring"]
-    class_class_curie: ClassVar[str] = "linkml_common:EnvironmentalMonitoring"
-    class_name: ClassVar[str] = "EnvironmentalMonitoring"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.EnvironmentalMonitoring
 
 
 @dataclass
@@ -1644,7 +1738,7 @@ class Landform(Place):
 
 
 @dataclass
-class PostalAddress(Entity):
+class PostalAddress(StructuredValue):
     """
     Represents an Address
     """
@@ -1709,6 +1803,7 @@ class GeoPointLocation(PointLocation):
             self.altitude = Decimal(self.altitude)
 
         super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
 
 
 @dataclass
@@ -1739,6 +1834,7 @@ class GeoBoxLocation(Location):
             self.south_bounding_coordinate = Decimal(self.south_bounding_coordinate)
 
         super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
 
 
 @dataclass
@@ -1820,36 +1916,6 @@ class Patient(HealthcareRole):
 
 
 @dataclass
-class Investigation(NamedThing):
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Investigation"]
-    class_class_curie: ClassVar[str] = "linkml_common:Investigation"
-    class_name: ClassVar[str] = "Investigation"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Investigation
-
-    id: Union[str, InvestigationId] = None
-    objectives: Optional[str] = None
-    variables: Optional[Union[Union[dict, "Variable"], List[Union[dict, "Variable"]]]] = empty_list()
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, InvestigationId):
-            self.id = InvestigationId(self.id)
-
-        if self.objectives is not None and not isinstance(self.objectives, str):
-            self.objectives = str(self.objectives)
-
-        if not isinstance(self.variables, list):
-            self.variables = [self.variables] if self.variables is not None else []
-        self.variables = [v if isinstance(v, Variable) else Variable(**as_dict(v)) for v in self.variables]
-
-        super().__post_init__(**kwargs)
-        self.type = str(self.class_name)
-
-
-@dataclass
 class InvestigativeProtocol(Procedure):
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -1925,30 +1991,7 @@ class SampleMaterial(NamedThing):
 
 
 @dataclass
-class Measurement(Observation):
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Measurement"]
-    class_class_curie: ClassVar[str] = "linkml_common:Measurement"
-    class_name: ClassVar[str] = "Measurement"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Measurement
-
-    quantity_measured: Optional[Union[dict, "Quantity"]] = None
-    variable_measured: Optional[Union[dict, "Variable"]] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self.quantity_measured is not None and not isinstance(self.quantity_measured, Quantity):
-            self.quantity_measured = Quantity(**as_dict(self.quantity_measured))
-
-        if self.variable_measured is not None and not isinstance(self.variable_measured, Variable):
-            self.variable_measured = Variable(**as_dict(self.variable_measured))
-
-        super().__post_init__(**kwargs)
-        self.type = str(self.class_name)
-
-
-@dataclass
-class Variable(Entity):
+class Variable(Intangible):
     _inherited_slots: ClassVar[List[str]] = []
 
     class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Variable"]
@@ -2127,33 +2170,6 @@ class QuantityRange(Intangible):
 
 
 @dataclass
-class UnitConversionOperation(MathematicalOperation):
-    """
-    A unit conversion operation
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["UnitConversionOperation"]
-    class_class_curie: ClassVar[str] = "linkml_common:UnitConversionOperation"
-    class_name: ClassVar[str] = "UnitConversionOperation"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.UnitConversionOperation
-
-    inputs: Optional[Union[Union[dict, Quantity], List[Union[dict, Quantity]]]] = empty_list()
-    outputs: Optional[Union[Union[dict, Quantity], List[Union[dict, Quantity]]]] = empty_list()
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if not isinstance(self.inputs, list):
-            self.inputs = [self.inputs] if self.inputs is not None else []
-        self.inputs = [v if isinstance(v, Quantity) else Quantity(**as_dict(v)) for v in self.inputs]
-
-        if not isinstance(self.outputs, list):
-            self.outputs = [self.outputs] if self.outputs is not None else []
-        self.outputs = [v if isinstance(v, Quantity) else Quantity(**as_dict(v)) for v in self.outputs]
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
 class UnitConcept(Concept):
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -2251,12 +2267,41 @@ class Organization(Agent):
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Organization
 
     id: Union[str, OrganizationId] = None
+    provides_services: Optional[Union[Union[dict, "Service"], List[Union[dict, "Service"]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, OrganizationId):
             self.id = OrganizationId(self.id)
+
+        if not isinstance(self.provides_services, list):
+            self.provides_services = [self.provides_services] if self.provides_services is not None else []
+        self.provides_services = [v if isinstance(v, Service) else Service(**as_dict(v)) for v in self.provides_services]
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class FinancialOrganization(Organization):
+    """
+    An organization that provides financial services
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["FinancialOrganization"]
+    class_class_curie: ClassVar[str] = "linkml_common:FinancialOrganization"
+    class_name: ClassVar[str] = "FinancialOrganization"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.FinancialOrganization
+
+    id: Union[str, FinancialOrganizationId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, FinancialOrganizationId):
+            self.id = FinancialOrganizationId(self.id)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -2311,6 +2356,52 @@ class AutomatedAgent(Agent):
 
 
 @dataclass
+class CreationMetadata(YAMLRoot):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["CreationMetadata"]
+    class_class_curie: ClassVar[str] = "linkml_common:CreationMetadata"
+    class_name: ClassVar[str] = "CreationMetadata"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.CreationMetadata
+
+    title: Optional[str] = None
+    abstract: Optional[str] = None
+    rights: Optional[str] = None
+    creators: Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]] = empty_list()
+    contributors: Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]] = empty_list()
+    contacts: Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]] = empty_list()
+    keywords: Optional[Union[str, List[str]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.title is not None and not isinstance(self.title, str):
+            self.title = str(self.title)
+
+        if self.abstract is not None and not isinstance(self.abstract, str):
+            self.abstract = str(self.abstract)
+
+        if self.rights is not None and not isinstance(self.rights, str):
+            self.rights = str(self.rights)
+
+        if not isinstance(self.creators, list):
+            self.creators = [self.creators] if self.creators is not None else []
+        self.creators = [v if isinstance(v, AgentId) else AgentId(v) for v in self.creators]
+
+        if not isinstance(self.contributors, list):
+            self.contributors = [self.contributors] if self.contributors is not None else []
+        self.contributors = [v if isinstance(v, AgentId) else AgentId(v) for v in self.contributors]
+
+        if not isinstance(self.contacts, list):
+            self.contacts = [self.contacts] if self.contacts is not None else []
+        self.contacts = [v if isinstance(v, AgentId) else AgentId(v) for v in self.contacts]
+
+        if not isinstance(self.keywords, list):
+            self.keywords = [self.keywords] if self.keywords is not None else []
+        self.keywords = [v if isinstance(v, str) else str(v) for v in self.keywords]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class CreativeWork(NamedThing):
     """
     The most generic kind of creative work, including books, movies, photographs, software programs, etc.
@@ -2361,53 +2452,6 @@ class CreativeWork(NamedThing):
         if not isinstance(self.keywords, list):
             self.keywords = [self.keywords] if self.keywords is not None else []
         self.keywords = [v if isinstance(v, str) else str(v) for v in self.keywords]
-
-        super().__post_init__(**kwargs)
-        self.type = str(self.class_name)
-
-
-@dataclass
-class Publication(CreativeWork):
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Publication"]
-    class_class_curie: ClassVar[str] = "linkml_common:Publication"
-    class_name: ClassVar[str] = "Publication"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Publication
-
-    id: Union[str, PublicationId] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, PublicationId):
-            self.id = PublicationId(self.id)
-
-        super().__post_init__(**kwargs)
-        self.type = str(self.class_name)
-
-
-@dataclass
-class Dataset(CreativeWork):
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Dataset"]
-    class_class_curie: ClassVar[str] = "linkml_common:Dataset"
-    class_name: ClassVar[str] = "Dataset"
-    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Dataset
-
-    id: Union[str, DatasetId] = None
-    collected_as_part_of: Optional[Union[Union[str, InvestigationId], List[Union[str, InvestigationId]]]] = empty_list()
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, DatasetId):
-            self.id = DatasetId(self.id)
-
-        if not isinstance(self.collected_as_part_of, list):
-            self.collected_as_part_of = [self.collected_as_part_of] if self.collected_as_part_of is not None else []
-        self.collected_as_part_of = [v if isinstance(v, InvestigationId) else InvestigationId(v) for v in self.collected_as_part_of]
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -2481,7 +2525,206 @@ class FinancialAccount(FinancialProduct):
 
 
 @dataclass
-class Event(NamedThing):
+class Prediction(Intangible):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Prediction"]
+    class_class_curie: ClassVar[str] = "linkml_common:Prediction"
+    class_name: ClassVar[str] = "Prediction"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Prediction
+
+    variable_predicted: Optional[Union[dict, Variable]] = None
+    predicted_value: Optional[Union[dict, Any]] = None
+    expected_value: Optional[Union[dict, Any]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.variable_predicted is not None and not isinstance(self.variable_predicted, Variable):
+            self.variable_predicted = Variable(**as_dict(self.variable_predicted))
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class SimplePrediction(Prediction):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["SimplePrediction"]
+    class_class_curie: ClassVar[str] = "linkml_common:SimplePrediction"
+    class_name: ClassVar[str] = "SimplePrediction"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.SimplePrediction
+
+    outcome: Optional[Union[str, "OutcomeType"]] = None
+    expected_value: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.outcome is not None and not isinstance(self.outcome, OutcomeType):
+            self.outcome = OutcomeType(self.outcome)
+
+        if self.expected_value is not None and not isinstance(self.expected_value, str):
+            self.expected_value = str(self.expected_value)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class AggregatePrediction(Prediction):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["AggregatePrediction"]
+    class_class_curie: ClassVar[str] = "linkml_common:AggregatePrediction"
+    class_name: ClassVar[str] = "AggregatePrediction"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.AggregatePrediction
+
+    true_positive_count: Optional[Union[int, CountScalar]] = None
+    false_positive_count: Optional[Union[int, CountScalar]] = None
+    true_negative_count: Optional[Union[int, CountScalar]] = None
+    false_negative_count: Optional[Union[int, CountScalar]] = None
+    recall: Optional[float] = None
+    precision: Optional[float] = None
+    f1_score: Optional[float] = None
+    accuracy: Optional[float] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.true_positive_count is not None and not isinstance(self.true_positive_count, CountScalar):
+            self.true_positive_count = CountScalar(self.true_positive_count)
+
+        if self.false_positive_count is not None and not isinstance(self.false_positive_count, CountScalar):
+            self.false_positive_count = CountScalar(self.false_positive_count)
+
+        if self.true_negative_count is not None and not isinstance(self.true_negative_count, CountScalar):
+            self.true_negative_count = CountScalar(self.true_negative_count)
+
+        if self.false_negative_count is not None and not isinstance(self.false_negative_count, CountScalar):
+            self.false_negative_count = CountScalar(self.false_negative_count)
+
+        if self.recall is not None and not isinstance(self.recall, float):
+            self.recall = float(self.recall)
+
+        if self.precision is not None and not isinstance(self.precision, float):
+            self.precision = float(self.precision)
+
+        if self.f1_score is not None and not isinstance(self.f1_score, float):
+            self.f1_score = float(self.f1_score)
+
+        if self.accuracy is not None and not isinstance(self.accuracy, float):
+            self.accuracy = float(self.accuracy)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class PredictionSummaryStatistics(Intangible):
+    """
+    A class for collecting totals of various outcomes.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["PredictionSummaryStatistics"]
+    class_class_curie: ClassVar[str] = "linkml_common:PredictionSummaryStatistics"
+    class_name: ClassVar[str] = "PredictionSummaryStatistics"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.PredictionSummaryStatistics
+
+    predictions: Optional[Union[Union[dict, Prediction], List[Union[dict, Prediction]]]] = empty_list()
+    uses_dataset: Optional[Union[str, DatasetId]] = None
+    true_positive_count: Optional[Union[int, CountScalar]] = None
+    false_positive_count: Optional[Union[int, CountScalar]] = None
+    true_negative_count: Optional[Union[int, CountScalar]] = None
+    false_negative_count: Optional[Union[int, CountScalar]] = None
+    recall: Optional[float] = None
+    precision: Optional[float] = None
+    f1_score: Optional[float] = None
+    accuracy: Optional[float] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if not isinstance(self.predictions, list):
+            self.predictions = [self.predictions] if self.predictions is not None else []
+        self.predictions = [v if isinstance(v, Prediction) else Prediction(**as_dict(v)) for v in self.predictions]
+
+        if self.uses_dataset is not None and not isinstance(self.uses_dataset, DatasetId):
+            self.uses_dataset = DatasetId(self.uses_dataset)
+
+        if self.true_positive_count is not None and not isinstance(self.true_positive_count, CountScalar):
+            self.true_positive_count = CountScalar(self.true_positive_count)
+
+        if self.false_positive_count is not None and not isinstance(self.false_positive_count, CountScalar):
+            self.false_positive_count = CountScalar(self.false_positive_count)
+
+        if self.true_negative_count is not None and not isinstance(self.true_negative_count, CountScalar):
+            self.true_negative_count = CountScalar(self.true_negative_count)
+
+        if self.false_negative_count is not None and not isinstance(self.false_negative_count, CountScalar):
+            self.false_negative_count = CountScalar(self.false_negative_count)
+
+        if self.recall is not None and not isinstance(self.recall, float):
+            self.recall = float(self.recall)
+
+        if self.precision is not None and not isinstance(self.precision, float):
+            self.precision = float(self.precision)
+
+        if self.f1_score is not None and not isinstance(self.f1_score, float):
+            self.f1_score = float(self.f1_score)
+
+        if self.accuracy is not None and not isinstance(self.accuracy, float):
+            self.accuracy = float(self.accuracy)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class OutcomeStatistics(YAMLRoot):
+    """
+    A class for collecting totals of various outcomes.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["OutcomeStatistics"]
+    class_class_curie: ClassVar[str] = "linkml_common:OutcomeStatistics"
+    class_name: ClassVar[str] = "OutcomeStatistics"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.OutcomeStatistics
+
+    true_positive_count: Optional[Union[int, CountScalar]] = None
+    false_positive_count: Optional[Union[int, CountScalar]] = None
+    true_negative_count: Optional[Union[int, CountScalar]] = None
+    false_negative_count: Optional[Union[int, CountScalar]] = None
+    recall: Optional[float] = None
+    precision: Optional[float] = None
+    f1_score: Optional[float] = None
+    accuracy: Optional[float] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self.true_positive_count is not None and not isinstance(self.true_positive_count, CountScalar):
+            self.true_positive_count = CountScalar(self.true_positive_count)
+
+        if self.false_positive_count is not None and not isinstance(self.false_positive_count, CountScalar):
+            self.false_positive_count = CountScalar(self.false_positive_count)
+
+        if self.true_negative_count is not None and not isinstance(self.true_negative_count, CountScalar):
+            self.true_negative_count = CountScalar(self.true_negative_count)
+
+        if self.false_negative_count is not None and not isinstance(self.false_negative_count, CountScalar):
+            self.false_negative_count = CountScalar(self.false_negative_count)
+
+        if self.recall is not None and not isinstance(self.recall, float):
+            self.recall = float(self.recall)
+
+        if self.precision is not None and not isinstance(self.precision, float):
+            self.precision = float(self.precision)
+
+        if self.f1_score is not None and not isinstance(self.f1_score, float):
+            self.f1_score = float(self.f1_score)
+
+        if self.accuracy is not None and not isinstance(self.accuracy, float):
+            self.accuracy = float(self.accuracy)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Event(Entity):
     """
     A thing that happens
     """
@@ -2498,6 +2741,8 @@ class Event(NamedThing):
     happens_at: Optional[Union[dict, "TimePoint"]] = None
     has_interval: Optional[Union[dict, "TemporalInterval"]] = None
     has_duration: Optional[Union[dict, "Duration"]] = None
+    is_ongoing_as_of: Optional[Union[dict, "TimePoint"]] = None
+    name: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -2519,6 +2764,12 @@ class Event(NamedThing):
 
         if self.has_duration is not None and not isinstance(self.has_duration, Duration):
             self.has_duration = Duration(**as_dict(self.has_duration))
+
+        if self.is_ongoing_as_of is not None and not isinstance(self.is_ongoing_as_of, TimePoint):
+            self.is_ongoing_as_of = TimePoint(**as_dict(self.is_ongoing_as_of))
+
+        if self.name is not None and not isinstance(self.name, str):
+            self.name = str(self.name)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -2645,6 +2896,89 @@ class HealthcareConditionOccurrence(Event):
 
         if self.observed_during is not None and not isinstance(self.observed_during, HealthcareEncounterId):
             self.observed_during = HealthcareEncounterId(self.observed_during)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class Investigation(Event):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Investigation"]
+    class_class_curie: ClassVar[str] = "linkml_common:Investigation"
+    class_name: ClassVar[str] = "Investigation"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Investigation
+
+    id: Union[str, InvestigationId] = None
+    objectives: Optional[str] = None
+    variables: Optional[Union[Union[dict, Variable], List[Union[dict, Variable]]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, InvestigationId):
+            self.id = InvestigationId(self.id)
+
+        if self.objectives is not None and not isinstance(self.objectives, str):
+            self.objectives = str(self.objectives)
+
+        if not isinstance(self.variables, list):
+            self.variables = [self.variables] if self.variables is not None else []
+        self.variables = [v if isinstance(v, Variable) else Variable(**as_dict(v)) for v in self.variables]
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class Observation(Event):
+    """
+    A statement about the state of something
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Observation"]
+    class_class_curie: ClassVar[str] = "linkml_common:Observation"
+    class_name: ClassVar[str] = "Observation"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Observation
+
+    id: Union[str, ObservationId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ObservationId):
+            self.id = ObservationId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class Measurement(Observation):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["Measurement"]
+    class_class_curie: ClassVar[str] = "linkml_common:Measurement"
+    class_name: ClassVar[str] = "Measurement"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Measurement
+
+    id: Union[str, MeasurementId] = None
+    quantity_measured: Optional[Union[dict, Quantity]] = None
+    variable_measured: Optional[Union[dict, Variable]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, MeasurementId):
+            self.id = MeasurementId(self.id)
+
+        if self.quantity_measured is not None and not isinstance(self.quantity_measured, Quantity):
+            self.quantity_measured = Quantity(**as_dict(self.quantity_measured))
+
+        if self.variable_measured is not None and not isinstance(self.variable_measured, Variable):
+            self.variable_measured = Variable(**as_dict(self.variable_measured))
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -2807,7 +3141,43 @@ class TemporalRelationship(Relationship):
 
 
 @dataclass
-class PlannedProcess(Event):
+class ExecutionOfProcedure(Event):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["ExecutionOfProcedure"]
+    class_class_curie: ClassVar[str] = "linkml_common:ExecutionOfProcedure"
+    class_name: ClassVar[str] = "ExecutionOfProcedure"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.ExecutionOfProcedure
+
+    id: Union[str, ExecutionOfProcedureId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ExecutionOfProcedureId):
+            self.id = ExecutionOfProcedureId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+class PlannedProcessConfiguration(Intangible):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["PlannedProcessConfiguration"]
+    class_class_curie: ClassVar[str] = "linkml_common:PlannedProcessConfiguration"
+    class_name: ClassVar[str] = "PlannedProcessConfiguration"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.PlannedProcessConfiguration
+
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class PlannedProcess(ExecutionOfProcedure):
     """
     A process that follows a defined procedure or plan
     """
@@ -2821,6 +3191,7 @@ class PlannedProcess(Event):
     id: Union[str, PlannedProcessId] = None
     follows_procedure: Optional[Union[str, ProcedureId]] = None
     uses_physical_device: Optional[Union[str, PhysicalDeviceId]] = None
+    uses_configuration: Optional[Union[dict, PlannedProcessConfiguration]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -2833,6 +3204,9 @@ class PlannedProcess(Event):
 
         if self.uses_physical_device is not None and not isinstance(self.uses_physical_device, PhysicalDeviceId):
             self.uses_physical_device = PhysicalDeviceId(self.uses_physical_device)
+
+        if self.uses_configuration is not None and not isinstance(self.uses_configuration, PlannedProcessConfiguration):
+            self.uses_configuration = PlannedProcessConfiguration(**as_dict(self.uses_configuration))
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -2912,6 +3286,42 @@ class DataGenerationFromSample(InvestigativeProcess):
             self.MissingRequiredField("id")
         if not isinstance(self.id, DataGenerationFromSampleId):
             self.id = DataGenerationFromSampleId(self.id)
+
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class ComputationalPlannedProcess(PlannedProcess):
+    """
+    Application of a mathematical operation to one or more inputs to produce one or more outputs
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["ComputationalPlannedProcess"]
+    class_class_curie: ClassVar[str] = "linkml_common:ComputationalPlannedProcess"
+    class_name: ClassVar[str] = "ComputationalPlannedProcess"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.ComputationalPlannedProcess
+
+    id: Union[str, ComputationalPlannedProcessId] = None
+    inputs: Optional[Union[Union[dict, Any], List[Union[dict, Any]]]] = empty_list()
+    outputs: Optional[Union[Union[dict, Any], List[Union[dict, Any]]]] = empty_list()
+    parts: Optional[Union[Union[str, ComputationalPlannedProcessId], List[Union[str, ComputationalPlannedProcessId]]]] = empty_list()
+    immediate_preceding_steps: Optional[Union[Union[str, ComputationalPlannedProcessId], List[Union[str, ComputationalPlannedProcessId]]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ComputationalPlannedProcessId):
+            self.id = ComputationalPlannedProcessId(self.id)
+
+        if not isinstance(self.parts, list):
+            self.parts = [self.parts] if self.parts is not None else []
+        self.parts = [v if isinstance(v, ComputationalPlannedProcessId) else ComputationalPlannedProcessId(v) for v in self.parts]
+
+        if not isinstance(self.immediate_preceding_steps, list):
+            self.immediate_preceding_steps = [self.immediate_preceding_steps] if self.immediate_preceding_steps is not None else []
+        self.immediate_preceding_steps = [v if isinstance(v, ComputationalPlannedProcessId) else ComputationalPlannedProcessId(v) for v in self.immediate_preceding_steps]
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -3124,6 +3534,12 @@ class WellType(EnumDefinitionImpl):
         name="WellType",
     )
 
+class FinanicialOrganizationEnum(EnumDefinitionImpl):
+
+    _defn = EnumDefinition(
+        name="FinanicialOrganizationEnum",
+    )
+
 class HealthcareEncounterClassification(EnumDefinitionImpl):
 
     _defn = EnumDefinition(
@@ -3235,6 +3651,25 @@ class PersonStatus(EnumDefinitionImpl):
         name="PersonStatus",
     )
 
+class OutcomeType(EnumDefinitionImpl):
+
+    TP = PermissibleValue(
+        text="TP",
+        description="True Positive")
+    FP = PermissibleValue(
+        text="FP",
+        description="False Positive")
+    TN = PermissibleValue(
+        text="TN",
+        description="True Negative")
+    FN = PermissibleValue(
+        text="FN",
+        description="False Negative")
+
+    _defn = EnumDefinition(
+        name="OutcomeType",
+    )
+
 class RelativeTimeEnum(EnumDefinitionImpl):
 
     BEFORE = PermissibleValue(text="BEFORE")
@@ -3300,6 +3735,9 @@ slots.age_in_years = Slot(uri=LINKML_COMMON.age_in_years, name="age_in_years", c
 slots.vital_status = Slot(uri=LINKML_COMMON.vital_status, name="vital_status", curie=LINKML_COMMON.curie('vital_status'),
                    model_uri=LINKML_COMMON.vital_status, domain=None, range=Optional[Union[str, "PersonStatus"]])
 
+slots.provides_services = Slot(uri=LINKML_COMMON.provides_services, name="provides_services", curie=LINKML_COMMON.curie('provides_services'),
+                   model_uri=LINKML_COMMON.provides_services, domain=None, range=Optional[Union[Union[dict, Service], List[Union[dict, Service]]]])
+
 slots.starts_at = Slot(uri=LINKML_COMMON.starts_at, name="starts_at", curie=LINKML_COMMON.curie('starts_at'),
                    model_uri=LINKML_COMMON.starts_at, domain=None, range=Optional[Union[dict, TimePoint]])
 
@@ -3330,20 +3768,11 @@ slots.has_interval = Slot(uri=LINKML_COMMON.has_interval, name="has_interval", c
 slots.has_duration = Slot(uri=LINKML_COMMON.has_duration, name="has_duration", curie=LINKML_COMMON.curie('has_duration'),
                    model_uri=LINKML_COMMON.has_duration, domain=None, range=Optional[Union[dict, Duration]])
 
-slots.mathematicalOperation__inputs = Slot(uri=LINKML_COMMON.inputs, name="mathematicalOperation__inputs", curie=LINKML_COMMON.curie('inputs'),
-                   model_uri=LINKML_COMMON.mathematicalOperation__inputs, domain=None, range=Optional[Union[Union[dict, Any], List[Union[dict, Any]]]])
+slots.is_ongoing_as_of = Slot(uri=LINKML_COMMON.is_ongoing_as_of, name="is_ongoing_as_of", curie=LINKML_COMMON.curie('is_ongoing_as_of'),
+                   model_uri=LINKML_COMMON.is_ongoing_as_of, domain=None, range=Optional[Union[dict, TimePoint]])
 
-slots.mathematicalOperation__outputs = Slot(uri=LINKML_COMMON.outputs, name="mathematicalOperation__outputs", curie=LINKML_COMMON.curie('outputs'),
-                   model_uri=LINKML_COMMON.mathematicalOperation__outputs, domain=None, range=Optional[Union[Union[dict, Any], List[Union[dict, Any]]]])
-
-slots.mathematicalOperation__parts = Slot(uri=LINKML_COMMON.parts, name="mathematicalOperation__parts", curie=LINKML_COMMON.curie('parts'),
-                   model_uri=LINKML_COMMON.mathematicalOperation__parts, domain=None, range=Optional[Union[Union[dict, MathematicalOperation], List[Union[dict, MathematicalOperation]]]])
-
-slots.mathematicalOperation__immediate_preceding_steps = Slot(uri=LINKML_COMMON.immediate_preceding_steps, name="mathematicalOperation__immediate_preceding_steps", curie=LINKML_COMMON.curie('immediate_preceding_steps'),
-                   model_uri=LINKML_COMMON.mathematicalOperation__immediate_preceding_steps, domain=None, range=Optional[Union[Union[dict, MathematicalOperation], List[Union[dict, MathematicalOperation]]]])
-
-slots.collection__members = Slot(uri=LINKML_COMMON.members, name="collection__members", curie=LINKML_COMMON.curie('members'),
-                   model_uri=LINKML_COMMON.collection__members, domain=None, range=Optional[Union[Union[dict, Entity], List[Union[dict, Entity]]]])
+slots.entitySet__members = Slot(uri=LINKML_COMMON.members, name="entitySet__members", curie=LINKML_COMMON.curie('members'),
+                   model_uri=LINKML_COMMON.entitySet__members, domain=None, range=Optional[Union[Union[dict, Entity], List[Union[dict, Entity]]]])
 
 slots.dataset__collected_as_part_of = Slot(uri=LINKML_COMMON.collected_as_part_of, name="dataset__collected_as_part_of", curie=LINKML_COMMON.curie('collected_as_part_of'),
                    model_uri=LINKML_COMMON.dataset__collected_as_part_of, domain=None, range=Optional[Union[Union[str, InvestigationId], List[Union[str, InvestigationId]]]])
@@ -3388,7 +3817,7 @@ slots.powerPlant__opex = Slot(uri=LINKML_COMMON.opex, name="powerPlant__opex", c
                    model_uri=LINKML_COMMON.powerPlant__opex, domain=None, range=Optional[Union[dict, MoneyQuantity]])
 
 slots.fossilFuelPlant__fuel = Slot(uri=LINKML_COMMON.fuel, name="fossilFuelPlant__fuel", curie=LINKML_COMMON.curie('fuel'),
-                   model_uri=LINKML_COMMON.fossilFuelPlant__fuel, domain=None, range=Optional[Union[str, FossilFuelId]])
+                   model_uri=LINKML_COMMON.fossilFuelPlant__fuel, domain=None, range=Optional[Union[str, "FossilFuelType"]])
 
 slots.hydroelectricPlant__dam = Slot(uri=LINKML_COMMON.dam, name="hydroelectricPlant__dam", curie=LINKML_COMMON.curie('dam'),
                    model_uri=LINKML_COMMON.hydroelectricPlant__dam, domain=None, range=Optional[Union[str, LandformId]])
@@ -3406,28 +3835,28 @@ slots.extractiveIndustryFacility__products = Slot(uri=LINKML_COMMON.products, na
                    model_uri=LINKML_COMMON.extractiveIndustryFacility__products, domain=None, range=Optional[Union[Dict[Union[str, ExtractiveIndustryProductId], Union[dict, ExtractiveIndustryProduct]], List[Union[dict, ExtractiveIndustryProduct]]]])
 
 slots.extractiveIndustryFacility__production_capacity = Slot(uri=LINKML_COMMON.production_capacity, name="extractiveIndustryFacility__production_capacity", curie=LINKML_COMMON.curie('production_capacity'),
-                   model_uri=LINKML_COMMON.extractiveIndustryFacility__production_capacity, domain=None, range=Optional[Union[dict, Quantity]])
+                   model_uri=LINKML_COMMON.extractiveIndustryFacility__production_capacity, domain=None, range=Optional[Union[dict, SimpleQuantity]])
 
 slots.extractiveIndustryFacility__annual_production = Slot(uri=LINKML_COMMON.annual_production, name="extractiveIndustryFacility__annual_production", curie=LINKML_COMMON.curie('annual_production'),
-                   model_uri=LINKML_COMMON.extractiveIndustryFacility__annual_production, domain=None, range=Optional[Union[dict, Quantity]])
+                   model_uri=LINKML_COMMON.extractiveIndustryFacility__annual_production, domain=None, range=Optional[Union[dict, SimpleQuantity]])
 
 slots.extractiveIndustryFacility__reserves = Slot(uri=LINKML_COMMON.reserves, name="extractiveIndustryFacility__reserves", curie=LINKML_COMMON.curie('reserves'),
-                   model_uri=LINKML_COMMON.extractiveIndustryFacility__reserves, domain=None, range=Optional[Union[dict, Quantity]])
+                   model_uri=LINKML_COMMON.extractiveIndustryFacility__reserves, domain=None, range=Optional[Union[dict, SimpleQuantity]])
 
 slots.miningFacility__mining_method = Slot(uri=LINKML_COMMON.mining_method, name="miningFacility__mining_method", curie=LINKML_COMMON.curie('mining_method'),
                    model_uri=LINKML_COMMON.miningFacility__mining_method, domain=None, range=Optional[Union[str, "MiningMethod"]])
 
 slots.miningFacility__depth = Slot(uri=LINKML_COMMON.depth, name="miningFacility__depth", curie=LINKML_COMMON.curie('depth'),
-                   model_uri=LINKML_COMMON.miningFacility__depth, domain=None, range=Optional[Union[dict, Quantity]])
+                   model_uri=LINKML_COMMON.miningFacility__depth, domain=None, range=Optional[Union[dict, SimpleQuantity]])
 
 slots.miningFacility__area = Slot(uri=LINKML_COMMON.area, name="miningFacility__area", curie=LINKML_COMMON.curie('area'),
-                   model_uri=LINKML_COMMON.miningFacility__area, domain=None, range=Optional[Union[dict, Quantity]])
+                   model_uri=LINKML_COMMON.miningFacility__area, domain=None, range=Optional[Union[dict, SimpleQuantity]])
 
 slots.wellFacility__well_type = Slot(uri=LINKML_COMMON.well_type, name="wellFacility__well_type", curie=LINKML_COMMON.curie('well_type'),
                    model_uri=LINKML_COMMON.wellFacility__well_type, domain=None, range=Optional[Union[str, "WellType"]])
 
 slots.wellFacility__depth = Slot(uri=LINKML_COMMON.depth, name="wellFacility__depth", curie=LINKML_COMMON.curie('depth'),
-                   model_uri=LINKML_COMMON.wellFacility__depth, domain=None, range=Optional[Union[dict, Quantity]])
+                   model_uri=LINKML_COMMON.wellFacility__depth, domain=None, range=Optional[Union[dict, SimpleQuantity]])
 
 slots.extractiveIndustryProduct__product_type = Slot(uri=LINKML_COMMON.product_type, name="extractiveIndustryProduct__product_type", curie=LINKML_COMMON.curie('product_type'),
                    model_uri=LINKML_COMMON.extractiveIndustryProduct__product_type, domain=None, range=Optional[Union[str, "ExtractiveIndustryProductType"]])
@@ -3570,6 +3999,27 @@ slots.quantityRange__lower_bound = Slot(uri=LINKML_COMMON.lower_bound, name="qua
 slots.quantityRange__upper_bound = Slot(uri=LINKML_COMMON.upper_bound, name="quantityRange__upper_bound", curie=LINKML_COMMON.curie('upper_bound'),
                    model_uri=LINKML_COMMON.quantityRange__upper_bound, domain=None, range=Optional[Union[dict, Quantity]])
 
+slots.creationMetadata__title = Slot(uri=LINKML_COMMON.title, name="creationMetadata__title", curie=LINKML_COMMON.curie('title'),
+                   model_uri=LINKML_COMMON.creationMetadata__title, domain=None, range=Optional[str])
+
+slots.creationMetadata__abstract = Slot(uri=LINKML_COMMON.abstract, name="creationMetadata__abstract", curie=LINKML_COMMON.curie('abstract'),
+                   model_uri=LINKML_COMMON.creationMetadata__abstract, domain=None, range=Optional[str])
+
+slots.creationMetadata__rights = Slot(uri=LINKML_COMMON.rights, name="creationMetadata__rights", curie=LINKML_COMMON.curie('rights'),
+                   model_uri=LINKML_COMMON.creationMetadata__rights, domain=None, range=Optional[str])
+
+slots.creationMetadata__creators = Slot(uri=DCTERMS.creator, name="creationMetadata__creators", curie=DCTERMS.curie('creator'),
+                   model_uri=LINKML_COMMON.creationMetadata__creators, domain=None, range=Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]])
+
+slots.creationMetadata__contributors = Slot(uri=DCTERMS.contributor, name="creationMetadata__contributors", curie=DCTERMS.curie('contributor'),
+                   model_uri=LINKML_COMMON.creationMetadata__contributors, domain=None, range=Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]])
+
+slots.creationMetadata__contacts = Slot(uri=SCHEMA.contactPoint, name="creationMetadata__contacts", curie=SCHEMA.curie('contactPoint'),
+                   model_uri=LINKML_COMMON.creationMetadata__contacts, domain=None, range=Optional[Union[Union[str, AgentId], List[Union[str, AgentId]]]])
+
+slots.creationMetadata__keywords = Slot(uri=SCHEMA.keywords, name="creationMetadata__keywords", curie=SCHEMA.curie('keywords'),
+                   model_uri=LINKML_COMMON.creationMetadata__keywords, domain=None, range=Optional[Union[str, List[str]]])
+
 slots.creativeWork__title = Slot(uri=LINKML_COMMON.title, name="creativeWork__title", curie=LINKML_COMMON.curie('title'),
                    model_uri=LINKML_COMMON.creativeWork__title, domain=None, range=Optional[str])
 
@@ -3591,6 +4041,51 @@ slots.creativeWork__contacts = Slot(uri=SCHEMA.contactPoint, name="creativeWork_
 slots.creativeWork__keywords = Slot(uri=SCHEMA.keywords, name="creativeWork__keywords", curie=SCHEMA.curie('keywords'),
                    model_uri=LINKML_COMMON.creativeWork__keywords, domain=None, range=Optional[Union[str, List[str]]])
 
+slots.prediction__variable_predicted = Slot(uri=LINKML_COMMON.variable_predicted, name="prediction__variable_predicted", curie=LINKML_COMMON.curie('variable_predicted'),
+                   model_uri=LINKML_COMMON.prediction__variable_predicted, domain=None, range=Optional[Union[dict, Variable]])
+
+slots.prediction__predicted_value = Slot(uri=LINKML_COMMON.predicted_value, name="prediction__predicted_value", curie=LINKML_COMMON.curie('predicted_value'),
+                   model_uri=LINKML_COMMON.prediction__predicted_value, domain=None, range=Optional[Union[dict, Any]])
+
+slots.prediction__expected_value = Slot(uri=LINKML_COMMON.expected_value, name="prediction__expected_value", curie=LINKML_COMMON.curie('expected_value'),
+                   model_uri=LINKML_COMMON.prediction__expected_value, domain=None, range=Optional[Union[dict, Any]])
+
+slots.simplePrediction__outcome = Slot(uri=LINKML_COMMON.outcome, name="simplePrediction__outcome", curie=LINKML_COMMON.curie('outcome'),
+                   model_uri=LINKML_COMMON.simplePrediction__outcome, domain=None, range=Optional[Union[str, "OutcomeType"]])
+
+slots.simplePrediction__expected_value = Slot(uri=LINKML_COMMON.expected_value, name="simplePrediction__expected_value", curie=LINKML_COMMON.curie('expected_value'),
+                   model_uri=LINKML_COMMON.simplePrediction__expected_value, domain=None, range=Optional[str])
+
+slots.predictionSummaryStatistics__predictions = Slot(uri=LINKML_COMMON.predictions, name="predictionSummaryStatistics__predictions", curie=LINKML_COMMON.curie('predictions'),
+                   model_uri=LINKML_COMMON.predictionSummaryStatistics__predictions, domain=None, range=Optional[Union[Union[dict, Prediction], List[Union[dict, Prediction]]]])
+
+slots.predictionSummaryStatistics__uses_dataset = Slot(uri=LINKML_COMMON.uses_dataset, name="predictionSummaryStatistics__uses_dataset", curie=LINKML_COMMON.curie('uses_dataset'),
+                   model_uri=LINKML_COMMON.predictionSummaryStatistics__uses_dataset, domain=None, range=Optional[Union[str, DatasetId]])
+
+slots.outcomeStatistics__true_positive_count = Slot(uri=LINKML_COMMON.true_positive_count, name="outcomeStatistics__true_positive_count", curie=LINKML_COMMON.curie('true_positive_count'),
+                   model_uri=LINKML_COMMON.outcomeStatistics__true_positive_count, domain=None, range=Optional[Union[int, CountScalar]])
+
+slots.outcomeStatistics__false_positive_count = Slot(uri=LINKML_COMMON.false_positive_count, name="outcomeStatistics__false_positive_count", curie=LINKML_COMMON.curie('false_positive_count'),
+                   model_uri=LINKML_COMMON.outcomeStatistics__false_positive_count, domain=None, range=Optional[Union[int, CountScalar]])
+
+slots.outcomeStatistics__true_negative_count = Slot(uri=LINKML_COMMON.true_negative_count, name="outcomeStatistics__true_negative_count", curie=LINKML_COMMON.curie('true_negative_count'),
+                   model_uri=LINKML_COMMON.outcomeStatistics__true_negative_count, domain=None, range=Optional[Union[int, CountScalar]])
+
+slots.outcomeStatistics__false_negative_count = Slot(uri=LINKML_COMMON.false_negative_count, name="outcomeStatistics__false_negative_count", curie=LINKML_COMMON.curie('false_negative_count'),
+                   model_uri=LINKML_COMMON.outcomeStatistics__false_negative_count, domain=None, range=Optional[Union[int, CountScalar]])
+
+slots.outcomeStatistics__recall = Slot(uri=LINKML_COMMON.recall, name="outcomeStatistics__recall", curie=LINKML_COMMON.curie('recall'),
+                   model_uri=LINKML_COMMON.outcomeStatistics__recall, domain=None, range=Optional[float])
+
+slots.outcomeStatistics__precision = Slot(uri=LINKML_COMMON.precision, name="outcomeStatistics__precision", curie=LINKML_COMMON.curie('precision'),
+                   model_uri=LINKML_COMMON.outcomeStatistics__precision, domain=None, range=Optional[float])
+
+slots.outcomeStatistics__f1_score = Slot(uri=LINKML_COMMON.f1_score, name="outcomeStatistics__f1_score", curie=LINKML_COMMON.curie('f1_score'),
+                   model_uri=LINKML_COMMON.outcomeStatistics__f1_score, domain=None, range=Optional[float])
+
+slots.outcomeStatistics__accuracy = Slot(uri=LINKML_COMMON.accuracy, name="outcomeStatistics__accuracy", curie=LINKML_COMMON.curie('accuracy'),
+                   model_uri=LINKML_COMMON.outcomeStatistics__accuracy, domain=None, range=Optional[float])
+
 slots.temporalRelationship__predicate = Slot(uri=LINKML_COMMON.predicate, name="temporalRelationship__predicate", curie=LINKML_COMMON.curie('predicate'),
                    model_uri=LINKML_COMMON.temporalRelationship__predicate, domain=None, range=Optional[Union[str, "RelativeTimeEnum"]])
 
@@ -3603,6 +4098,21 @@ slots.plannedProcess__follows_procedure = Slot(uri=LINKML_COMMON.follows_procedu
 slots.plannedProcess__uses_physical_device = Slot(uri=LINKML_COMMON.uses_physical_device, name="plannedProcess__uses_physical_device", curie=LINKML_COMMON.curie('uses_physical_device'),
                    model_uri=LINKML_COMMON.plannedProcess__uses_physical_device, domain=None, range=Optional[Union[str, PhysicalDeviceId]])
 
+slots.plannedProcess__uses_configuration = Slot(uri=LINKML_COMMON.uses_configuration, name="plannedProcess__uses_configuration", curie=LINKML_COMMON.curie('uses_configuration'),
+                   model_uri=LINKML_COMMON.plannedProcess__uses_configuration, domain=None, range=Optional[Union[dict, PlannedProcessConfiguration]])
+
+slots.computationalPlannedProcess__inputs = Slot(uri=LINKML_COMMON.inputs, name="computationalPlannedProcess__inputs", curie=LINKML_COMMON.curie('inputs'),
+                   model_uri=LINKML_COMMON.computationalPlannedProcess__inputs, domain=None, range=Optional[Union[Union[dict, Any], List[Union[dict, Any]]]])
+
+slots.computationalPlannedProcess__outputs = Slot(uri=LINKML_COMMON.outputs, name="computationalPlannedProcess__outputs", curie=LINKML_COMMON.curie('outputs'),
+                   model_uri=LINKML_COMMON.computationalPlannedProcess__outputs, domain=None, range=Optional[Union[Union[dict, Any], List[Union[dict, Any]]]])
+
+slots.computationalPlannedProcess__parts = Slot(uri=LINKML_COMMON.parts, name="computationalPlannedProcess__parts", curie=LINKML_COMMON.curie('parts'),
+                   model_uri=LINKML_COMMON.computationalPlannedProcess__parts, domain=None, range=Optional[Union[Union[str, ComputationalPlannedProcessId], List[Union[str, ComputationalPlannedProcessId]]]])
+
+slots.computationalPlannedProcess__immediate_preceding_steps = Slot(uri=LINKML_COMMON.immediate_preceding_steps, name="computationalPlannedProcess__immediate_preceding_steps", curie=LINKML_COMMON.curie('immediate_preceding_steps'),
+                   model_uri=LINKML_COMMON.computationalPlannedProcess__immediate_preceding_steps, domain=None, range=Optional[Union[Union[str, ComputationalPlannedProcessId], List[Union[str, ComputationalPlannedProcessId]]]])
+
 slots.Landform_geolocation = Slot(uri=LINKML_COMMON.geolocation, name="Landform_geolocation", curie=LINKML_COMMON.curie('geolocation'),
                    model_uri=LINKML_COMMON.Landform_geolocation, domain=Landform, range=Optional[Union[dict, "GeoPointLocation"]])
 
@@ -3614,12 +4124,6 @@ slots.InvestigativeProtocol_classification = Slot(uri=LINKML_COMMON.classificati
 
 slots.StudyDesign_classification = Slot(uri=LINKML_COMMON.classification, name="StudyDesign_classification", curie=LINKML_COMMON.curie('classification'),
                    model_uri=LINKML_COMMON.StudyDesign_classification, domain=StudyDesign, range=Optional[Union[str, ConceptId]])
-
-slots.UnitConversionOperation_inputs = Slot(uri=LINKML_COMMON.inputs, name="UnitConversionOperation_inputs", curie=LINKML_COMMON.curie('inputs'),
-                   model_uri=LINKML_COMMON.UnitConversionOperation_inputs, domain=UnitConversionOperation, range=Optional[Union[Union[dict, Quantity], List[Union[dict, Quantity]]]])
-
-slots.UnitConversionOperation_outputs = Slot(uri=LINKML_COMMON.outputs, name="UnitConversionOperation_outputs", curie=LINKML_COMMON.curie('outputs'),
-                   model_uri=LINKML_COMMON.UnitConversionOperation_outputs, domain=UnitConversionOperation, range=Optional[Union[Union[dict, Quantity], List[Union[dict, Quantity]]]])
 
 slots.Person_primary_email = Slot(uri=SCHEMA.email, name="Person_primary_email", curie=SCHEMA.curie('email'),
                    model_uri=LINKML_COMMON.Person_primary_email, domain=Person, range=Optional[str],

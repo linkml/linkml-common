@@ -10,6 +10,7 @@ generator_args:
     add_root_classes: true
     # throws 'Cannot handle metadata profile: rdfs'
     # metadata_profile: rdfs
+    mixins_as_expressions: true
   markdown:
     mergeimports: true
   graphql:

@@ -16,14 +16,21 @@ prefixes:
   fhir: http://hl7.org/fhir/
   qudt: http://qudt.org/vocab/unit/
   fibo.QuantitiesAndUnits: https://www.omg.org/spec/Commons/QuantitiesAndUnits/
+  UO: http://purl.obolibrary.org/obo/UO_
+  UCUM: http://unitsofmeasure.org/
 default_prefix: linkml_common
 default_range: string
 
 imports:
   - linkml:types
   - core
+  - time
 
 classes:
+
+  Observation:
+    description: A statement about the state of something
+    is_a: Event
 
   QuantityKind:
     is_a: Concept
@@ -89,19 +96,19 @@ classes:
         range: Quantity
         description: The upper bound of the range
 
-  UnitConversionOperation:
-    description: >-
-      A unit conversion operation
-    is_a: MathematicalOperation
-    slot_usage:
-      inputs:
-        range: Quantity
-        description: The input unit
-        maximum_cardinality: 1
-      outputs:
-        range: Quantity
-        description: The output unit
-        maximum_cardinality: 1
+  #UnitConversionOperation:
+  #  description: >-
+  #    A unit conversion operation
+  #  is_a: MathematicalOperationExecution
+  #  slot_usage:
+  #    inputs:
+  #      range: Quantity
+  #      description: The input unit
+  #      maximum_cardinality: 1
+  #    outputs:
+  #      range: Quantity
+  #      description: The output unit
+  #      maximum_cardinality: 1
 
   UnitConcept:
     is_a: Concept

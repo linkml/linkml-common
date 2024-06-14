@@ -27,27 +27,45 @@ imports:
 
 classes:
 
+  Identified:
+    mixin: true
+    slots:
+      - id
+      - name
+
+  Typed:
+    mixin: true
+    slots:
+      - type
+
   Entity:
     abstract: true
     description: >-
       A physical, digital, conceptual, or other kind of thing with some
       common characteristics
     class_uri: schema:Thing
-    slots:
-      - type
+    mixins:
+      - Typed
+
+  Intangible:
+    description: >-
+      An entity that is not a physical object, process, or information
+    class_uri: schema:Intangible
+    is_a: Entity
 
   NamedThing:
     is_a: Entity
+    mixins:
+      - Identified
     slots:
-      - id
-      - name
-      - type
       - classification
       - ontology_types
       - description
 
   Concept:
-    is_a: NamedThing
+    is_a: Intangible
+    mixins:
+      - Identified
     exact_mappings:
       - biolink:OntologyClass
       - fhir:CodableConcept
@@ -55,18 +73,21 @@ classes:
   InformationEntity:
     description: >-
       An entity that describes some information
-    is_a: NamedThing
+    is_a: Intangible
+    mixins:
+      - Identified
     slots:
       - describes
 
   PhysicalDevice:
     is_a: NamedThing
 
-  Intangible:
+
+  StructuredValue:
     description: >-
-      An entity that is not a physical object, process, or information
-    class_uri: schema:Intangible
-    is_a: Entity
+      A value that is a structured collection of other values
+    is_a: Intangible
+    class_uri: schema:StructuredValue
 
   Role:
     is_a: Intangible
@@ -84,18 +105,14 @@ classes:
 
   Location:
     abstract: true
+    is_a: StructuredValue
 
   PointLocation:
     is_a: Location
 
-  Observation:
-    description: A statement about the state of something
-    is_a: Entity
-
-
   Specification:
     description: A specification of a thing
-    is_a: NamedThing
+    is_a: InformationEntity
     exact_mappings:
       - IAO:0000104
 
@@ -103,31 +120,11 @@ classes:
     description: A canonical series of actions conducted in a certain order or manner
     is_a: Specification
 
-  MathematicalOperation:
-    description: >-
-      Application of a mathematical operation to one or more inputs to produce one or more outputs
-    # is_a: Process
-    attributes:
-      inputs:
-        range: Any
-        multivalued: true
-        description: The inputs to the operation
-      outputs:
-        range: Any
-        multivalued: true
-        description: The outputs of the operation
-      parts:
-        range: MathematicalOperation
-        multivalued: true
-        description: The parts of the process
-      immediate_preceding_steps:
-        range: MathematicalOperation
-        multivalued: true
-        description: The steps that immediately precede this step
-
-  Collection:
+  EntitySet:
     description: >-
       A group of things. The collection may be heterogeneous or homogeneous.
+    aliases:
+      - collection
     is_a: Intangible
     attributes:
       members:
@@ -135,8 +132,6 @@ classes:
         multivalued: true
         description: The members of the collection
         inlined_as_list: true
-
-
 
   Any:
     class_uri: linkml:Any
@@ -182,3 +177,9 @@ slots:
     range: Any
     description: >-
       The object of a relationship
+
+types:
+
+  CountScalar:
+    typeof: integer
+    minimum_value: 0

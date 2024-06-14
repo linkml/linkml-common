@@ -24,16 +24,46 @@ imports:
 
 classes:
 
+  ExecutionOfProcedure:
+    is_a: Event
+
+  PlannedProcessConfiguration:
+    is_a: Intangible
+
   PlannedProcess:
     description: A process that follows a defined procedure or plan
-    is_a: Event
+    is_a: ExecutionOfProcedure
     attributes:
       follows_procedure:
         range: Procedure
       uses_physical_device:
         range: PhysicalDevice
+      uses_configuration:
+        range: PlannedProcessConfiguration
     exact_mappings:
       - OBI:0000011
+
+  ComputationalPlannedProcess:
+    description: >-
+      Application of a mathematical operation to one or more inputs to produce one or more outputs
+    is_a: PlannedProcess
+    attributes:
+      inputs:
+        range: Any
+        multivalued: true
+        description: The inputs to the operation
+      outputs:
+        range: Any
+        multivalued: true
+        description: The outputs of the operation
+      parts:
+        range: ComputationalPlannedProcess
+        multivalued: true
+        description: The parts of the process
+      immediate_preceding_steps:
+        range: ComputationalPlannedProcess
+        multivalued: true
+        description: The steps that immediately precede this step
 
   MaterialCollection:
     is_a: PlannedProcess

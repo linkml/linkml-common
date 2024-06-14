@@ -66,3 +66,19 @@ classes:
       - fibo:ProductsAndServices/ClientsAndAccounts/Account
       - schema:BankAccount
 
+  FinancialOrganization:
+    description: An organization that provides financial services
+    is_a: Organization
+    exact_mappings:
+      - schema:FinancialService
+    annotations:
+      recommended_value_set_bindings: linkml_common:FinanicialOrganizationEnum
+
+enums:
+  FinanicialOrganizationEnum:
+    reachable_from:
+      source_nodes:
+        - fibo:FND/Organizations/Organizations/Organization
+      is_direct: false
+      relationship_types:
+        - rdfs:subClassOf

@@ -48,7 +48,7 @@ classes:
 
   PostalAddress:
     class_uri: schema:PostalAddress
-    is_a: Entity
+    is_a: StructuredValue
     description: >-
       Represents an Address
     attributes:

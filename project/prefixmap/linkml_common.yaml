@@ -4,8 +4,8 @@
    "IAO": "http://purl.obolibrary.org/obo/IAO_",
    "OBI": "http://purl.obolibrary.org/obo/OBI_",
    "PATO": "http://purl.obolibrary.org/obo/PATO_",
-   "UCUM": "http://example.org/UNKNOWN/UCUM/",
-   "UO": "http://example.org/UNKNOWN/UO/",
+   "UCUM": "http://unitsofmeasure.org/",
+   "UO": "http://purl.obolibrary.org/obo/UO_",
    "biolink": "https://w3id.org/biolink/",
    "dcterms": "http://purl.org/dc/terms/",
    "example": "https://example.org/",
@@ -16,7 +16,7 @@
    "fibo.commons.PartiesAndSituations": "https://spec.edmcouncil.org/fibo/ontology/FBC/ommons/PartiesAndSituations/",
    "linkml": "https://w3id.org/linkml/",
    "linkml_common": "https://w3id.org/linkml-common/",
-   "nmdcschema": "http://example.org/UNKNOWN/nmdcschema/",
+   "nmdcschema": "https://w3id.org/nmdc/",
    "omopschema": "http://example.org/omop/",
    "prov": "http://www.w3.org/ns/prov#",
    "qudt": "http://qudt.org/vocab/unit/",
@@ -55,5 +55,8 @@
    },
    "SimpleQuantity": {
       "@id": "fhir:SimpleQuantity"
+   },
+   "StructuredValue": {
+      "@id": "schema:StructuredValue"
    }
 }
