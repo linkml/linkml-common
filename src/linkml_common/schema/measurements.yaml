@@ -23,15 +23,27 @@ imports:
 
 classes:
 
+  Observation:
+    description: A statement about the state of something
+    is_a: Event
+    attributes:
+      observation_subject:
+        range: Entity
+      variable_measured:
+        range: Variable
+        description: The variable being measured
+      measured_using:
+        range: PhysicalDevice
+
   Measurement:
     is_a: Observation
     attributes:
       quantity_measured:
         range: Quantity
         description: The quantity being measured
-      variable_measured:
-        range: Variable
-        description: The variable being measured
+
+  QualitativeObservation:
+    is_a: Observation
 
   Variable:
     is_a: Intangible

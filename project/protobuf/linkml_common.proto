@@ -649,8 +649,10 @@ message Measurement
   timePoint isOngoingAsOf = 0
   uriorcurie id = 0
   string name = 0
-  quantity quantityMeasured = 0
+  entity observationSubject = 0
   variable variableMeasured = 0
+  physicalDevice measuredUsing = 0
+  quantity quantityMeasured = 0
  }
 // A facility where mineral resources are extracted from the earth
 message MiningFacility
@@ -720,6 +722,9 @@ message Observation
   timePoint isOngoingAsOf = 0
   uriorcurie id = 0
   string name = 0
+  entity observationSubject = 0
+  variable variableMeasured = 0
+  physicalDevice measuredUsing = 0
  }
 // Represents an Organization
 message Organization
@@ -870,6 +875,21 @@ message Publication
   any describes = 0
   uriorcurie id = 0
   string name = 0
+ }
+message QualitativeObservation
+ {
+  string type = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
+  timePoint isOngoingAsOf = 0
+  uriorcurie id = 0
+  string name = 0
+  entity observationSubject = 0
+  variable variableMeasured = 0
+  physicalDevice measuredUsing = 0
  }
 message Quantity
  {

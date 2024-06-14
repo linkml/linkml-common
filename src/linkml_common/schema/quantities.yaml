@@ -28,9 +28,6 @@ imports:
 
 classes:
 
-  Observation:
-    description: A statement about the state of something
-    is_a: Event
 
   QuantityKind:
     is_a: Concept

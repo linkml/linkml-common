@@ -725,8 +725,7 @@ linkml:Sparqlpath xsd:string
 <Measurement> CLOSED {
     (  $<Measurement_tes> (  &<Observation_tes> ;
           rdf:type [ <Observation> ] ? ;
-          <quantity_measured> @<Quantity> ? ;
-          <variable_measured> @<Variable> ?
+          <quantity_measured> @<Quantity> ?
        ) ;
        rdf:type [ <Measurement> ]
     )
@@ -783,11 +782,14 @@ linkml:Sparqlpath xsd:string
 <Observation>  (
     CLOSED {
        (  $<Observation_tes> (  &<Event_tes> ;
-             rdf:type [ <Event> ] ?
+             rdf:type [ <Event> ] ? ;
+             <observation_subject> @<Entity> ? ;
+             <variable_measured> @<Variable> ? ;
+             <measured_using> @<PhysicalDevice> ?
           ) ;
           rdf:type [ <Observation> ]
        )
-    } OR @<Measurement>
+    } OR @<Measurement> OR @<QualitativeObservation>
 )
 
 <Organization>  (
@@ -976,6 +978,14 @@ linkml:Sparqlpath xsd:string
           rdf:type [ <InformationEntity> ] ?
        ) ;
        rdf:type [ <Publication> ]
+    )
+}
+
+<QualitativeObservation> CLOSED {
+    (  $<QualitativeObservation_tes> (  &<Observation_tes> ;
+          rdf:type [ <Observation> ] ?
+       ) ;
+       rdf:type [ <QualitativeObservation> ]
     )
 }
 

@@ -348,16 +348,6 @@
 --     * Slot: north_bounding_coordinate Description: The northernmost coordinate of the location
 --     * Slot: south_bounding_coordinate Description: The southernmost coordinate of the location
 --     * Slot: type Description: A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.
--- # Class: "Observation" Description: "A statement about the state of something"
---     * Slot: id Description: A unique identifier for a thing
---     * Slot: name Description: A human-readable name for a thing
---     * Slot: type Description: A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.
---     * Slot: starts_at_id Description: 
---     * Slot: ends_at_id Description: 
---     * Slot: happens_at_id Description: 
---     * Slot: has_interval_id Description: 
---     * Slot: has_duration_id Description: 
---     * Slot: is_ongoing_as_of_id Description: 
 -- # Class: "QuantityKind" Description: ""
 --     * Slot: id Description: A unique identifier for a thing
 --     * Slot: name Description: A human-readable name for a thing
@@ -467,11 +457,39 @@
 --     * Slot: id Description: A unique identifier for a thing
 --     * Slot: name Description: A human-readable name for a thing
 --     * Slot: type Description: A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.
+-- # Class: "Observation" Description: "A statement about the state of something"
+--     * Slot: measured_using Description: 
+--     * Slot: id Description: A unique identifier for a thing
+--     * Slot: name Description: A human-readable name for a thing
+--     * Slot: type Description: A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.
+--     * Slot: observation_subject_id Description: 
+--     * Slot: variable_measured_id Description: The variable being measured
+--     * Slot: starts_at_id Description: 
+--     * Slot: ends_at_id Description: 
+--     * Slot: happens_at_id Description: 
+--     * Slot: has_interval_id Description: 
+--     * Slot: has_duration_id Description: 
+--     * Slot: is_ongoing_as_of_id Description: 
 -- # Class: "Measurement" Description: ""
+--     * Slot: measured_using Description: 
 --     * Slot: id Description: A unique identifier for a thing
 --     * Slot: name Description: A human-readable name for a thing
 --     * Slot: type Description: A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.
 --     * Slot: quantity_measured_id Description: The quantity being measured
+--     * Slot: observation_subject_id Description: 
+--     * Slot: variable_measured_id Description: The variable being measured
+--     * Slot: starts_at_id Description: 
+--     * Slot: ends_at_id Description: 
+--     * Slot: happens_at_id Description: 
+--     * Slot: has_interval_id Description: 
+--     * Slot: has_duration_id Description: 
+--     * Slot: is_ongoing_as_of_id Description: 
+-- # Class: "QualitativeObservation" Description: ""
+--     * Slot: measured_using Description: 
+--     * Slot: id Description: A unique identifier for a thing
+--     * Slot: name Description: A human-readable name for a thing
+--     * Slot: type Description: A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.
+--     * Slot: observation_subject_id Description: 
 --     * Slot: variable_measured_id Description: The variable being measured
 --     * Slot: starts_at_id Description: 
 --     * Slot: ends_at_id Description: 
@@ -1809,24 +1827,6 @@ CREATE TABLE "EngineeringMaterialProcessing" (
 	FOREIGN KEY(has_duration_id) REFERENCES "Duration" (id), 
 	FOREIGN KEY(is_ongoing_as_of_id) REFERENCES "TimePoint" (id)
 );
-CREATE TABLE "Observation" (
-	id TEXT NOT NULL, 
-	name TEXT, 
-	type TEXT, 
-	starts_at_id INTEGER, 
-	ends_at_id INTEGER, 
-	happens_at_id INTEGER, 
-	has_interval_id INTEGER, 
-	has_duration_id INTEGER, 
-	is_ongoing_as_of_id INTEGER, 
-	PRIMARY KEY (id), 
-	FOREIGN KEY(starts_at_id) REFERENCES "TimePoint" (id), 
-	FOREIGN KEY(ends_at_id) REFERENCES "TimePoint" (id), 
-	FOREIGN KEY(happens_at_id) REFERENCES "TimePoint" (id), 
-	FOREIGN KEY(has_interval_id) REFERENCES "TemporalInterval" (id), 
-	FOREIGN KEY(has_duration_id) REFERENCES "Duration" (id), 
-	FOREIGN KEY(is_ongoing_as_of_id) REFERENCES "TimePoint" (id)
-);
 CREATE TABLE "Ratio" (
 	id INTEGER NOT NULL, 
 	has_quantity_kind TEXT, 
@@ -1875,11 +1875,12 @@ CREATE TABLE "FinancialAccount" (
 	FOREIGN KEY(bank) REFERENCES "Organization" (id), 
 	FOREIGN KEY(account_holder) REFERENCES "Person" (id)
 );
-CREATE TABLE "Measurement" (
+CREATE TABLE "Observation" (
+	measured_using TEXT, 
 	id TEXT NOT NULL, 
 	name TEXT, 
 	type TEXT, 
-	quantity_measured_id INTEGER, 
+	observation_subject_id INTEGER, 
 	variable_measured_id INTEGER, 
 	starts_at_id INTEGER, 
 	ends_at_id INTEGER, 
@@ -1888,7 +1889,58 @@ CREATE TABLE "Measurement" (
 	has_duration_id INTEGER, 
 	is_ongoing_as_of_id INTEGER, 
 	PRIMARY KEY (id), 
+	FOREIGN KEY(measured_using) REFERENCES "PhysicalDevice" (id), 
+	FOREIGN KEY(observation_subject_id) REFERENCES "Entity" (id), 
+	FOREIGN KEY(variable_measured_id) REFERENCES "Variable" (id), 
+	FOREIGN KEY(starts_at_id) REFERENCES "TimePoint" (id), 
+	FOREIGN KEY(ends_at_id) REFERENCES "TimePoint" (id), 
+	FOREIGN KEY(happens_at_id) REFERENCES "TimePoint" (id), 
+	FOREIGN KEY(has_interval_id) REFERENCES "TemporalInterval" (id), 
+	FOREIGN KEY(has_duration_id) REFERENCES "Duration" (id), 
+	FOREIGN KEY(is_ongoing_as_of_id) REFERENCES "TimePoint" (id)
+);
+CREATE TABLE "Measurement" (
+	measured_using TEXT, 
+	id TEXT NOT NULL, 
+	name TEXT, 
+	type TEXT, 
+	quantity_measured_id INTEGER, 
+	observation_subject_id INTEGER, 
+	variable_measured_id INTEGER, 
+	starts_at_id INTEGER, 
+	ends_at_id INTEGER, 
+	happens_at_id INTEGER, 
+	has_interval_id INTEGER, 
+	has_duration_id INTEGER, 
+	is_ongoing_as_of_id INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(measured_using) REFERENCES "PhysicalDevice" (id), 
 	FOREIGN KEY(quantity_measured_id) REFERENCES "Quantity" (id), 
+	FOREIGN KEY(observation_subject_id) REFERENCES "Entity" (id), 
+	FOREIGN KEY(variable_measured_id) REFERENCES "Variable" (id), 
+	FOREIGN KEY(starts_at_id) REFERENCES "TimePoint" (id), 
+	FOREIGN KEY(ends_at_id) REFERENCES "TimePoint" (id), 
+	FOREIGN KEY(happens_at_id) REFERENCES "TimePoint" (id), 
+	FOREIGN KEY(has_interval_id) REFERENCES "TemporalInterval" (id), 
+	FOREIGN KEY(has_duration_id) REFERENCES "Duration" (id), 
+	FOREIGN KEY(is_ongoing_as_of_id) REFERENCES "TimePoint" (id)
+);
+CREATE TABLE "QualitativeObservation" (
+	measured_using TEXT, 
+	id TEXT NOT NULL, 
+	name TEXT, 
+	type TEXT, 
+	observation_subject_id INTEGER, 
+	variable_measured_id INTEGER, 
+	starts_at_id INTEGER, 
+	ends_at_id INTEGER, 
+	happens_at_id INTEGER, 
+	has_interval_id INTEGER, 
+	has_duration_id INTEGER, 
+	is_ongoing_as_of_id INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(measured_using) REFERENCES "PhysicalDevice" (id), 
+	FOREIGN KEY(observation_subject_id) REFERENCES "Entity" (id), 
 	FOREIGN KEY(variable_measured_id) REFERENCES "Variable" (id), 
 	FOREIGN KEY(starts_at_id) REFERENCES "TimePoint" (id), 
 	FOREIGN KEY(ends_at_id) REFERENCES "TimePoint" (id), 

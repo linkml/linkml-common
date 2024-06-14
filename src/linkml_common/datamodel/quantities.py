@@ -157,7 +157,7 @@ class EntitySet(Intangible):
     """
     A group of things. The collection may be heterogeneous or homogeneous.
     """
-    members: Optional[List[Union[Entity,Intangible,NamedThing,Event,Observation,PhysicalDevice,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,TimePointOrTemporalInterval,Quantity,QuantityRange,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,TemporalRelationship,Location,PointLocation,Specification,Procedure,QuantityKind,UnitConcept]]] = Field(default_factory=list, description="""The members of the collection""")
+    members: Optional[List[Union[Entity,Intangible,NamedThing,Event,PhysicalDevice,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,TimePointOrTemporalInterval,Quantity,QuantityRange,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,TemporalRelationship,Location,PointLocation,Specification,Procedure,QuantityKind,UnitConcept]]] = Field(default_factory=list, description="""The members of the collection""")
     type: Literal["EntitySet"] = Field("EntitySet", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
@@ -213,21 +213,6 @@ class TemporalRelationship(Relationship):
     predicate: Optional[RelativeTimeEnum] = Field(None, description="""The relationship between the two time points""")
     relative_to: Optional[Union[TemporalInterval, TimePoint, str]] = Field(None)
     type: Literal["TemporalRelationship"] = Field("TemporalRelationship", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-
-
-class Observation(Event):
-    """
-    A statement about the state of something
-    """
-    starts_at: Optional[TimePoint] = Field(None)
-    ends_at: Optional[TimePoint] = Field(None)
-    happens_at: Optional[TimePoint] = Field(None)
-    has_interval: Optional[TemporalInterval] = Field(None)
-    has_duration: Optional[Duration] = Field(None)
-    is_ongoing_as_of: Optional[TimePoint] = Field(None)
-    id: str = Field(..., description="""A unique identifier for a thing""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["Observation"] = Field("Observation", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class QuantityKind(Concept):
@@ -307,7 +292,6 @@ TimePointOrTemporalInterval.update_forward_refs()
 TemporalInterval.update_forward_refs()
 TimePoint.update_forward_refs()
 TemporalRelationship.update_forward_refs()
-Observation.update_forward_refs()
 QuantityKind.update_forward_refs()
 Quantity.update_forward_refs()
 Duration.update_forward_refs()

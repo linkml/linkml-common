@@ -1,5 +1,5 @@
 # Auto generated from linkml_common.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-06-13T22:20:01
+# Generation date: 2024-06-13T22:32:43
 # Schema: linkml-common
 #
 # id: https://w3id.org/linkml/linkml-common
@@ -318,6 +318,10 @@ class ObservationId(EventId):
 
 
 class MeasurementId(ObservationId):
+    pass
+
+
+class QualitativeObservationId(ObservationId):
     pass
 
 
@@ -2944,12 +2948,24 @@ class Observation(Event):
     class_model_uri: ClassVar[URIRef] = LINKML_COMMON.Observation
 
     id: Union[str, ObservationId] = None
+    observation_subject: Optional[Union[dict, Entity]] = None
+    variable_measured: Optional[Union[dict, Variable]] = None
+    measured_using: Optional[Union[str, PhysicalDeviceId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, ObservationId):
             self.id = ObservationId(self.id)
+
+        if self.observation_subject is not None and not isinstance(self.observation_subject, Entity):
+            self.observation_subject = Entity(**as_dict(self.observation_subject))
+
+        if self.variable_measured is not None and not isinstance(self.variable_measured, Variable):
+            self.variable_measured = Variable(**as_dict(self.variable_measured))
+
+        if self.measured_using is not None and not isinstance(self.measured_using, PhysicalDeviceId):
+            self.measured_using = PhysicalDeviceId(self.measured_using)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -2966,7 +2982,6 @@ class Measurement(Observation):
 
     id: Union[str, MeasurementId] = None
     quantity_measured: Optional[Union[dict, Quantity]] = None
-    variable_measured: Optional[Union[dict, Variable]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -2977,8 +2992,26 @@ class Measurement(Observation):
         if self.quantity_measured is not None and not isinstance(self.quantity_measured, Quantity):
             self.quantity_measured = Quantity(**as_dict(self.quantity_measured))
 
-        if self.variable_measured is not None and not isinstance(self.variable_measured, Variable):
-            self.variable_measured = Variable(**as_dict(self.variable_measured))
+        super().__post_init__(**kwargs)
+        self.type = str(self.class_name)
+
+
+@dataclass
+class QualitativeObservation(Observation):
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = LINKML_COMMON["QualitativeObservation"]
+    class_class_curie: ClassVar[str] = "linkml_common:QualitativeObservation"
+    class_name: ClassVar[str] = "QualitativeObservation"
+    class_model_uri: ClassVar[URIRef] = LINKML_COMMON.QualitativeObservation
+
+    id: Union[str, QualitativeObservationId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, QualitativeObservationId):
+            self.id = QualitativeObservationId(self.id)
 
         super().__post_init__(**kwargs)
         self.type = str(self.class_name)
@@ -3969,11 +4002,17 @@ slots.sampleCollectionProcess__material_collected = Slot(uri=LINKML_COMMON.mater
 slots.sampleCollectionProcess__collected_from = Slot(uri=LINKML_COMMON.collected_from, name="sampleCollectionProcess__collected_from", curie=LINKML_COMMON.curie('collected_from'),
                    model_uri=LINKML_COMMON.sampleCollectionProcess__collected_from, domain=None, range=Optional[Union[str, NamedThingId]])
 
+slots.observation__observation_subject = Slot(uri=LINKML_COMMON.observation_subject, name="observation__observation_subject", curie=LINKML_COMMON.curie('observation_subject'),
+                   model_uri=LINKML_COMMON.observation__observation_subject, domain=None, range=Optional[Union[dict, Entity]])
+
+slots.observation__variable_measured = Slot(uri=LINKML_COMMON.variable_measured, name="observation__variable_measured", curie=LINKML_COMMON.curie('variable_measured'),
+                   model_uri=LINKML_COMMON.observation__variable_measured, domain=None, range=Optional[Union[dict, Variable]])
+
+slots.observation__measured_using = Slot(uri=LINKML_COMMON.measured_using, name="observation__measured_using", curie=LINKML_COMMON.curie('measured_using'),
+                   model_uri=LINKML_COMMON.observation__measured_using, domain=None, range=Optional[Union[str, PhysicalDeviceId]])
+
 slots.measurement__quantity_measured = Slot(uri=LINKML_COMMON.quantity_measured, name="measurement__quantity_measured", curie=LINKML_COMMON.curie('quantity_measured'),
                    model_uri=LINKML_COMMON.measurement__quantity_measured, domain=None, range=Optional[Union[dict, Quantity]])
-
-slots.measurement__variable_measured = Slot(uri=LINKML_COMMON.variable_measured, name="measurement__variable_measured", curie=LINKML_COMMON.curie('variable_measured'),
-                   model_uri=LINKML_COMMON.measurement__variable_measured, domain=None, range=Optional[Union[dict, Variable]])
 
 slots.variable__allowed_units = Slot(uri=LINKML_COMMON.allowed_units, name="variable__allowed_units", curie=LINKML_COMMON.curie('allowed_units'),
                    model_uri=LINKML_COMMON.variable__allowed_units, domain=None, range=Optional[Union[Union[str, UnitConceptId], List[Union[str, UnitConceptId]]]])

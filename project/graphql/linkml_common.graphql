@@ -712,8 +712,10 @@ type Measurement
     isOngoingAsOf: TimePoint
     id: Uriorcurie!
     name: String
-    quantityMeasured: Quantity
+    observationSubject: Entity
     variableMeasured: Variable
+    measuredUsing: PhysicalDevice
+    quantityMeasured: Quantity
   }
 
 type MiningFacility
@@ -784,6 +786,9 @@ type Observation
     isOngoingAsOf: TimePoint
     id: Uriorcurie!
     name: String
+    observationSubject: Entity
+    variableMeasured: Variable
+    measuredUsing: PhysicalDevice
   }
 
 type Organization
@@ -952,6 +957,22 @@ type Publication
     describes: Any
     id: Uriorcurie!
     name: String
+  }
+
+type QualitativeObservation
+  {
+    type: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
+    observationSubject: Entity
+    variableMeasured: Variable
+    measuredUsing: PhysicalDevice
   }
 
 type Quantity

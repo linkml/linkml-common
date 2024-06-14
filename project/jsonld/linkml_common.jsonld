@@ -1957,6 +1957,45 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "observation__observation_subject",
+      "from_schema": "https://w3id.org/linkml-common/meaurements",
+      "slot_uri": "https://w3id.org/linkml-common/observation_subject",
+      "alias": "observation_subject",
+      "owner": "Observation",
+      "domain_of": [
+        "Observation"
+      ],
+      "range": "Entity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observation__variable_measured",
+      "description": "The variable being measured",
+      "from_schema": "https://w3id.org/linkml-common/meaurements",
+      "slot_uri": "https://w3id.org/linkml-common/variable_measured",
+      "alias": "variable_measured",
+      "owner": "Observation",
+      "domain_of": [
+        "Observation"
+      ],
+      "range": "Variable",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "observation__measured_using",
+      "from_schema": "https://w3id.org/linkml-common/meaurements",
+      "slot_uri": "https://w3id.org/linkml-common/measured_using",
+      "alias": "measured_using",
+      "owner": "Observation",
+      "domain_of": [
+        "Observation"
+      ],
+      "range": "PhysicalDevice",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "measurement__quantity_measured",
       "description": "The quantity being measured",
       "from_schema": "https://w3id.org/linkml-common/meaurements",
@@ -1967,20 +2006,6 @@
         "Measurement"
       ],
       "range": "Quantity",
-      "inlined": true,
-      "@type": "SlotDefinition"
-    },
-    {
-      "name": "measurement__variable_measured",
-      "description": "The variable being measured",
-      "from_schema": "https://w3id.org/linkml-common/meaurements",
-      "slot_uri": "https://w3id.org/linkml-common/variable_measured",
-      "alias": "variable_measured",
-      "owner": "Measurement",
-      "domain_of": [
-        "Measurement"
-      ],
-      "range": "Variable",
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -4766,6 +4791,48 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "Observation",
+      "definition_uri": "https://w3id.org/linkml-common/Observation",
+      "description": "A statement about the state of something",
+      "from_schema": "https://w3id.org/linkml-common/meaurements",
+      "is_a": "Event",
+      "slots": [
+        "type",
+        "starts_at",
+        "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
+        "is_ongoing_as_of",
+        "id",
+        "name",
+        "observation__observation_subject",
+        "observation__variable_measured",
+        "observation__measured_using"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "observation_subject",
+          "range": "Entity",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "variable_measured",
+          "description": "The variable being measured",
+          "range": "Variable",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "measured_using",
+          "range": "PhysicalDevice",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/Observation",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "Measurement",
       "definition_uri": "https://w3id.org/linkml-common/Measurement",
       "from_schema": "https://w3id.org/linkml-common/meaurements",
@@ -4780,8 +4847,10 @@
         "is_ongoing_as_of",
         "id",
         "name",
-        "measurement__quantity_measured",
-        "measurement__variable_measured"
+        "observation__observation_subject",
+        "observation__variable_measured",
+        "observation__measured_using",
+        "measurement__quantity_measured"
       ],
       "slot_usage": {},
       "attributes": [
@@ -4790,15 +4859,32 @@
           "description": "The quantity being measured",
           "range": "Quantity",
           "@type": "SlotDefinition"
-        },
-        {
-          "name": "variable_measured",
-          "description": "The variable being measured",
-          "range": "Variable",
-          "@type": "SlotDefinition"
         }
       ],
       "class_uri": "https://w3id.org/linkml-common/Measurement",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "QualitativeObservation",
+      "definition_uri": "https://w3id.org/linkml-common/QualitativeObservation",
+      "from_schema": "https://w3id.org/linkml-common/meaurements",
+      "is_a": "Observation",
+      "slots": [
+        "type",
+        "starts_at",
+        "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
+        "is_ongoing_as_of",
+        "id",
+        "name",
+        "observation__observation_subject",
+        "observation__variable_measured",
+        "observation__measured_using"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/QualitativeObservation",
       "@type": "ClassDefinition"
     },
     {
@@ -4821,27 +4907,6 @@
         }
       ],
       "class_uri": "https://w3id.org/linkml-common/Variable",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "Observation",
-      "definition_uri": "https://w3id.org/linkml-common/Observation",
-      "description": "A statement about the state of something",
-      "from_schema": "https://w3id.org/linkml-common/quantities",
-      "is_a": "Event",
-      "slots": [
-        "type",
-        "starts_at",
-        "ends_at",
-        "happens_at",
-        "has_interval",
-        "has_duration",
-        "is_ongoing_as_of",
-        "id",
-        "name"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml-common/Observation",
       "@type": "ClassDefinition"
     },
     {
@@ -5830,7 +5895,7 @@
   "source_file": "linkml_common.yaml",
   "source_file_date": "2024-06-13T21:47:13",
   "source_file_size": 830,
-  "generation_date": "2024-06-13T22:19:59",
+  "generation_date": "2024-06-13T22:32:40",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/linkml_common.context.jsonld",

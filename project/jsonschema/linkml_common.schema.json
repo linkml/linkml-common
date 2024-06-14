@@ -1051,10 +1051,10 @@
                                 "$ref": "#/$defs/EngineeringProcess"
                             },
                             {
-                                "$ref": "#/$defs/Observation"
+                                "$ref": "#/$defs/LifeEvent"
                             },
                             {
-                                "$ref": "#/$defs/LifeEvent"
+                                "$ref": "#/$defs/Observation"
                             },
                             {
                                 "$ref": "#/$defs/ExecutionOfProcedure"
@@ -1091,6 +1091,9 @@
                             },
                             {
                                 "$ref": "#/$defs/Measurement"
+                            },
+                            {
+                                "$ref": "#/$defs/QualitativeObservation"
                             },
                             {
                                 "$ref": "#/$defs/PhysicalDevice"
@@ -2962,9 +2965,334 @@
                 "is_ongoing_as_of": {
                     "$ref": "#/$defs/TimePoint"
                 },
+                "measured_using": {
+                    "type": "string"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
+                },
+                "observation_subject": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Intangible"
+                        },
+                        {
+                            "$ref": "#/$defs/NamedThing"
+                        },
+                        {
+                            "$ref": "#/$defs/Event"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareEncounter"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareConditionOccurrence"
+                        },
+                        {
+                            "$ref": "#/$defs/Investigation"
+                        },
+                        {
+                            "$ref": "#/$defs/ClinicalCohortEnrollment"
+                        },
+                        {
+                            "$ref": "#/$defs/EngineeringProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/LifeEvent"
+                        },
+                        {
+                            "$ref": "#/$defs/Observation"
+                        },
+                        {
+                            "$ref": "#/$defs/ExecutionOfProcedure"
+                        },
+                        {
+                            "$ref": "#/$defs/PlannedProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/InvestigativeProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/ComputationalPlannedProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/MaterialCollection"
+                        },
+                        {
+                            "$ref": "#/$defs/MaterialProcessing"
+                        },
+                        {
+                            "$ref": "#/$defs/SampleProcessing"
+                        },
+                        {
+                            "$ref": "#/$defs/EngineeringMaterialProcessing"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodProcessing"
+                        },
+                        {
+                            "$ref": "#/$defs/SampleCollectionProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/DataGenerationFromSample"
+                        },
+                        {
+                            "$ref": "#/$defs/Measurement"
+                        },
+                        {
+                            "$ref": "#/$defs/QualitativeObservation"
+                        },
+                        {
+                            "$ref": "#/$defs/PhysicalDevice"
+                        },
+                        {
+                            "$ref": "#/$defs/BuiltEnvironmentFeature"
+                        },
+                        {
+                            "$ref": "#/$defs/SampleMaterial"
+                        },
+                        {
+                            "$ref": "#/$defs/ClinicalCohort"
+                        },
+                        {
+                            "$ref": "#/$defs/RawMaterial"
+                        },
+                        {
+                            "$ref": "#/$defs/Equipment"
+                        },
+                        {
+                            "$ref": "#/$defs/Place"
+                        },
+                        {
+                            "$ref": "#/$defs/Agent"
+                        },
+                        {
+                            "$ref": "#/$defs/CreativeWork"
+                        },
+                        {
+                            "$ref": "#/$defs/Person"
+                        },
+                        {
+                            "$ref": "#/$defs/Organization"
+                        },
+                        {
+                            "$ref": "#/$defs/AutomatedAgent"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareOrganization"
+                        },
+                        {
+                            "$ref": "#/$defs/FinancialOrganization"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareSite"
+                        },
+                        {
+                            "$ref": "#/$defs/Landform"
+                        },
+                        {
+                            "$ref": "#/$defs/EnvironmentalSite"
+                        },
+                        {
+                            "$ref": "#/$defs/ExtractiveIndustryEquipment"
+                        },
+                        {
+                            "$ref": "#/$defs/Facility"
+                        },
+                        {
+                            "$ref": "#/$defs/BuiltSystem"
+                        },
+                        {
+                            "$ref": "#/$defs/ElectricalGrid"
+                        },
+                        {
+                            "$ref": "#/$defs/Building"
+                        },
+                        {
+                            "$ref": "#/$defs/ExtractiveIndustryFacility"
+                        },
+                        {
+                            "$ref": "#/$defs/MiningFacility"
+                        },
+                        {
+                            "$ref": "#/$defs/WellFacility"
+                        },
+                        {
+                            "$ref": "#/$defs/QuarryFacility"
+                        },
+                        {
+                            "$ref": "#/$defs/PowerPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/FossilFuelPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/NuclearPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/RenewablePlant"
+                        },
+                        {
+                            "$ref": "#/$defs/HydroelectricPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/SolarPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/WindFarm"
+                        },
+                        {
+                            "$ref": "#/$defs/Concept"
+                        },
+                        {
+                            "$ref": "#/$defs/InformationEntity"
+                        },
+                        {
+                            "$ref": "#/$defs/StructuredValue"
+                        },
+                        {
+                            "$ref": "#/$defs/EntitySet"
+                        },
+                        {
+                            "$ref": "#/$defs/DataStructure"
+                        },
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/QuantityRange"
+                        },
+                        {
+                            "$ref": "#/$defs/Service"
+                        },
+                        {
+                            "$ref": "#/$defs/Variable"
+                        },
+                        {
+                            "$ref": "#/$defs/TimePointOrTemporalInterval"
+                        },
+                        {
+                            "$ref": "#/$defs/PlannedProcessConfiguration"
+                        },
+                        {
+                            "$ref": "#/$defs/Prediction"
+                        },
+                        {
+                            "$ref": "#/$defs/PredictionSummaryStatistics"
+                        },
+                        {
+                            "$ref": "#/$defs/SimplePrediction"
+                        },
+                        {
+                            "$ref": "#/$defs/AggregatePrediction"
+                        },
+                        {
+                            "$ref": "#/$defs/TemporalInterval"
+                        },
+                        {
+                            "$ref": "#/$defs/TimePoint"
+                        },
+                        {
+                            "$ref": "#/$defs/FinancialProduct"
+                        },
+                        {
+                            "$ref": "#/$defs/FinancialAccount"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/TemporalRelationship"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareRole"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareProvider"
+                        },
+                        {
+                            "$ref": "#/$defs/Patient"
+                        },
+                        {
+                            "$ref": "#/$defs/PostalAddress"
+                        },
+                        {
+                            "$ref": "#/$defs/PointLocation"
+                        },
+                        {
+                            "$ref": "#/$defs/GeoBoxLocation"
+                        },
+                        {
+                            "$ref": "#/$defs/GeoPointLocation"
+                        },
+                        {
+                            "$ref": "#/$defs/Specification"
+                        },
+                        {
+                            "$ref": "#/$defs/Publication"
+                        },
+                        {
+                            "$ref": "#/$defs/Dataset"
+                        },
+                        {
+                            "$ref": "#/$defs/ClinicalCohortDefinition"
+                        },
+                        {
+                            "$ref": "#/$defs/Procedure"
+                        },
+                        {
+                            "$ref": "#/$defs/InvestigativeProtocol"
+                        },
+                        {
+                            "$ref": "#/$defs/StudyDesign"
+                        },
+                        {
+                            "$ref": "#/$defs/EngineeringSpecification"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodRecipe"
+                        },
+                        {
+                            "$ref": "#/$defs/QuantityKind"
+                        },
+                        {
+                            "$ref": "#/$defs/UnitConcept"
+                        },
+                        {
+                            "$ref": "#/$defs/CurrencyConcept"
+                        },
+                        {
+                            "$ref": "#/$defs/PowerPlantType"
+                        },
+                        {
+                            "$ref": "#/$defs/ExtractiveIndustryProduct"
+                        },
+                        {
+                            "$ref": "#/$defs/ExtractiveIndustryWaste"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodTypeConcept"
+                        },
+                        {
+                            "$ref": "#/$defs/BasicFoodType"
+                        },
+                        {
+                            "$ref": "#/$defs/CompositeFoodType"
+                        }
+                    ]
                 },
                 "quantity_measured": {
                     "anyOf": [
@@ -3299,9 +3627,334 @@
                 "is_ongoing_as_of": {
                     "$ref": "#/$defs/TimePoint"
                 },
+                "measured_using": {
+                    "type": "string"
+                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
+                },
+                "observation_subject": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Intangible"
+                        },
+                        {
+                            "$ref": "#/$defs/NamedThing"
+                        },
+                        {
+                            "$ref": "#/$defs/Event"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareEncounter"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareConditionOccurrence"
+                        },
+                        {
+                            "$ref": "#/$defs/Investigation"
+                        },
+                        {
+                            "$ref": "#/$defs/ClinicalCohortEnrollment"
+                        },
+                        {
+                            "$ref": "#/$defs/EngineeringProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/LifeEvent"
+                        },
+                        {
+                            "$ref": "#/$defs/Observation"
+                        },
+                        {
+                            "$ref": "#/$defs/ExecutionOfProcedure"
+                        },
+                        {
+                            "$ref": "#/$defs/PlannedProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/InvestigativeProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/ComputationalPlannedProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/MaterialCollection"
+                        },
+                        {
+                            "$ref": "#/$defs/MaterialProcessing"
+                        },
+                        {
+                            "$ref": "#/$defs/SampleProcessing"
+                        },
+                        {
+                            "$ref": "#/$defs/EngineeringMaterialProcessing"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodProcessing"
+                        },
+                        {
+                            "$ref": "#/$defs/SampleCollectionProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/DataGenerationFromSample"
+                        },
+                        {
+                            "$ref": "#/$defs/Measurement"
+                        },
+                        {
+                            "$ref": "#/$defs/QualitativeObservation"
+                        },
+                        {
+                            "$ref": "#/$defs/PhysicalDevice"
+                        },
+                        {
+                            "$ref": "#/$defs/BuiltEnvironmentFeature"
+                        },
+                        {
+                            "$ref": "#/$defs/SampleMaterial"
+                        },
+                        {
+                            "$ref": "#/$defs/ClinicalCohort"
+                        },
+                        {
+                            "$ref": "#/$defs/RawMaterial"
+                        },
+                        {
+                            "$ref": "#/$defs/Equipment"
+                        },
+                        {
+                            "$ref": "#/$defs/Place"
+                        },
+                        {
+                            "$ref": "#/$defs/Agent"
+                        },
+                        {
+                            "$ref": "#/$defs/CreativeWork"
+                        },
+                        {
+                            "$ref": "#/$defs/Person"
+                        },
+                        {
+                            "$ref": "#/$defs/Organization"
+                        },
+                        {
+                            "$ref": "#/$defs/AutomatedAgent"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareOrganization"
+                        },
+                        {
+                            "$ref": "#/$defs/FinancialOrganization"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareSite"
+                        },
+                        {
+                            "$ref": "#/$defs/Landform"
+                        },
+                        {
+                            "$ref": "#/$defs/EnvironmentalSite"
+                        },
+                        {
+                            "$ref": "#/$defs/ExtractiveIndustryEquipment"
+                        },
+                        {
+                            "$ref": "#/$defs/Facility"
+                        },
+                        {
+                            "$ref": "#/$defs/BuiltSystem"
+                        },
+                        {
+                            "$ref": "#/$defs/ElectricalGrid"
+                        },
+                        {
+                            "$ref": "#/$defs/Building"
+                        },
+                        {
+                            "$ref": "#/$defs/ExtractiveIndustryFacility"
+                        },
+                        {
+                            "$ref": "#/$defs/MiningFacility"
+                        },
+                        {
+                            "$ref": "#/$defs/WellFacility"
+                        },
+                        {
+                            "$ref": "#/$defs/QuarryFacility"
+                        },
+                        {
+                            "$ref": "#/$defs/PowerPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/FossilFuelPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/NuclearPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/RenewablePlant"
+                        },
+                        {
+                            "$ref": "#/$defs/HydroelectricPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/SolarPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/WindFarm"
+                        },
+                        {
+                            "$ref": "#/$defs/Concept"
+                        },
+                        {
+                            "$ref": "#/$defs/InformationEntity"
+                        },
+                        {
+                            "$ref": "#/$defs/StructuredValue"
+                        },
+                        {
+                            "$ref": "#/$defs/EntitySet"
+                        },
+                        {
+                            "$ref": "#/$defs/DataStructure"
+                        },
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/QuantityRange"
+                        },
+                        {
+                            "$ref": "#/$defs/Service"
+                        },
+                        {
+                            "$ref": "#/$defs/Variable"
+                        },
+                        {
+                            "$ref": "#/$defs/TimePointOrTemporalInterval"
+                        },
+                        {
+                            "$ref": "#/$defs/PlannedProcessConfiguration"
+                        },
+                        {
+                            "$ref": "#/$defs/Prediction"
+                        },
+                        {
+                            "$ref": "#/$defs/PredictionSummaryStatistics"
+                        },
+                        {
+                            "$ref": "#/$defs/SimplePrediction"
+                        },
+                        {
+                            "$ref": "#/$defs/AggregatePrediction"
+                        },
+                        {
+                            "$ref": "#/$defs/TemporalInterval"
+                        },
+                        {
+                            "$ref": "#/$defs/TimePoint"
+                        },
+                        {
+                            "$ref": "#/$defs/FinancialProduct"
+                        },
+                        {
+                            "$ref": "#/$defs/FinancialAccount"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/TemporalRelationship"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareRole"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareProvider"
+                        },
+                        {
+                            "$ref": "#/$defs/Patient"
+                        },
+                        {
+                            "$ref": "#/$defs/PostalAddress"
+                        },
+                        {
+                            "$ref": "#/$defs/PointLocation"
+                        },
+                        {
+                            "$ref": "#/$defs/GeoBoxLocation"
+                        },
+                        {
+                            "$ref": "#/$defs/GeoPointLocation"
+                        },
+                        {
+                            "$ref": "#/$defs/Specification"
+                        },
+                        {
+                            "$ref": "#/$defs/Publication"
+                        },
+                        {
+                            "$ref": "#/$defs/Dataset"
+                        },
+                        {
+                            "$ref": "#/$defs/ClinicalCohortDefinition"
+                        },
+                        {
+                            "$ref": "#/$defs/Procedure"
+                        },
+                        {
+                            "$ref": "#/$defs/InvestigativeProtocol"
+                        },
+                        {
+                            "$ref": "#/$defs/StudyDesign"
+                        },
+                        {
+                            "$ref": "#/$defs/EngineeringSpecification"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodRecipe"
+                        },
+                        {
+                            "$ref": "#/$defs/QuantityKind"
+                        },
+                        {
+                            "$ref": "#/$defs/UnitConcept"
+                        },
+                        {
+                            "$ref": "#/$defs/CurrencyConcept"
+                        },
+                        {
+                            "$ref": "#/$defs/PowerPlantType"
+                        },
+                        {
+                            "$ref": "#/$defs/ExtractiveIndustryProduct"
+                        },
+                        {
+                            "$ref": "#/$defs/ExtractiveIndustryWaste"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodTypeConcept"
+                        },
+                        {
+                            "$ref": "#/$defs/BasicFoodType"
+                        },
+                        {
+                            "$ref": "#/$defs/CompositeFoodType"
+                        }
+                    ]
                 },
                 "starts_at": {
                     "$ref": "#/$defs/TimePoint"
@@ -3312,6 +3965,10 @@
                         "Observation"
                     ],
                     "type": "string"
+                },
+                "variable_measured": {
+                    "$ref": "#/$defs/Variable",
+                    "description": "The variable being measured"
                 }
             },
             "required": [
@@ -3942,6 +4599,379 @@
                 "id"
             ],
             "title": "Publication",
+            "type": "object"
+        },
+        "QualitativeObservation": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "ends_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "happens_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "has_duration": {
+                    "$ref": "#/$defs/Duration"
+                },
+                "has_interval": {
+                    "$ref": "#/$defs/TemporalInterval"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "is_ongoing_as_of": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "measured_using": {
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "observation_subject": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Intangible"
+                        },
+                        {
+                            "$ref": "#/$defs/NamedThing"
+                        },
+                        {
+                            "$ref": "#/$defs/Event"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareEncounter"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareConditionOccurrence"
+                        },
+                        {
+                            "$ref": "#/$defs/Investigation"
+                        },
+                        {
+                            "$ref": "#/$defs/ClinicalCohortEnrollment"
+                        },
+                        {
+                            "$ref": "#/$defs/EngineeringProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/LifeEvent"
+                        },
+                        {
+                            "$ref": "#/$defs/Observation"
+                        },
+                        {
+                            "$ref": "#/$defs/ExecutionOfProcedure"
+                        },
+                        {
+                            "$ref": "#/$defs/PlannedProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/InvestigativeProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/ComputationalPlannedProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/MaterialCollection"
+                        },
+                        {
+                            "$ref": "#/$defs/MaterialProcessing"
+                        },
+                        {
+                            "$ref": "#/$defs/SampleProcessing"
+                        },
+                        {
+                            "$ref": "#/$defs/EngineeringMaterialProcessing"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodProcessing"
+                        },
+                        {
+                            "$ref": "#/$defs/SampleCollectionProcess"
+                        },
+                        {
+                            "$ref": "#/$defs/DataGenerationFromSample"
+                        },
+                        {
+                            "$ref": "#/$defs/Measurement"
+                        },
+                        {
+                            "$ref": "#/$defs/QualitativeObservation"
+                        },
+                        {
+                            "$ref": "#/$defs/PhysicalDevice"
+                        },
+                        {
+                            "$ref": "#/$defs/BuiltEnvironmentFeature"
+                        },
+                        {
+                            "$ref": "#/$defs/SampleMaterial"
+                        },
+                        {
+                            "$ref": "#/$defs/ClinicalCohort"
+                        },
+                        {
+                            "$ref": "#/$defs/RawMaterial"
+                        },
+                        {
+                            "$ref": "#/$defs/Equipment"
+                        },
+                        {
+                            "$ref": "#/$defs/Place"
+                        },
+                        {
+                            "$ref": "#/$defs/Agent"
+                        },
+                        {
+                            "$ref": "#/$defs/CreativeWork"
+                        },
+                        {
+                            "$ref": "#/$defs/Person"
+                        },
+                        {
+                            "$ref": "#/$defs/Organization"
+                        },
+                        {
+                            "$ref": "#/$defs/AutomatedAgent"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareOrganization"
+                        },
+                        {
+                            "$ref": "#/$defs/FinancialOrganization"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareSite"
+                        },
+                        {
+                            "$ref": "#/$defs/Landform"
+                        },
+                        {
+                            "$ref": "#/$defs/EnvironmentalSite"
+                        },
+                        {
+                            "$ref": "#/$defs/ExtractiveIndustryEquipment"
+                        },
+                        {
+                            "$ref": "#/$defs/Facility"
+                        },
+                        {
+                            "$ref": "#/$defs/BuiltSystem"
+                        },
+                        {
+                            "$ref": "#/$defs/ElectricalGrid"
+                        },
+                        {
+                            "$ref": "#/$defs/Building"
+                        },
+                        {
+                            "$ref": "#/$defs/ExtractiveIndustryFacility"
+                        },
+                        {
+                            "$ref": "#/$defs/MiningFacility"
+                        },
+                        {
+                            "$ref": "#/$defs/WellFacility"
+                        },
+                        {
+                            "$ref": "#/$defs/QuarryFacility"
+                        },
+                        {
+                            "$ref": "#/$defs/PowerPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/FossilFuelPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/NuclearPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/RenewablePlant"
+                        },
+                        {
+                            "$ref": "#/$defs/HydroelectricPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/SolarPlant"
+                        },
+                        {
+                            "$ref": "#/$defs/WindFarm"
+                        },
+                        {
+                            "$ref": "#/$defs/Concept"
+                        },
+                        {
+                            "$ref": "#/$defs/InformationEntity"
+                        },
+                        {
+                            "$ref": "#/$defs/StructuredValue"
+                        },
+                        {
+                            "$ref": "#/$defs/EntitySet"
+                        },
+                        {
+                            "$ref": "#/$defs/DataStructure"
+                        },
+                        {
+                            "$ref": "#/$defs/Quantity"
+                        },
+                        {
+                            "$ref": "#/$defs/QuantityRange"
+                        },
+                        {
+                            "$ref": "#/$defs/Service"
+                        },
+                        {
+                            "$ref": "#/$defs/Variable"
+                        },
+                        {
+                            "$ref": "#/$defs/TimePointOrTemporalInterval"
+                        },
+                        {
+                            "$ref": "#/$defs/PlannedProcessConfiguration"
+                        },
+                        {
+                            "$ref": "#/$defs/Prediction"
+                        },
+                        {
+                            "$ref": "#/$defs/PredictionSummaryStatistics"
+                        },
+                        {
+                            "$ref": "#/$defs/SimplePrediction"
+                        },
+                        {
+                            "$ref": "#/$defs/AggregatePrediction"
+                        },
+                        {
+                            "$ref": "#/$defs/TemporalInterval"
+                        },
+                        {
+                            "$ref": "#/$defs/TimePoint"
+                        },
+                        {
+                            "$ref": "#/$defs/FinancialProduct"
+                        },
+                        {
+                            "$ref": "#/$defs/FinancialAccount"
+                        },
+                        {
+                            "$ref": "#/$defs/SimpleQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/Ratio"
+                        },
+                        {
+                            "$ref": "#/$defs/Duration"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodIngredient"
+                        },
+                        {
+                            "$ref": "#/$defs/MoneyQuantity"
+                        },
+                        {
+                            "$ref": "#/$defs/TemporalRelationship"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareRole"
+                        },
+                        {
+                            "$ref": "#/$defs/HealthcareProvider"
+                        },
+                        {
+                            "$ref": "#/$defs/Patient"
+                        },
+                        {
+                            "$ref": "#/$defs/PostalAddress"
+                        },
+                        {
+                            "$ref": "#/$defs/PointLocation"
+                        },
+                        {
+                            "$ref": "#/$defs/GeoBoxLocation"
+                        },
+                        {
+                            "$ref": "#/$defs/GeoPointLocation"
+                        },
+                        {
+                            "$ref": "#/$defs/Specification"
+                        },
+                        {
+                            "$ref": "#/$defs/Publication"
+                        },
+                        {
+                            "$ref": "#/$defs/Dataset"
+                        },
+                        {
+                            "$ref": "#/$defs/ClinicalCohortDefinition"
+                        },
+                        {
+                            "$ref": "#/$defs/Procedure"
+                        },
+                        {
+                            "$ref": "#/$defs/InvestigativeProtocol"
+                        },
+                        {
+                            "$ref": "#/$defs/StudyDesign"
+                        },
+                        {
+                            "$ref": "#/$defs/EngineeringSpecification"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodRecipe"
+                        },
+                        {
+                            "$ref": "#/$defs/QuantityKind"
+                        },
+                        {
+                            "$ref": "#/$defs/UnitConcept"
+                        },
+                        {
+                            "$ref": "#/$defs/CurrencyConcept"
+                        },
+                        {
+                            "$ref": "#/$defs/PowerPlantType"
+                        },
+                        {
+                            "$ref": "#/$defs/ExtractiveIndustryProduct"
+                        },
+                        {
+                            "$ref": "#/$defs/ExtractiveIndustryWaste"
+                        },
+                        {
+                            "$ref": "#/$defs/FoodTypeConcept"
+                        },
+                        {
+                            "$ref": "#/$defs/BasicFoodType"
+                        },
+                        {
+                            "$ref": "#/$defs/CompositeFoodType"
+                        }
+                    ]
+                },
+                "starts_at": {
+                    "$ref": "#/$defs/TimePoint"
+                },
+                "type": {
+                    "description": "A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.",
+                    "enum": [
+                        "QualitativeObservation"
+                    ],
+                    "type": "string"
+                },
+                "variable_measured": {
+                    "$ref": "#/$defs/Variable",
+                    "description": "The variable being measured"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "QualitativeObservation",
             "type": "object"
         },
         "Quantity": {
