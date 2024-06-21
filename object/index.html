@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://linkml.github.io/linkml-common/object/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-8.5.10">
     
     
       
@@ -256,6 +256,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#applicable-classes" class="md-nav__link">
+    Applicable Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#properties" class="md-nav__link">
     Properties
   </a>
@@ -314,6 +321,43 @@
 <p>URI: <a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#object">rdf:object</a></p>
 <!-- no inheritance hierarchy -->
 
+<h2 id="applicable-classes">Applicable Classes</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Modifies Slot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../OrganismalRelationship/">OrganismalRelationship</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../OrganizationPersonnelRelationship/">OrganizationPersonnelRelationship</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../PersonInRole/">PersonInRole</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Relationship/">Relationship</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TemporalRelationship/">TemporalRelationship</a></td>
+<td>A relationship to another time point</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
 <h2 id="properties">Properties</h2>
 <ul>
 <li>Range: <a href="../Any/">Any</a></li>
@@ -332,6 +376,9 @@ from_schema: https://w3id.org/linkml/linkml-common
 rank: 1000
 slot_uri: rdf:object
 alias: object
+domain_of:
+- Relationship
+- OrganizationPersonnelRelationship
 range: Any
 
 </code></pre>

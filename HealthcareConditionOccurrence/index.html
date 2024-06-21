@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/HealthcareConditionOccurrence/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: HealthcareConditionOccurrence - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -203,49 +203,85 @@
 <p>URI: <a href="https://w3id.org/linkml-common/HealthcareConditionOccurrence">linkml_common:HealthcareConditionOccurrence</a></p>
 <div class="mermaid"> classDiagram
     class HealthcareConditionOccurrence
+    click HealthcareConditionOccurrence href "../HealthcareConditionOccurrence"
       Event &lt;|-- HealthcareConditionOccurrence
-
-      HealthcareConditionOccurrence : classification
-
-          HealthcareConditionOccurrence --&gt; Concept : classification
-
-      HealthcareConditionOccurrence : description
+        click Event href "../Event"
 
       HealthcareConditionOccurrence : ends_at
 
-          HealthcareConditionOccurrence --&gt; TimePoint : ends_at
+
+
+
+    HealthcareConditionOccurrence --&gt; "0..1" TimePoint : ends_at
+    click TimePoint href "../TimePoint"
+
 
       HealthcareConditionOccurrence : happens_at
 
-          HealthcareConditionOccurrence --&gt; TimePoint : happens_at
+
+
+
+    HealthcareConditionOccurrence --&gt; "0..1" TimePoint : happens_at
+    click TimePoint href "../TimePoint"
+
 
       HealthcareConditionOccurrence : has_duration
 
-          HealthcareConditionOccurrence --&gt; Duration : has_duration
+
+
+
+    HealthcareConditionOccurrence --&gt; "0..1" Duration : has_duration
+    click Duration href "../Duration"
+
 
       HealthcareConditionOccurrence : has_interval
 
-          HealthcareConditionOccurrence --&gt; TemporalInterval : has_interval
+
+
+
+    HealthcareConditionOccurrence --&gt; "0..1" TemporalInterval : has_interval
+    click TemporalInterval href "../TemporalInterval"
+
 
       HealthcareConditionOccurrence : id
+
+      HealthcareConditionOccurrence : is_ongoing_as_of
+
+
+
+
+    HealthcareConditionOccurrence --&gt; "0..1" TimePoint : is_ongoing_as_of
+    click TimePoint href "../TimePoint"
+
 
       HealthcareConditionOccurrence : name
 
       HealthcareConditionOccurrence : observed_during
 
-          HealthcareConditionOccurrence --&gt; HealthcareEncounter : observed_during
 
-      HealthcareConditionOccurrence : ontology_types
 
-          HealthcareConditionOccurrence --&gt; Concept : ontology_types
+
+    HealthcareConditionOccurrence --&gt; "0..1" HealthcareEncounter : observed_during
+    click HealthcareEncounter href "../HealthcareEncounter"
+
 
       HealthcareConditionOccurrence : patient
 
-          HealthcareConditionOccurrence --&gt; Patient : patient
+
+
+
+    HealthcareConditionOccurrence --&gt; "0..1" Patient : patient
+    click Patient href "../Patient"
+
 
       HealthcareConditionOccurrence : starts_at
 
-          HealthcareConditionOccurrence --&gt; TimePoint : starts_at
+
+
+
+    HealthcareConditionOccurrence --&gt; "0..1" TimePoint : starts_at
+    click TimePoint href "../TimePoint"
+
 
       HealthcareConditionOccurrence : type
 
@@ -253,12 +289,9 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
-<li><a href="../Event/">Event</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><a href="../Event/">Event</a> [ <a href="../Identified/">Identified</a>]<ul>
 <li><strong>HealthcareConditionOccurrence</strong></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -318,40 +351,28 @@
 <td><a href="../Event/">Event</a></td>
 </tr>
 <tr>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>0..1 <br/> <a href="../TimePoint/">TimePoint</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../classification/">classification</a></td>
-<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
-<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>0..* <br/> <a href="../Concept/">Concept</a></td>
-<td></td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -491,6 +512,15 @@ attributes:
     domain_of:
     - Event
     range: Duration
+  is_ongoing_as_of:
+    name: is_ongoing_as_of
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: is_ongoing_as_of
+    owner: HealthcareConditionOccurrence
+    domain_of:
+    - Event
+    range: TimePoint
   id:
     name: id
     description: A unique identifier for a thing
@@ -501,19 +531,21 @@ attributes:
     alias: id
     owner: HealthcareConditionOccurrence
     domain_of:
-    - NamedThing
+    - Identified
     range: uriorcurie
     required: true
   name:
     name: name
     description: A human-readable name for a thing
     from_schema: https://w3id.org/linkml/linkml-common
+    exact_mappings:
+    - rdfs:label
     rank: 1000
     slot_uri: schema:name
     alias: name
     owner: HealthcareConditionOccurrence
     domain_of:
-    - NamedThing
+    - Identified
     range: string
   type:
     name: type
@@ -526,43 +558,7 @@ attributes:
     alias: type
     owner: HealthcareConditionOccurrence
     domain_of:
-    - Entity
-    - NamedThing
-    range: string
-  classification:
-    name: classification
-    description: A precise classification of the thing, using a concept from an ontology,
-      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
-      to restrict the range of values which this slot can take, using `values_from`,
-      or bindings.
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    alias: classification
-    owner: HealthcareConditionOccurrence
-    domain_of:
-    - NamedThing
-    range: Concept
-  ontology_types:
-    name: ontology_types
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    multivalued: true
-    alias: ontology_types
-    owner: HealthcareConditionOccurrence
-    domain_of:
-    - NamedThing
-    range: Concept
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: HealthcareConditionOccurrence
-    domain_of:
-    - NamedThing
-    - TimePoint
+    - Typed
     range: string
 
 </code></pre>

@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/Intangible/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: Intangible - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -204,17 +204,45 @@
 <p>URI: <a href="http://schema.org/Intangible">schema:Intangible</a></p>
 <div class="mermaid"> classDiagram
     class Intangible
+    click Intangible href "../Intangible"
       Entity &lt;|-- Intangible
+        click Entity href "../Entity"
 
 
+      Intangible &lt;|-- Concept
+        click Concept href "../Concept"
+      Intangible &lt;|-- InformationEntity
+        click InformationEntity href "../InformationEntity"
+      Intangible &lt;|-- StructuredValue
+        click StructuredValue href "../StructuredValue"
       Intangible &lt;|-- Role
+        click Role href "../Role"
       Intangible &lt;|-- Relationship
-      Intangible &lt;|-- Collection
-      Intangible &lt;|-- Service
+        click Relationship href "../Relationship"
+      Intangible &lt;|-- EntitySet
+        click EntitySet href "../EntitySet"
+      Intangible &lt;|-- ComputationalModel
+        click ComputationalModel href "../ComputationalModel"
       Intangible &lt;|-- DataStructure
-      Intangible &lt;|-- Quantity
-      Intangible &lt;|-- QuantityRange
+        click DataStructure href "../DataStructure"
+      Intangible &lt;|-- SetOfObservations
+        click SetOfObservations href "../SetOfObservations"
+      Intangible &lt;|-- Variable
+        click Variable href "../Variable"
       Intangible &lt;|-- TimePointOrTemporalInterval
+        click TimePointOrTemporalInterval href "../TimePointOrTemporalInterval"
+      Intangible &lt;|-- PlannedProcessConfiguration
+        click PlannedProcessConfiguration href "../PlannedProcessConfiguration"
+      Intangible &lt;|-- Quantity
+        click Quantity href "../Quantity"
+      Intangible &lt;|-- QuantityRange
+        click QuantityRange href "../QuantityRange"
+      Intangible &lt;|-- Service
+        click Service href "../Service"
+      Intangible &lt;|-- Prediction
+        click Prediction href "../Prediction"
+      Intangible &lt;|-- PredictionSummaryStatistics
+        click PredictionSummaryStatistics href "../PredictionSummaryStatistics"
 
 
       Intangible : type
@@ -223,16 +251,25 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><strong>Intangible</strong><ul>
+<li><a href="../Concept/">Concept</a> [ <a href="../Identified/">Identified</a>]</li>
+<li><a href="../InformationEntity/">InformationEntity</a> [ <a href="../Identified/">Identified</a>]</li>
+<li><a href="../StructuredValue/">StructuredValue</a></li>
 <li><a href="../Role/">Role</a></li>
 <li><a href="../Relationship/">Relationship</a></li>
-<li><a href="../Collection/">Collection</a></li>
-<li><a href="../Service/">Service</a></li>
+<li><a href="../EntitySet/">EntitySet</a></li>
+<li><a href="../ComputationalModel/">ComputationalModel</a> [ <a href="../Model/">Model</a>]</li>
 <li><a href="../DataStructure/">DataStructure</a></li>
+<li><a href="../SetOfObservations/">SetOfObservations</a></li>
+<li><a href="../Variable/">Variable</a></li>
+<li><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a></li>
+<li><a href="../PlannedProcessConfiguration/">PlannedProcessConfiguration</a></li>
 <li><a href="../Quantity/">Quantity</a></li>
 <li><a href="../QuantityRange/">QuantityRange</a></li>
-<li><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a></li>
+<li><a href="../Service/">Service</a></li>
+<li><a href="../Prediction/">Prediction</a></li>
+<li><a href="../PredictionSummaryStatistics/">PredictionSummaryStatistics</a> [ <a href="../OutcomeStatistics/">OutcomeStatistics</a>]</li>
 </ul>
 </li>
 </ul>
@@ -253,7 +290,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -311,8 +348,7 @@ attributes:
     alias: type
     owner: Intangible
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 class_uri: schema:Intangible
 

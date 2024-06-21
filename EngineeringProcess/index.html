@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/EngineeringProcess/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: EngineeringProcess - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -208,49 +208,85 @@
 <p>URI: <a href="https://w3id.org/linkml-common/EngineeringProcess">linkml_common:EngineeringProcess</a></p>
 <div class="mermaid"> classDiagram
     class EngineeringProcess
+    click EngineeringProcess href "../EngineeringProcess"
       Event &lt;|-- EngineeringProcess
-
-      EngineeringProcess : classification
-
-          EngineeringProcess --&gt; Concept : classification
-
-      EngineeringProcess : description
+        click Event href "../Event"
 
       EngineeringProcess : ends_at
 
-          EngineeringProcess --&gt; TimePoint : ends_at
+
+
+
+    EngineeringProcess --&gt; "0..1" TimePoint : ends_at
+    click TimePoint href "../TimePoint"
+
 
       EngineeringProcess : follows_procedure
 
-          EngineeringProcess --&gt; EngineeringSpecification : follows_procedure
+
+
+
+    EngineeringProcess --&gt; "0..1" EngineeringSpecification : follows_procedure
+    click EngineeringSpecification href "../EngineeringSpecification"
+
 
       EngineeringProcess : happens_at
 
-          EngineeringProcess --&gt; TimePoint : happens_at
+
+
+
+    EngineeringProcess --&gt; "0..1" TimePoint : happens_at
+    click TimePoint href "../TimePoint"
+
 
       EngineeringProcess : has_duration
 
-          EngineeringProcess --&gt; Duration : has_duration
+
+
+
+    EngineeringProcess --&gt; "0..1" Duration : has_duration
+    click Duration href "../Duration"
+
 
       EngineeringProcess : has_interval
 
-          EngineeringProcess --&gt; TemporalInterval : has_interval
+
+
+
+    EngineeringProcess --&gt; "0..1" TemporalInterval : has_interval
+    click TemporalInterval href "../TemporalInterval"
+
 
       EngineeringProcess : id
 
+      EngineeringProcess : is_ongoing_as_of
+
+
+
+
+    EngineeringProcess --&gt; "0..1" TimePoint : is_ongoing_as_of
+    click TimePoint href "../TimePoint"
+
+
       EngineeringProcess : name
-
-      EngineeringProcess : ontology_types
-
-          EngineeringProcess --&gt; Concept : ontology_types
 
       EngineeringProcess : part_of
 
-          EngineeringProcess --&gt; EngineeringProcess : part_of
+
+
+
+    EngineeringProcess --&gt; "0..1" EngineeringProcess : part_of
+    click EngineeringProcess href "../EngineeringProcess"
+
 
       EngineeringProcess : starts_at
 
-          EngineeringProcess --&gt; TimePoint : starts_at
+
+
+
+    EngineeringProcess --&gt; "0..1" TimePoint : starts_at
+    click TimePoint href "../TimePoint"
+
 
       EngineeringProcess : type
 
@@ -258,12 +294,9 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
-<li><a href="../Event/">Event</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><a href="../Event/">Event</a> [ <a href="../Identified/">Identified</a>]<ul>
 <li><strong>EngineeringProcess</strong></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -323,40 +356,28 @@
 <td><a href="../Event/">Event</a></td>
 </tr>
 <tr>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>0..1 <br/> <a href="../TimePoint/">TimePoint</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../classification/">classification</a></td>
-<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
-<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>0..* <br/> <a href="../Concept/">Concept</a></td>
-<td></td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -416,8 +437,8 @@ attributes:
     from_schema: https://w3id.org/linkml-common/engineering
     domain_of:
     - InvestigativeProcess
-    - EngineeringProcess
     - PlannedProcess
+    - EngineeringProcess
     range: EngineeringSpecification
   part_of:
     name: part_of
@@ -442,8 +463,8 @@ attributes:
     owner: EngineeringProcess
     domain_of:
     - InvestigativeProcess
-    - EngineeringProcess
     - PlannedProcess
+    - EngineeringProcess
     range: EngineeringSpecification
   part_of:
     name: part_of
@@ -503,6 +524,15 @@ attributes:
     domain_of:
     - Event
     range: Duration
+  is_ongoing_as_of:
+    name: is_ongoing_as_of
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: is_ongoing_as_of
+    owner: EngineeringProcess
+    domain_of:
+    - Event
+    range: TimePoint
   id:
     name: id
     description: A unique identifier for a thing
@@ -513,19 +543,21 @@ attributes:
     alias: id
     owner: EngineeringProcess
     domain_of:
-    - NamedThing
+    - Identified
     range: uriorcurie
     required: true
   name:
     name: name
     description: A human-readable name for a thing
     from_schema: https://w3id.org/linkml/linkml-common
+    exact_mappings:
+    - rdfs:label
     rank: 1000
     slot_uri: schema:name
     alias: name
     owner: EngineeringProcess
     domain_of:
-    - NamedThing
+    - Identified
     range: string
   type:
     name: type
@@ -538,43 +570,7 @@ attributes:
     alias: type
     owner: EngineeringProcess
     domain_of:
-    - Entity
-    - NamedThing
-    range: string
-  classification:
-    name: classification
-    description: A precise classification of the thing, using a concept from an ontology,
-      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
-      to restrict the range of values which this slot can take, using `values_from`,
-      or bindings.
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    alias: classification
-    owner: EngineeringProcess
-    domain_of:
-    - NamedThing
-    range: Concept
-  ontology_types:
-    name: ontology_types
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    multivalued: true
-    alias: ontology_types
-    owner: EngineeringProcess
-    domain_of:
-    - NamedThing
-    range: Concept
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: EngineeringProcess
-    domain_of:
-    - NamedThing
-    - TimePoint
+    - Typed
     range: string
 
 </code></pre>

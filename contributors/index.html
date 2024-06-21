@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://linkml.github.io/linkml-common/contributors/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-8.5.10">
     
     
       
@@ -274,19 +274,6 @@
     Identifier and Mapping Information
   </a>
   
-    <nav class="md-nav" aria-label="Identifier and Mapping Information">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#schema-source" class="md-nav__link">
-    Schema Source
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -317,8 +304,7 @@
 
 
 <h1 id="slot-contributors">Slot: contributors</h1>
-<p><em>A person or organization that contributed to the creation of the work</em></p>
-<p>URI: <a href="http://purl.org/dc/terms/contributor">dcterms:contributor</a></p>
+<p>URI: <a href="https://w3id.org/linkml-common/contributors">linkml_common:contributors</a></p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -332,8 +318,8 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../Publication/">Publication</a></td>
-<td></td>
+<td><a href="../CreativeWork/">CreativeWork</a></td>
+<td>The most generic kind of creative work, including books, movies, photographs,...</td>
 <td>no</td>
 </tr>
 <tr>
@@ -342,40 +328,26 @@
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../CreativeWork/">CreativeWork</a></td>
-<td>The most generic kind of creative work, including books, movies, photographs,...</td>
+<td><a href="../CreationMetadata/">CreationMetadata</a></td>
+<td></td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>
-<p>Range: <a href="../Agent/">Agent</a></p>
-</li>
-<li>
-<p>Multivalued: True</p>
-</li>
+<li>Range: <a href="../String/">String</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://w3id.org/linkml/linkml-common</li>
-</ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
 <pre><code class="language-yaml">name: contributors
-description: A person or organization that contributed to the creation of the work
-from_schema: https://w3id.org/linkml/linkml-common
-rank: 1000
-slot_uri: dcterms:contributor
-multivalued: true
 alias: contributors
-owner: CreativeWork
 domain_of:
+- CreationMetadata
 - CreativeWork
-range: Agent
+range: string
 
 </code></pre>
 

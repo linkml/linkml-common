@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/Publication/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: Publication - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -203,41 +203,22 @@
 <p>URI: <a href="https://w3id.org/linkml-common/Publication">linkml_common:Publication</a></p>
 <div class="mermaid"> classDiagram
     class Publication
-      CreativeWork &lt;|-- Publication
+    click Publication href "../Publication"
+      InformationEntity &lt;|-- Publication
+        click InformationEntity href "../InformationEntity"
 
-      Publication : abstract
+      Publication : describes
 
-      Publication : classification
 
-          Publication --&gt; Concept : classification
 
-      Publication : contacts
 
-          Publication --&gt; Agent : contacts
+    Publication --&gt; "0..1" Any : describes
+    click Any href "../Any"
 
-      Publication : contributors
-
-          Publication --&gt; Agent : contributors
-
-      Publication : creators
-
-          Publication --&gt; Agent : creators
-
-      Publication : description
 
       Publication : id
 
-      Publication : keywords
-
       Publication : name
-
-      Publication : ontology_types
-
-          Publication --&gt; Concept : ontology_types
-
-      Publication : rights
-
-      Publication : title
 
       Publication : type
 
@@ -245,9 +226,9 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
-<li><a href="../CreativeWork/">CreativeWork</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><a href="../Intangible/">Intangible</a><ul>
+<li><a href="../InformationEntity/">InformationEntity</a> [ <a href="../Identified/">Identified</a>]<ul>
 <li><strong>Publication</strong></li>
 </ul>
 </li>
@@ -268,82 +249,28 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../title/">title</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>The title of the item</td>
-<td><a href="../CreativeWork/">CreativeWork</a></td>
-</tr>
-<tr>
-<td><a href="../abstract/">abstract</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A summary of the item</td>
-<td><a href="../CreativeWork/">CreativeWork</a></td>
-</tr>
-<tr>
-<td><a href="../rights/">rights</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>Information about rights held in and over the item</td>
-<td><a href="../CreativeWork/">CreativeWork</a></td>
-</tr>
-<tr>
-<td><a href="../creators/">creators</a></td>
-<td>0..* <br/> <a href="../Agent/">Agent</a></td>
-<td>The person or organization who created the work</td>
-<td><a href="../CreativeWork/">CreativeWork</a></td>
-</tr>
-<tr>
-<td><a href="../contributors/">contributors</a></td>
-<td>0..* <br/> <a href="../Agent/">Agent</a></td>
-<td>A person or organization that contributed to the creation of the work</td>
-<td><a href="../CreativeWork/">CreativeWork</a></td>
-</tr>
-<tr>
-<td><a href="../contacts/">contacts</a></td>
-<td>0..* <br/> <a href="../Agent/">Agent</a></td>
-<td>A contact point for a person or organization</td>
-<td><a href="../CreativeWork/">CreativeWork</a></td>
-</tr>
-<tr>
-<td><a href="../keywords/">keywords</a></td>
-<td>0..* <br/> <a href="../String/">String</a></td>
-<td>Keywords or tags used to describe this item</td>
-<td><a href="../CreativeWork/">CreativeWork</a></td>
+<td><a href="../describes/">describes</a></td>
+<td>0..1 <br/> <a href="../Any/">Any</a></td>
+<td>The thing that is being described</td>
+<td><a href="../InformationEntity/">InformationEntity</a></td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../classification/">classification</a></td>
-<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
-<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>0..* <br/> <a href="../Concept/">Concept</a></td>
-<td></td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -377,7 +304,7 @@
 <details>
 <pre><code class="language-yaml">name: Publication
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: CreativeWork
+is_a: InformationEntity
 
 </code></pre>
 </details>
@@ -385,89 +312,19 @@ is_a: CreativeWork
 <details>
 <pre><code class="language-yaml">name: Publication
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: CreativeWork
+is_a: InformationEntity
 attributes:
-  title:
-    name: title
-    description: The title of the item
-    from_schema: https://w3id.org/linkml-common/social
-    exact_mappings:
-    - dcterms:title
+  describes:
+    name: describes
+    description: The thing that is being described
+    from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
-    alias: title
+    slot_uri: schema:describes
+    alias: describes
     owner: Publication
     domain_of:
-    - CreativeWork
-    range: string
-  abstract:
-    name: abstract
-    description: A summary of the item
-    from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
-    alias: abstract
-    owner: Publication
-    domain_of:
-    - CreativeWork
-    range: string
-  rights:
-    name: rights
-    description: Information about rights held in and over the item
-    from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
-    alias: rights
-    owner: Publication
-    domain_of:
-    - CreativeWork
-    range: string
-  creators:
-    name: creators
-    description: The person or organization who created the work
-    from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
-    slot_uri: dcterms:creator
-    multivalued: true
-    alias: creators
-    owner: Publication
-    domain_of:
-    - CreativeWork
-    range: Agent
-  contributors:
-    name: contributors
-    description: A person or organization that contributed to the creation of the
-      work
-    from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
-    slot_uri: dcterms:contributor
-    multivalued: true
-    alias: contributors
-    owner: Publication
-    domain_of:
-    - CreativeWork
-    range: Agent
-  contacts:
-    name: contacts
-    description: A contact point for a person or organization
-    from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
-    slot_uri: schema:contactPoint
-    multivalued: true
-    alias: contacts
-    owner: Publication
-    domain_of:
-    - CreativeWork
-    range: Agent
-  keywords:
-    name: keywords
-    description: Keywords or tags used to describe this item
-    from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
-    slot_uri: schema:keywords
-    multivalued: true
-    alias: keywords
-    owner: Publication
-    domain_of:
-    - CreativeWork
-    range: string
+    - InformationEntity
+    range: Any
   id:
     name: id
     description: A unique identifier for a thing
@@ -478,19 +335,21 @@ attributes:
     alias: id
     owner: Publication
     domain_of:
-    - NamedThing
+    - Identified
     range: uriorcurie
     required: true
   name:
     name: name
     description: A human-readable name for a thing
     from_schema: https://w3id.org/linkml/linkml-common
+    exact_mappings:
+    - rdfs:label
     rank: 1000
     slot_uri: schema:name
     alias: name
     owner: Publication
     domain_of:
-    - NamedThing
+    - Identified
     range: string
   type:
     name: type
@@ -503,43 +362,7 @@ attributes:
     alias: type
     owner: Publication
     domain_of:
-    - Entity
-    - NamedThing
-    range: string
-  classification:
-    name: classification
-    description: A precise classification of the thing, using a concept from an ontology,
-      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
-      to restrict the range of values which this slot can take, using `values_from`,
-      or bindings.
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    alias: classification
-    owner: Publication
-    domain_of:
-    - NamedThing
-    range: Concept
-  ontology_types:
-    name: ontology_types
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    multivalued: true
-    alias: ontology_types
-    owner: Publication
-    domain_of:
-    - NamedThing
-    range: Concept
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: Publication
-    domain_of:
-    - NamedThing
-    - TimePoint
+    - Typed
     range: string
 
 </code></pre>

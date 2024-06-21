@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/SimpleQuantity/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: SimpleQuantity - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -209,21 +209,34 @@
 <p>URI: <a href="http://hl7.org/fhir/SimpleQuantity">fhir:SimpleQuantity</a></p>
 <div class="mermaid"> classDiagram
     class SimpleQuantity
+    click SimpleQuantity href "../SimpleQuantity"
       Quantity &lt;|-- SimpleQuantity
+        click Quantity href "../Quantity"
 
 
       SimpleQuantity &lt;|-- MoneyQuantity
+        click MoneyQuantity href "../MoneyQuantity"
 
 
       SimpleQuantity : has_quantity_kind
 
-          SimpleQuantity --&gt; QuantityKind : has_quantity_kind
+
+
+
+    SimpleQuantity --&gt; "0..1" QuantityKind : has_quantity_kind
+    click QuantityKind href "../QuantityKind"
+
 
       SimpleQuantity : type
 
       SimpleQuantity : unit
 
-          SimpleQuantity --&gt; UnitConcept : unit
+
+
+
+    SimpleQuantity --&gt; "0..1" UnitConcept : unit
+    click UnitConcept href "../UnitConcept"
+
 
       SimpleQuantity : value
 
@@ -231,7 +244,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><a href="../Quantity/">Quantity</a><ul>
 <li><strong>SimpleQuantity</strong><ul>
@@ -278,7 +291,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -476,10 +489,9 @@ attributes:
     name: value
     description: The value of the quantity
     from_schema: https://w3id.org/linkml-common/quantities
-    rank: 1000
     domain_of:
-    - SimpleQuantity
     - MoneyQuantity
+    - SimpleQuantity
     range: float
   unit:
     name: unit
@@ -487,10 +499,9 @@ attributes:
     exact_mappings:
     - schema:unitCode
     - qudt:unit
-    rank: 1000
     domain_of:
-    - SimpleQuantity
     - MoneyQuantity
+    - SimpleQuantity
     range: UnitConcept
 class_uri: fhir:SimpleQuantity
 
@@ -509,12 +520,11 @@ attributes:
     name: value
     description: The value of the quantity
     from_schema: https://w3id.org/linkml-common/quantities
-    rank: 1000
     alias: value
     owner: SimpleQuantity
     domain_of:
-    - SimpleQuantity
     - MoneyQuantity
+    - SimpleQuantity
     range: float
   unit:
     name: unit
@@ -522,12 +532,11 @@ attributes:
     exact_mappings:
     - schema:unitCode
     - qudt:unit
-    rank: 1000
     alias: unit
     owner: SimpleQuantity
     domain_of:
-    - SimpleQuantity
     - MoneyQuantity
+    - SimpleQuantity
     range: UnitConcept
   has_quantity_kind:
     name: has_quantity_kind
@@ -550,8 +559,7 @@ attributes:
     alias: type
     owner: SimpleQuantity
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 class_uri: fhir:SimpleQuantity
 

@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/Patient/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: Patient - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -208,11 +208,18 @@
 <p>URI: <a href="https://w3id.org/linkml-common/Patient">linkml_common:Patient</a></p>
 <div class="mermaid"> classDiagram
     class Patient
+    click Patient href "../Patient"
       HealthcareRole &lt;|-- Patient
+        click HealthcareRole href "../HealthcareRole"
 
       Patient : is_person
 
-          Patient --&gt; Person : is_person
+
+
+
+    Patient --&gt; "0..1" Person : is_person
+    click Person href "../Person"
+
 
       Patient : type
 
@@ -220,7 +227,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><a href="../Role/">Role</a><ul>
 <li><a href="../HealthcareRole/">HealthcareRole</a><ul>
@@ -255,7 +262,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -350,8 +357,7 @@ attributes:
     alias: type
     owner: Patient
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 
 </code></pre>

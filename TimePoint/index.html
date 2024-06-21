@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/TimePoint/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: TimePoint - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -209,7 +209,9 @@
 <p>URI: <a href="https://w3id.org/linkml-common/TimePoint">linkml_common:TimePoint</a></p>
 <div class="mermaid"> classDiagram
     class TimePoint
+    click TimePoint href "../TimePoint"
       TimePointOrTemporalInterval &lt;|-- TimePoint
+        click TimePointOrTemporalInterval href "../TimePointOrTemporalInterval"
 
       TimePoint : date_value
 
@@ -219,15 +221,30 @@
 
       TimePoint : ends_at
 
-          TimePoint --&gt; TimePoint : ends_at
+
+
+
+    TimePoint --&gt; "0..1" TimePoint : ends_at
+    click TimePoint href "../TimePoint"
+
 
       TimePoint : marker_event
 
-          TimePoint --&gt; Event : marker_event
+
+
+
+    TimePoint --&gt; "0..1" Event : marker_event
+    click Event href "../Event"
+
 
       TimePoint : starts_at
 
-          TimePoint --&gt; TimePoint : starts_at
+
+
+
+    TimePoint --&gt; "0..1" TimePoint : starts_at
+    click TimePoint href "../TimePoint"
+
 
       TimePoint : time_value
 
@@ -239,7 +256,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a><ul>
 <li><strong>TimePoint</strong></li>
@@ -313,7 +330,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -329,96 +346,6 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../LifeEvent/">LifeEvent</a></td>
-<td><a href="../starts_at/">starts_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../LifeEvent/">LifeEvent</a></td>
-<td><a href="../ends_at/">ends_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../LifeEvent/">LifeEvent</a></td>
-<td><a href="../happens_at/">happens_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../InvestigativeProcess/">InvestigativeProcess</a></td>
-<td><a href="../starts_at/">starts_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../InvestigativeProcess/">InvestigativeProcess</a></td>
-<td><a href="../ends_at/">ends_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../InvestigativeProcess/">InvestigativeProcess</a></td>
-<td><a href="../happens_at/">happens_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../SampleCollectionProcess/">SampleCollectionProcess</a></td>
-<td><a href="../starts_at/">starts_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../SampleCollectionProcess/">SampleCollectionProcess</a></td>
-<td><a href="../ends_at/">ends_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../SampleCollectionProcess/">SampleCollectionProcess</a></td>
-<td><a href="../happens_at/">happens_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../SampleProcessing/">SampleProcessing</a></td>
-<td><a href="../starts_at/">starts_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../SampleProcessing/">SampleProcessing</a></td>
-<td><a href="../ends_at/">ends_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../SampleProcessing/">SampleProcessing</a></td>
-<td><a href="../happens_at/">happens_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../DataGenerationFromSample/">DataGenerationFromSample</a></td>
-<td><a href="../starts_at/">starts_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../DataGenerationFromSample/">DataGenerationFromSample</a></td>
-<td><a href="../ends_at/">ends_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
-<td><a href="../DataGenerationFromSample/">DataGenerationFromSample</a></td>
-<td><a href="../happens_at/">happens_at</a></td>
-<td>range</td>
-<td><a href="./">TimePoint</a></td>
-</tr>
-<tr>
 <td><a href="../HealthcareEncounter/">HealthcareEncounter</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
@@ -433,6 +360,12 @@
 <tr>
 <td><a href="../HealthcareEncounter/">HealthcareEncounter</a></td>
 <td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../HealthcareEncounter/">HealthcareEncounter</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
@@ -455,6 +388,132 @@
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
+<td><a href="../HealthcareConditionOccurrence/">HealthcareConditionOccurrence</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../Investigation/">Investigation</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../Investigation/">Investigation</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../Investigation/">Investigation</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../Investigation/">Investigation</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../InvestigativeProcess/">InvestigativeProcess</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../InvestigativeProcess/">InvestigativeProcess</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../InvestigativeProcess/">InvestigativeProcess</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../InvestigativeProcess/">InvestigativeProcess</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../SampleCollectionProcess/">SampleCollectionProcess</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../SampleCollectionProcess/">SampleCollectionProcess</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../SampleCollectionProcess/">SampleCollectionProcess</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../SampleCollectionProcess/">SampleCollectionProcess</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../SampleProcessing/">SampleProcessing</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../SampleProcessing/">SampleProcessing</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../SampleProcessing/">SampleProcessing</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../SampleProcessing/">SampleProcessing</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../DataGenerationFromSample/">DataGenerationFromSample</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../DataGenerationFromSample/">DataGenerationFromSample</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../DataGenerationFromSample/">DataGenerationFromSample</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../DataGenerationFromSample/">DataGenerationFromSample</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
 <td><a href="../ClinicalCohortEnrollment/">ClinicalCohortEnrollment</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
@@ -473,38 +532,80 @@
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
-<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../ClinicalCohortEnrollment/">ClinicalCohortEnrollment</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../Observation/">Observation</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
-<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../Observation/">Observation</a></td>
 <td><a href="../ends_at/">ends_at</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
-<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../Observation/">Observation</a></td>
 <td><a href="../happens_at/">happens_at</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
-<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../Observation/">Observation</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../Measurement/">Measurement</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
-<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../Measurement/">Measurement</a></td>
 <td><a href="../ends_at/">ends_at</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
-<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../Measurement/">Measurement</a></td>
 <td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../Measurement/">Measurement</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../QualitativeObservation/">QualitativeObservation</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../QualitativeObservation/">QualitativeObservation</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../QualitativeObservation/">QualitativeObservation</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../QualitativeObservation/">QualitativeObservation</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
@@ -523,6 +624,12 @@
 <tr>
 <td><a href="../Event/">Event</a></td>
 <td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../Event/">Event</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
@@ -563,6 +670,36 @@
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
+<td><a href="../TemporalRelationship/">TemporalRelationship</a></td>
+<td><a href="../relative_to/">relative_to</a></td>
+<td>any_of[range]</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../ExecutionOfProcedure/">ExecutionOfProcedure</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../ExecutionOfProcedure/">ExecutionOfProcedure</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../ExecutionOfProcedure/">ExecutionOfProcedure</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../ExecutionOfProcedure/">ExecutionOfProcedure</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
@@ -577,6 +714,36 @@
 <tr>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
 <td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../ComputationalPlannedProcess/">ComputationalPlannedProcess</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../ComputationalPlannedProcess/">ComputationalPlannedProcess</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../ComputationalPlannedProcess/">ComputationalPlannedProcess</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../ComputationalPlannedProcess/">ComputationalPlannedProcess</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
@@ -599,6 +766,12 @@
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
+<td><a href="../MaterialCollection/">MaterialCollection</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
 <td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
@@ -617,6 +790,84 @@
 <td><a href="./">TimePoint</a></td>
 </tr>
 <tr>
+<td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../LifeEvent/">LifeEvent</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../LifeEvent/">LifeEvent</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../LifeEvent/">LifeEvent</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../LifeEvent/">LifeEvent</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
 <td><a href="../FoodProcessing/">FoodProcessing</a></td>
 <td><a href="../starts_at/">starts_at</a></td>
 <td>range</td>
@@ -631,6 +882,36 @@
 <tr>
 <td><a href="../FoodProcessing/">FoodProcessing</a></td>
 <td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../FoodProcessing/">FoodProcessing</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../FoodPreparation/">FoodPreparation</a></td>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../FoodPreparation/">FoodPreparation</a></td>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../FoodPreparation/">FoodPreparation</a></td>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>range</td>
+<td><a href="./">TimePoint</a></td>
+</tr>
+<tr>
+<td><a href="../FoodPreparation/">FoodPreparation</a></td>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
 <td>range</td>
 <td><a href="./">TimePoint</a></td>
 </tr>
@@ -750,7 +1031,7 @@ attributes:
     alias: description
     owner: TimePoint
     domain_of:
-    - NamedThing
+    - PhysicalEntity
     - TimePoint
     range: string
   starts_at:
@@ -786,8 +1067,7 @@ attributes:
     alias: type
     owner: TimePoint
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 
 </code></pre>

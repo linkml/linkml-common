@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://linkml.github.io/linkml-common/rights/">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-8.5.10">
     
     
       
@@ -274,19 +274,6 @@
     Identifier and Mapping Information
   </a>
   
-    <nav class="md-nav" aria-label="Identifier and Mapping Information">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#schema-source" class="md-nav__link">
-    Schema Source
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -317,7 +304,6 @@
 
 
 <h1 id="slot-rights">Slot: rights</h1>
-<p><em>Information about rights held in and over the item</em></p>
 <p>URI: <a href="https://w3id.org/linkml-common/rights">linkml_common:rights</a></p>
 <!-- no inheritance hierarchy -->
 
@@ -332,8 +318,8 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../Publication/">Publication</a></td>
-<td></td>
+<td><a href="../CreativeWork/">CreativeWork</a></td>
+<td>The most generic kind of creative work, including books, movies, photographs,...</td>
 <td>no</td>
 </tr>
 <tr>
@@ -342,8 +328,8 @@
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../CreativeWork/">CreativeWork</a></td>
-<td>The most generic kind of creative work, including books, movies, photographs,...</td>
+<td><a href="../CreationMetadata/">CreationMetadata</a></td>
+<td></td>
 <td>no</td>
 </tr>
 </tbody>
@@ -353,20 +339,13 @@
 <li>Range: <a href="../String/">String</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://w3id.org/linkml/linkml-common</li>
-</ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
 <pre><code class="language-yaml">name: rights
-description: Information about rights held in and over the item
-from_schema: https://w3id.org/linkml/linkml-common
-rank: 1000
 alias: rights
-owner: CreativeWork
 domain_of:
+- CreationMetadata
 - CreativeWork
 range: string
 

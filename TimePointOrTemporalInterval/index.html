@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/TimePointOrTemporalInterval/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: TimePointOrTemporalInterval - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -203,20 +203,34 @@
 <p>URI: <a href="https://w3id.org/linkml-common/TimePointOrTemporalInterval">linkml_common:TimePointOrTemporalInterval</a></p>
 <div class="mermaid"> classDiagram
     class TimePointOrTemporalInterval
+    click TimePointOrTemporalInterval href "../TimePointOrTemporalInterval"
       Intangible &lt;|-- TimePointOrTemporalInterval
+        click Intangible href "../Intangible"
 
 
       TimePointOrTemporalInterval &lt;|-- TemporalInterval
+        click TemporalInterval href "../TemporalInterval"
       TimePointOrTemporalInterval &lt;|-- TimePoint
+        click TimePoint href "../TimePoint"
 
 
       TimePointOrTemporalInterval : ends_at
 
-          TimePointOrTemporalInterval --&gt; TimePoint : ends_at
+
+
+
+    TimePointOrTemporalInterval --&gt; "0..1" TimePoint : ends_at
+    click TimePoint href "../TimePoint"
+
 
       TimePointOrTemporalInterval : starts_at
 
-          TimePointOrTemporalInterval --&gt; TimePoint : starts_at
+
+
+
+    TimePointOrTemporalInterval --&gt; "0..1" TimePoint : starts_at
+    click TimePoint href "../TimePoint"
+
 
       TimePointOrTemporalInterval : type
 
@@ -224,7 +238,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><strong>TimePointOrTemporalInterval</strong><ul>
 <li><a href="../TemporalInterval/">TemporalInterval</a></li>
@@ -263,7 +277,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -343,8 +357,7 @@ attributes:
     alias: type
     owner: TimePointOrTemporalInterval
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 
 </code></pre>

@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/MoneyQuantity/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: MoneyQuantity - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -209,17 +209,29 @@
 <p>URI: <a href="http://hl7.org/fhir/MoneyQuantity">fhir:MoneyQuantity</a></p>
 <div class="mermaid"> classDiagram
     class MoneyQuantity
+    click MoneyQuantity href "../MoneyQuantity"
       SimpleQuantity &lt;|-- MoneyQuantity
+        click SimpleQuantity href "../SimpleQuantity"
 
       MoneyQuantity : has_quantity_kind
 
-          MoneyQuantity --&gt; QuantityKind : has_quantity_kind
+
+
+
+    MoneyQuantity --&gt; "0..1" QuantityKind : has_quantity_kind
+    click QuantityKind href "../QuantityKind"
+
 
       MoneyQuantity : type
 
       MoneyQuantity : unit
 
-          MoneyQuantity --&gt; CurrencyConcept : unit
+
+
+
+    MoneyQuantity --&gt; "0..1" CurrencyConcept : unit
+    click CurrencyConcept href "../CurrencyConcept"
+
 
       MoneyQuantity : value
 
@@ -227,7 +239,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><a href="../Quantity/">Quantity</a><ul>
 <li><a href="../SimpleQuantity/">SimpleQuantity</a><ul>
@@ -274,7 +286,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -412,17 +424,19 @@ attributes:
     name: value
     description: The value of the quantity
     from_schema: https://w3id.org/linkml-common/financial
+    rank: 1000
     domain_of:
-    - SimpleQuantity
     - MoneyQuantity
+    - SimpleQuantity
     range: float
   unit:
     name: unit
     description: The currency of the quantity
     from_schema: https://w3id.org/linkml-common/financial
+    rank: 1000
     domain_of:
-    - SimpleQuantity
     - MoneyQuantity
+    - SimpleQuantity
     role: currency
     range: CurrencyConcept
 class_uri: fhir:MoneyQuantity
@@ -440,21 +454,23 @@ attributes:
     name: value
     description: The value of the quantity
     from_schema: https://w3id.org/linkml-common/financial
+    rank: 1000
     alias: value
     owner: MoneyQuantity
     domain_of:
-    - SimpleQuantity
     - MoneyQuantity
+    - SimpleQuantity
     range: float
   unit:
     name: unit
     description: The currency of the quantity
     from_schema: https://w3id.org/linkml-common/financial
+    rank: 1000
     alias: unit
     owner: MoneyQuantity
     domain_of:
-    - SimpleQuantity
     - MoneyQuantity
+    - SimpleQuantity
     role: currency
     range: CurrencyConcept
   has_quantity_kind:
@@ -478,8 +494,7 @@ attributes:
     alias: type
     owner: MoneyQuantity
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 class_uri: fhir:MoneyQuantity
 

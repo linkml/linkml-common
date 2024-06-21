@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/Event/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: Event - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -209,50 +209,88 @@
 <p>URI: <a href="https://w3id.org/linkml-common/Event">linkml_common:Event</a></p>
 <div class="mermaid"> classDiagram
     class Event
-      NamedThing &lt;|-- Event
+    click Event href "../Event"
+      Identified &lt;|-- Event
+        click Identified href "../Identified"
+      Entity &lt;|-- Event
+        click Entity href "../Entity"
 
 
-      Event &lt;|-- LifeEvent
       Event &lt;|-- HealthcareEncounter
+        click HealthcareEncounter href "../HealthcareEncounter"
       Event &lt;|-- HealthcareConditionOccurrence
+        click HealthcareConditionOccurrence href "../HealthcareConditionOccurrence"
+      Event &lt;|-- Investigation
+        click Investigation href "../Investigation"
       Event &lt;|-- ClinicalCohortEnrollment
+        click ClinicalCohortEnrollment href "../ClinicalCohortEnrollment"
+      Event &lt;|-- Observation
+        click Observation href "../Observation"
+      Event &lt;|-- ExecutionOfProcedure
+        click ExecutionOfProcedure href "../ExecutionOfProcedure"
       Event &lt;|-- EngineeringProcess
-      Event &lt;|-- PlannedProcess
+        click EngineeringProcess href "../EngineeringProcess"
+      Event &lt;|-- LifeEvent
+        click LifeEvent href "../LifeEvent"
 
-
-      Event : classification
-
-          Event --&gt; Concept : classification
-
-      Event : description
 
       Event : ends_at
 
-          Event --&gt; TimePoint : ends_at
+
+
+
+    Event --&gt; "0..1" TimePoint : ends_at
+    click TimePoint href "../TimePoint"
+
 
       Event : happens_at
 
-          Event --&gt; TimePoint : happens_at
+
+
+
+    Event --&gt; "0..1" TimePoint : happens_at
+    click TimePoint href "../TimePoint"
+
 
       Event : has_duration
 
-          Event --&gt; Duration : has_duration
+
+
+
+    Event --&gt; "0..1" Duration : has_duration
+    click Duration href "../Duration"
+
 
       Event : has_interval
 
-          Event --&gt; TemporalInterval : has_interval
+
+
+
+    Event --&gt; "0..1" TemporalInterval : has_interval
+    click TemporalInterval href "../TemporalInterval"
+
 
       Event : id
 
+      Event : is_ongoing_as_of
+
+
+
+
+    Event --&gt; "0..1" TimePoint : is_ongoing_as_of
+    click TimePoint href "../TimePoint"
+
+
       Event : name
-
-      Event : ontology_types
-
-          Event --&gt; Concept : ontology_types
 
       Event : starts_at
 
-          Event --&gt; TimePoint : starts_at
+
+
+
+    Event --&gt; "0..1" TimePoint : starts_at
+    click TimePoint href "../TimePoint"
+
 
       Event : type
 
@@ -260,17 +298,16 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
-<li><strong>Event</strong><ul>
-<li><a href="../LifeEvent/">LifeEvent</a></li>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><strong>Event</strong> [ <a href="../Identified/">Identified</a>]<ul>
 <li><a href="../HealthcareEncounter/">HealthcareEncounter</a></li>
 <li><a href="../HealthcareConditionOccurrence/">HealthcareConditionOccurrence</a></li>
+<li><a href="../Investigation/">Investigation</a></li>
 <li><a href="../ClinicalCohortEnrollment/">ClinicalCohortEnrollment</a></li>
+<li><a href="../Observation/">Observation</a></li>
+<li><a href="../ExecutionOfProcedure/">ExecutionOfProcedure</a></li>
 <li><a href="../EngineeringProcess/">EngineeringProcess</a></li>
-<li><a href="../PlannedProcess/">PlannedProcess</a></li>
-</ul>
-</li>
+<li><a href="../LifeEvent/">LifeEvent</a></li>
 </ul>
 </li>
 </ul>
@@ -318,40 +355,28 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>0..1 <br/> <a href="../TimePoint/">TimePoint</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../classification/">classification</a></td>
-<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
-<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>0..* <br/> <a href="../Concept/">Concept</a></td>
-<td></td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -367,8 +392,32 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../ClinicalHistory/">ClinicalHistory</a></td>
+<td><a href="../events/">events</a></td>
+<td>range</td>
+<td><a href="./">Event</a></td>
+</tr>
+<tr>
+<td><a href="../SubjectObservationHistory/">SubjectObservationHistory</a></td>
+<td><a href="../events/">events</a></td>
+<td>range</td>
+<td><a href="./">Event</a></td>
+</tr>
+<tr>
 <td><a href="../TimePoint/">TimePoint</a></td>
 <td><a href="../marker_event/">marker_event</a></td>
+<td>range</td>
+<td><a href="./">Event</a></td>
+</tr>
+<tr>
+<td><a href="../TemporalRelationship/">TemporalRelationship</a></td>
+<td><a href="../relative_to/">relative_to</a></td>
+<td>any_of[range]</td>
+<td><a href="./">Event</a></td>
+</tr>
+<tr>
+<td><a href="../SubjectHistory/">SubjectHistory</a></td>
+<td><a href="../events/">events</a></td>
 <td>range</td>
 <td><a href="./">Event</a></td>
 </tr>
@@ -405,13 +454,16 @@
 <pre><code class="language-yaml">name: Event
 description: A thing that happens
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: NamedThing
+is_a: Entity
+mixins:
+- Identified
 slots:
 - starts_at
 - ends_at
 - happens_at
 - has_interval
 - has_duration
+- is_ongoing_as_of
 
 </code></pre>
 </details>
@@ -420,7 +472,9 @@ slots:
 <pre><code class="language-yaml">name: Event
 description: A thing that happens
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: NamedThing
+is_a: Entity
+mixins:
+- Identified
 attributes:
   starts_at:
     name: starts_at
@@ -471,6 +525,15 @@ attributes:
     domain_of:
     - Event
     range: Duration
+  is_ongoing_as_of:
+    name: is_ongoing_as_of
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: is_ongoing_as_of
+    owner: Event
+    domain_of:
+    - Event
+    range: TimePoint
   id:
     name: id
     description: A unique identifier for a thing
@@ -481,19 +544,21 @@ attributes:
     alias: id
     owner: Event
     domain_of:
-    - NamedThing
+    - Identified
     range: uriorcurie
     required: true
   name:
     name: name
     description: A human-readable name for a thing
     from_schema: https://w3id.org/linkml/linkml-common
+    exact_mappings:
+    - rdfs:label
     rank: 1000
     slot_uri: schema:name
     alias: name
     owner: Event
     domain_of:
-    - NamedThing
+    - Identified
     range: string
   type:
     name: type
@@ -506,43 +571,7 @@ attributes:
     alias: type
     owner: Event
     domain_of:
-    - Entity
-    - NamedThing
-    range: string
-  classification:
-    name: classification
-    description: A precise classification of the thing, using a concept from an ontology,
-      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
-      to restrict the range of values which this slot can take, using `values_from`,
-      or bindings.
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    alias: classification
-    owner: Event
-    domain_of:
-    - NamedThing
-    range: Concept
-  ontology_types:
-    name: ontology_types
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    multivalued: true
-    alias: ontology_types
-    owner: Event
-    domain_of:
-    - NamedThing
-    range: Concept
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: Event
-    domain_of:
-    - NamedThing
-    - TimePoint
+    - Typed
     range: string
 
 </code></pre>

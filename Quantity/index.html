@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/Quantity/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: Quantity - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -208,18 +208,29 @@
 <p>URI: <a href="http://hl7.org/fhir/Quantity">fhir:Quantity</a></p>
 <div class="mermaid"> classDiagram
     class Quantity
+    click Quantity href "../Quantity"
       Intangible &lt;|-- Quantity
+        click Intangible href "../Intangible"
 
 
-      Quantity &lt;|-- SimpleQuantity
-      Quantity &lt;|-- Ratio
       Quantity &lt;|-- Duration
+        click Duration href "../Duration"
+      Quantity &lt;|-- SimpleQuantity
+        click SimpleQuantity href "../SimpleQuantity"
+      Quantity &lt;|-- Ratio
+        click Ratio href "../Ratio"
       Quantity &lt;|-- FoodIngredient
+        click FoodIngredient href "../FoodIngredient"
 
 
       Quantity : has_quantity_kind
 
-          Quantity --&gt; QuantityKind : has_quantity_kind
+
+
+
+    Quantity --&gt; "0..1" QuantityKind : has_quantity_kind
+    click QuantityKind href "../QuantityKind"
+
 
       Quantity : type
 
@@ -227,12 +238,12 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><strong>Quantity</strong><ul>
+<li><a href="../Duration/">Duration</a></li>
 <li><a href="../SimpleQuantity/">SimpleQuantity</a></li>
 <li><a href="../Ratio/">Ratio</a></li>
-<li><a href="../Duration/">Duration</a></li>
 <li><a href="../FoodIngredient/">FoodIngredient</a></li>
 </ul>
 </li>
@@ -262,7 +273,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -277,6 +288,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../Measurement/">Measurement</a></td>
+<td><a href="../quantity_measured/">quantity_measured</a></td>
+<td>range</td>
+<td><a href="./">Quantity</a></td>
+</tr>
 <tr>
 <td><a href="../Ratio/">Ratio</a></td>
 <td><a href="../numerator/">numerator</a></td>
@@ -298,24 +315,6 @@
 <tr>
 <td><a href="../QuantityRange/">QuantityRange</a></td>
 <td><a href="../upper_bound/">upper_bound</a></td>
-<td>range</td>
-<td><a href="./">Quantity</a></td>
-</tr>
-<tr>
-<td><a href="../UnitConversionOperation/">UnitConversionOperation</a></td>
-<td><a href="../inputs/">inputs</a></td>
-<td>range</td>
-<td><a href="./">Quantity</a></td>
-</tr>
-<tr>
-<td><a href="../UnitConversionOperation/">UnitConversionOperation</a></td>
-<td><a href="../outputs/">outputs</a></td>
-<td>range</td>
-<td><a href="./">Quantity</a></td>
-</tr>
-<tr>
-<td><a href="../Measurement/">Measurement</a></td>
-<td><a href="../quantity_measured/">quantity_measured</a></td>
 <td>range</td>
 <td><a href="./">Quantity</a></td>
 </tr>
@@ -404,8 +403,7 @@ attributes:
     alias: type
     owner: Quantity
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 class_uri: fhir:Quantity
 union_of:

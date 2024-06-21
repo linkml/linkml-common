@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/Entity/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: Entity - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -212,11 +212,20 @@
 <p>URI: <a href="http://schema.org/Thing">schema:Thing</a></p>
 <div class="mermaid"> classDiagram
     class Entity
-      Entity &lt;|-- NamedThing
+    click Entity href "../Entity"
+      Typed &lt;|-- Entity
+        click Typed href "../Typed"
+
+
       Entity &lt;|-- Intangible
-      Entity &lt;|-- Observation
-      Entity &lt;|-- PostalAddress
-      Entity &lt;|-- Variable
+        click Intangible href "../Intangible"
+      Entity &lt;|-- PhysicalEntity
+        click PhysicalEntity href "../PhysicalEntity"
+      Entity &lt;|-- Event
+        click Event href "../Event"
+      Entity &lt;|-- SubjectHistory
+        click SubjectHistory href "../SubjectHistory"
+
 
       Entity : type
 
@@ -224,12 +233,11 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><strong>Entity</strong><ul>
-<li><a href="../NamedThing/">NamedThing</a></li>
+<li><strong>Entity</strong> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a></li>
-<li><a href="../Observation/">Observation</a></li>
-<li><a href="../PostalAddress/">PostalAddress</a></li>
-<li><a href="../Variable/">Variable</a></li>
+<li><a href="../PhysicalEntity/">PhysicalEntity</a> [ <a href="../Identified/">Identified</a>]</li>
+<li><a href="../Event/">Event</a> [ <a href="../Identified/">Identified</a>]</li>
+<li><a href="../SubjectHistory/">SubjectHistory</a></li>
 </ul>
 </li>
 </ul>
@@ -248,7 +256,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td>direct</td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -264,14 +272,134 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../Collection/">Collection</a></td>
+<td><a href="../Relationship/">Relationship</a></td>
+<td><a href="../subject/">subject</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../Relationship/">Relationship</a></td>
+<td><a href="../object/">object</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../PhysicalSystem/">PhysicalSystem</a></td>
+<td><a href="../events/">events</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../EntitySet/">EntitySet</a></td>
 <td><a href="../members/">members</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../Model/">Model</a></td>
+<td><a href="../models/">models</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../ComputationalModel/">ComputationalModel</a></td>
+<td><a href="../models/">models</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../Simulation/">Simulation</a></td>
+<td><a href="../models/">models</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../DigitalTwin/">DigitalTwin</a></td>
+<td><a href="../models/">models</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../Observation/">Observation</a></td>
+<td><a href="../observation_subject/">observation_subject</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../SetOfObservations/">SetOfObservations</a></td>
+<td><a href="../observation_subject/">observation_subject</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../Measurement/">Measurement</a></td>
+<td><a href="../observation_subject/">observation_subject</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../QualitativeObservation/">QualitativeObservation</a></td>
+<td><a href="../observation_subject/">observation_subject</a></td>
 <td>range</td>
 <td><a href="./">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../TemporalRelationship/">TemporalRelationship</a></td>
 <td><a href="../relative_to/">relative_to</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../TemporalRelationship/">TemporalRelationship</a></td>
+<td><a href="../subject/">subject</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../TemporalRelationship/">TemporalRelationship</a></td>
+<td><a href="../object/">object</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../EconomicSystem/">EconomicSystem</a></td>
+<td><a href="../events/">events</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../PersonInRole/">PersonInRole</a></td>
+<td><a href="../subject/">subject</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../PersonInRole/">PersonInRole</a></td>
+<td><a href="../object/">object</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../EnvironmentalSystem/">EnvironmentalSystem</a></td>
+<td><a href="../events/">events</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../Climate/">Climate</a></td>
+<td><a href="../events/">events</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../OrganismalRelationship/">OrganismalRelationship</a></td>
+<td><a href="../subject/">subject</a></td>
+<td>range</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../OrganismalRelationship/">OrganismalRelationship</a></td>
+<td><a href="../object/">object</a></td>
 <td>range</td>
 <td><a href="./">Entity</a></td>
 </tr>
@@ -310,8 +438,8 @@ description: A physical, digital, conceptual, or other kind of thing with some c
   characteristics
 from_schema: https://w3id.org/linkml/linkml-common
 abstract: true
-slots:
-- type
+mixins:
+- Typed
 class_uri: schema:Thing
 
 </code></pre>
@@ -323,6 +451,8 @@ description: A physical, digital, conceptual, or other kind of thing with some c
   characteristics
 from_schema: https://w3id.org/linkml/linkml-common
 abstract: true
+mixins:
+- Typed
 attributes:
   type:
     name: type
@@ -335,8 +465,7 @@ attributes:
     alias: type
     owner: Entity
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 class_uri: schema:Thing
 

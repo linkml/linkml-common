@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/HealthcareProvider/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: HealthcareProvider - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -208,19 +208,36 @@
 <p>URI: <a href="https://w3id.org/linkml-common/HealthcareProvider">linkml_common:HealthcareProvider</a></p>
 <div class="mermaid"> classDiagram
     class HealthcareProvider
+    click HealthcareProvider href "../HealthcareProvider"
       HealthcareRole &lt;|-- HealthcareProvider
+        click HealthcareRole href "../HealthcareRole"
 
       HealthcareProvider : care_site
 
-          HealthcareProvider --&gt; HealthcareSite : care_site
+
+
+
+    HealthcareProvider --&gt; "0..1" HealthcareSite : care_site
+    click HealthcareSite href "../HealthcareSite"
+
 
       HealthcareProvider : is_person
 
-          HealthcareProvider --&gt; Person : is_person
+
+
+
+    HealthcareProvider --&gt; "0..1" Person : is_person
+    click Person href "../Person"
+
 
       HealthcareProvider : speciality
 
-          HealthcareProvider --&gt; Concept : speciality
+
+
+
+    HealthcareProvider --&gt; "0..1" Concept : speciality
+    click Concept href "../Concept"
+
 
       HealthcareProvider : type
 
@@ -228,7 +245,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><a href="../Role/">Role</a><ul>
 <li><a href="../HealthcareRole/">HealthcareRole</a><ul>
@@ -275,7 +292,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -391,8 +408,7 @@ attributes:
     alias: type
     owner: HealthcareProvider
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 
 </code></pre>

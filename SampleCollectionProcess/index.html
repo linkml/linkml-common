@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/SampleCollectionProcess/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: SampleCollectionProcess - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -203,71 +203,131 @@
 <p>URI: <a href="https://w3id.org/linkml-common/SampleCollectionProcess">linkml_common:SampleCollectionProcess</a></p>
 <div class="mermaid"> classDiagram
     class SampleCollectionProcess
+    click SampleCollectionProcess href "../SampleCollectionProcess"
       InvestigativeProcess &lt;|-- SampleCollectionProcess
-
-      SampleCollectionProcess : classification
-
-          SampleCollectionProcess --&gt; Concept : classification
+        click InvestigativeProcess href "../InvestigativeProcess"
 
       SampleCollectionProcess : collected_from
 
-          SampleCollectionProcess --&gt; NamedThing : collected_from
 
-      SampleCollectionProcess : description
+
+
+    SampleCollectionProcess --&gt; "0..1" PhysicalEntity : collected_from
+    click PhysicalEntity href "../PhysicalEntity"
+
 
       SampleCollectionProcess : ends_at
 
-          SampleCollectionProcess --&gt; TimePoint : ends_at
+
+
+
+    SampleCollectionProcess --&gt; "0..1" TimePoint : ends_at
+    click TimePoint href "../TimePoint"
+
 
       SampleCollectionProcess : follows_procedure
 
-          SampleCollectionProcess --&gt; InvestigativeProtocol : follows_procedure
+
+
+
+    SampleCollectionProcess --&gt; "0..1" InvestigativeProtocol : follows_procedure
+    click InvestigativeProtocol href "../InvestigativeProtocol"
+
 
       SampleCollectionProcess : happens_at
 
-          SampleCollectionProcess --&gt; TimePoint : happens_at
+
+
+
+    SampleCollectionProcess --&gt; "0..1" TimePoint : happens_at
+    click TimePoint href "../TimePoint"
+
 
       SampleCollectionProcess : has_duration
 
-          SampleCollectionProcess --&gt; Duration : has_duration
+
+
+
+    SampleCollectionProcess --&gt; "0..1" Duration : has_duration
+    click Duration href "../Duration"
+
 
       SampleCollectionProcess : has_interval
 
-          SampleCollectionProcess --&gt; TemporalInterval : has_interval
+
+
+
+    SampleCollectionProcess --&gt; "0..1" TemporalInterval : has_interval
+    click TemporalInterval href "../TemporalInterval"
+
 
       SampleCollectionProcess : id
 
+      SampleCollectionProcess : is_ongoing_as_of
+
+
+
+
+    SampleCollectionProcess --&gt; "0..1" TimePoint : is_ongoing_as_of
+    click TimePoint href "../TimePoint"
+
+
       SampleCollectionProcess : material_collected
 
-          SampleCollectionProcess --&gt; SampleMaterial : material_collected
+
+
+
+    SampleCollectionProcess --&gt; "0..1" SampleMaterial : material_collected
+    click SampleMaterial href "../SampleMaterial"
+
 
       SampleCollectionProcess : name
 
-      SampleCollectionProcess : ontology_types
-
-          SampleCollectionProcess --&gt; Concept : ontology_types
-
       SampleCollectionProcess : part_of
 
-          SampleCollectionProcess --&gt; Investigation : part_of
+
+
+
+    SampleCollectionProcess --&gt; "0..1" Investigation : part_of
+    click Investigation href "../Investigation"
+
 
       SampleCollectionProcess : starts_at
 
-          SampleCollectionProcess --&gt; TimePoint : starts_at
+
+
+
+    SampleCollectionProcess --&gt; "0..1" TimePoint : starts_at
+    click TimePoint href "../TimePoint"
+
 
       SampleCollectionProcess : type
 
+      SampleCollectionProcess : uses_configuration
+
+
+
+
+    SampleCollectionProcess --&gt; "0..1" PlannedProcessConfiguration : uses_configuration
+    click PlannedProcessConfiguration href "../PlannedProcessConfiguration"
+
+
       SampleCollectionProcess : uses_physical_device
 
-          SampleCollectionProcess --&gt; PhysicalDevice : uses_physical_device
+
+
+
+    SampleCollectionProcess --&gt; "0..1" PhysicalDevice : uses_physical_device
+    click PhysicalDevice href "../PhysicalDevice"
+
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
-<li><a href="../Event/">Event</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><a href="../Event/">Event</a> [ <a href="../Identified/">Identified</a>]<ul>
+<li><a href="../ExecutionOfProcedure/">ExecutionOfProcedure</a><ul>
 <li><a href="../PlannedProcess/">PlannedProcess</a><ul>
 <li><a href="../InvestigativeProcess/">InvestigativeProcess</a><ul>
 <li><strong>SampleCollectionProcess</strong></li>
@@ -301,7 +361,7 @@
 </tr>
 <tr>
 <td><a href="../collected_from/">collected_from</a></td>
-<td>0..1 <br/> <a href="../NamedThing/">NamedThing</a></td>
+<td>0..1 <br/> <a href="../PhysicalEntity/">PhysicalEntity</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -309,7 +369,7 @@
 <td><a href="../follows_procedure/">follows_procedure</a></td>
 <td>0..1 <br/> <a href="../InvestigativeProtocol/">InvestigativeProtocol</a></td>
 <td></td>
-<td><a href="../PlannedProcess/">PlannedProcess</a>, <a href="../InvestigativeProcess/">InvestigativeProcess</a></td>
+<td><a href="../InvestigativeProcess/">InvestigativeProcess</a>, <a href="../PlannedProcess/">PlannedProcess</a></td>
 </tr>
 <tr>
 <td><a href="../part_of/">part_of</a></td>
@@ -320,6 +380,12 @@
 <tr>
 <td><a href="../uses_physical_device/">uses_physical_device</a></td>
 <td>0..1 <br/> <a href="../PhysicalDevice/">PhysicalDevice</a></td>
+<td></td>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+</tr>
+<tr>
+<td><a href="../uses_configuration/">uses_configuration</a></td>
+<td>0..1 <br/> <a href="../PlannedProcessConfiguration/">PlannedProcessConfiguration</a></td>
 <td></td>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
 </tr>
@@ -354,40 +420,28 @@
 <td><a href="../Event/">Event</a></td>
 </tr>
 <tr>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>0..1 <br/> <a href="../TimePoint/">TimePoint</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../classification/">classification</a></td>
-<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
-<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>0..* <br/> <a href="../Concept/">Concept</a></td>
-<td></td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -442,7 +496,7 @@ attributes:
     rank: 1000
     domain_of:
     - SampleCollectionProcess
-    range: NamedThing
+    range: PhysicalEntity
 
 </code></pre>
 </details>
@@ -471,7 +525,7 @@ attributes:
     owner: SampleCollectionProcess
     domain_of:
     - SampleCollectionProcess
-    range: NamedThing
+    range: PhysicalEntity
   follows_procedure:
     name: follows_procedure
     from_schema: https://w3id.org/linkml-common/investigations
@@ -480,8 +534,8 @@ attributes:
     owner: SampleCollectionProcess
     domain_of:
     - InvestigativeProcess
-    - EngineeringProcess
     - PlannedProcess
+    - EngineeringProcess
     range: InvestigativeProtocol
   part_of:
     name: part_of
@@ -502,6 +556,15 @@ attributes:
     domain_of:
     - PlannedProcess
     range: PhysicalDevice
+  uses_configuration:
+    name: uses_configuration
+    from_schema: https://w3id.org/linkml-common/plannedprocess
+    rank: 1000
+    alias: uses_configuration
+    owner: SampleCollectionProcess
+    domain_of:
+    - PlannedProcess
+    range: PlannedProcessConfiguration
   starts_at:
     name: starts_at
     from_schema: https://w3id.org/linkml/linkml-common
@@ -551,6 +614,15 @@ attributes:
     domain_of:
     - Event
     range: Duration
+  is_ongoing_as_of:
+    name: is_ongoing_as_of
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: is_ongoing_as_of
+    owner: SampleCollectionProcess
+    domain_of:
+    - Event
+    range: TimePoint
   id:
     name: id
     description: A unique identifier for a thing
@@ -561,19 +633,21 @@ attributes:
     alias: id
     owner: SampleCollectionProcess
     domain_of:
-    - NamedThing
+    - Identified
     range: uriorcurie
     required: true
   name:
     name: name
     description: A human-readable name for a thing
     from_schema: https://w3id.org/linkml/linkml-common
+    exact_mappings:
+    - rdfs:label
     rank: 1000
     slot_uri: schema:name
     alias: name
     owner: SampleCollectionProcess
     domain_of:
-    - NamedThing
+    - Identified
     range: string
   type:
     name: type
@@ -586,43 +660,7 @@ attributes:
     alias: type
     owner: SampleCollectionProcess
     domain_of:
-    - Entity
-    - NamedThing
-    range: string
-  classification:
-    name: classification
-    description: A precise classification of the thing, using a concept from an ontology,
-      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
-      to restrict the range of values which this slot can take, using `values_from`,
-      or bindings.
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    alias: classification
-    owner: SampleCollectionProcess
-    domain_of:
-    - NamedThing
-    range: Concept
-  ontology_types:
-    name: ontology_types
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    multivalued: true
-    alias: ontology_types
-    owner: SampleCollectionProcess
-    domain_of:
-    - NamedThing
-    range: Concept
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: SampleCollectionProcess
-    domain_of:
-    - NamedThing
-    - TimePoint
+    - Typed
     range: string
 
 </code></pre>

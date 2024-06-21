@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/CreativeWork/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: CreativeWork - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -204,30 +204,49 @@
 <p>URI: <a href="https://w3id.org/linkml-common/CreativeWork">linkml_common:CreativeWork</a></p>
 <div class="mermaid"> classDiagram
     class CreativeWork
-      NamedThing &lt;|-- CreativeWork
-
-
-      CreativeWork &lt;|-- Publication
-      CreativeWork &lt;|-- Dataset
-
+    click CreativeWork href "../CreativeWork"
+      CreationMetadata &lt;|-- CreativeWork
+        click CreationMetadata href "../CreationMetadata"
+      PhysicalEntity &lt;|-- CreativeWork
+        click PhysicalEntity href "../PhysicalEntity"
 
       CreativeWork : abstract
 
       CreativeWork : classification
 
-          CreativeWork --&gt; Concept : classification
+
+
+
+    CreativeWork --&gt; "0..1" Concept : classification
+    click Concept href "../Concept"
+
 
       CreativeWork : contacts
 
-          CreativeWork --&gt; Agent : contacts
+
+
+
+    CreativeWork --&gt; "*" PhysicalEntity : contacts
+    click PhysicalEntity href "../PhysicalEntity"
+
 
       CreativeWork : contributors
 
-          CreativeWork --&gt; Agent : contributors
+
+
+
+    CreativeWork --&gt; "*" PhysicalEntity : contributors
+    click PhysicalEntity href "../PhysicalEntity"
+
 
       CreativeWork : creators
 
-          CreativeWork --&gt; Agent : creators
+
+
+
+    CreativeWork --&gt; "*" PhysicalEntity : creators
+    click PhysicalEntity href "../PhysicalEntity"
+
 
       CreativeWork : description
 
@@ -239,7 +258,12 @@
 
       CreativeWork : ontology_types
 
-          CreativeWork --&gt; Concept : ontology_types
+
+
+
+    CreativeWork --&gt; "*" Concept : ontology_types
+    click Concept href "../Concept"
+
 
       CreativeWork : rights
 
@@ -251,13 +275,9 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
-<li><strong>CreativeWork</strong><ul>
-<li><a href="../Publication/">Publication</a></li>
-<li><a href="../Dataset/">Dataset</a></li>
-</ul>
-</li>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><a href="../PhysicalEntity/">PhysicalEntity</a> [ <a href="../Identified/">Identified</a>]<ul>
+<li><strong>CreativeWork</strong> [ <a href="../CreationMetadata/">CreationMetadata</a>]</li>
 </ul>
 </li>
 </ul>
@@ -294,63 +314,63 @@
 </tr>
 <tr>
 <td><a href="../creators/">creators</a></td>
-<td>0..* <br/> <a href="../Agent/">Agent</a></td>
+<td>* <br/> <a href="../PhysicalEntity/">PhysicalEntity</a> or <br/><a href="../Person/">Person</a> or <br/><a href="../Organization/">Organization</a></td>
 <td>The person or organization who created the work</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../contributors/">contributors</a></td>
-<td>0..* <br/> <a href="../Agent/">Agent</a></td>
+<td>* <br/> <a href="../PhysicalEntity/">PhysicalEntity</a> or <br/><a href="../Person/">Person</a> or <br/><a href="../Organization/">Organization</a></td>
 <td>A person or organization that contributed to the creation of the work</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../contacts/">contacts</a></td>
-<td>0..* <br/> <a href="../Agent/">Agent</a></td>
+<td>* <br/> <a href="../PhysicalEntity/">PhysicalEntity</a></td>
 <td>A contact point for a person or organization</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../keywords/">keywords</a></td>
-<td>0..* <br/> <a href="../String/">String</a></td>
+<td>* <br/> <a href="../String/">String</a></td>
 <td>Keywords or tags used to describe this item</td>
 <td>direct</td>
-</tr>
-<tr>
-<td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../type/">type</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
 <td><a href="../classification/">classification</a></td>
 <td>0..1 <br/> <a href="../Concept/">Concept</a></td>
 <td>A precise classification of the thing, using a concept from an ontology, cont...</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../PhysicalEntity/">PhysicalEntity</a></td>
 </tr>
 <tr>
 <td><a href="../ontology_types/">ontology_types</a></td>
-<td>0..* <br/> <a href="../Concept/">Concept</a></td>
-<td></td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td>* <br/> <a href="../Concept/">Concept</a></td>
+<td>A collection of concepts that help to classify the thing, using concepts from...</td>
+<td><a href="../PhysicalEntity/">PhysicalEntity</a></td>
 </tr>
 <tr>
 <td><a href="../description/">description</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../PhysicalEntity/">PhysicalEntity</a></td>
+</tr>
+<tr>
+<td><a href="../id/">id</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>A unique identifier for a thing</td>
+<td><a href="../Identified/">Identified</a></td>
+</tr>
+<tr>
+<td><a href="../name/">name</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A human-readable name for a thing</td>
+<td><a href="../Identified/">Identified</a></td>
+</tr>
+<tr>
+<td><a href="../type/">type</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A type for a thing</td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -392,7 +412,9 @@ description: The most generic kind of creative work, including books, movies, ph
 from_schema: https://w3id.org/linkml/linkml-common
 exact_mappings:
 - schema:CreativeWork
-is_a: NamedThing
+is_a: PhysicalEntity
+mixins:
+- CreationMetadata
 attributes:
   title:
     name: title
@@ -400,65 +422,71 @@ attributes:
     from_schema: https://w3id.org/linkml-common/social
     exact_mappings:
     - dcterms:title
-    rank: 1000
     domain_of:
+    - CreationMetadata
     - CreativeWork
     range: string
   abstract:
     name: abstract
     description: A summary of the item
     from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
     domain_of:
+    - CreationMetadata
     - CreativeWork
     range: string
   rights:
     name: rights
     description: Information about rights held in and over the item
     from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
     domain_of:
+    - CreationMetadata
     - CreativeWork
     range: string
   creators:
     name: creators
     description: The person or organization who created the work
     from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
     slot_uri: dcterms:creator
     multivalued: true
     domain_of:
+    - CreationMetadata
     - CreativeWork
-    range: Agent
+    range: PhysicalEntity
+    any_of:
+    - range: Person
+    - range: Organization
   contributors:
     name: contributors
     description: A person or organization that contributed to the creation of the
       work
     from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
     slot_uri: dcterms:contributor
     multivalued: true
     domain_of:
+    - CreationMetadata
     - CreativeWork
-    range: Agent
+    range: PhysicalEntity
+    any_of:
+    - range: Person
+    - range: Organization
   contacts:
     name: contacts
     description: A contact point for a person or organization
     from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
     slot_uri: schema:contactPoint
     multivalued: true
     domain_of:
+    - CreationMetadata
     - CreativeWork
-    range: Agent
+    range: PhysicalEntity
   keywords:
     name: keywords
     description: Keywords or tags used to describe this item
     from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
     slot_uri: schema:keywords
     multivalued: true
     domain_of:
+    - CreationMetadata
     - CreativeWork
     range: string
 
@@ -472,7 +500,9 @@ description: The most generic kind of creative work, including books, movies, ph
 from_schema: https://w3id.org/linkml/linkml-common
 exact_mappings:
 - schema:CreativeWork
-is_a: NamedThing
+is_a: PhysicalEntity
+mixins:
+- CreationMetadata
 attributes:
   title:
     name: title
@@ -480,118 +510,86 @@ attributes:
     from_schema: https://w3id.org/linkml-common/social
     exact_mappings:
     - dcterms:title
-    rank: 1000
     alias: title
     owner: CreativeWork
     domain_of:
+    - CreationMetadata
     - CreativeWork
     range: string
   abstract:
     name: abstract
     description: A summary of the item
     from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
     alias: abstract
     owner: CreativeWork
     domain_of:
+    - CreationMetadata
     - CreativeWork
     range: string
   rights:
     name: rights
     description: Information about rights held in and over the item
     from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
     alias: rights
     owner: CreativeWork
     domain_of:
+    - CreationMetadata
     - CreativeWork
     range: string
   creators:
     name: creators
     description: The person or organization who created the work
     from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
     slot_uri: dcterms:creator
     multivalued: true
     alias: creators
     owner: CreativeWork
     domain_of:
+    - CreationMetadata
     - CreativeWork
-    range: Agent
+    range: PhysicalEntity
+    any_of:
+    - range: Person
+    - range: Organization
   contributors:
     name: contributors
     description: A person or organization that contributed to the creation of the
       work
     from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
     slot_uri: dcterms:contributor
     multivalued: true
     alias: contributors
     owner: CreativeWork
     domain_of:
+    - CreationMetadata
     - CreativeWork
-    range: Agent
+    range: PhysicalEntity
+    any_of:
+    - range: Person
+    - range: Organization
   contacts:
     name: contacts
     description: A contact point for a person or organization
     from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
     slot_uri: schema:contactPoint
     multivalued: true
     alias: contacts
     owner: CreativeWork
     domain_of:
+    - CreationMetadata
     - CreativeWork
-    range: Agent
+    range: PhysicalEntity
   keywords:
     name: keywords
     description: Keywords or tags used to describe this item
     from_schema: https://w3id.org/linkml-common/social
-    rank: 1000
     slot_uri: schema:keywords
     multivalued: true
     alias: keywords
     owner: CreativeWork
     domain_of:
+    - CreationMetadata
     - CreativeWork
-    range: string
-  id:
-    name: id
-    description: A unique identifier for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:identifier
-    identifier: true
-    alias: id
-    owner: CreativeWork
-    domain_of:
-    - NamedThing
-    range: uriorcurie
-    required: true
-  name:
-    name: name
-    description: A human-readable name for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: CreativeWork
-    domain_of:
-    - NamedThing
-    range: string
-  type:
-    name: type
-    description: A type for a thing. The range of this should be a class within the
-      schema. It is intended for schema-based classification. Anything beneath the
-      shoreline of the schema should use `classification`.
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    designates_type: true
-    alias: type
-    owner: CreativeWork
-    domain_of:
-    - Entity
-    - NamedThing
     range: string
   classification:
     name: classification
@@ -604,17 +602,19 @@ attributes:
     alias: classification
     owner: CreativeWork
     domain_of:
-    - NamedThing
+    - PhysicalEntity
     range: Concept
   ontology_types:
     name: ontology_types
+    description: A collection of concepts that help to classify the thing, using concepts
+      from an ontolology,  thesaurus, or taxonomy.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
     multivalued: true
     alias: ontology_types
     owner: CreativeWork
     domain_of:
-    - NamedThing
+    - PhysicalEntity
     range: Concept
   description:
     name: description
@@ -625,8 +625,47 @@ attributes:
     alias: description
     owner: CreativeWork
     domain_of:
-    - NamedThing
+    - PhysicalEntity
     - TimePoint
+    range: string
+  id:
+    name: id
+    description: A unique identifier for a thing
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    slot_uri: schema:identifier
+    identifier: true
+    alias: id
+    owner: CreativeWork
+    domain_of:
+    - Identified
+    range: uriorcurie
+    required: true
+  name:
+    name: name
+    description: A human-readable name for a thing
+    from_schema: https://w3id.org/linkml/linkml-common
+    exact_mappings:
+    - rdfs:label
+    rank: 1000
+    slot_uri: schema:name
+    alias: name
+    owner: CreativeWork
+    domain_of:
+    - Identified
+    range: string
+  type:
+    name: type
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    designates_type: true
+    alias: type
+    owner: CreativeWork
+    domain_of:
+    - Typed
     range: string
 
 </code></pre>

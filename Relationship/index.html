@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/Relationship/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: Relationship - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -206,10 +206,46 @@
 <p>URI: <a href="https://w3id.org/linkml-common/Relationship">linkml_common:Relationship</a></p>
 <div class="mermaid"> classDiagram
     class Relationship
+    click Relationship href "../Relationship"
       Intangible &lt;|-- Relationship
+        click Intangible href "../Intangible"
 
 
       Relationship &lt;|-- TemporalRelationship
+        click TemporalRelationship href "../TemporalRelationship"
+      Relationship &lt;|-- PersonInRole
+        click PersonInRole href "../PersonInRole"
+      Relationship &lt;|-- OrganizationPersonnelRelationship
+        click OrganizationPersonnelRelationship href "../OrganizationPersonnelRelationship"
+      Relationship &lt;|-- OrganismalRelationship
+        click OrganismalRelationship href "../OrganismalRelationship"
+
+
+      Relationship : object
+
+
+
+
+    Relationship --&gt; "0..1" Entity : object
+    click Entity href "../Entity"
+
+
+      Relationship : predicate
+
+
+
+
+    Relationship --&gt; "0..1" Concept : predicate
+    click Concept href "../Concept"
+
+
+      Relationship : subject
+
+
+
+
+    Relationship --&gt; "0..1" Entity : subject
+    click Entity href "../Entity"
 
 
       Relationship : type
@@ -218,10 +254,13 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><strong>Relationship</strong><ul>
 <li><a href="../TemporalRelationship/">TemporalRelationship</a></li>
+<li><a href="../PersonInRole/">PersonInRole</a></li>
+<li><a href="../OrganizationPersonnelRelationship/">OrganizationPersonnelRelationship</a></li>
+<li><a href="../OrganismalRelationship/">OrganismalRelationship</a></li>
 </ul>
 </li>
 </ul>
@@ -241,10 +280,28 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../subject/">subject</a></td>
+<td>0..1 <br/> <a href="../Entity/">Entity</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../predicate/">predicate</a></td>
+<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../object/">object</a></td>
+<td>0..1 <br/> <a href="../Entity/">Entity</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -286,6 +343,32 @@ close_mappings:
 - rdfs:Statement
 is_a: Intangible
 abstract: true
+attributes:
+  subject:
+    name: subject
+    from_schema: https://w3id.org/linkml-common/core
+    domain_of:
+    - Relationship
+    - ClinicalHistory
+    - SubjectHistory
+    - OrganizationPersonnelRelationship
+    range: Entity
+  predicate:
+    name: predicate
+    from_schema: https://w3id.org/linkml-common/core
+    rank: 1000
+    domain_of:
+    - Relationship
+    - TemporalRelationship
+    - OrganizationPersonnelRelationship
+    range: Concept
+  object:
+    name: object
+    from_schema: https://w3id.org/linkml-common/core
+    domain_of:
+    - Relationship
+    - OrganizationPersonnelRelationship
+    range: Entity
 
 </code></pre>
 </details>
@@ -298,6 +381,37 @@ close_mappings:
 is_a: Intangible
 abstract: true
 attributes:
+  subject:
+    name: subject
+    from_schema: https://w3id.org/linkml-common/core
+    alias: subject
+    owner: Relationship
+    domain_of:
+    - Relationship
+    - ClinicalHistory
+    - SubjectHistory
+    - OrganizationPersonnelRelationship
+    range: Entity
+  predicate:
+    name: predicate
+    from_schema: https://w3id.org/linkml-common/core
+    rank: 1000
+    alias: predicate
+    owner: Relationship
+    domain_of:
+    - Relationship
+    - TemporalRelationship
+    - OrganizationPersonnelRelationship
+    range: Concept
+  object:
+    name: object
+    from_schema: https://w3id.org/linkml-common/core
+    alias: object
+    owner: Relationship
+    domain_of:
+    - Relationship
+    - OrganizationPersonnelRelationship
+    range: Entity
   type:
     name: type
     description: A type for a thing. The range of this should be a class within the
@@ -309,8 +423,7 @@ attributes:
     alias: type
     owner: Relationship
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 
 </code></pre>

@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/Procedure/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: Procedure - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -209,28 +209,33 @@
 <p>URI: <a href="https://w3id.org/linkml-common/Procedure">linkml_common:Procedure</a></p>
 <div class="mermaid"> classDiagram
     class Procedure
+    click Procedure href "../Procedure"
       Specification &lt;|-- Procedure
+        click Specification href "../Specification"
 
 
       Procedure &lt;|-- InvestigativeProtocol
+        click InvestigativeProtocol href "../InvestigativeProtocol"
       Procedure &lt;|-- StudyDesign
+        click StudyDesign href "../StudyDesign"
       Procedure &lt;|-- EngineeringSpecification
+        click EngineeringSpecification href "../EngineeringSpecification"
       Procedure &lt;|-- FoodRecipe
+        click FoodRecipe href "../FoodRecipe"
 
 
-      Procedure : classification
+      Procedure : describes
 
-          Procedure --&gt; Concept : classification
 
-      Procedure : description
+
+
+    Procedure --&gt; "0..1" Any : describes
+    click Any href "../Any"
+
 
       Procedure : id
 
       Procedure : name
-
-      Procedure : ontology_types
-
-          Procedure --&gt; Concept : ontology_types
 
       Procedure : type
 
@@ -238,14 +243,17 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><a href="../Intangible/">Intangible</a><ul>
+<li><a href="../InformationEntity/">InformationEntity</a> [ <a href="../Identified/">Identified</a>]<ul>
 <li><a href="../Specification/">Specification</a><ul>
 <li><strong>Procedure</strong><ul>
 <li><a href="../InvestigativeProtocol/">InvestigativeProtocol</a></li>
 <li><a href="../StudyDesign/">StudyDesign</a></li>
 <li><a href="../EngineeringSpecification/">EngineeringSpecification</a></li>
 <li><a href="../FoodRecipe/">FoodRecipe</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -267,40 +275,28 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../describes/">describes</a></td>
+<td>0..1 <br/> <a href="../Any/">Any</a></td>
+<td>The thing that is being described</td>
+<td><a href="../InformationEntity/">InformationEntity</a></td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../classification/">classification</a></td>
-<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
-<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>0..* <br/> <a href="../Concept/">Concept</a></td>
-<td></td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -322,13 +318,13 @@
 <td><a href="./">Procedure</a></td>
 </tr>
 <tr>
-<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../PlannedProcess/">PlannedProcess</a></td>
 <td><a href="../follows_procedure/">follows_procedure</a></td>
 <td>range</td>
 <td><a href="./">Procedure</a></td>
 </tr>
 <tr>
-<td><a href="../PlannedProcess/">PlannedProcess</a></td>
+<td><a href="../ComputationalPlannedProcess/">ComputationalPlannedProcess</a></td>
 <td><a href="../follows_procedure/">follows_procedure</a></td>
 <td>range</td>
 <td><a href="./">Procedure</a></td>
@@ -341,6 +337,12 @@
 </tr>
 <tr>
 <td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
+<td><a href="../follows_procedure/">follows_procedure</a></td>
+<td>range</td>
+<td><a href="./">Procedure</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
 <td><a href="../follows_procedure/">follows_procedure</a></td>
 <td>range</td>
 <td><a href="./">Procedure</a></td>
@@ -395,6 +397,17 @@ description: A canonical series of actions conducted in a certain order or manne
 from_schema: https://w3id.org/linkml/linkml-common
 is_a: Specification
 attributes:
+  describes:
+    name: describes
+    description: The thing that is being described
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    slot_uri: schema:describes
+    alias: describes
+    owner: Procedure
+    domain_of:
+    - InformationEntity
+    range: Any
   id:
     name: id
     description: A unique identifier for a thing
@@ -405,19 +418,21 @@ attributes:
     alias: id
     owner: Procedure
     domain_of:
-    - NamedThing
+    - Identified
     range: uriorcurie
     required: true
   name:
     name: name
     description: A human-readable name for a thing
     from_schema: https://w3id.org/linkml/linkml-common
+    exact_mappings:
+    - rdfs:label
     rank: 1000
     slot_uri: schema:name
     alias: name
     owner: Procedure
     domain_of:
-    - NamedThing
+    - Identified
     range: string
   type:
     name: type
@@ -430,43 +445,7 @@ attributes:
     alias: type
     owner: Procedure
     domain_of:
-    - Entity
-    - NamedThing
-    range: string
-  classification:
-    name: classification
-    description: A precise classification of the thing, using a concept from an ontology,
-      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
-      to restrict the range of values which this slot can take, using `values_from`,
-      or bindings.
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    alias: classification
-    owner: Procedure
-    domain_of:
-    - NamedThing
-    range: Concept
-  ontology_types:
-    name: ontology_types
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    multivalued: true
-    alias: ontology_types
-    owner: Procedure
-    domain_of:
-    - NamedThing
-    range: Concept
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: Procedure
-    domain_of:
-    - NamedThing
-    - TimePoint
+    - Typed
     range: string
 
 </code></pre>

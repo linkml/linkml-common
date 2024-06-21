@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/Variable/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: Variable - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -208,11 +208,18 @@
 <p>URI: <a href="https://w3id.org/linkml-common/Variable">linkml_common:Variable</a></p>
 <div class="mermaid"> classDiagram
     class Variable
-      Entity &lt;|-- Variable
+    click Variable href "../Variable"
+      Intangible &lt;|-- Variable
+        click Intangible href "../Intangible"
 
       Variable : allowed_units
 
-          Variable --&gt; UnitConcept : allowed_units
+
+
+
+    Variable --&gt; "*" UnitConcept : allowed_units
+    click UnitConcept href "../UnitConcept"
+
 
       Variable : type
 
@@ -220,8 +227,11 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><a href="../Intangible/">Intangible</a><ul>
 <li><strong>Variable</strong></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -238,7 +248,7 @@
 <tbody>
 <tr>
 <td><a href="../allowed_units/">allowed_units</a></td>
-<td>0..* <br/> <a href="../UnitConcept/">UnitConcept</a></td>
+<td>* <br/> <a href="../UnitConcept/">UnitConcept</a></td>
 <td>The units that are allowed for this variable</td>
 <td>direct</td>
 </tr>
@@ -246,7 +256,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -268,8 +278,38 @@
 <td><a href="./">Variable</a></td>
 </tr>
 <tr>
+<td><a href="../Observation/">Observation</a></td>
+<td><a href="../variable_measured/">variable_measured</a></td>
+<td>range</td>
+<td><a href="./">Variable</a></td>
+</tr>
+<tr>
 <td><a href="../Measurement/">Measurement</a></td>
 <td><a href="../variable_measured/">variable_measured</a></td>
+<td>range</td>
+<td><a href="./">Variable</a></td>
+</tr>
+<tr>
+<td><a href="../QualitativeObservation/">QualitativeObservation</a></td>
+<td><a href="../variable_measured/">variable_measured</a></td>
+<td>range</td>
+<td><a href="./">Variable</a></td>
+</tr>
+<tr>
+<td><a href="../Prediction/">Prediction</a></td>
+<td><a href="../variable_predicted/">variable_predicted</a></td>
+<td>range</td>
+<td><a href="./">Variable</a></td>
+</tr>
+<tr>
+<td><a href="../SimplePrediction/">SimplePrediction</a></td>
+<td><a href="../variable_predicted/">variable_predicted</a></td>
+<td>range</td>
+<td><a href="./">Variable</a></td>
+</tr>
+<tr>
+<td><a href="../AggregatePrediction/">AggregatePrediction</a></td>
+<td><a href="../variable_predicted/">variable_predicted</a></td>
 <td>range</td>
 <td><a href="./">Variable</a></td>
 </tr>
@@ -305,7 +345,7 @@
 <details>
 <pre><code class="language-yaml">name: Variable
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: Entity
+is_a: Intangible
 attributes:
   allowed_units:
     name: allowed_units
@@ -323,7 +363,7 @@ attributes:
 <details>
 <pre><code class="language-yaml">name: Variable
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: Entity
+is_a: Intangible
 attributes:
   allowed_units:
     name: allowed_units
@@ -347,8 +387,7 @@ attributes:
     alias: type
     owner: Variable
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 
 </code></pre>

@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/QuantityRange/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: QuantityRange - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -204,23 +204,35 @@
 <p>URI: <a href="http://hl7.org/fhir/Range">fhir:Range</a></p>
 <div class="mermaid"> classDiagram
     class QuantityRange
+    click QuantityRange href "../QuantityRange"
       Intangible &lt;|-- QuantityRange
+        click Intangible href "../Intangible"
 
       QuantityRange : lower_bound
 
-          QuantityRange --&gt; Quantity : lower_bound
+
+
+
+    QuantityRange --&gt; "0..1" Quantity : lower_bound
+    click Quantity href "../Quantity"
+
 
       QuantityRange : type
 
       QuantityRange : upper_bound
 
-          QuantityRange --&gt; Quantity : upper_bound
+
+
+
+    QuantityRange --&gt; "0..1" Quantity : upper_bound
+    click Quantity href "../Quantity"
+
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><strong>QuantityRange</strong></li>
 </ul>
@@ -255,7 +267,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -350,8 +362,7 @@ attributes:
     alias: type
     owner: QuantityRange
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 class_uri: fhir:Range
 

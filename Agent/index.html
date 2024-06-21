@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/Agent/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: Agent - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -142,18 +142,13 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-    Inheritance
-  </a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
     Slots
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#usages">
-    Usages
+<a class="md-nav__link" href="#mixin-usage">
+    Mixin Usage
   </a>
 </li>
 <li class="md-nav__item">
@@ -209,47 +204,17 @@
 <p>URI: <a href="https://w3id.org/linkml-common/Agent">linkml_common:Agent</a></p>
 <div class="mermaid"> classDiagram
     class Agent
-      NamedThing &lt;|-- Agent
-
-
+    click Agent href "../Agent"
       Agent &lt;|-- Person
+        click Person href "../Person"
       Agent &lt;|-- Organization
+        click Organization href "../Organization"
       Agent &lt;|-- AutomatedAgent
-
-
-      Agent : classification
-
-          Agent --&gt; Concept : classification
-
-      Agent : description
-
-      Agent : id
-
-      Agent : name
-
-      Agent : ontology_types
-
-          Agent --&gt; Concept : ontology_types
-
-      Agent : type
+        click AutomatedAgent href "../AutomatedAgent"
 
 
 </div>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../Entity/">Entity</a><ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
-<li><strong>Agent</strong><ul>
-<li><a href="../Person/">Person</a></li>
-<li><a href="../Organization/">Organization</a></li>
-<li><a href="../AutomatedAgent/">AutomatedAgent</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -262,107 +227,33 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../type/">type</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../classification/">classification</a></td>
-<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
-<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>0..* <br/> <a href="../Concept/">Concept</a></td>
 <td></td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h2 id="usages">Usages</h2>
+<h2 id="mixin-usage">Mixin Usage</h2>
 <table>
 <thead>
 <tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
+<th>mixed into</th>
+<th>description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Publication/">Publication</a></td>
-<td><a href="../creators/">creators</a></td>
-<td>range</td>
-<td><a href="./">Agent</a></td>
+<td><a href="../Person/">Person</a></td>
+<td>Represents a Person</td>
 </tr>
 <tr>
-<td><a href="../Publication/">Publication</a></td>
-<td><a href="../contributors/">contributors</a></td>
-<td>range</td>
-<td><a href="./">Agent</a></td>
+<td><a href="../Organization/">Organization</a></td>
+<td>Represents an Organization</td>
 </tr>
 <tr>
-<td><a href="../Publication/">Publication</a></td>
-<td><a href="../contacts/">contacts</a></td>
-<td>range</td>
-<td><a href="./">Agent</a></td>
-</tr>
-<tr>
-<td><a href="../CreativeWork/">CreativeWork</a></td>
-<td><a href="../creators/">creators</a></td>
-<td>range</td>
-<td><a href="./">Agent</a></td>
-</tr>
-<tr>
-<td><a href="../CreativeWork/">CreativeWork</a></td>
-<td><a href="../contributors/">contributors</a></td>
-<td>range</td>
-<td><a href="./">Agent</a></td>
-</tr>
-<tr>
-<td><a href="../CreativeWork/">CreativeWork</a></td>
-<td><a href="../contacts/">contacts</a></td>
-<td>range</td>
-<td><a href="./">Agent</a></td>
-</tr>
-<tr>
-<td><a href="../Dataset/">Dataset</a></td>
-<td><a href="../creators/">creators</a></td>
-<td>range</td>
-<td><a href="./">Agent</a></td>
-</tr>
-<tr>
-<td><a href="../Dataset/">Dataset</a></td>
-<td><a href="../contributors/">contributors</a></td>
-<td>range</td>
-<td><a href="./">Agent</a></td>
-</tr>
-<tr>
-<td><a href="../Dataset/">Dataset</a></td>
-<td><a href="../contacts/">contacts</a></td>
-<td>range</td>
-<td><a href="./">Agent</a></td>
+<td><a href="../AutomatedAgent/">AutomatedAgent</a></td>
+<td>Represents an Automated Agent</td>
 </tr>
 </tbody>
 </table>
@@ -404,7 +295,7 @@ from_schema: https://w3id.org/linkml/linkml-common
 exact_mappings:
 - prov:Agent
 - fibo.commons.PartiesAndSituations:Agent
-is_a: NamedThing
+mixin: true
 
 </code></pre>
 </details>
@@ -416,81 +307,7 @@ from_schema: https://w3id.org/linkml/linkml-common
 exact_mappings:
 - prov:Agent
 - fibo.commons.PartiesAndSituations:Agent
-is_a: NamedThing
-attributes:
-  id:
-    name: id
-    description: A unique identifier for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:identifier
-    identifier: true
-    alias: id
-    owner: Agent
-    domain_of:
-    - NamedThing
-    range: uriorcurie
-    required: true
-  name:
-    name: name
-    description: A human-readable name for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: Agent
-    domain_of:
-    - NamedThing
-    range: string
-  type:
-    name: type
-    description: A type for a thing. The range of this should be a class within the
-      schema. It is intended for schema-based classification. Anything beneath the
-      shoreline of the schema should use `classification`.
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    designates_type: true
-    alias: type
-    owner: Agent
-    domain_of:
-    - Entity
-    - NamedThing
-    range: string
-  classification:
-    name: classification
-    description: A precise classification of the thing, using a concept from an ontology,
-      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
-      to restrict the range of values which this slot can take, using `values_from`,
-      or bindings.
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    alias: classification
-    owner: Agent
-    domain_of:
-    - NamedThing
-    range: Concept
-  ontology_types:
-    name: ontology_types
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    multivalued: true
-    alias: ontology_types
-    owner: Agent
-    domain_of:
-    - NamedThing
-    range: Concept
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: Agent
-    domain_of:
-    - NamedThing
-    - TimePoint
-    range: string
+mixin: true
 
 </code></pre>
 </details>

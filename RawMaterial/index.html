@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/RawMaterial/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: RawMaterial - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -203,11 +203,18 @@
 <p>URI: <a href="https://w3id.org/linkml-common/RawMaterial">linkml_common:RawMaterial</a></p>
 <div class="mermaid"> classDiagram
     class RawMaterial
-      NamedThing &lt;|-- RawMaterial
+    click RawMaterial href "../RawMaterial"
+      PhysicalEntity &lt;|-- RawMaterial
+        click PhysicalEntity href "../PhysicalEntity"
 
       RawMaterial : classification
 
-          RawMaterial --&gt; Concept : classification
+
+
+
+    RawMaterial --&gt; "0..1" Concept : classification
+    click Concept href "../Concept"
+
 
       RawMaterial : description
 
@@ -217,7 +224,12 @@
 
       RawMaterial : ontology_types
 
-          RawMaterial --&gt; Concept : ontology_types
+
+
+
+    RawMaterial --&gt; "*" Concept : ontology_types
+    click Concept href "../Concept"
+
 
       RawMaterial : type
 
@@ -225,8 +237,8 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><a href="../PhysicalEntity/">PhysicalEntity</a> [ <a href="../Identified/">Identified</a>]<ul>
 <li><strong>RawMaterial</strong></li>
 </ul>
 </li>
@@ -245,40 +257,40 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../type/">type</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
 <td><a href="../classification/">classification</a></td>
 <td>0..1 <br/> <a href="../Concept/">Concept</a></td>
 <td>A precise classification of the thing, using a concept from an ontology, cont...</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../PhysicalEntity/">PhysicalEntity</a></td>
 </tr>
 <tr>
 <td><a href="../ontology_types/">ontology_types</a></td>
-<td>0..* <br/> <a href="../Concept/">Concept</a></td>
-<td></td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td>* <br/> <a href="../Concept/">Concept</a></td>
+<td>A collection of concepts that help to classify the thing, using concepts from...</td>
+<td><a href="../PhysicalEntity/">PhysicalEntity</a></td>
 </tr>
 <tr>
 <td><a href="../description/">description</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../PhysicalEntity/">PhysicalEntity</a></td>
+</tr>
+<tr>
+<td><a href="../id/">id</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>A unique identifier for a thing</td>
+<td><a href="../Identified/">Identified</a></td>
+</tr>
+<tr>
+<td><a href="../name/">name</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A human-readable name for a thing</td>
+<td><a href="../Identified/">Identified</a></td>
+</tr>
+<tr>
+<td><a href="../type/">type</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A type for a thing</td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -312,7 +324,7 @@
 <details>
 <pre><code class="language-yaml">name: RawMaterial
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: NamedThing
+is_a: PhysicalEntity
 
 </code></pre>
 </details>
@@ -320,8 +332,45 @@ is_a: NamedThing
 <details>
 <pre><code class="language-yaml">name: RawMaterial
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: NamedThing
+is_a: PhysicalEntity
 attributes:
+  classification:
+    name: classification
+    description: A precise classification of the thing, using a concept from an ontology,
+      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
+      to restrict the range of values which this slot can take, using `values_from`,
+      or bindings.
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: classification
+    owner: RawMaterial
+    domain_of:
+    - PhysicalEntity
+    range: Concept
+  ontology_types:
+    name: ontology_types
+    description: A collection of concepts that help to classify the thing, using concepts
+      from an ontolology,  thesaurus, or taxonomy.
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    multivalued: true
+    alias: ontology_types
+    owner: RawMaterial
+    domain_of:
+    - PhysicalEntity
+    range: Concept
+  description:
+    name: description
+    description: A human-readable description for a thing
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    slot_uri: schema:description
+    alias: description
+    owner: RawMaterial
+    domain_of:
+    - PhysicalEntity
+    - TimePoint
+    range: string
   id:
     name: id
     description: A unique identifier for a thing
@@ -332,19 +381,21 @@ attributes:
     alias: id
     owner: RawMaterial
     domain_of:
-    - NamedThing
+    - Identified
     range: uriorcurie
     required: true
   name:
     name: name
     description: A human-readable name for a thing
     from_schema: https://w3id.org/linkml/linkml-common
+    exact_mappings:
+    - rdfs:label
     rank: 1000
     slot_uri: schema:name
     alias: name
     owner: RawMaterial
     domain_of:
-    - NamedThing
+    - Identified
     range: string
   type:
     name: type
@@ -357,43 +408,7 @@ attributes:
     alias: type
     owner: RawMaterial
     domain_of:
-    - Entity
-    - NamedThing
-    range: string
-  classification:
-    name: classification
-    description: A precise classification of the thing, using a concept from an ontology,
-      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
-      to restrict the range of values which this slot can take, using `values_from`,
-      or bindings.
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    alias: classification
-    owner: RawMaterial
-    domain_of:
-    - NamedThing
-    range: Concept
-  ontology_types:
-    name: ontology_types
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    multivalued: true
-    alias: ontology_types
-    owner: RawMaterial
-    domain_of:
-    - NamedThing
-    range: Concept
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: RawMaterial
-    domain_of:
-    - NamedThing
-    - TimePoint
+    - Typed
     range: string
 
 </code></pre>

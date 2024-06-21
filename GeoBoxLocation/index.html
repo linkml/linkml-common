@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/GeoBoxLocation/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: GeoBoxLocation - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -208,7 +208,9 @@
 <p>URI: <a href="https://w3id.org/linkml-common/GeoBoxLocation">linkml_common:GeoBoxLocation</a></p>
 <div class="mermaid"> classDiagram
     class GeoBoxLocation
+    click GeoBoxLocation href "../GeoBoxLocation"
       Location &lt;|-- GeoBoxLocation
+        click Location href "../Location"
 
       GeoBoxLocation : east_bounding_coordinate
 
@@ -216,14 +218,25 @@
 
       GeoBoxLocation : south_bounding_coordinate
 
+      GeoBoxLocation : type
+
       GeoBoxLocation : west_bounding_coordinate
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><a href="../Intangible/">Intangible</a><ul>
+<li><a href="../StructuredValue/">StructuredValue</a><ul>
 <li><a href="../Location/">Location</a><ul>
 <li><strong>GeoBoxLocation</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -262,6 +275,12 @@
 <td>The southernmost coordinate of the location</td>
 <td>direct</td>
 </tr>
+<tr>
+<td><a href="../type/">type</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A type for a thing</td>
+<td><a href="../Typed/">Typed</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="usages">Usages</h2>
@@ -289,6 +308,12 @@
 </tr>
 <tr>
 <td><a href="../Landform/">Landform</a></td>
+<td><a href="../bounding_coordinates/">bounding_coordinates</a></td>
+<td>range</td>
+<td><a href="./">GeoBoxLocation</a></td>
+</tr>
+<tr>
+<td><a href="../AstronomicalBody/">AstronomicalBody</a></td>
 <td><a href="../bounding_coordinates/">bounding_coordinates</a></td>
 <td>range</td>
 <td><a href="./">GeoBoxLocation</a></td>
@@ -414,6 +439,19 @@ attributes:
     domain_of:
     - GeoBoxLocation
     range: decimal
+  type:
+    name: type
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    designates_type: true
+    alias: type
+    owner: GeoBoxLocation
+    domain_of:
+    - Typed
+    range: string
 
 </code></pre>
 </details>

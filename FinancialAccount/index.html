@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/FinancialAccount/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: FinancialAccount - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -204,17 +204,29 @@
 <p>URI: <a href="https://w3id.org/linkml-common/FinancialAccount">linkml_common:FinancialAccount</a></p>
 <div class="mermaid"> classDiagram
     class FinancialAccount
+    click FinancialAccount href "../FinancialAccount"
       FinancialProduct &lt;|-- FinancialAccount
+        click FinancialProduct href "../FinancialProduct"
 
       FinancialAccount : account_holder
 
-          FinancialAccount --&gt; Person : account_holder
+
+
+
+    FinancialAccount --&gt; "0..1" Person : account_holder
+    click Person href "../Person"
+
 
       FinancialAccount : account_number
 
       FinancialAccount : bank
 
-          FinancialAccount --&gt; Organization : bank
+
+
+
+    FinancialAccount --&gt; "0..1" Organization : bank
+    click Organization href "../Organization"
+
 
       FinancialAccount : type
 
@@ -222,7 +234,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><a href="../Service/">Service</a><ul>
 <li><a href="../FinancialProduct/">FinancialProduct</a><ul>
@@ -269,7 +281,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -391,8 +403,7 @@ attributes:
     alias: type
     owner: FinancialAccount
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 
 </code></pre>

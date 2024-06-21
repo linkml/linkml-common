@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/PlannedProcess/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: PlannedProcess - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -204,69 +204,123 @@
 <p>URI: <a href="https://w3id.org/linkml-common/PlannedProcess">linkml_common:PlannedProcess</a></p>
 <div class="mermaid"> classDiagram
     class PlannedProcess
-      Event &lt;|-- PlannedProcess
+    click PlannedProcess href "../PlannedProcess"
+      ExecutionOfProcedure &lt;|-- PlannedProcess
+        click ExecutionOfProcedure href "../ExecutionOfProcedure"
 
 
       PlannedProcess &lt;|-- InvestigativeProcess
+        click InvestigativeProcess href "../InvestigativeProcess"
+      PlannedProcess &lt;|-- ComputationalPlannedProcess
+        click ComputationalPlannedProcess href "../ComputationalPlannedProcess"
       PlannedProcess &lt;|-- MaterialCollection
+        click MaterialCollection href "../MaterialCollection"
       PlannedProcess &lt;|-- MaterialProcessing
+        click MaterialProcessing href "../MaterialProcessing"
+      PlannedProcess &lt;|-- FoodPreparation
+        click FoodPreparation href "../FoodPreparation"
 
-
-      PlannedProcess : classification
-
-          PlannedProcess --&gt; Concept : classification
-
-      PlannedProcess : description
 
       PlannedProcess : ends_at
 
-          PlannedProcess --&gt; TimePoint : ends_at
+
+
+
+    PlannedProcess --&gt; "0..1" TimePoint : ends_at
+    click TimePoint href "../TimePoint"
+
 
       PlannedProcess : follows_procedure
 
-          PlannedProcess --&gt; Procedure : follows_procedure
+
+
+
+    PlannedProcess --&gt; "0..1" Procedure : follows_procedure
+    click Procedure href "../Procedure"
+
 
       PlannedProcess : happens_at
 
-          PlannedProcess --&gt; TimePoint : happens_at
+
+
+
+    PlannedProcess --&gt; "0..1" TimePoint : happens_at
+    click TimePoint href "../TimePoint"
+
 
       PlannedProcess : has_duration
 
-          PlannedProcess --&gt; Duration : has_duration
+
+
+
+    PlannedProcess --&gt; "0..1" Duration : has_duration
+    click Duration href "../Duration"
+
 
       PlannedProcess : has_interval
 
-          PlannedProcess --&gt; TemporalInterval : has_interval
+
+
+
+    PlannedProcess --&gt; "0..1" TemporalInterval : has_interval
+    click TemporalInterval href "../TemporalInterval"
+
 
       PlannedProcess : id
 
+      PlannedProcess : is_ongoing_as_of
+
+
+
+
+    PlannedProcess --&gt; "0..1" TimePoint : is_ongoing_as_of
+    click TimePoint href "../TimePoint"
+
+
       PlannedProcess : name
-
-      PlannedProcess : ontology_types
-
-          PlannedProcess --&gt; Concept : ontology_types
 
       PlannedProcess : starts_at
 
-          PlannedProcess --&gt; TimePoint : starts_at
+
+
+
+    PlannedProcess --&gt; "0..1" TimePoint : starts_at
+    click TimePoint href "../TimePoint"
+
 
       PlannedProcess : type
 
+      PlannedProcess : uses_configuration
+
+
+
+
+    PlannedProcess --&gt; "0..1" PlannedProcessConfiguration : uses_configuration
+    click PlannedProcessConfiguration href "../PlannedProcessConfiguration"
+
+
       PlannedProcess : uses_physical_device
 
-          PlannedProcess --&gt; PhysicalDevice : uses_physical_device
+
+
+
+    PlannedProcess --&gt; "0..1" PhysicalDevice : uses_physical_device
+    click PhysicalDevice href "../PhysicalDevice"
+
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
-<li><a href="../Event/">Event</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><a href="../Event/">Event</a> [ <a href="../Identified/">Identified</a>]<ul>
+<li><a href="../ExecutionOfProcedure/">ExecutionOfProcedure</a><ul>
 <li><strong>PlannedProcess</strong><ul>
 <li><a href="../InvestigativeProcess/">InvestigativeProcess</a></li>
+<li><a href="../ComputationalPlannedProcess/">ComputationalPlannedProcess</a></li>
 <li><a href="../MaterialCollection/">MaterialCollection</a></li>
 <li><a href="../MaterialProcessing/">MaterialProcessing</a></li>
+<li><a href="../FoodPreparation/">FoodPreparation</a></li>
 </ul>
 </li>
 </ul>
@@ -296,6 +350,12 @@
 <tr>
 <td><a href="../uses_physical_device/">uses_physical_device</a></td>
 <td>0..1 <br/> <a href="../PhysicalDevice/">PhysicalDevice</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../uses_configuration/">uses_configuration</a></td>
+<td>0..1 <br/> <a href="../PlannedProcessConfiguration/">PlannedProcessConfiguration</a></td>
 <td></td>
 <td>direct</td>
 </tr>
@@ -330,40 +390,28 @@
 <td><a href="../Event/">Event</a></td>
 </tr>
 <tr>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>0..1 <br/> <a href="../TimePoint/">TimePoint</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../classification/">classification</a></td>
-<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
-<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>0..* <br/> <a href="../Concept/">Concept</a></td>
-<td></td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -404,15 +452,15 @@ description: A process that follows a defined procedure or plan
 from_schema: https://w3id.org/linkml/linkml-common
 exact_mappings:
 - OBI:0000011
-is_a: Event
+is_a: ExecutionOfProcedure
 attributes:
   follows_procedure:
     name: follows_procedure
     from_schema: https://w3id.org/linkml-common/plannedprocess
     domain_of:
     - InvestigativeProcess
-    - EngineeringProcess
     - PlannedProcess
+    - EngineeringProcess
     range: Procedure
   uses_physical_device:
     name: uses_physical_device
@@ -421,6 +469,13 @@ attributes:
     domain_of:
     - PlannedProcess
     range: PhysicalDevice
+  uses_configuration:
+    name: uses_configuration
+    from_schema: https://w3id.org/linkml-common/plannedprocess
+    rank: 1000
+    domain_of:
+    - PlannedProcess
+    range: PlannedProcessConfiguration
 
 </code></pre>
 </details>
@@ -431,7 +486,7 @@ description: A process that follows a defined procedure or plan
 from_schema: https://w3id.org/linkml/linkml-common
 exact_mappings:
 - OBI:0000011
-is_a: Event
+is_a: ExecutionOfProcedure
 attributes:
   follows_procedure:
     name: follows_procedure
@@ -440,8 +495,8 @@ attributes:
     owner: PlannedProcess
     domain_of:
     - InvestigativeProcess
-    - EngineeringProcess
     - PlannedProcess
+    - EngineeringProcess
     range: Procedure
   uses_physical_device:
     name: uses_physical_device
@@ -452,6 +507,15 @@ attributes:
     domain_of:
     - PlannedProcess
     range: PhysicalDevice
+  uses_configuration:
+    name: uses_configuration
+    from_schema: https://w3id.org/linkml-common/plannedprocess
+    rank: 1000
+    alias: uses_configuration
+    owner: PlannedProcess
+    domain_of:
+    - PlannedProcess
+    range: PlannedProcessConfiguration
   starts_at:
     name: starts_at
     from_schema: https://w3id.org/linkml/linkml-common
@@ -501,6 +565,15 @@ attributes:
     domain_of:
     - Event
     range: Duration
+  is_ongoing_as_of:
+    name: is_ongoing_as_of
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: is_ongoing_as_of
+    owner: PlannedProcess
+    domain_of:
+    - Event
+    range: TimePoint
   id:
     name: id
     description: A unique identifier for a thing
@@ -511,19 +584,21 @@ attributes:
     alias: id
     owner: PlannedProcess
     domain_of:
-    - NamedThing
+    - Identified
     range: uriorcurie
     required: true
   name:
     name: name
     description: A human-readable name for a thing
     from_schema: https://w3id.org/linkml/linkml-common
+    exact_mappings:
+    - rdfs:label
     rank: 1000
     slot_uri: schema:name
     alias: name
     owner: PlannedProcess
     domain_of:
-    - NamedThing
+    - Identified
     range: string
   type:
     name: type
@@ -536,43 +611,7 @@ attributes:
     alias: type
     owner: PlannedProcess
     domain_of:
-    - Entity
-    - NamedThing
-    range: string
-  classification:
-    name: classification
-    description: A precise classification of the thing, using a concept from an ontology,
-      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
-      to restrict the range of values which this slot can take, using `values_from`,
-      or bindings.
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    alias: classification
-    owner: PlannedProcess
-    domain_of:
-    - NamedThing
-    range: Concept
-  ontology_types:
-    name: ontology_types
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    multivalued: true
-    alias: ontology_types
-    owner: PlannedProcess
-    domain_of:
-    - NamedThing
-    range: Concept
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: PlannedProcess
-    domain_of:
-    - NamedThing
-    - TimePoint
+    - Typed
     range: string
 
 </code></pre>

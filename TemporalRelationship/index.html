@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/TemporalRelationship/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: TemporalRelationship - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -204,15 +204,45 @@
 <p>URI: <a href="https://w3id.org/linkml-common/TemporalRelationship">linkml_common:TemporalRelationship</a></p>
 <div class="mermaid"> classDiagram
     class TemporalRelationship
+    click TemporalRelationship href "../TemporalRelationship"
       Relationship &lt;|-- TemporalRelationship
+        click Relationship href "../Relationship"
+
+      TemporalRelationship : object
+
+
+
+
+    TemporalRelationship --&gt; "0..1" Entity : object
+    click Entity href "../Entity"
+
 
       TemporalRelationship : predicate
 
-          TemporalRelationship --&gt; RelativeTimeEnum : predicate
+
+
+
+    TemporalRelationship --&gt; "0..1" RelativeTimeEnum : predicate
+    click RelativeTimeEnum href "../RelativeTimeEnum"
+
 
       TemporalRelationship : relative_to
 
-          TemporalRelationship --&gt; Entity : relative_to
+
+
+
+    TemporalRelationship --&gt; "0..1" Entity : relative_to
+    click Entity href "../Entity"
+
+
+      TemporalRelationship : subject
+
+
+
+
+    TemporalRelationship --&gt; "0..1" Entity : subject
+    click Entity href "../Entity"
+
 
       TemporalRelationship : type
 
@@ -220,7 +250,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><a href="../Relationship/">Relationship</a><ul>
 <li><strong>TemporalRelationship</strong></li>
@@ -255,10 +285,22 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../subject/">subject</a></td>
+<td>0..1 <br/> <a href="../Entity/">Entity</a></td>
+<td></td>
+<td><a href="../Relationship/">Relationship</a></td>
+</tr>
+<tr>
+<td><a href="../object/">object</a></td>
+<td>0..1 <br/> <a href="../Entity/">Entity</a></td>
+<td></td>
+<td><a href="../Relationship/">Relationship</a></td>
+</tr>
+<tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -299,9 +341,10 @@ attributes:
     name: predicate
     description: The relationship between the two time points
     from_schema: https://w3id.org/linkml-common/time
-    rank: 1000
     domain_of:
+    - Relationship
     - TemporalRelationship
+    - OrganizationPersonnelRelationship
     range: RelativeTimeEnum
   relative_to:
     name: relative_to
@@ -328,11 +371,12 @@ attributes:
     name: predicate
     description: The relationship between the two time points
     from_schema: https://w3id.org/linkml-common/time
-    rank: 1000
     alias: predicate
     owner: TemporalRelationship
     domain_of:
+    - Relationship
     - TemporalRelationship
+    - OrganizationPersonnelRelationship
     range: RelativeTimeEnum
   relative_to:
     name: relative_to
@@ -347,6 +391,26 @@ attributes:
     - range: TimePoint
     - range: TemporalInterval
     - range: Event
+  subject:
+    name: subject
+    from_schema: https://w3id.org/linkml-common/core
+    alias: subject
+    owner: TemporalRelationship
+    domain_of:
+    - Relationship
+    - ClinicalHistory
+    - SubjectHistory
+    - OrganizationPersonnelRelationship
+    range: Entity
+  object:
+    name: object
+    from_schema: https://w3id.org/linkml-common/core
+    alias: object
+    owner: TemporalRelationship
+    domain_of:
+    - Relationship
+    - OrganizationPersonnelRelationship
+    range: Entity
   type:
     name: type
     description: A type for a thing. The range of this should be a class within the
@@ -358,8 +422,7 @@ attributes:
     alias: type
     owner: TemporalRelationship
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 
 </code></pre>

@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/Location/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: Location - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -206,16 +206,35 @@
 <p>URI: <a href="https://w3id.org/linkml-common/Location">linkml_common:Location</a></p>
 <div class="mermaid"> classDiagram
     class Location
+    click Location href "../Location"
+      StructuredValue &lt;|-- Location
+        click StructuredValue href "../StructuredValue"
+
+
       Location &lt;|-- PointLocation
+        click PointLocation href "../PointLocation"
       Location &lt;|-- GeoBoxLocation
+        click GeoBoxLocation href "../GeoBoxLocation"
+
+
+      Location : type
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><a href="../Intangible/">Intangible</a><ul>
+<li><a href="../StructuredValue/">StructuredValue</a><ul>
 <li><strong>Location</strong><ul>
 <li><a href="../PointLocation/">PointLocation</a></li>
 <li><a href="../GeoBoxLocation/">GeoBoxLocation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -231,10 +250,10 @@
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><a href="../type/">type</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A type for a thing</td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -268,6 +287,7 @@
 <details>
 <pre><code class="language-yaml">name: Location
 from_schema: https://w3id.org/linkml/linkml-common
+is_a: StructuredValue
 abstract: true
 
 </code></pre>
@@ -276,7 +296,22 @@ abstract: true
 <details>
 <pre><code class="language-yaml">name: Location
 from_schema: https://w3id.org/linkml/linkml-common
+is_a: StructuredValue
 abstract: true
+attributes:
+  type:
+    name: type
+    description: A type for a thing. The range of this should be a class within the
+      schema. It is intended for schema-based classification. Anything beneath the
+      shoreline of the schema should use `classification`.
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    designates_type: true
+    alias: type
+    owner: Location
+    domain_of:
+    - Typed
+    range: string
 
 </code></pre>
 </details>

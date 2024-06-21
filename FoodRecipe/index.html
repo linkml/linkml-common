@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/FoodRecipe/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: FoodRecipe - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -152,6 +152,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#usages">
+    Usages
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
     Identifier and Mapping Information
   </a>
@@ -203,29 +208,40 @@
 <p>URI: <a href="https://w3id.org/linkml-common/FoodRecipe">linkml_common:FoodRecipe</a></p>
 <div class="mermaid"> classDiagram
     class FoodRecipe
+    click FoodRecipe href "../FoodRecipe"
       Procedure &lt;|-- FoodRecipe
+        click Procedure href "../Procedure"
 
-      FoodRecipe : classification
+      FoodRecipe : describes
 
-          FoodRecipe --&gt; Concept : classification
 
-      FoodRecipe : description
+
+
+    FoodRecipe --&gt; "0..1" Any : describes
+    click Any href "../Any"
+
 
       FoodRecipe : id
 
       FoodRecipe : ingredients
 
-          FoodRecipe --&gt; FoodIngredient : ingredients
+
+
+
+    FoodRecipe --&gt; "*" FoodIngredient : ingredients
+    click FoodIngredient href "../FoodIngredient"
+
 
       FoodRecipe : name
 
-      FoodRecipe : ontology_types
-
-          FoodRecipe --&gt; Concept : ontology_types
-
       FoodRecipe : steps
 
-          FoodRecipe --&gt; FoodProcessing : steps
+
+
+
+    FoodRecipe --&gt; "*" FoodProcessing : steps
+    click FoodProcessing href "../FoodProcessing"
+
 
       FoodRecipe : type
 
@@ -233,11 +249,14 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><a href="../Intangible/">Intangible</a><ul>
+<li><a href="../InformationEntity/">InformationEntity</a> [ <a href="../Identified/">Identified</a>]<ul>
 <li><a href="../Specification/">Specification</a><ul>
 <li><a href="../Procedure/">Procedure</a><ul>
 <li><strong>FoodRecipe</strong></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -260,51 +279,58 @@
 <tbody>
 <tr>
 <td><a href="../ingredients/">ingredients</a></td>
-<td>0..* <br/> <a href="../FoodIngredient/">FoodIngredient</a></td>
+<td>* <br/> <a href="../FoodIngredient/">FoodIngredient</a></td>
 <td></td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../steps/">steps</a></td>
-<td>0..* <br/> <a href="../FoodProcessing/">FoodProcessing</a></td>
+<td>* <br/> <a href="../FoodProcessing/">FoodProcessing</a></td>
 <td></td>
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../describes/">describes</a></td>
+<td>0..1 <br/> <a href="../Any/">Any</a></td>
+<td>The thing that is being described</td>
+<td><a href="../InformationEntity/">InformationEntity</a></td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Identified/">Identified</a></td>
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a>, <a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
+</tbody>
+</table>
+<h2 id="usages">Usages</h2>
+<table>
+<thead>
 <tr>
-<td><a href="../classification/">classification</a></td>
-<td>0..1 <br/> <a href="../Concept/">Concept</a></td>
-<td>A precise classification of the thing, using a concept from an ontology, cont...</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<th>used by</th>
+<th>used in</th>
+<th>type</th>
+<th>used</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td><a href="../ontology_types/">ontology_types</a></td>
-<td>0..* <br/> <a href="../Concept/">Concept</a></td>
-<td></td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../FoodPreparation/">FoodPreparation</a></td>
+<td><a href="../follows_procedure/">follows_procedure</a></td>
+<td>range</td>
+<td><a href="./">FoodRecipe</a></td>
 </tr>
 </tbody>
 </table>
@@ -385,6 +411,17 @@ attributes:
     domain_of:
     - FoodRecipe
     range: FoodProcessing
+  describes:
+    name: describes
+    description: The thing that is being described
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    slot_uri: schema:describes
+    alias: describes
+    owner: FoodRecipe
+    domain_of:
+    - InformationEntity
+    range: Any
   id:
     name: id
     description: A unique identifier for a thing
@@ -395,19 +432,21 @@ attributes:
     alias: id
     owner: FoodRecipe
     domain_of:
-    - NamedThing
+    - Identified
     range: uriorcurie
     required: true
   name:
     name: name
     description: A human-readable name for a thing
     from_schema: https://w3id.org/linkml/linkml-common
+    exact_mappings:
+    - rdfs:label
     rank: 1000
     slot_uri: schema:name
     alias: name
     owner: FoodRecipe
     domain_of:
-    - NamedThing
+    - Identified
     range: string
   type:
     name: type
@@ -420,43 +459,7 @@ attributes:
     alias: type
     owner: FoodRecipe
     domain_of:
-    - Entity
-    - NamedThing
-    range: string
-  classification:
-    name: classification
-    description: A precise classification of the thing, using a concept from an ontology,
-      controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose
-      to restrict the range of values which this slot can take, using `values_from`,
-      or bindings.
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    alias: classification
-    owner: FoodRecipe
-    domain_of:
-    - NamedThing
-    range: Concept
-  ontology_types:
-    name: ontology_types
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    multivalued: true
-    alias: ontology_types
-    owner: FoodRecipe
-    domain_of:
-    - NamedThing
-    range: Concept
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/linkml/linkml-common
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: FoodRecipe
-    domain_of:
-    - NamedThing
-    - TimePoint
+    - Typed
     range: string
 
 </code></pre>

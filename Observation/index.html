@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/Observation/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: Observation - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -152,6 +152,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#usages">
+    Usages
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
     Identifier and Mapping Information
   </a>
@@ -204,21 +209,115 @@
 <p>URI: <a href="https://w3id.org/linkml-common/Observation">linkml_common:Observation</a></p>
 <div class="mermaid"> classDiagram
     class Observation
-      Entity &lt;|-- Observation
+    click Observation href "../Observation"
+      Event &lt;|-- Observation
+        click Event href "../Event"
 
 
       Observation &lt;|-- Measurement
+        click Measurement href "../Measurement"
+      Observation &lt;|-- QualitativeObservation
+        click QualitativeObservation href "../QualitativeObservation"
+
+
+      Observation : ends_at
+
+
+
+
+    Observation --&gt; "0..1" TimePoint : ends_at
+    click TimePoint href "../TimePoint"
+
+
+      Observation : happens_at
+
+
+
+
+    Observation --&gt; "0..1" TimePoint : happens_at
+    click TimePoint href "../TimePoint"
+
+
+      Observation : has_duration
+
+
+
+
+    Observation --&gt; "0..1" Duration : has_duration
+    click Duration href "../Duration"
+
+
+      Observation : has_interval
+
+
+
+
+    Observation --&gt; "0..1" TemporalInterval : has_interval
+    click TemporalInterval href "../TemporalInterval"
+
+
+      Observation : id
+
+      Observation : is_ongoing_as_of
+
+
+
+
+    Observation --&gt; "0..1" TimePoint : is_ongoing_as_of
+    click TimePoint href "../TimePoint"
+
+
+      Observation : measured_using
+
+
+
+
+    Observation --&gt; "0..1" PhysicalDevice : measured_using
+    click PhysicalDevice href "../PhysicalDevice"
+
+
+      Observation : name
+
+      Observation : observation_subject
+
+
+
+
+    Observation --&gt; "0..1" Entity : observation_subject
+    click Entity href "../Entity"
+
+
+      Observation : starts_at
+
+
+
+
+    Observation --&gt; "0..1" TimePoint : starts_at
+    click TimePoint href "../TimePoint"
 
 
       Observation : type
+
+      Observation : variable_measured
+
+
+
+
+    Observation --&gt; "0..1" Variable : variable_measured
+    click Variable href "../Variable"
+
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
+<li><a href="../Event/">Event</a> [ <a href="../Identified/">Identified</a>]<ul>
 <li><strong>Observation</strong><ul>
 <li><a href="../Measurement/">Measurement</a></li>
+<li><a href="../QualitativeObservation/">QualitativeObservation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -236,10 +335,119 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../observation_subject/">observation_subject</a></td>
+<td>0..1 <br/> <a href="../Entity/">Entity</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../variable_measured/">variable_measured</a></td>
+<td>0..1 <br/> <a href="../Variable/">Variable</a></td>
+<td>The variable being measured</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../measured_using/">measured_using</a></td>
+<td>0..1 <br/> <a href="../PhysicalDevice/">PhysicalDevice</a></td>
+<td></td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../starts_at/">starts_at</a></td>
+<td>0..1 <br/> <a href="../TimePoint/">TimePoint</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
+<td><a href="../ends_at/">ends_at</a></td>
+<td>0..1 <br/> <a href="../TimePoint/">TimePoint</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
+<td><a href="../happens_at/">happens_at</a></td>
+<td>0..1 <br/> <a href="../TimePoint/">TimePoint</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>0..1 <br/> <a href="../TemporalInterval/">TemporalInterval</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
+<td><a href="../has_duration/">has_duration</a></td>
+<td>0..1 <br/> <a href="../Duration/">Duration</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
+<td><a href="../is_ongoing_as_of/">is_ongoing_as_of</a></td>
+<td>0..1 <br/> <a href="../TimePoint/">TimePoint</a></td>
+<td></td>
+<td><a href="../Event/">Event</a></td>
+</tr>
+<tr>
+<td><a href="../id/">id</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>A unique identifier for a thing</td>
+<td><a href="../Identified/">Identified</a></td>
+</tr>
+<tr>
+<td><a href="../name/">name</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>A human-readable name for a thing</td>
+<td><a href="../Identified/">Identified</a></td>
+</tr>
+<tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="usages">Usages</h2>
+<table>
+<thead>
+<tr>
+<th>used by</th>
+<th>used in</th>
+<th>type</th>
+<th>used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../ClinicalHistory/">ClinicalHistory</a></td>
+<td><a href="../observations/">observations</a></td>
+<td>range</td>
+<td><a href="./">Observation</a></td>
+</tr>
+<tr>
+<td><a href="../ClinicalHistory/">ClinicalHistory</a></td>
+<td><a href="../interpretations/">interpretations</a></td>
+<td>range</td>
+<td><a href="./">Observation</a></td>
+</tr>
+<tr>
+<td><a href="../SetOfObservations/">SetOfObservations</a></td>
+<td><a href="../observations/">observations</a></td>
+<td>range</td>
+<td><a href="./">Observation</a></td>
+</tr>
+<tr>
+<td><a href="../SubjectObservationHistory/">SubjectObservationHistory</a></td>
+<td><a href="../observations/">observations</a></td>
+<td>range</td>
+<td><a href="./">Observation</a></td>
+</tr>
+<tr>
+<td><a href="../SubjectObservationHistory/">SubjectObservationHistory</a></td>
+<td><a href="../interpretations/">interpretations</a></td>
+<td>range</td>
+<td><a href="./">Observation</a></td>
 </tr>
 </tbody>
 </table>
@@ -274,7 +482,31 @@
 <pre><code class="language-yaml">name: Observation
 description: A statement about the state of something
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: Entity
+is_a: Event
+attributes:
+  observation_subject:
+    name: observation_subject
+    from_schema: https://w3id.org/linkml-common/meaurements
+    rank: 1000
+    domain_of:
+    - Observation
+    - SetOfObservations
+    range: Entity
+  variable_measured:
+    name: variable_measured
+    description: The variable being measured
+    from_schema: https://w3id.org/linkml-common/meaurements
+    rank: 1000
+    domain_of:
+    - Observation
+    range: Variable
+  measured_using:
+    name: measured_using
+    from_schema: https://w3id.org/linkml-common/meaurements
+    rank: 1000
+    domain_of:
+    - Observation
+    range: PhysicalDevice
 
 </code></pre>
 </details>
@@ -283,8 +515,121 @@ is_a: Entity
 <pre><code class="language-yaml">name: Observation
 description: A statement about the state of something
 from_schema: https://w3id.org/linkml/linkml-common
-is_a: Entity
+is_a: Event
 attributes:
+  observation_subject:
+    name: observation_subject
+    from_schema: https://w3id.org/linkml-common/meaurements
+    rank: 1000
+    alias: observation_subject
+    owner: Observation
+    domain_of:
+    - Observation
+    - SetOfObservations
+    range: Entity
+  variable_measured:
+    name: variable_measured
+    description: The variable being measured
+    from_schema: https://w3id.org/linkml-common/meaurements
+    rank: 1000
+    alias: variable_measured
+    owner: Observation
+    domain_of:
+    - Observation
+    range: Variable
+  measured_using:
+    name: measured_using
+    from_schema: https://w3id.org/linkml-common/meaurements
+    rank: 1000
+    alias: measured_using
+    owner: Observation
+    domain_of:
+    - Observation
+    range: PhysicalDevice
+  starts_at:
+    name: starts_at
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: starts_at
+    owner: Observation
+    domain_of:
+    - Event
+    - TimePointOrTemporalInterval
+    - TemporalInterval
+    range: TimePoint
+  ends_at:
+    name: ends_at
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: ends_at
+    owner: Observation
+    domain_of:
+    - Event
+    - TimePointOrTemporalInterval
+    - TemporalInterval
+    range: TimePoint
+  happens_at:
+    name: happens_at
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: happens_at
+    owner: Observation
+    domain_of:
+    - Event
+    range: TimePoint
+  has_interval:
+    name: has_interval
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: has_interval
+    owner: Observation
+    domain_of:
+    - Event
+    range: TemporalInterval
+  has_duration:
+    name: has_duration
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: has_duration
+    owner: Observation
+    domain_of:
+    - Event
+    range: Duration
+  is_ongoing_as_of:
+    name: is_ongoing_as_of
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    alias: is_ongoing_as_of
+    owner: Observation
+    domain_of:
+    - Event
+    range: TimePoint
+  id:
+    name: id
+    description: A unique identifier for a thing
+    from_schema: https://w3id.org/linkml/linkml-common
+    rank: 1000
+    slot_uri: schema:identifier
+    identifier: true
+    alias: id
+    owner: Observation
+    domain_of:
+    - Identified
+    range: uriorcurie
+    required: true
+  name:
+    name: name
+    description: A human-readable name for a thing
+    from_schema: https://w3id.org/linkml/linkml-common
+    exact_mappings:
+    - rdfs:label
+    rank: 1000
+    slot_uri: schema:name
+    alias: name
+    owner: Observation
+    domain_of:
+    - Identified
+    range: string
   type:
     name: type
     description: A type for a thing. The range of this should be a class within the
@@ -296,8 +641,7 @@ attributes:
     alias: type
     owner: Observation
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 
 </code></pre>

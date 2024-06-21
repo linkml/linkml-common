@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/TemporalInterval/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: TemporalInterval - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -209,15 +209,27 @@
 <p>URI: <a href="https://w3id.org/linkml-common/TemporalInterval">linkml_common:TemporalInterval</a></p>
 <div class="mermaid"> classDiagram
     class TemporalInterval
+    click TemporalInterval href "../TemporalInterval"
       TimePointOrTemporalInterval &lt;|-- TemporalInterval
+        click TimePointOrTemporalInterval href "../TimePointOrTemporalInterval"
 
       TemporalInterval : ends_at
 
-          TemporalInterval --&gt; TimePoint : ends_at
+
+
+
+    TemporalInterval --&gt; "0..1" TimePoint : ends_at
+    click TimePoint href "../TimePoint"
+
 
       TemporalInterval : starts_at
 
-          TemporalInterval --&gt; TimePoint : starts_at
+
+
+
+    TemporalInterval --&gt; "0..1" TimePoint : starts_at
+    click TimePoint href "../TimePoint"
+
 
       TemporalInterval : type
 
@@ -225,7 +237,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a><ul>
 <li><strong>TemporalInterval</strong></li>
@@ -263,7 +275,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -279,7 +291,25 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../LifeEvent/">LifeEvent</a></td>
+<td><a href="../HealthcareEncounter/">HealthcareEncounter</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../HealthcareConditionOccurrence/">HealthcareConditionOccurrence</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../ClinicalHistory/">ClinicalHistory</a></td>
+<td><a href="../over_interval/">over_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../Investigation/">Investigation</a></td>
 <td><a href="../has_interval/">has_interval</a></td>
 <td>range</td>
 <td><a href="./">TemporalInterval</a></td>
@@ -309,31 +339,31 @@
 <td><a href="./">TemporalInterval</a></td>
 </tr>
 <tr>
-<td><a href="../HealthcareEncounter/">HealthcareEncounter</a></td>
-<td><a href="../has_interval/">has_interval</a></td>
-<td>range</td>
-<td><a href="./">TemporalInterval</a></td>
-</tr>
-<tr>
-<td><a href="../HealthcareConditionOccurrence/">HealthcareConditionOccurrence</a></td>
-<td><a href="../has_interval/">has_interval</a></td>
-<td>range</td>
-<td><a href="./">TemporalInterval</a></td>
-</tr>
-<tr>
 <td><a href="../ClinicalCohortEnrollment/">ClinicalCohortEnrollment</a></td>
 <td><a href="../has_interval/">has_interval</a></td>
 <td>range</td>
 <td><a href="./">TemporalInterval</a></td>
 </tr>
 <tr>
-<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../Observation/">Observation</a></td>
 <td><a href="../has_interval/">has_interval</a></td>
 <td>range</td>
 <td><a href="./">TemporalInterval</a></td>
 </tr>
 <tr>
-<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../SubjectObservationHistory/">SubjectObservationHistory</a></td>
+<td><a href="../over_interval/">over_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../Measurement/">Measurement</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../QualitativeObservation/">QualitativeObservation</a></td>
 <td><a href="../has_interval/">has_interval</a></td>
 <td>range</td>
 <td><a href="./">TemporalInterval</a></td>
@@ -345,7 +375,31 @@
 <td><a href="./">TemporalInterval</a></td>
 </tr>
 <tr>
+<td><a href="../TemporalRelationship/">TemporalRelationship</a></td>
+<td><a href="../relative_to/">relative_to</a></td>
+<td>any_of[range]</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../SubjectHistory/">SubjectHistory</a></td>
+<td><a href="../over_interval/">over_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../ExecutionOfProcedure/">ExecutionOfProcedure</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../ComputationalPlannedProcess/">ComputationalPlannedProcess</a></td>
 <td><a href="../has_interval/">has_interval</a></td>
 <td>range</td>
 <td><a href="./">TemporalInterval</a></td>
@@ -363,7 +417,31 @@
 <td><a href="./">TemporalInterval</a></td>
 </tr>
 <tr>
+<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../EngineeringMaterialProcessing/">EngineeringMaterialProcessing</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../LifeEvent/">LifeEvent</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
 <td><a href="../FoodProcessing/">FoodProcessing</a></td>
+<td><a href="../has_interval/">has_interval</a></td>
+<td>range</td>
+<td><a href="./">TemporalInterval</a></td>
+</tr>
+<tr>
+<td><a href="../FoodPreparation/">FoodPreparation</a></td>
 <td><a href="../has_interval/">has_interval</a></td>
 <td>range</td>
 <td><a href="./">TemporalInterval</a></td>
@@ -448,8 +526,7 @@ attributes:
     alias: type
     owner: TemporalInterval
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 
 </code></pre>

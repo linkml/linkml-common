@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://linkml.github.io/linkml-common/FinancialProduct/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
-<meta content="mkdocs-1.5.3, mkdocs-material-8.5.10" name="generator"/>
+<meta content="mkdocs-1.6.0, mkdocs-material-8.5.10" name="generator"/>
 <title>Class: FinancialProduct - linkml-common</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
@@ -204,10 +204,13 @@
 <p>URI: <a href="https://w3id.org/linkml-common/FinancialProduct">linkml_common:FinancialProduct</a></p>
 <div class="mermaid"> classDiagram
     class FinancialProduct
+    click FinancialProduct href "../FinancialProduct"
       Service &lt;|-- FinancialProduct
+        click Service href "../Service"
 
 
       FinancialProduct &lt;|-- FinancialAccount
+        click FinancialAccount href "../FinancialAccount"
 
 
       FinancialProduct : type
@@ -216,7 +219,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../Entity/">Entity</a><ul>
+<li><a href="../Entity/">Entity</a> [ <a href="../Typed/">Typed</a>]<ul>
 <li><a href="../Intangible/">Intangible</a><ul>
 <li><a href="../Service/">Service</a><ul>
 <li><strong>FinancialProduct</strong><ul>
@@ -245,7 +248,7 @@
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>A type for a thing</td>
-<td><a href="../Entity/">Entity</a></td>
+<td><a href="../Typed/">Typed</a></td>
 </tr>
 </tbody>
 </table>
@@ -304,8 +307,7 @@ attributes:
     alias: type
     owner: FinancialProduct
     domain_of:
-    - Entity
-    - NamedThing
+    - Typed
     range: string
 
 </code></pre>
