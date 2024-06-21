@@ -1,11 +1,5 @@
-type Agent
+interface Agent
   {
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
-    id: Uriorcurie!
-    name: String
   }
 
 type AggregatePrediction implements OutcomeStatistics
@@ -28,7 +22,20 @@ type Any
   {
   }
 
-type AutomatedAgent
+type AstronomicalBody
+  {
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    id: Uriorcurie!
+    name: String
+    address: PostalAddress
+    geolocation: GeoPointLocation
+    boundingCoordinates: GeoBoxLocation
+  }
+
+type AutomatedAgent implements Agent
   {
     type: String
     classification: Concept
@@ -76,6 +83,24 @@ type BuiltSystem
     name: String
   }
 
+type Climate
+  {
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    id: Uriorcurie!
+    name: String
+    components: [PhysicalEntity]
+    events: [Entity]
+  }
+
+type ClimateModel
+  {
+    type: String
+    models: Climate
+  }
+
 type ClinicalCohort
   {
     type: String
@@ -110,11 +135,28 @@ type ClinicalCohortEnrollment
     cohort: ClinicalCohort
   }
 
+type ClinicalHistory
+  {
+    type: String
+    events: [Event]
+    overInterval: TemporalInterval
+    observations: [Observation]
+    measurements: [Measurement]
+    interpretations: [Observation]
+    subject: Person
+  }
+
 type CompositeFoodType
   {
     type: String
     id: Uriorcurie!
     name: String
+  }
+
+type ComputationalModel implements Model
+  {
+    type: String
+    models: Entity
   }
 
 type ComputationalPlannedProcess
@@ -149,9 +191,9 @@ interface CreationMetadata
     title: String
     abstract: String
     rights: String
-    creators: [Agent]
-    contributors: [Agent]
-    contacts: [Agent]
+    creators: [PhysicalEntity]
+    contributors: [PhysicalEntity]
+    contacts: [PhysicalEntity]
     keywords: [String]
   }
 
@@ -166,9 +208,9 @@ type CreativeWork implements CreationMetadata
     title: String
     abstract: String
     rights: String
-    creators: [Agent]
-    contributors: [Agent]
-    contacts: [Agent]
+    creators: [PhysicalEntity]
+    contributors: [PhysicalEntity]
+    contacts: [PhysicalEntity]
     keywords: [String]
   }
 
@@ -206,9 +248,9 @@ type Dataset implements CreationMetadata
     title: String
     abstract: String
     rights: String
-    creators: [Agent]
-    contributors: [Agent]
-    contacts: [Agent]
+    creators: [PhysicalEntity]
+    contributors: [PhysicalEntity]
+    contacts: [PhysicalEntity]
     keywords: [String]
   }
 
@@ -217,10 +259,29 @@ type DataStructure
     type: String
   }
 
+type DigitalTwin
+  {
+    type: String
+    models: Entity
+  }
+
 type Duration
   {
     type: String
     hasQuantityKind: QuantityKind
+  }
+
+type EconomicSystem
+  {
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    id: Uriorcurie!
+    name: String
+    components: [PhysicalEntity]
+    events: [Entity]
+    economyOfPlace: Place
   }
 
 type ElectricalGrid
@@ -295,6 +356,18 @@ type EnvironmentalSite
     address: PostalAddress
     geolocation: GeoPointLocation
     boundingCoordinates: GeoBoxLocation
+  }
+
+type EnvironmentalSystem
+  {
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    id: Uriorcurie!
+    name: String
+    components: [PhysicalEntity]
+    events: [Entity]
   }
 
 type Equipment
@@ -405,6 +478,7 @@ type FinancialOrganization
     id: Uriorcurie!
     name: String
     providesServices: [Service]
+    hasPersonRoles: [PersonInRole]
   }
 
 type FinancialProduct
@@ -416,6 +490,22 @@ type FoodIngredient
   {
     type: String
     hasQuantityKind: QuantityKind
+  }
+
+type FoodPreparation
+  {
+    type: String
+    startsAt: TimePoint
+    endsAt: TimePoint
+    happensAt: TimePoint
+    hasInterval: TemporalInterval
+    hasDuration: Duration
+    isOngoingAsOf: TimePoint
+    id: Uriorcurie!
+    name: String
+    usesPhysicalDevice: PhysicalDevice
+    usesConfiguration: PlannedProcessConfiguration
+    followsProcedure: FoodRecipe
   }
 
 type FoodProcessing
@@ -528,6 +618,7 @@ type HealthcareOrganization
     id: Uriorcurie!
     name: String
     providesServices: [Service]
+    hasPersonRoles: [PersonInRole]
   }
 
 type HealthcareProvider
@@ -583,6 +674,16 @@ interface Identified
     name: String
   }
 
+type IndividualOrganism
+  {
+    type: String
+    ontologyTypes: [Concept]
+    description: String
+    id: Uriorcurie!
+    name: String
+    classification: Concept
+  }
+
 type InformationEntity implements Identified
   {
     type: String
@@ -609,6 +710,9 @@ type Investigation
     name: String
     objectives: String
     variables: [Variable]
+    hypothesis: StudyHypothesis
+    design: StudyDesign
+    results: [StudyResult]
   }
 
 type InvestigativeProcess
@@ -641,7 +745,6 @@ type InvestigativeProtocol
 type Landform
   {
     type: String
-    classification: Concept
     ontologyTypes: [Concept]
     description: String
     id: Uriorcurie!
@@ -649,6 +752,7 @@ type Landform
     address: PostalAddress
     boundingCoordinates: GeoBoxLocation
     geolocation: GeoPointLocation
+    classification: Concept
   }
 
 type LifeEvent
@@ -738,22 +842,17 @@ type MiningFacility
     area: SimpleQuantity
   }
 
+interface Model
+  {
+    models: Entity
+  }
+
 type MoneyQuantity
   {
     type: String
     hasQuantityKind: QuantityKind
     value: Float
     unit: CurrencyConcept
-  }
-
-type NamedThing implements Identified
-  {
-    type: String
-    classification: Concept
-    ontologyTypes: [Concept]
-    description: String
-    id: Uriorcurie!
-    name: String
   }
 
 type NuclearPlant
@@ -791,7 +890,15 @@ type Observation
     measuredUsing: PhysicalDevice
   }
 
-type Organization
+type OrganismalRelationship
+  {
+    type: String
+    subject: Entity
+    predicate: Concept
+    object: Entity
+  }
+
+type Organization implements Agent
   {
     type: String
     classification: Concept
@@ -800,6 +907,30 @@ type Organization
     id: Uriorcurie!
     name: String
     providesServices: [Service]
+    hasPersonRoles: [PersonInRole]
+  }
+
+type OrganizationalRole
+  {
+    type: String
+  }
+
+type OrganizationPersonnelRelationship
+  {
+    type: String
+    subject: String
+    predicate: String
+    object: String
+  }
+
+type OrgChart
+  {
+    type: String
+    describes: Any
+    id: Uriorcurie!
+    name: String
+    forOrganization: Organization
+    relationships: OrganizationPersonnelRelationship
   }
 
 interface OutcomeStatistics
@@ -820,18 +951,28 @@ type Patient
     isPerson: Person
   }
 
-type Person
+type Person implements Agent
   {
     type: String
-    classification: Concept
     ontologyTypes: [Concept]
     description: String
     id: Uriorcurie!
     name: String
+    classification: Concept
     primaryEmail: String
     birthDate: Date
     ageInYears: Integer
     vitalStatus: PersonStatus
+  }
+
+type PersonInRole
+  {
+    type: String
+    subject: Entity
+    predicate: Concept
+    object: Entity
+    subjectPerson: Person
+    personRole: OrganizationalRole
   }
 
 type PhysicalDevice
@@ -842,6 +983,28 @@ type PhysicalDevice
     description: String
     id: Uriorcurie!
     name: String
+  }
+
+type PhysicalEntity implements Identified
+  {
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    id: Uriorcurie!
+    name: String
+  }
+
+type PhysicalSystem
+  {
+    type: String
+    classification: Concept
+    ontologyTypes: [Concept]
+    description: String
+    id: Uriorcurie!
+    name: String
+    components: [PhysicalEntity]
+    events: [Entity]
   }
 
 type Place
@@ -1033,6 +1196,9 @@ type RawMaterial
 interface Relationship
   {
     type: String
+    subject: Entity
+    predicate: Concept
+    object: Entity
   }
 
 type RenewablePlant
@@ -1075,7 +1241,7 @@ type SampleCollectionProcess
     followsProcedure: InvestigativeProtocol
     partOf: Investigation
     materialCollected: SampleMaterial
-    collectedFrom: NamedThing
+    collectedFrom: PhysicalEntity
   }
 
 type SampleMaterial
@@ -1109,6 +1275,13 @@ type Service
     type: String
   }
 
+type SetOfObservations
+  {
+    type: String
+    observationSubject: Entity
+    observations: Observation
+  }
+
 type SimplePrediction
   {
     type: String
@@ -1124,6 +1297,12 @@ type SimpleQuantity
     hasQuantityKind: QuantityKind
     value: Float
     unit: UnitConcept
+  }
+
+type Simulation
+  {
+    type: String
+    models: Entity
   }
 
 type SolarPlant
@@ -1167,6 +1346,43 @@ type StudyDesign
     classification: Concept
   }
 
+type StudyHypothesis
+  {
+    type: String
+    describes: Any
+    id: Uriorcurie!
+    name: String
+  }
+
+type StudyResult
+  {
+    type: String
+    describes: Any
+    id: Uriorcurie!
+    name: String
+    hypothesis: StudyHypothesis
+    result: String
+  }
+
+type SubjectHistory
+  {
+    type: String
+    subject: PhysicalEntity!
+    events: [Event]
+    overInterval: TemporalInterval
+  }
+
+type SubjectObservationHistory
+  {
+    type: String
+    subject: PhysicalEntity!
+    events: [Event]
+    overInterval: TemporalInterval
+    observations: [Observation]
+    measurements: [Measurement]
+    interpretations: [Observation]
+  }
+
 type TemporalInterval
   {
     type: String
@@ -1177,6 +1393,8 @@ type TemporalInterval
 type TemporalRelationship
   {
     type: String
+    subject: Entity
+    object: Entity
     predicate: RelativeTimeEnum
     relativeTo: Entity
   }
@@ -1217,6 +1435,16 @@ type Variable
   {
     type: String
     allowedUnits: [UnitConcept]
+  }
+
+type VeterinaryAnimal
+  {
+    type: String
+    ontologyTypes: [Concept]
+    description: String
+    id: Uriorcurie!
+    name: String
+    classification: Concept
   }
 
 type WellFacility

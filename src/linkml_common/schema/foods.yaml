@@ -40,6 +40,12 @@ classes:
   FoodProcessing:
     is_a: MaterialProcessing
 
+  FoodPreparation:
+    is_a: PlannedProcess
+    slot_usage:
+      follows_procedure:
+        range: FoodRecipe
+
   FoodTypeConcept:
     is_a: Concept
 

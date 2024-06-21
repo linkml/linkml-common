@@ -14,6 +14,7 @@
     "civilengineering",
     "clinicalresearch",
     "computational",
+    "economy",
     "engineering",
     "energytechnology",
     "extractiveindustry",
@@ -28,7 +29,8 @@
     "social",
     "statistics",
     "time",
-    "plannedprocess"
+    "plannedprocess",
+    "organisms"
   ],
   "license": "MIT",
   "prefixes": [
@@ -517,6 +519,19 @@
       }
     },
     {
+      "name": "LandformEnum",
+      "definition_uri": "https://w3id.org/linkml-common/LandformEnum",
+      "from_schema": "https://w3id.org/linkml-common/geography",
+      "reachable_from": {
+        "source_nodes": [
+          "ENVO:01000813"
+        ],
+        "relationship_types": [
+          "rdfs:subClassOf"
+        ]
+      }
+    },
+    {
       "name": "HealthcareEncounterClassification",
       "definition_uri": "https://w3id.org/linkml-common/HealthcareEncounterClassification",
       "from_schema": "https://w3id.org/linkml-common/healthcare",
@@ -654,6 +669,12 @@
       ]
     },
     {
+      "name": "OrganizationPersonnelRelationshipEnum",
+      "definition_uri": "https://w3id.org/linkml-common/OrganizationPersonnelRelationshipEnum",
+      "description": "...",
+      "from_schema": "https://w3id.org/linkml-common/social"
+    },
+    {
       "name": "OutcomeType",
       "definition_uri": "https://w3id.org/linkml-common/OutcomeType",
       "from_schema": "https://w3id.org/linkml-common/statistics",
@@ -691,6 +712,19 @@
           "text": "AT_SAME_TIME_AS"
         }
       ]
+    },
+    {
+      "name": "OrganismTaxonEnum",
+      "definition_uri": "https://w3id.org/linkml-common/organisms/OrganismTaxonEnum",
+      "from_schema": "https://w3id.org/linkml-common/organisms",
+      "reachable_from": {
+        "source_nodes": [
+          "NCBITaxon:1"
+        ],
+        "relationship_types": [
+          "rdfs:subClassOf"
+        ]
+      }
     }
   ],
   "slots": [
@@ -720,6 +754,9 @@
       "mappings": [
         "http://schema.org/name"
       ],
+      "exact_mappings": [
+        "http://www.w3.org/2000/01/rdf-schema#label"
+      ],
       "slot_uri": "http://schema.org/name",
       "owner": "Identified",
       "domain_of": [
@@ -739,7 +776,7 @@
       "slot_uri": "http://schema.org/description",
       "owner": "TimePoint",
       "domain_of": [
-        "NamedThing",
+        "PhysicalEntity",
         "TimePoint"
       ],
       "range": "string",
@@ -765,9 +802,9 @@
       "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
       "from_schema": "https://w3id.org/linkml-common/core",
       "slot_uri": "https://w3id.org/linkml-common/classification",
-      "owner": "NamedThing",
+      "owner": "PhysicalEntity",
       "domain_of": [
-        "NamedThing"
+        "PhysicalEntity"
       ],
       "range": "Concept",
       "@type": "SlotDefinition"
@@ -775,12 +812,13 @@
     {
       "name": "ontology_types",
       "definition_uri": "https://w3id.org/linkml-common/ontology_types",
+      "description": "A collection of concepts that help to classify the thing, using concepts from an ontolology,  thesaurus, or taxonomy.",
       "from_schema": "https://w3id.org/linkml-common/core",
       "slot_uri": "https://w3id.org/linkml-common/ontology_types",
       "multivalued": true,
-      "owner": "NamedThing",
+      "owner": "PhysicalEntity",
       "domain_of": [
-        "NamedThing"
+        "PhysicalEntity"
       ],
       "range": "Concept",
       "@type": "SlotDefinition"
@@ -1103,6 +1141,71 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "relationship__subject",
+      "from_schema": "https://w3id.org/linkml-common/core",
+      "slot_uri": "https://w3id.org/linkml-common/subject",
+      "alias": "subject",
+      "owner": "Relationship",
+      "domain_of": [
+        "Relationship"
+      ],
+      "range": "Entity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "relationship__predicate",
+      "from_schema": "https://w3id.org/linkml-common/core",
+      "slot_uri": "https://w3id.org/linkml-common/predicate",
+      "alias": "predicate",
+      "owner": "Relationship",
+      "domain_of": [
+        "Relationship"
+      ],
+      "range": "Concept",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "relationship__object",
+      "from_schema": "https://w3id.org/linkml-common/core",
+      "slot_uri": "https://w3id.org/linkml-common/object",
+      "alias": "object",
+      "owner": "Relationship",
+      "domain_of": [
+        "Relationship"
+      ],
+      "range": "Entity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "physicalSystem__components",
+      "from_schema": "https://w3id.org/linkml-common/core",
+      "slot_uri": "https://w3id.org/linkml-common/components",
+      "multivalued": true,
+      "alias": "components",
+      "owner": "PhysicalSystem",
+      "domain_of": [
+        "PhysicalSystem"
+      ],
+      "range": "PhysicalEntity",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "physicalSystem__events",
+      "from_schema": "https://w3id.org/linkml-common/core",
+      "slot_uri": "https://w3id.org/linkml-common/events",
+      "multivalued": true,
+      "alias": "events",
+      "owner": "PhysicalSystem",
+      "domain_of": [
+        "PhysicalSystem"
+      ],
+      "range": "Entity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "entitySet__members",
       "description": "The members of the collection",
       "from_schema": "https://w3id.org/linkml-common/core",
@@ -1166,6 +1269,18 @@
         "ClinicalCohortEnrollment"
       ],
       "range": "ClinicalCohort",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "economicSystem__economy_of_place",
+      "from_schema": "https://w3id.org/linkml-common/economy",
+      "slot_uri": "https://w3id.org/linkml-common/economy_of_place",
+      "alias": "economy_of_place",
+      "owner": "EconomicSystem",
+      "domain_of": [
+        "EconomicSystem"
+      ],
+      "range": "Place",
       "@type": "SlotDefinition"
     },
     {
@@ -1871,6 +1986,18 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "clinicalHistory__subject",
+      "from_schema": "https://w3id.org/linkml-common/healthcare",
+      "slot_uri": "https://w3id.org/linkml-common/subject",
+      "alias": "subject",
+      "owner": "ClinicalHistory",
+      "domain_of": [
+        "ClinicalHistory"
+      ],
+      "range": "Person",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "investigation__objectives",
       "from_schema": "https://w3id.org/linkml-common/investigations",
       "slot_uri": "https://w3id.org/linkml-common/objectives",
@@ -1897,6 +2024,43 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "investigation__hypothesis",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "slot_uri": "https://w3id.org/linkml-common/hypothesis",
+      "alias": "hypothesis",
+      "owner": "Investigation",
+      "domain_of": [
+        "Investigation"
+      ],
+      "range": "StudyHypothesis",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "investigation__design",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "slot_uri": "https://w3id.org/linkml-common/design",
+      "alias": "design",
+      "owner": "Investigation",
+      "domain_of": [
+        "Investigation"
+      ],
+      "range": "StudyDesign",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "investigation__results",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "slot_uri": "https://w3id.org/linkml-common/results",
+      "multivalued": true,
+      "alias": "results",
+      "owner": "Investigation",
+      "domain_of": [
+        "Investigation"
+      ],
+      "range": "StudyResult",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "investigativeProtocol__protocols_io_url",
       "from_schema": "https://w3id.org/linkml-common/investigations",
       "slot_uri": "https://w3id.org/linkml-common/protocols_io_url",
@@ -1906,6 +2070,30 @@
         "InvestigativeProtocol"
       ],
       "range": "uri",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "studyResult__hypothesis",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "slot_uri": "https://w3id.org/linkml-common/hypothesis",
+      "alias": "hypothesis",
+      "owner": "StudyResult",
+      "domain_of": [
+        "StudyResult"
+      ],
+      "range": "StudyHypothesis",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "studyResult__result",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "slot_uri": "https://w3id.org/linkml-common/result",
+      "alias": "result",
+      "owner": "StudyResult",
+      "domain_of": [
+        "StudyResult"
+      ],
+      "range": "string",
       "@type": "SlotDefinition"
     },
     {
@@ -1953,7 +2141,20 @@
       "domain_of": [
         "SampleCollectionProcess"
       ],
-      "range": "NamedThing",
+      "range": "PhysicalEntity",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "model__models",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "slot_uri": "https://w3id.org/linkml-common/models",
+      "alias": "models",
+      "owner": "Model",
+      "domain_of": [
+        "Model"
+      ],
+      "range": "Entity",
+      "inlined": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1993,6 +2194,78 @@
         "Observation"
       ],
       "range": "PhysicalDevice",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "setOfObservations__observation_subject",
+      "from_schema": "https://w3id.org/linkml-common/meaurements",
+      "slot_uri": "https://w3id.org/linkml-common/observation_subject",
+      "alias": "observation_subject",
+      "owner": "SetOfObservations",
+      "domain_of": [
+        "SetOfObservations"
+      ],
+      "range": "Entity",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "setOfObservations__observations",
+      "from_schema": "https://w3id.org/linkml-common/meaurements",
+      "slot_uri": "https://w3id.org/linkml-common/observations",
+      "alias": "observations",
+      "owner": "SetOfObservations",
+      "domain_of": [
+        "SetOfObservations"
+      ],
+      "range": "Observation",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "subjectObservationHistory__observations",
+      "from_schema": "https://w3id.org/linkml-common/meaurements",
+      "slot_uri": "https://w3id.org/linkml-common/observations",
+      "multivalued": true,
+      "alias": "observations",
+      "owner": "SubjectObservationHistory",
+      "domain_of": [
+        "SubjectObservationHistory"
+      ],
+      "range": "Observation",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "subjectObservationHistory__measurements",
+      "from_schema": "https://w3id.org/linkml-common/meaurements",
+      "slot_uri": "https://w3id.org/linkml-common/measurements",
+      "multivalued": true,
+      "alias": "measurements",
+      "owner": "SubjectObservationHistory",
+      "domain_of": [
+        "SubjectObservationHistory"
+      ],
+      "range": "Measurement",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "subjectObservationHistory__interpretations",
+      "from_schema": "https://w3id.org/linkml-common/meaurements",
+      "slot_uri": "https://w3id.org/linkml-common/interpretations",
+      "multivalued": true,
+      "alias": "interpretations",
+      "owner": "SubjectObservationHistory",
+      "domain_of": [
+        "SubjectObservationHistory"
+      ],
+      "range": "Observation",
+      "inlined": true,
+      "inlined_as_list": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2122,6 +2395,116 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "organization__has_person_roles",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "slot_uri": "https://w3id.org/linkml-common/has_person_roles",
+      "multivalued": true,
+      "alias": "has_person_roles",
+      "owner": "Organization",
+      "domain_of": [
+        "Organization"
+      ],
+      "range": "PersonInRole",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "orgChart__for_organization",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "slot_uri": "https://w3id.org/linkml-common/for_organization",
+      "alias": "for_organization",
+      "owner": "OrgChart",
+      "domain_of": [
+        "OrgChart"
+      ],
+      "range": "Organization",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "orgChart__relationships",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "slot_uri": "https://w3id.org/linkml-common/relationships",
+      "alias": "relationships",
+      "owner": "OrgChart",
+      "domain_of": [
+        "OrgChart"
+      ],
+      "range": "OrganizationPersonnelRelationship",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "personInRole__subject_person",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "slot_uri": "https://w3id.org/linkml-common/subject_person",
+      "alias": "subject_person",
+      "owner": "PersonInRole",
+      "domain_of": [
+        "PersonInRole"
+      ],
+      "range": "Person",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "personInRole__person_role",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "slot_uri": "https://w3id.org/linkml-common/person_role",
+      "alias": "person_role",
+      "owner": "PersonInRole",
+      "domain_of": [
+        "PersonInRole"
+      ],
+      "range": "OrganizationalRole",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "organizationPersonnelRelationship__subject",
+      "id_prefixes": [
+        "PersonInRole"
+      ],
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "slot_uri": "https://w3id.org/linkml-common/subject",
+      "alias": "subject",
+      "owner": "OrganizationPersonnelRelationship",
+      "domain_of": [
+        "OrganizationPersonnelRelationship"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "organizationPersonnelRelationship__predicate",
+      "id_prefixes": [
+        "OrganizationPersonnelRelationshipEnum"
+      ],
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "slot_uri": "https://w3id.org/linkml-common/predicate",
+      "alias": "predicate",
+      "owner": "OrganizationPersonnelRelationship",
+      "domain_of": [
+        "OrganizationPersonnelRelationship"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "organizationPersonnelRelationship__object",
+      "id_prefixes": [
+        "PersonInRole"
+      ],
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "slot_uri": "https://w3id.org/linkml-common/object",
+      "alias": "object",
+      "owner": "OrganizationPersonnelRelationship",
+      "domain_of": [
+        "OrganizationPersonnelRelationship"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "creationMetadata__title",
       "description": "The title of the item",
       "from_schema": "https://w3id.org/linkml-common/social",
@@ -2177,7 +2560,7 @@
       "domain_of": [
         "CreationMetadata"
       ],
-      "range": "Agent",
+      "range": "PhysicalEntity",
       "@type": "SlotDefinition"
     },
     {
@@ -2194,7 +2577,7 @@
       "domain_of": [
         "CreationMetadata"
       ],
-      "range": "Agent",
+      "range": "PhysicalEntity",
       "@type": "SlotDefinition"
     },
     {
@@ -2211,7 +2594,7 @@
       "domain_of": [
         "CreationMetadata"
       ],
-      "range": "Agent",
+      "range": "PhysicalEntity",
       "@type": "SlotDefinition"
     },
     {
@@ -2287,7 +2670,17 @@
       "domain_of": [
         "CreativeWork"
       ],
-      "range": "Agent",
+      "range": "PhysicalEntity",
+      "any_of": [
+        {
+          "range": "Person",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "Organization",
+          "@type": "AnonymousSlotExpression"
+        }
+      ],
       "@type": "SlotDefinition"
     },
     {
@@ -2304,7 +2697,17 @@
       "domain_of": [
         "CreativeWork"
       ],
-      "range": "Agent",
+      "range": "PhysicalEntity",
+      "any_of": [
+        {
+          "range": "Person",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "Organization",
+          "@type": "AnonymousSlotExpression"
+        }
+      ],
       "@type": "SlotDefinition"
     },
     {
@@ -2321,7 +2724,7 @@
       "domain_of": [
         "CreativeWork"
       ],
-      "range": "Agent",
+      "range": "PhysicalEntity",
       "@type": "SlotDefinition"
     },
     {
@@ -2594,6 +2997,45 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "subjectHistory__subject",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "slot_uri": "https://w3id.org/linkml-common/subject",
+      "alias": "subject",
+      "owner": "SubjectHistory",
+      "domain_of": [
+        "SubjectHistory"
+      ],
+      "range": "PhysicalEntity",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "subjectHistory__events",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "slot_uri": "https://w3id.org/linkml-common/events",
+      "multivalued": true,
+      "alias": "events",
+      "owner": "SubjectHistory",
+      "domain_of": [
+        "SubjectHistory"
+      ],
+      "range": "Event",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "subjectHistory__over_interval",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "slot_uri": "https://w3id.org/linkml-common/over_interval",
+      "alias": "over_interval",
+      "owner": "SubjectHistory",
+      "domain_of": [
+        "SubjectHistory"
+      ],
+      "range": "TemporalInterval",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "plannedProcess__follows_procedure",
       "from_schema": "https://w3id.org/linkml-common/plannedprocess",
       "slot_uri": "https://w3id.org/linkml-common/follows_procedure",
@@ -2689,6 +3131,45 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "models",
+      "from_schema": "https://w3id.org/linkml/linkml-common",
+      "slot_uri": "https://w3id.org/linkml-common/models",
+      "range": "Climate",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ClimateModel_models",
+      "from_schema": "https://w3id.org/linkml/linkml-common",
+      "is_a": "model__models",
+      "domain": "ClimateModel",
+      "slot_uri": "https://w3id.org/linkml-common/models",
+      "alias": "models",
+      "owner": "ClimateModel",
+      "domain_of": [
+        "ClimateModel"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "models",
+      "range": "Climate",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "FoodPreparation_follows_procedure",
+      "from_schema": "https://w3id.org/linkml/linkml-common",
+      "is_a": "plannedProcess__follows_procedure",
+      "domain": "FoodPreparation",
+      "slot_uri": "https://w3id.org/linkml-common/follows_procedure",
+      "alias": "follows_procedure",
+      "owner": "FoodPreparation",
+      "domain_of": [
+        "FoodPreparation"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "follows_procedure",
+      "range": "FoodRecipe",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "Landform_geolocation",
       "definition_uri": "https://w3id.org/linkml-common/geolocation",
       "description": "The geolocation of the place",
@@ -2706,6 +3187,31 @@
       "range": "GeoPointLocation",
       "recommended": true,
       "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Landform_classification",
+      "definition_uri": "https://w3id.org/linkml-common/classification",
+      "annotations": [
+        {
+          "tag": "recommended_value_set_bindings",
+          "value": "linkml_common:LandformEnum",
+          "@type": "Annotation"
+        }
+      ],
+      "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+      "from_schema": "https://w3id.org/linkml-common/core",
+      "is_a": "classification",
+      "domain": "Landform",
+      "slot_uri": "https://w3id.org/linkml-common/classification",
+      "alias": "classification",
+      "owner": "Landform",
+      "domain_of": [
+        "Landform"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "classification",
+      "range": "Concept",
       "@type": "SlotDefinition"
     },
     {
@@ -2797,6 +3303,31 @@
       "range": "string",
       "pattern": "^\\S+@[\\S+\\.]+\\S+",
       "@type": "SlotDefinition"
+    },
+    {
+      "name": "IndividualOrganism_classification",
+      "definition_uri": "https://w3id.org/linkml-common/classification",
+      "annotations": [
+        {
+          "tag": "recommended_value_set_bindings",
+          "value": "linkml_common:OrganismTaxonEnum",
+          "@type": "Annotation"
+        }
+      ],
+      "description": "A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.",
+      "from_schema": "https://w3id.org/linkml-common/core",
+      "is_a": "classification",
+      "domain": "IndividualOrganism",
+      "slot_uri": "https://w3id.org/linkml-common/classification",
+      "alias": "classification",
+      "owner": "IndividualOrganism",
+      "domain_of": [
+        "IndividualOrganism"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "classification",
+      "range": "Concept",
+      "@type": "SlotDefinition"
     }
   ],
   "classes": [
@@ -2861,8 +3392,8 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "NamedThing",
-      "definition_uri": "https://w3id.org/linkml-common/NamedThing",
+      "name": "PhysicalEntity",
+      "definition_uri": "https://w3id.org/linkml-common/PhysicalEntity",
       "from_schema": "https://w3id.org/linkml-common/core",
       "is_a": "Entity",
       "mixins": [
@@ -2877,7 +3408,7 @@
         "name"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml-common/NamedThing",
+      "class_uri": "https://w3id.org/linkml-common/PhysicalEntity",
       "@type": "ClassDefinition"
     },
     {
@@ -2924,7 +3455,7 @@
       "name": "PhysicalDevice",
       "definition_uri": "https://w3id.org/linkml-common/PhysicalDevice",
       "from_schema": "https://w3id.org/linkml-common/core",
-      "is_a": "NamedThing",
+      "is_a": "PhysicalEntity",
       "slots": [
         "type",
         "classification",
@@ -2982,10 +3513,63 @@
       "is_a": "Intangible",
       "abstract": true,
       "slots": [
-        "type"
+        "type",
+        "relationship__subject",
+        "relationship__predicate",
+        "relationship__object"
       ],
       "slot_usage": {},
+      "attributes": [
+        {
+          "name": "subject",
+          "range": "Entity",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "predicate",
+          "range": "Concept",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "object",
+          "range": "Entity",
+          "@type": "SlotDefinition"
+        }
+      ],
       "class_uri": "https://w3id.org/linkml-common/Relationship",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "PhysicalSystem",
+      "definition_uri": "https://w3id.org/linkml-common/PhysicalSystem",
+      "from_schema": "https://w3id.org/linkml-common/core",
+      "is_a": "PhysicalEntity",
+      "slots": [
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "id",
+        "name",
+        "physicalSystem__components",
+        "physicalSystem__events"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "components",
+          "multivalued": true,
+          "range": "PhysicalEntity",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "events",
+          "multivalued": true,
+          "range": "Entity",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/PhysicalSystem",
       "@type": "ClassDefinition"
     },
     {
@@ -3139,7 +3723,7 @@
       "name": "BuiltEnvironmentFeature",
       "definition_uri": "https://w3id.org/linkml-common/BuiltEnvironmentFeature",
       "from_schema": "https://w3id.org/linkml-common/civilengineering",
-      "is_a": "NamedThing",
+      "is_a": "PhysicalEntity",
       "slots": [
         "type",
         "classification",
@@ -3210,7 +3794,7 @@
       "definition_uri": "https://w3id.org/linkml-common/ClinicalCohort",
       "description": "A group of patients who share a common set of characteristics",
       "from_schema": "https://w3id.org/linkml-common/clinicalresearch",
-      "is_a": "NamedThing",
+      "is_a": "PhysicalEntity",
       "slots": [
         "type",
         "classification",
@@ -3301,6 +3885,33 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "EconomicSystem",
+      "definition_uri": "https://w3id.org/linkml-common/EconomicSystem",
+      "from_schema": "https://w3id.org/linkml-common/economy",
+      "is_a": "PhysicalSystem",
+      "slots": [
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "id",
+        "name",
+        "physicalSystem__components",
+        "physicalSystem__events",
+        "economicSystem__economy_of_place"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "economy_of_place",
+          "range": "Place",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/EconomicSystem",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "EngineeringSpecification",
       "definition_uri": "https://w3id.org/linkml-common/EngineeringSpecification",
       "from_schema": "https://w3id.org/linkml-common/engineering",
@@ -3319,7 +3930,7 @@
       "name": "RawMaterial",
       "definition_uri": "https://w3id.org/linkml-common/RawMaterial",
       "from_schema": "https://w3id.org/linkml-common/engineering",
-      "is_a": "NamedThing",
+      "is_a": "PhysicalEntity",
       "slots": [
         "type",
         "classification",
@@ -3393,7 +4004,7 @@
       "name": "Equipment",
       "definition_uri": "https://w3id.org/linkml-common/Equipment",
       "from_schema": "https://w3id.org/linkml-common/engineering",
-      "is_a": "NamedThing",
+      "is_a": "PhysicalEntity",
       "slots": [
         "type",
         "classification",
@@ -3956,6 +4567,57 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "EnvironmentalSystem",
+      "definition_uri": "https://w3id.org/linkml-common/EnvironmentalSystem",
+      "from_schema": "https://w3id.org/linkml-common/environmental",
+      "is_a": "PhysicalSystem",
+      "slots": [
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "id",
+        "name",
+        "physicalSystem__components",
+        "physicalSystem__events"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/EnvironmentalSystem",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Climate",
+      "definition_uri": "https://w3id.org/linkml-common/Climate",
+      "from_schema": "https://w3id.org/linkml-common/environmental",
+      "is_a": "EnvironmentalSystem",
+      "slots": [
+        "type",
+        "classification",
+        "ontology_types",
+        "description",
+        "id",
+        "name",
+        "physicalSystem__components",
+        "physicalSystem__events"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/Climate",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ClimateModel",
+      "definition_uri": "https://w3id.org/linkml-common/ClimateModel",
+      "from_schema": "https://w3id.org/linkml-common/environmental",
+      "is_a": "Simulation",
+      "slots": [
+        "type",
+        "ClimateModel_models"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/ClimateModel",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "MoneyQuantity",
       "definition_uri": "https://w3id.org/linkml-common/MoneyQuantity",
       "description": "A quantity of money",
@@ -4080,7 +4742,8 @@
         "description",
         "id",
         "name",
-        "provides_services"
+        "provides_services",
+        "organization__has_person_roles"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/FinancialOrganization",
@@ -4154,6 +4817,29 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "FoodPreparation",
+      "definition_uri": "https://w3id.org/linkml-common/FoodPreparation",
+      "from_schema": "https://w3id.org/linkml-common/foods",
+      "is_a": "PlannedProcess",
+      "slots": [
+        "type",
+        "starts_at",
+        "ends_at",
+        "happens_at",
+        "has_interval",
+        "has_duration",
+        "is_ongoing_as_of",
+        "id",
+        "name",
+        "plannedProcess__uses_physical_device",
+        "plannedProcess__uses_configuration",
+        "FoodPreparation_follows_procedure"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/FoodPreparation",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "FoodTypeConcept",
       "definition_uri": "https://w3id.org/linkml-common/FoodTypeConcept",
       "from_schema": "https://w3id.org/linkml-common/foods",
@@ -4206,7 +4892,7 @@
       "mappings": [
         "schema:Place"
       ],
-      "is_a": "NamedThing",
+      "is_a": "PhysicalEntity",
       "slots": [
         "type",
         "classification",
@@ -4228,8 +4914,31 @@
       "description": "A natural feature of the solid surface of the Earth or other planetary body",
       "from_schema": "https://w3id.org/linkml-common/geography",
       "exact_mappings": [
-        "ENVO:00000083",
+        "ENVO:01000813",
         "fhir:Location"
+      ],
+      "is_a": "Place",
+      "slots": [
+        "type",
+        "ontology_types",
+        "description",
+        "id",
+        "name",
+        "address",
+        "bounding_coordinates",
+        "Landform_geolocation",
+        "Landform_classification"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/Landform",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "AstronomicalBody",
+      "definition_uri": "https://w3id.org/linkml-common/AstronomicalBody",
+      "from_schema": "https://w3id.org/linkml-common/geography",
+      "exact_mappings": [
+        "ENVO:01000799"
       ],
       "is_a": "Place",
       "slots": [
@@ -4240,11 +4949,11 @@
         "id",
         "name",
         "address",
-        "bounding_coordinates",
-        "Landform_geolocation"
+        "geolocation",
+        "bounding_coordinates"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/linkml-common/Landform",
+      "class_uri": "https://w3id.org/linkml-common/AstronomicalBody",
       "@type": "ClassDefinition"
     },
     {
@@ -4465,7 +5174,8 @@
         "description",
         "id",
         "name",
-        "provides_services"
+        "provides_services",
+        "organization__has_person_roles"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/HealthcareOrganization",
@@ -4572,6 +5282,31 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "ClinicalHistory",
+      "definition_uri": "https://w3id.org/linkml-common/ClinicalHistory",
+      "from_schema": "https://w3id.org/linkml-common/healthcare",
+      "is_a": "SubjectObservationHistory",
+      "slots": [
+        "type",
+        "subjectHistory__events",
+        "subjectHistory__over_interval",
+        "subjectObservationHistory__observations",
+        "subjectObservationHistory__measurements",
+        "subjectObservationHistory__interpretations",
+        "clinicalHistory__subject"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "subject",
+          "range": "Person",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/ClinicalHistory",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "Investigation",
       "definition_uri": "https://w3id.org/linkml-common/Investigation",
       "implements": [
@@ -4590,7 +5325,10 @@
         "id",
         "name",
         "investigation__objectives",
-        "investigation__variables"
+        "investigation__variables",
+        "investigation__hypothesis",
+        "investigation__design",
+        "investigation__results"
       ],
       "slot_usage": {},
       "attributes": [
@@ -4603,6 +5341,22 @@
           "name": "variables",
           "multivalued": true,
           "range": "Variable",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "hypothesis",
+          "range": "StudyHypothesis",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "design",
+          "range": "StudyDesign",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "results",
+          "multivalued": true,
+          "range": "StudyResult",
           "@type": "SlotDefinition"
         }
       ],
@@ -4634,6 +5388,21 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "StudyHypothesis",
+      "definition_uri": "https://w3id.org/linkml-common/StudyHypothesis",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "is_a": "InformationEntity",
+      "slots": [
+        "type",
+        "describes",
+        "id",
+        "name"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/StudyHypothesis",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "StudyDesign",
       "definition_uri": "https://w3id.org/linkml-common/StudyDesign",
       "from_schema": "https://w3id.org/linkml-common/investigations",
@@ -4650,10 +5419,39 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "StudyResult",
+      "definition_uri": "https://w3id.org/linkml-common/StudyResult",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "is_a": "InformationEntity",
+      "slots": [
+        "type",
+        "describes",
+        "id",
+        "name",
+        "studyResult__hypothesis",
+        "studyResult__result"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "hypothesis",
+          "range": "StudyHypothesis",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "result",
+          "range": "string",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/StudyResult",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "SampleMaterial",
       "definition_uri": "https://w3id.org/linkml-common/SampleMaterial",
       "from_schema": "https://w3id.org/linkml-common/investigations",
-      "is_a": "NamedThing",
+      "is_a": "PhysicalEntity",
       "slots": [
         "type",
         "classification",
@@ -4736,7 +5534,7 @@
         },
         {
           "name": "collected_from",
-          "range": "NamedThing",
+          "range": "PhysicalEntity",
           "@type": "SlotDefinition"
         }
       ],
@@ -4791,6 +5589,67 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "Model",
+      "definition_uri": "https://w3id.org/linkml-common/Model",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "mixin": true,
+      "slots": [
+        "model__models"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "models",
+          "range": "Entity",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/Model",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ComputationalModel",
+      "definition_uri": "https://w3id.org/linkml-common/ComputationalModel",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "is_a": "Intangible",
+      "mixins": [
+        "Model"
+      ],
+      "slots": [
+        "type",
+        "model__models"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/ComputationalModel",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Simulation",
+      "definition_uri": "https://w3id.org/linkml-common/Simulation",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "is_a": "ComputationalModel",
+      "slots": [
+        "type",
+        "model__models"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/Simulation",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "DigitalTwin",
+      "definition_uri": "https://w3id.org/linkml-common/DigitalTwin",
+      "from_schema": "https://w3id.org/linkml-common/investigations",
+      "is_a": "ComputationalModel",
+      "slots": [
+        "type",
+        "model__models"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/DigitalTwin",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "Observation",
       "definition_uri": "https://w3id.org/linkml-common/Observation",
       "description": "A statement about the state of something",
@@ -4830,6 +5689,74 @@
         }
       ],
       "class_uri": "https://w3id.org/linkml-common/Observation",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SetOfObservations",
+      "definition_uri": "https://w3id.org/linkml-common/SetOfObservations",
+      "from_schema": "https://w3id.org/linkml-common/meaurements",
+      "is_a": "Intangible",
+      "slots": [
+        "type",
+        "setOfObservations__observation_subject",
+        "setOfObservations__observations"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "observation_subject",
+          "range": "Entity",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "observations",
+          "range": "Observation",
+          "inlined_as_list": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/SetOfObservations",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SubjectObservationHistory",
+      "definition_uri": "https://w3id.org/linkml-common/SubjectObservationHistory",
+      "from_schema": "https://w3id.org/linkml-common/meaurements",
+      "is_a": "SubjectHistory",
+      "slots": [
+        "type",
+        "subjectHistory__subject",
+        "subjectHistory__events",
+        "subjectHistory__over_interval",
+        "subjectObservationHistory__observations",
+        "subjectObservationHistory__measurements",
+        "subjectObservationHistory__interpretations"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "observations",
+          "multivalued": true,
+          "range": "Observation",
+          "inlined_as_list": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "measurements",
+          "multivalued": true,
+          "range": "Measurement",
+          "inlined_as_list": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "interpretations",
+          "multivalued": true,
+          "range": "Observation",
+          "inlined_as_list": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/SubjectObservationHistory",
       "@type": "ClassDefinition"
     },
     {
@@ -5091,15 +6018,7 @@
         "prov:Agent",
         "fibo.commons.PartiesAndSituations:Agent"
       ],
-      "is_a": "NamedThing",
-      "slots": [
-        "type",
-        "classification",
-        "ontology_types",
-        "description",
-        "id",
-        "name"
-      ],
+      "mixin": true,
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/Agent",
       "@type": "ClassDefinition"
@@ -5112,14 +6031,17 @@
       "exact_mappings": [
         "schema:Person"
       ],
-      "is_a": "Agent",
+      "is_a": "IndividualOrganism",
+      "mixins": [
+        "Agent"
+      ],
       "slots": [
         "type",
-        "classification",
         "ontology_types",
         "description",
         "id",
         "name",
+        "IndividualOrganism_classification",
         "Person_primary_email",
         "birth_date",
         "age_in_years",
@@ -5130,6 +6052,23 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "VeterinaryAnimal",
+      "definition_uri": "https://w3id.org/linkml-common/VeterinaryAnimal",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "is_a": "IndividualOrganism",
+      "slots": [
+        "type",
+        "ontology_types",
+        "description",
+        "id",
+        "name",
+        "IndividualOrganism_classification"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/VeterinaryAnimal",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "Organization",
       "definition_uri": "https://w3id.org/linkml-common/Organization",
       "description": "Represents an Organization",
@@ -5137,7 +6076,10 @@
       "exact_mappings": [
         "schema:Organization"
       ],
-      "is_a": "Agent",
+      "is_a": "PhysicalEntity",
+      "mixins": [
+        "Agent"
+      ],
       "slots": [
         "type",
         "classification",
@@ -5145,10 +6087,128 @@
         "description",
         "id",
         "name",
-        "provides_services"
+        "provides_services",
+        "organization__has_person_roles"
       ],
       "slot_usage": {},
+      "attributes": [
+        {
+          "name": "has_person_roles",
+          "multivalued": true,
+          "range": "PersonInRole",
+          "inlined_as_list": true,
+          "@type": "SlotDefinition"
+        }
+      ],
       "class_uri": "https://w3id.org/linkml-common/Organization",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "OrganizationalRole",
+      "definition_uri": "https://w3id.org/linkml-common/OrganizationalRole",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "is_a": "Role",
+      "slots": [
+        "type"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/OrganizationalRole",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "OrgChart",
+      "definition_uri": "https://w3id.org/linkml-common/OrgChart",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "is_a": "InformationEntity",
+      "slots": [
+        "type",
+        "describes",
+        "id",
+        "name",
+        "orgChart__for_organization",
+        "orgChart__relationships"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "for_organization",
+          "range": "Organization",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "relationships",
+          "range": "OrganizationPersonnelRelationship",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/OrgChart",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "PersonInRole",
+      "definition_uri": "https://w3id.org/linkml-common/PersonInRole",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "is_a": "Relationship",
+      "slots": [
+        "type",
+        "relationship__subject",
+        "relationship__predicate",
+        "relationship__object",
+        "personInRole__subject_person",
+        "personInRole__person_role"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "subject_person",
+          "range": "Person",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "person_role",
+          "range": "OrganizationalRole",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/PersonInRole",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "OrganizationPersonnelRelationship",
+      "definition_uri": "https://w3id.org/linkml-common/OrganizationPersonnelRelationship",
+      "from_schema": "https://w3id.org/linkml-common/social",
+      "is_a": "Relationship",
+      "slots": [
+        "type",
+        "organizationPersonnelRelationship__subject",
+        "organizationPersonnelRelationship__predicate",
+        "organizationPersonnelRelationship__object"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "subject",
+          "id_prefixes": [
+            "PersonInRole"
+          ],
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "predicate",
+          "id_prefixes": [
+            "OrganizationPersonnelRelationshipEnum"
+          ],
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "object",
+          "id_prefixes": [
+            "PersonInRole"
+          ],
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/OrganizationPersonnelRelationship",
       "@type": "ClassDefinition"
     },
     {
@@ -5156,7 +6216,10 @@
       "definition_uri": "https://w3id.org/linkml-common/AutomatedAgent",
       "description": "Represents an Automated Agent",
       "from_schema": "https://w3id.org/linkml-common/social",
-      "is_a": "Agent",
+      "is_a": "PhysicalEntity",
+      "mixins": [
+        "Agent"
+      ],
       "slots": [
         "type",
         "classification",
@@ -5231,7 +6294,7 @@
           "description": "The person or organization who created the work",
           "slot_uri": "dcterms:creator",
           "multivalued": true,
-          "range": "Agent",
+          "range": "PhysicalEntity",
           "@type": "SlotDefinition"
         },
         {
@@ -5239,7 +6302,7 @@
           "description": "A person or organization that contributed to the creation of the work",
           "slot_uri": "dcterms:contributor",
           "multivalued": true,
-          "range": "Agent",
+          "range": "PhysicalEntity",
           "@type": "SlotDefinition"
         },
         {
@@ -5247,7 +6310,7 @@
           "description": "A contact point for a person or organization",
           "slot_uri": "schema:contactPoint",
           "multivalued": true,
-          "range": "Agent",
+          "range": "PhysicalEntity",
           "@type": "SlotDefinition"
         },
         {
@@ -5270,7 +6333,7 @@
       "exact_mappings": [
         "schema:CreativeWork"
       ],
-      "is_a": "NamedThing",
+      "is_a": "PhysicalEntity",
       "mixins": [
         "CreationMetadata"
       ],
@@ -5317,7 +6380,17 @@
           "description": "The person or organization who created the work",
           "slot_uri": "dcterms:creator",
           "multivalued": true,
-          "range": "Agent",
+          "range": "PhysicalEntity",
+          "any_of": [
+            {
+              "range": "Person",
+              "@type": "AnonymousSlotExpression"
+            },
+            {
+              "range": "Organization",
+              "@type": "AnonymousSlotExpression"
+            }
+          ],
           "@type": "SlotDefinition"
         },
         {
@@ -5325,7 +6398,17 @@
           "description": "A person or organization that contributed to the creation of the work",
           "slot_uri": "dcterms:contributor",
           "multivalued": true,
-          "range": "Agent",
+          "range": "PhysicalEntity",
+          "any_of": [
+            {
+              "range": "Person",
+              "@type": "AnonymousSlotExpression"
+            },
+            {
+              "range": "Organization",
+              "@type": "AnonymousSlotExpression"
+            }
+          ],
           "@type": "SlotDefinition"
         },
         {
@@ -5333,7 +6416,7 @@
           "description": "A contact point for a person or organization",
           "slot_uri": "schema:contactPoint",
           "multivalued": true,
-          "range": "Agent",
+          "range": "PhysicalEntity",
           "@type": "SlotDefinition"
         },
         {
@@ -5394,6 +6477,10 @@
         }
       ],
       "class_uri": "https://w3id.org/linkml-common/Prediction",
+      "union_of": [
+        "SimplePrediction",
+        "AggregatePrediction"
+      ],
       "@type": "ClassDefinition"
     },
     {
@@ -5676,6 +6763,8 @@
       "is_a": "Relationship",
       "slots": [
         "type",
+        "relationship__subject",
+        "relationship__object",
         "temporalRelationship__predicate",
         "temporalRelationship__relative_to"
       ],
@@ -5708,6 +6797,40 @@
         }
       ],
       "class_uri": "https://w3id.org/linkml-common/TemporalRelationship",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SubjectHistory",
+      "definition_uri": "https://w3id.org/linkml-common/SubjectHistory",
+      "from_schema": "https://w3id.org/linkml-common/time",
+      "is_a": "Entity",
+      "slots": [
+        "type",
+        "subjectHistory__subject",
+        "subjectHistory__events",
+        "subjectHistory__over_interval"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "subject",
+          "range": "PhysicalEntity",
+          "required": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "events",
+          "multivalued": true,
+          "range": "Event",
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "over_interval",
+          "range": "TemporalInterval",
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/linkml-common/SubjectHistory",
       "@type": "ClassDefinition"
     },
     {
@@ -5889,13 +7012,45 @@
       "slot_usage": {},
       "class_uri": "https://w3id.org/linkml-common/MaterialProcessing",
       "@type": "ClassDefinition"
+    },
+    {
+      "name": "IndividualOrganism",
+      "definition_uri": "https://w3id.org/linkml-common/organisms/IndividualOrganism",
+      "from_schema": "https://w3id.org/linkml-common/organisms",
+      "is_a": "PhysicalEntity",
+      "slots": [
+        "type",
+        "ontology_types",
+        "description",
+        "id",
+        "name",
+        "IndividualOrganism_classification"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/organisms/IndividualOrganism",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "OrganismalRelationship",
+      "definition_uri": "https://w3id.org/linkml-common/organisms/OrganismalRelationship",
+      "from_schema": "https://w3id.org/linkml-common/organisms",
+      "is_a": "Relationship",
+      "slots": [
+        "type",
+        "relationship__subject",
+        "relationship__predicate",
+        "relationship__object"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml-common/organisms/OrganismalRelationship",
+      "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "linkml_common.yaml",
-  "source_file_date": "2024-06-13T21:47:13",
-  "source_file_size": 830,
-  "generation_date": "2024-06-13T22:32:40",
+  "source_file_date": "2024-06-13T22:58:32",
+  "source_file_size": 842,
+  "generation_date": "2024-06-20T18:35:53",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/linkml_common.context.jsonld",
@@ -5906,6 +7061,7 @@
     "civilengineering.context.jsonld",
     "clinicalresearch.context.jsonld",
     "computational.context.jsonld",
+    "economy.context.jsonld",
     "engineering.context.jsonld",
     "energytechnology.context.jsonld",
     "extractiveindustry.context.jsonld",
@@ -5921,6 +7077,7 @@
     "statistics.context.jsonld",
     "time.context.jsonld",
     "plannedprocess.context.jsonld",
+    "organisms.context.jsonld",
     {
       "@base": "https://w3id.org/linkml-common/"
     }

@@ -1,0 +1,34 @@
+id: https://w3id.org/linkml-common/organisms
+name: linkml-common-organisms
+title: linkml-common-organisms
+description: |-
+  Common Data Model Elements
+license: MIT
+see_also:
+  - https://linkml.github.io/linkml-common
+
+imports:
+  - linkml:types
+  - core
+
+classes:
+
+  IndividualOrganism:
+    is_a: PhysicalEntity
+    slot_usage:
+      classification:
+        annotations:
+          recommended_value_set_bindings: linkml_common:OrganismTaxonEnum
+
+  OrganismalRelationship:
+    is_a: Relationship
+
+enums:
+
+  OrganismTaxonEnum:
+    reachable_from:
+      source_nodes:
+        - NCBITaxon:1
+      is_direct: false
+      relationship_types:
+        - rdfs:subClassOf

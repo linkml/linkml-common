@@ -92,13 +92,13 @@ class Intangible(Entity):
     type: Literal["Intangible"] = Field("Intangible", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class NamedThing(Entity, Identified):
+class PhysicalEntity(Entity, Identified):
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
     ontology_types: Optional[List[str]] = Field(default_factory=list)
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["NamedThing"] = Field("NamedThing", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+    type: Literal["PhysicalEntity"] = Field("PhysicalEntity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class Concept(Intangible, Identified):
@@ -117,7 +117,7 @@ class InformationEntity(Intangible, Identified):
     type: Literal["InformationEntity"] = Field("InformationEntity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class PhysicalDevice(NamedThing):
+class PhysicalDevice(PhysicalEntity):
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
     ontology_types: Optional[List[str]] = Field(default_factory=list)
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
@@ -173,54 +173,8 @@ class EntitySet(Intangible):
     """
     A group of things. The collection may be heterogeneous or homogeneous.
     """
-    members: Optional[List[Union[Entity,Intangible,NamedThing,Event,LifeEvent,PhysicalDevice,Agent,CreativeWork,Person,Organization,AutomatedAgent,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,Quantity,QuantityRange,TimePointOrTemporalInterval,Service,TemporalInterval,TimePoint,SimpleQuantity,Ratio,Duration,TemporalRelationship,Location,PointLocation,Specification,Publication,Procedure,QuantityKind,UnitConcept]]] = Field(default_factory=list, description="""The members of the collection""")
+    members: Optional[List[Union[Entity,Intangible,PhysicalEntity,Event,LifeEvent,PhysicalDevice,Agent,CreativeWork,Person,Organization,AutomatedAgent,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,TimePointOrTemporalInterval,Quantity,QuantityRange,Service,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,TemporalRelationship,Location,PointLocation,Specification,Publication,Procedure,QuantityKind,UnitConcept]]] = Field(default_factory=list, description="""The members of the collection""")
     type: Literal["EntitySet"] = Field("EntitySet", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-
-
-class QuantityKind(Concept):
-    id: str = Field(..., description="""A unique identifier for a thing""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["QuantityKind"] = Field("QuantityKind", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-
-
-class Quantity(Intangible):
-    has_quantity_kind: Optional[str] = Field(None, description="""The kind of quantity""")
-    type: Literal["Quantity"] = Field("Quantity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-
-
-class SimpleQuantity(Quantity):
-    """
-    A quantity is a property that can be measured or counted
-    """
-    value: Optional[float] = Field(None, description="""The value of the quantity""")
-    unit: Optional[str] = Field(None)
-    has_quantity_kind: Optional[str] = Field(None, description="""The kind of quantity""")
-    type: Literal["SimpleQuantity"] = Field("SimpleQuantity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-
-
-class Ratio(Quantity):
-    """
-    A tuple of two quantities
-    """
-    numerator: Optional[Union[Quantity,SimpleQuantity,Ratio,Duration]] = Field(None, description="""The numerator of the ratio""")
-    denominator: Optional[Union[Quantity,SimpleQuantity,Ratio,Duration]] = Field(None, description="""The denominator of the ratio""")
-    has_quantity_kind: Optional[str] = Field(None, description="""The kind of quantity""")
-    type: Literal["Ratio"] = Field("Ratio", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-
-
-class QuantityRange(Intangible):
-    """
-    A quantity range is a property that can be measured or counted
-    """
-    lower_bound: Optional[Union[Quantity,SimpleQuantity,Ratio,Duration]] = Field(None, description="""The lower bound of the range""")
-    upper_bound: Optional[Union[Quantity,SimpleQuantity,Ratio,Duration]] = Field(None, description="""The upper bound of the range""")
-    type: Literal["QuantityRange"] = Field("QuantityRange", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-
-
-class UnitConcept(Concept):
-    id: str = Field(..., description="""A unique identifier for a thing""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["UnitConcept"] = Field("UnitConcept", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class Event(Entity, Identified):
@@ -232,6 +186,7 @@ class Event(Entity, Identified):
     happens_at: Optional[TimePoint] = Field(None)
     has_interval: Optional[TemporalInterval] = Field(None)
     has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["Event"] = Field("Event", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
@@ -267,14 +222,6 @@ class TimePoint(TimePointOrTemporalInterval):
     type: Literal["TimePoint"] = Field("TimePoint", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class Duration(Quantity):
-    """
-    A length of time
-    """
-    has_quantity_kind: Optional[str] = Field(None, description="""The kind of quantity""")
-    type: Literal["Duration"] = Field("Duration", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-
-
 class TemporalRelationship(Relationship):
     """
     A relationship to another time point
@@ -284,7 +231,61 @@ class TemporalRelationship(Relationship):
     type: Literal["TemporalRelationship"] = Field("TemporalRelationship", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class Agent(NamedThing):
+class QuantityKind(Concept):
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["QuantityKind"] = Field("QuantityKind", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class Quantity(Intangible):
+    has_quantity_kind: Optional[str] = Field(None, description="""The kind of quantity""")
+    type: Literal["Quantity"] = Field("Quantity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class Duration(Quantity):
+    """
+    A length of time
+    """
+    has_quantity_kind: Optional[str] = Field(None, description="""The kind of quantity""")
+    type: Literal["Duration"] = Field("Duration", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class SimpleQuantity(Quantity):
+    """
+    A quantity is a property that can be measured or counted
+    """
+    value: Optional[float] = Field(None, description="""The value of the quantity""")
+    unit: Optional[str] = Field(None)
+    has_quantity_kind: Optional[str] = Field(None, description="""The kind of quantity""")
+    type: Literal["SimpleQuantity"] = Field("SimpleQuantity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class Ratio(Quantity):
+    """
+    A tuple of two quantities
+    """
+    numerator: Optional[Union[Quantity,Duration,SimpleQuantity,Ratio]] = Field(None, description="""The numerator of the ratio""")
+    denominator: Optional[Union[Quantity,Duration,SimpleQuantity,Ratio]] = Field(None, description="""The denominator of the ratio""")
+    has_quantity_kind: Optional[str] = Field(None, description="""The kind of quantity""")
+    type: Literal["Ratio"] = Field("Ratio", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class QuantityRange(Intangible):
+    """
+    A quantity range is a property that can be measured or counted
+    """
+    lower_bound: Optional[Union[Quantity,Duration,SimpleQuantity,Ratio]] = Field(None, description="""The lower bound of the range""")
+    upper_bound: Optional[Union[Quantity,Duration,SimpleQuantity,Ratio]] = Field(None, description="""The upper bound of the range""")
+    type: Literal["QuantityRange"] = Field("QuantityRange", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class UnitConcept(Concept):
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["UnitConcept"] = Field("UnitConcept", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class Agent(PhysicalEntity):
     """
     Represents an Agent
     """
@@ -355,6 +356,7 @@ class LifeEvent(Event):
     happens_at: Optional[TimePoint] = Field(None)
     has_interval: Optional[TemporalInterval] = Field(None)
     has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["LifeEvent"] = Field("LifeEvent", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
@@ -370,7 +372,7 @@ class CreationMetadata(ConfiguredBaseModel):
     keywords: Optional[List[str]] = Field(default_factory=list, description="""Keywords or tags used to describe this item""")
 
 
-class CreativeWork(CreationMetadata, NamedThing):
+class CreativeWork(CreationMetadata, PhysicalEntity):
     """
     The most generic kind of creative work, including books, movies, photographs, software programs, etc.
     """
@@ -409,7 +411,7 @@ Identified.update_forward_refs()
 Typed.update_forward_refs()
 Entity.update_forward_refs()
 Intangible.update_forward_refs()
-NamedThing.update_forward_refs()
+PhysicalEntity.update_forward_refs()
 Concept.update_forward_refs()
 InformationEntity.update_forward_refs()
 PhysicalDevice.update_forward_refs()
@@ -421,18 +423,18 @@ PointLocation.update_forward_refs()
 Specification.update_forward_refs()
 Procedure.update_forward_refs()
 EntitySet.update_forward_refs()
-QuantityKind.update_forward_refs()
-Quantity.update_forward_refs()
-SimpleQuantity.update_forward_refs()
-Ratio.update_forward_refs()
-QuantityRange.update_forward_refs()
-UnitConcept.update_forward_refs()
 Event.update_forward_refs()
 TimePointOrTemporalInterval.update_forward_refs()
 TemporalInterval.update_forward_refs()
 TimePoint.update_forward_refs()
-Duration.update_forward_refs()
 TemporalRelationship.update_forward_refs()
+QuantityKind.update_forward_refs()
+Quantity.update_forward_refs()
+Duration.update_forward_refs()
+SimpleQuantity.update_forward_refs()
+Ratio.update_forward_refs()
+QuantityRange.update_forward_refs()
+UnitConcept.update_forward_refs()
 Agent.update_forward_refs()
 Person.update_forward_refs()
 Organization.update_forward_refs()

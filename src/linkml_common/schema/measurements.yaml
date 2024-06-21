@@ -35,6 +35,31 @@ classes:
       measured_using:
         range: PhysicalDevice
 
+  SetOfObservations:
+    is_a: Intangible
+    attributes:
+      observation_subject:
+        range: Entity
+      observations:
+        range: Observation
+        inlined_as_list: True
+
+  SubjectObservationHistory:
+    is_a: SubjectHistory
+    attributes:
+      observations:
+        range: Observation
+        inlined_as_list: True
+        multivalued: true
+      measurements:
+        range: Measurement
+        inlined_as_list: True
+        multivalued: true
+      interpretations:
+        range: Observation
+        inlined_as_list: True
+        multivalued: true
+
   Measurement:
     is_a: Observation
     attributes:

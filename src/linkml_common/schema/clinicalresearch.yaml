@@ -27,7 +27,7 @@ classes:
 
   ClinicalCohort:
     description: A group of patients who share a common set of characteristics
-    is_a: NamedThing
+    is_a: PhysicalEntity
     attributes:
       definition:
         range: ClinicalCohortDefinition

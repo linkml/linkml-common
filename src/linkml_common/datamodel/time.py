@@ -76,13 +76,13 @@ class Intangible(Entity):
     type: Literal["Intangible"] = Field("Intangible", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class NamedThing(Entity, Identified):
+class PhysicalEntity(Entity, Identified):
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
+    ontology_types: Optional[List[str]] = Field(default_factory=list, description="""A collection of concepts that help to classify the thing, using concepts from an ontolology,  thesaurus, or taxonomy.""")
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["NamedThing"] = Field("NamedThing", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+    type: Literal["PhysicalEntity"] = Field("PhysicalEntity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class Concept(Intangible, Identified):
@@ -101,9 +101,9 @@ class InformationEntity(Intangible, Identified):
     type: Literal["InformationEntity"] = Field("InformationEntity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class PhysicalDevice(NamedThing):
+class PhysicalDevice(PhysicalEntity):
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
+    ontology_types: Optional[List[str]] = Field(default_factory=list, description="""A collection of concepts that help to classify the thing, using concepts from an ontolology,  thesaurus, or taxonomy.""")
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
@@ -157,7 +157,7 @@ class EntitySet(Intangible):
     """
     A group of things. The collection may be heterogeneous or homogeneous.
     """
-    members: Optional[List[Union[Entity,Intangible,NamedThing,Event,Observation,PhysicalDevice,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,Quantity,QuantityRange,TimePointOrTemporalInterval,TemporalInterval,TimePoint,SimpleQuantity,Ratio,Duration,TemporalRelationship,Location,PointLocation,Specification,Procedure,QuantityKind,UnitConcept]]] = Field(default_factory=list, description="""The members of the collection""")
+    members: Optional[List[Union[Entity,Intangible,PhysicalEntity,Event,SubjectHistory,PhysicalDevice,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,Quantity,QuantityRange,TimePointOrTemporalInterval,TemporalInterval,TimePoint,SimpleQuantity,Ratio,Duration,TemporalRelationship,Location,PointLocation,Specification,Procedure,QuantityKind,UnitConcept]]] = Field(default_factory=list, description="""The members of the collection""")
     type: Literal["EntitySet"] = Field("EntitySet", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
@@ -222,21 +222,6 @@ class Event(Entity, Identified):
     type: Literal["Event"] = Field("Event", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class Observation(Event):
-    """
-    A statement about the state of something
-    """
-    starts_at: Optional[TimePoint] = Field(None)
-    ends_at: Optional[TimePoint] = Field(None)
-    happens_at: Optional[TimePoint] = Field(None)
-    has_interval: Optional[TemporalInterval] = Field(None)
-    has_duration: Optional[Duration] = Field(None)
-    is_ongoing_as_of: Optional[TimePoint] = Field(None)
-    id: str = Field(..., description="""A unique identifier for a thing""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["Observation"] = Field("Observation", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-
-
 class TimePointOrTemporalInterval(Intangible):
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
@@ -284,13 +269,20 @@ class TemporalRelationship(Relationship):
     type: Literal["TemporalRelationship"] = Field("TemporalRelationship", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
+class SubjectHistory(Entity):
+    subject: str = Field(...)
+    events: Optional[List[str]] = Field(default_factory=list)
+    over_interval: Optional[TemporalInterval] = Field(None)
+    type: Literal["SubjectHistory"] = Field("SubjectHistory", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
 # Update forward refs
 # see https://pydantic-docs.helpmanual.io/usage/postponed_annotations/
 Identified.update_forward_refs()
 Typed.update_forward_refs()
 Entity.update_forward_refs()
 Intangible.update_forward_refs()
-NamedThing.update_forward_refs()
+PhysicalEntity.update_forward_refs()
 Concept.update_forward_refs()
 InformationEntity.update_forward_refs()
 PhysicalDevice.update_forward_refs()
@@ -309,10 +301,10 @@ Ratio.update_forward_refs()
 QuantityRange.update_forward_refs()
 UnitConcept.update_forward_refs()
 Event.update_forward_refs()
-Observation.update_forward_refs()
 TimePointOrTemporalInterval.update_forward_refs()
 TemporalInterval.update_forward_refs()
 TimePoint.update_forward_refs()
 Duration.update_forward_refs()
 TemporalRelationship.update_forward_refs()
+SubjectHistory.update_forward_refs()
 

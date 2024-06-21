@@ -13,6 +13,7 @@ prefixes:
   biolink: https://w3id.org/biolink/
   schema: http://schema.org/
   PATO: http://purl.obolibrary.org/obo/PATO_
+  NCBITaxon: http://purl.obolibrary.org/obo/NCBITaxon_
   fhir: http://hl7.org/fhir/
   prov: http://www.w3.org/ns/prov#
   dcterms: http://purl.org/dc/terms/
@@ -24,18 +25,21 @@ imports:
   - linkml:types
   - core
   - time
+  - organisms
 
 classes:
 
   Agent:
-    is_a: NamedThing
+    mixin: true
     description: Represents an Agent
     exact_mappings:
       - prov:Agent
       - fibo.commons.PartiesAndSituations:Agent
 
   Person:
-    is_a: Agent
+    is_a: IndividualOrganism
+    mixins:
+      - Agent
     description: Represents a Person
     slots:
       - primary_email
@@ -48,17 +52,55 @@ classes:
     exact_mappings:
       - schema:Person
 
+  VeterinaryAnimal:
+    is_a: IndividualOrganism
+
+
   Organization:
-    is_a: Agent
+    is_a: PhysicalEntity
+    mixins:
+      - Agent
     description: Represents an Organization
     exact_mappings:
       - schema:Organization
     slots:
       - provides_services
+    attributes:
+      has_person_roles:
+        range: PersonInRole
+        inlined_as_list: true
+        multivalued: true
 
+  OrganizationalRole:
+    is_a: Role
+
+  OrgChart:
+    is_a: InformationEntity
+    attributes:
+      for_organization:
+        range: Organization
+      relationships:
+        range: OrganizationPersonnelRelationship
+
+  PersonInRole:
+    is_a: Relationship
+    attributes:
+      subject_person:
+        range: Person
+      person_role:
+        range: OrganizationalRole
+
+  OrganizationPersonnelRelationship:
+    is_a: Relationship
+    attributes:
+      subject: PersonInRole
+      predicate: OrganizationPersonnelRelationshipEnum
+      object: PersonInRole
 
   AutomatedAgent:
-    is_a: Agent
+    is_a: PhysicalEntity
+    mixins:
+      - Agent
     description: Represents an Automated Agent
 
   LifeEvent:
@@ -79,17 +121,17 @@ classes:
         range: string
         description: Information about rights held in and over the item
       creators:
-        range: Agent
+        range: PhysicalEntity
         slot_uri: dcterms:creator
         description: The person or organization who created the work
         multivalued: true
       contributors:
-        range: Agent
+        range: PhysicalEntity
         slot_uri: dcterms:contributor
         description: A person or organization that contributed to the creation of the work
         multivalued: true
       contacts:
-        range: Agent
+        range: PhysicalEntity
         slot_uri: schema:contactPoint
         description: A contact point for a person or organization
         multivalued: true
@@ -101,7 +143,7 @@ classes:
 
   CreativeWork:
     description: The most generic kind of creative work, including books, movies, photographs, software programs, etc.
-    is_a: NamedThing
+    is_a: PhysicalEntity
     mixins:
       - CreationMetadata
     exact_mappings:
@@ -119,17 +161,23 @@ classes:
         range: string
         description: Information about rights held in and over the item
       creators:
-        range: Agent
+        range: PhysicalEntity
+        any_of:
+          - range: Person
+          - range: Organization
         slot_uri: dcterms:creator
         description: The person or organization who created the work
         multivalued: true
       contributors:
-        range: Agent
+        range: PhysicalEntity
+        any_of:
+          - range: Person
+          - range: Organization
         slot_uri: dcterms:contributor
         description: A person or organization that contributed to the creation of the work
         multivalued: true
       contacts:
-        range: Agent
+        range: PhysicalEntity
         slot_uri: schema:contactPoint
         description: A contact point for a person or organization
         multivalued: true
@@ -179,3 +227,6 @@ enums:
         description: the vital status is not known
         todos:
           - map this to an ontology
+
+  OrganizationPersonnelRelationshipEnum:
+    description: ...

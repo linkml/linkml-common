@@ -53,56 +53,20 @@ class RelativeTimeEnum(str, Enum):
     AT_SAME_TIME_AS = "AT_SAME_TIME_AS"
 
 
-class Entity(ConfiguredBaseModel):
+class Identified(ConfiguredBaseModel):
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+
+
+class Typed(ConfiguredBaseModel):
+    type: Literal["Typed"] = Field("Typed", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class Entity(Typed):
     """
     A physical, digital, conceptual, or other kind of thing with some common characteristics
     """
     type: Literal["Entity"] = Field("Entity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-
-
-class Variable(Entity):
-    allowed_units: Optional[List[str]] = Field(default_factory=list, description="""The units that are allowed for this variable""")
-    type: Literal["Variable"] = Field("Variable", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-
-
-class NamedThing(Entity):
-    id: str = Field(..., description="""A unique identifier for a thing""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["NamedThing"] = Field("NamedThing", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
-
-
-class Concept(NamedThing):
-    id: str = Field(..., description="""A unique identifier for a thing""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["Concept"] = Field("Concept", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
-
-
-class InformationEntity(NamedThing):
-    """
-    An entity that describes some information
-    """
-    describes: Optional[Any] = Field(None, description="""The thing that is being described""")
-    id: str = Field(..., description="""A unique identifier for a thing""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["InformationEntity"] = Field("InformationEntity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
-
-
-class PhysicalDevice(NamedThing):
-    id: str = Field(..., description="""A unique identifier for a thing""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["PhysicalDevice"] = Field("PhysicalDevice", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
 
 
 class Intangible(Entity):
@@ -110,6 +74,52 @@ class Intangible(Entity):
     An entity that is not a physical object, process, or information
     """
     type: Literal["Intangible"] = Field("Intangible", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class Variable(Intangible):
+    allowed_units: Optional[List[str]] = Field(default_factory=list, description="""The units that are allowed for this variable""")
+    type: Literal["Variable"] = Field("Variable", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class PhysicalEntity(Entity, Identified):
+    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
+    ontology_types: Optional[List[str]] = Field(default_factory=list)
+    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["PhysicalEntity"] = Field("PhysicalEntity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class Concept(Intangible, Identified):
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["Concept"] = Field("Concept", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class InformationEntity(Intangible, Identified):
+    """
+    An entity that describes some information
+    """
+    describes: Optional[Any] = Field(None, description="""The thing that is being described""")
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["InformationEntity"] = Field("InformationEntity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class PhysicalDevice(PhysicalEntity):
+    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
+    ontology_types: Optional[List[str]] = Field(default_factory=list)
+    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["PhysicalDevice"] = Field("PhysicalDevice", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class StructuredValue(Intangible):
+    """
+    A value that is a structured collection of other values
+    """
+    type: Literal["StructuredValue"] = Field("StructuredValue", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class Role(Intangible):
@@ -120,76 +130,46 @@ class Relationship(Intangible):
     type: Literal["Relationship"] = Field("Relationship", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class Location(ConfiguredBaseModel):
-    pass
+class Location(StructuredValue):
+    type: Literal["Location"] = Field("Location", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class PointLocation(Location):
-    pass
+    type: Literal["PointLocation"] = Field("PointLocation", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class Observation(Entity):
-    """
-    A statement about the state of something
-    """
-    type: Literal["Observation"] = Field("Observation", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-
-
-class Measurement(Observation):
-    quantity_measured: Optional[Union[Quantity,SimpleQuantity,Ratio,Duration]] = Field(None, description="""The quantity being measured""")
-    variable_measured: Optional[Variable] = Field(None, description="""The variable being measured""")
-    type: Literal["Measurement"] = Field("Measurement", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-
-
-class Specification(NamedThing):
+class Specification(InformationEntity):
     """
     A specification of a thing
     """
+    describes: Optional[Any] = Field(None, description="""The thing that is being described""")
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["Specification"] = Field("Specification", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
 
 
 class Procedure(Specification):
     """
     A canonical series of actions conducted in a certain order or manner
     """
+    describes: Optional[Any] = Field(None, description="""The thing that is being described""")
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["Procedure"] = Field("Procedure", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
 
 
-class MathematicalOperation(ConfiguredBaseModel):
-    """
-    Application of a mathematical operation to one or more inputs to produce one or more outputs
-    """
-    inputs: Optional[List[Any]] = Field(default_factory=list, description="""The inputs to the operation""")
-    outputs: Optional[List[Any]] = Field(default_factory=list, description="""The outputs of the operation""")
-    parts: Optional[List[MathematicalOperation]] = Field(default_factory=list, description="""The parts of the process""")
-    immediate_preceding_steps: Optional[List[MathematicalOperation]] = Field(default_factory=list, description="""The steps that immediately precede this step""")
-
-
-class Collection(Intangible):
+class EntitySet(Intangible):
     """
     A group of things. The collection may be heterogeneous or homogeneous.
     """
-    members: Optional[List[Union[Entity,Variable,NamedThing,Intangible,Observation,PostalAddress,Measurement,Role,Relationship,Collection,Quantity,QuantityRange,TimePointOrTemporalInterval,TemporalInterval,TimePoint,SimpleQuantity,Ratio,Duration,TemporalRelationship,Concept,InformationEntity,PhysicalDevice,Specification,Place,Event,RawMaterial,Equipment,BuiltEnvironmentFeature,Facility,BuiltSystem,Building,PlannedProcess,EngineeringProcess,MaterialCollection,MaterialProcessing,EngineeringMaterialProcessing,Landform,Procedure,EngineeringSpecification,QuantityKind,UnitConcept]]] = Field(default_factory=list, description="""The members of the collection""")
-    type: Literal["Collection"] = Field("Collection", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+    members: Optional[List[Union[Entity,Intangible,PhysicalEntity,Event,Observation,ExecutionOfProcedure,EngineeringProcess,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,EngineeringMaterialProcessing,Measurement,QualitativeObservation,PhysicalDevice,Place,RawMaterial,Equipment,BuiltEnvironmentFeature,Facility,BuiltSystem,Building,Landform,Variable,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,Quantity,QuantityRange,TimePointOrTemporalInterval,PlannedProcessConfiguration,TemporalInterval,TimePoint,SimpleQuantity,Ratio,Duration,TemporalRelationship,Location,PostalAddress,PointLocation,GeoBoxLocation,GeoPointLocation,Specification,Procedure,EngineeringSpecification,QuantityKind,UnitConcept]]] = Field(default_factory=list, description="""The members of the collection""")
+    type: Literal["EntitySet"] = Field("EntitySet", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class QuantityKind(Concept):
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["QuantityKind"] = Field("QuantityKind", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
 
 
 class Quantity(Intangible):
@@ -226,38 +206,25 @@ class QuantityRange(Intangible):
     type: Literal["QuantityRange"] = Field("QuantityRange", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class UnitConversionOperation(MathematicalOperation):
-    """
-    A unit conversion operation
-    """
-    inputs: Optional[List[Union[Quantity,SimpleQuantity,Ratio,Duration]]] = Field(default_factory=list, description="""The input unit""")
-    outputs: Optional[List[Union[Quantity,SimpleQuantity,Ratio,Duration]]] = Field(default_factory=list, description="""The output unit""")
-    parts: Optional[List[MathematicalOperation]] = Field(default_factory=list, description="""The parts of the process""")
-    immediate_preceding_steps: Optional[List[MathematicalOperation]] = Field(default_factory=list, description="""The steps that immediately precede this step""")
-
-
 class UnitConcept(Concept):
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["UnitConcept"] = Field("UnitConcept", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
 
 
-class Place(NamedThing):
+class Place(PhysicalEntity):
     """
     Entities that have a somewhat fixed, physical extension.
     """
     address: Optional[PostalAddress] = Field(None)
     geolocation: Optional[GeoPointLocation] = Field(None, description="""The geolocation of the place""")
     bounding_coordinates: Optional[GeoBoxLocation] = Field(None, description="""The bounding coordinates of the place""")
-    id: str = Field(..., description="""A unique identifier for a thing""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["Place"] = Field("Place", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
     ontology_types: Optional[List[str]] = Field(default_factory=list)
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["Place"] = Field("Place", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class Landform(Place):
@@ -267,15 +234,15 @@ class Landform(Place):
     address: Optional[PostalAddress] = Field(None)
     geolocation: Optional[GeoPointLocation] = Field(None, description="""The geolocation of the place""")
     bounding_coordinates: Optional[GeoBoxLocation] = Field(None, description="""The bounding coordinates of the place""")
-    id: str = Field(..., description="""A unique identifier for a thing""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["Landform"] = Field("Landform", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
     ontology_types: Optional[List[str]] = Field(default_factory=list)
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["Landform"] = Field("Landform", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class PostalAddress(Entity):
+class PostalAddress(StructuredValue):
     """
     Represents an Address
     """
@@ -292,6 +259,7 @@ class GeoPointLocation(PointLocation):
     latitude: Optional[Decimal] = Field(None, description="""The latitude of the location""")
     longitude: Optional[Decimal] = Field(None, description="""The longitude of the location""")
     altitude: Optional[Decimal] = Field(None, description="""The altitude of the location""")
+    type: Literal["GeoPointLocation"] = Field("GeoPointLocation", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class GeoBoxLocation(Location):
@@ -299,9 +267,10 @@ class GeoBoxLocation(Location):
     east_bounding_coordinate: Optional[Decimal] = Field(None, description="""The easternmost coordinate of the location""")
     north_bounding_coordinate: Optional[Decimal] = Field(None, description="""The northernmost coordinate of the location""")
     south_bounding_coordinate: Optional[Decimal] = Field(None, description="""The southernmost coordinate of the location""")
+    type: Literal["GeoBoxLocation"] = Field("GeoBoxLocation", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class Event(NamedThing):
+class Event(Entity, Identified):
     """
     A thing that happens
     """
@@ -310,12 +279,59 @@ class Event(NamedThing):
     happens_at: Optional[TimePoint] = Field(None)
     has_interval: Optional[TemporalInterval] = Field(None)
     has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["Event"] = Field("Event", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
+
+
+class Observation(Event):
+    """
+    A statement about the state of something
+    """
+    observation_subject: Optional[Union[Entity,Intangible,PhysicalEntity,Event,Observation,ExecutionOfProcedure,EngineeringProcess,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,EngineeringMaterialProcessing,Measurement,QualitativeObservation,PhysicalDevice,Place,RawMaterial,Equipment,BuiltEnvironmentFeature,Facility,BuiltSystem,Building,Landform,Variable,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,Quantity,QuantityRange,TimePointOrTemporalInterval,PlannedProcessConfiguration,TemporalInterval,TimePoint,SimpleQuantity,Ratio,Duration,TemporalRelationship,Location,PostalAddress,PointLocation,GeoBoxLocation,GeoPointLocation,Specification,Procedure,EngineeringSpecification,QuantityKind,UnitConcept]] = Field(None)
+    variable_measured: Optional[Variable] = Field(None, description="""The variable being measured""")
+    measured_using: Optional[str] = Field(None)
+    starts_at: Optional[TimePoint] = Field(None)
+    ends_at: Optional[TimePoint] = Field(None)
+    happens_at: Optional[TimePoint] = Field(None)
+    has_interval: Optional[TemporalInterval] = Field(None)
+    has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["Observation"] = Field("Observation", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class Measurement(Observation):
+    quantity_measured: Optional[Union[Quantity,SimpleQuantity,Ratio,Duration]] = Field(None, description="""The quantity being measured""")
+    observation_subject: Optional[Union[Entity,Intangible,PhysicalEntity,Event,Observation,ExecutionOfProcedure,EngineeringProcess,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,EngineeringMaterialProcessing,Measurement,QualitativeObservation,PhysicalDevice,Place,RawMaterial,Equipment,BuiltEnvironmentFeature,Facility,BuiltSystem,Building,Landform,Variable,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,Quantity,QuantityRange,TimePointOrTemporalInterval,PlannedProcessConfiguration,TemporalInterval,TimePoint,SimpleQuantity,Ratio,Duration,TemporalRelationship,Location,PostalAddress,PointLocation,GeoBoxLocation,GeoPointLocation,Specification,Procedure,EngineeringSpecification,QuantityKind,UnitConcept]] = Field(None)
+    variable_measured: Optional[Variable] = Field(None, description="""The variable being measured""")
+    measured_using: Optional[str] = Field(None)
+    starts_at: Optional[TimePoint] = Field(None)
+    ends_at: Optional[TimePoint] = Field(None)
+    happens_at: Optional[TimePoint] = Field(None)
+    has_interval: Optional[TemporalInterval] = Field(None)
+    has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["Measurement"] = Field("Measurement", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class QualitativeObservation(Observation):
+    observation_subject: Optional[Union[Entity,Intangible,PhysicalEntity,Event,Observation,ExecutionOfProcedure,EngineeringProcess,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,EngineeringMaterialProcessing,Measurement,QualitativeObservation,PhysicalDevice,Place,RawMaterial,Equipment,BuiltEnvironmentFeature,Facility,BuiltSystem,Building,Landform,Variable,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,Quantity,QuantityRange,TimePointOrTemporalInterval,PlannedProcessConfiguration,TemporalInterval,TimePoint,SimpleQuantity,Ratio,Duration,TemporalRelationship,Location,PostalAddress,PointLocation,GeoBoxLocation,GeoPointLocation,Specification,Procedure,EngineeringSpecification,QuantityKind,UnitConcept]] = Field(None)
+    variable_measured: Optional[Variable] = Field(None, description="""The variable being measured""")
+    measured_using: Optional[str] = Field(None)
+    starts_at: Optional[TimePoint] = Field(None)
+    ends_at: Optional[TimePoint] = Field(None)
+    happens_at: Optional[TimePoint] = Field(None)
+    has_interval: Optional[TemporalInterval] = Field(None)
+    has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["QualitativeObservation"] = Field("QualitativeObservation", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class TimePointOrTemporalInterval(Intangible):
@@ -365,73 +381,106 @@ class TemporalRelationship(Relationship):
     type: Literal["TemporalRelationship"] = Field("TemporalRelationship", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class PlannedProcess(Event):
+class ExecutionOfProcedure(Event):
+    starts_at: Optional[TimePoint] = Field(None)
+    ends_at: Optional[TimePoint] = Field(None)
+    happens_at: Optional[TimePoint] = Field(None)
+    has_interval: Optional[TemporalInterval] = Field(None)
+    has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["ExecutionOfProcedure"] = Field("ExecutionOfProcedure", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class PlannedProcessConfiguration(Intangible):
+    type: Literal["PlannedProcessConfiguration"] = Field("PlannedProcessConfiguration", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class PlannedProcess(ExecutionOfProcedure):
     """
     A process that follows a defined procedure or plan
     """
     follows_procedure: Optional[str] = Field(None)
     uses_physical_device: Optional[str] = Field(None)
+    uses_configuration: Optional[PlannedProcessConfiguration] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
     has_interval: Optional[TemporalInterval] = Field(None)
     has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["PlannedProcess"] = Field("PlannedProcess", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
+
+
+class ComputationalPlannedProcess(PlannedProcess):
+    """
+    Application of a mathematical operation to one or more inputs to produce one or more outputs
+    """
+    inputs: Optional[List[Any]] = Field(default_factory=list, description="""The inputs to the operation""")
+    outputs: Optional[List[Any]] = Field(default_factory=list, description="""The outputs of the operation""")
+    parts: Optional[List[str]] = Field(default_factory=list, description="""The parts of the process""")
+    immediate_preceding_steps: Optional[List[str]] = Field(default_factory=list, description="""The steps that immediately precede this step""")
+    follows_procedure: Optional[str] = Field(None)
+    uses_physical_device: Optional[str] = Field(None)
+    uses_configuration: Optional[PlannedProcessConfiguration] = Field(None)
+    starts_at: Optional[TimePoint] = Field(None)
+    ends_at: Optional[TimePoint] = Field(None)
+    happens_at: Optional[TimePoint] = Field(None)
+    has_interval: Optional[TemporalInterval] = Field(None)
+    has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["ComputationalPlannedProcess"] = Field("ComputationalPlannedProcess", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class MaterialCollection(PlannedProcess):
     follows_procedure: Optional[str] = Field(None)
     uses_physical_device: Optional[str] = Field(None)
+    uses_configuration: Optional[PlannedProcessConfiguration] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
     has_interval: Optional[TemporalInterval] = Field(None)
     has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["MaterialCollection"] = Field("MaterialCollection", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
 
 
 class MaterialProcessing(PlannedProcess):
     follows_procedure: Optional[str] = Field(None)
     uses_physical_device: Optional[str] = Field(None)
+    uses_configuration: Optional[PlannedProcessConfiguration] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
     has_interval: Optional[TemporalInterval] = Field(None)
     has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["MaterialProcessing"] = Field("MaterialProcessing", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
 
 
 class EngineeringSpecification(Procedure):
+    describes: Optional[Any] = Field(None, description="""The thing that is being described""")
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["EngineeringSpecification"] = Field("EngineeringSpecification", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class RawMaterial(PhysicalEntity):
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
     ontology_types: Optional[List[str]] = Field(default_factory=list)
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
-
-
-class RawMaterial(NamedThing):
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["RawMaterial"] = Field("RawMaterial", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
 
 
 class EngineeringProcess(Event):
@@ -442,102 +491,98 @@ class EngineeringProcess(Event):
     happens_at: Optional[TimePoint] = Field(None)
     has_interval: Optional[TemporalInterval] = Field(None)
     has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["EngineeringProcess"] = Field("EngineeringProcess", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
 
 
 class EngineeringMaterialProcessing(MaterialProcessing):
     follows_procedure: Optional[str] = Field(None)
     uses_physical_device: Optional[str] = Field(None)
+    uses_configuration: Optional[PlannedProcessConfiguration] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
     has_interval: Optional[TemporalInterval] = Field(None)
     has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["EngineeringMaterialProcessing"] = Field("EngineeringMaterialProcessing", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class Equipment(PhysicalEntity):
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
     ontology_types: Optional[List[str]] = Field(default_factory=list)
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
-
-
-class Equipment(NamedThing):
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["Equipment"] = Field("Equipment", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class BuiltEnvironmentFeature(PhysicalEntity):
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
     ontology_types: Optional[List[str]] = Field(default_factory=list)
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
-
-
-class BuiltEnvironmentFeature(NamedThing):
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["BuiltEnvironmentFeature"] = Field("BuiltEnvironmentFeature", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
 
 
 class Facility(BuiltEnvironmentFeature):
     located_at_place: Optional[str] = Field(None, description="""The place where the entity is located""")
-    id: str = Field(..., description="""A unique identifier for a thing""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["Facility"] = Field("Facility", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
     ontology_types: Optional[List[str]] = Field(default_factory=list)
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["Facility"] = Field("Facility", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class Building(Facility):
     located_at_place: Optional[str] = Field(None, description="""The place where the entity is located""")
+    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
+    ontology_types: Optional[List[str]] = Field(default_factory=list)
+    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
     type: Literal["Building"] = Field("Building", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
-    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
-    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
 
 
 class BuiltSystem(BuiltEnvironmentFeature):
-    id: str = Field(..., description="""A unique identifier for a thing""")
-    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["BuiltSystem"] = Field("BuiltSystem", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
     ontology_types: Optional[List[str]] = Field(default_factory=list)
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["BuiltSystem"] = Field("BuiltSystem", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 # Update forward refs
 # see https://pydantic-docs.helpmanual.io/usage/postponed_annotations/
+Identified.update_forward_refs()
+Typed.update_forward_refs()
 Entity.update_forward_refs()
+Intangible.update_forward_refs()
 Variable.update_forward_refs()
-NamedThing.update_forward_refs()
+PhysicalEntity.update_forward_refs()
 Concept.update_forward_refs()
 InformationEntity.update_forward_refs()
 PhysicalDevice.update_forward_refs()
-Intangible.update_forward_refs()
+StructuredValue.update_forward_refs()
 Role.update_forward_refs()
 Relationship.update_forward_refs()
 Location.update_forward_refs()
 PointLocation.update_forward_refs()
-Observation.update_forward_refs()
-Measurement.update_forward_refs()
 Specification.update_forward_refs()
 Procedure.update_forward_refs()
-MathematicalOperation.update_forward_refs()
-Collection.update_forward_refs()
+EntitySet.update_forward_refs()
 QuantityKind.update_forward_refs()
 Quantity.update_forward_refs()
 SimpleQuantity.update_forward_refs()
 Ratio.update_forward_refs()
 QuantityRange.update_forward_refs()
-UnitConversionOperation.update_forward_refs()
 UnitConcept.update_forward_refs()
 Place.update_forward_refs()
 Landform.update_forward_refs()
@@ -545,12 +590,18 @@ PostalAddress.update_forward_refs()
 GeoPointLocation.update_forward_refs()
 GeoBoxLocation.update_forward_refs()
 Event.update_forward_refs()
+Observation.update_forward_refs()
+Measurement.update_forward_refs()
+QualitativeObservation.update_forward_refs()
 TimePointOrTemporalInterval.update_forward_refs()
 TemporalInterval.update_forward_refs()
 TimePoint.update_forward_refs()
 Duration.update_forward_refs()
 TemporalRelationship.update_forward_refs()
+ExecutionOfProcedure.update_forward_refs()
+PlannedProcessConfiguration.update_forward_refs()
 PlannedProcess.update_forward_refs()
+ComputationalPlannedProcess.update_forward_refs()
 MaterialCollection.update_forward_refs()
 MaterialProcessing.update_forward_refs()
 EngineeringSpecification.update_forward_refs()

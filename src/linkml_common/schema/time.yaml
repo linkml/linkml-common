@@ -84,6 +84,18 @@ classes:
           - range: TemporalInterval
           - range: Event
 
+  SubjectHistory:
+    is_a: Entity
+    attributes:
+      subject:
+        range: PhysicalEntity
+        required: true
+      events:
+        range: Event
+        multivalued: true
+      over_interval:
+        range: TemporalInterval
+
 
 slots:
 

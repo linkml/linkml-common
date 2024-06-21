@@ -43,6 +43,9 @@ enums:
 classes:
   Prediction:
     is_a: Intangible
+    union_of:
+      - SimplePrediction
+      - AggregatePrediction
     attributes:
       variable_predicted:
         range: Variable

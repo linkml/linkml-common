@@ -1,6 +1,6 @@
-id: https://w3id.org/linkml-common/engineering
-name: linkml-common-engineering
-title: linkml-common-engineering
+id: https://w3id.org/linkml-common/economy
+name: linkml-common-economy
+title: linkml-common-economy
 description: |-
   Common Data Model Elements
 license: MIT
@@ -21,27 +21,15 @@ imports:
   - linkml:types
   - measurements
   - time
+  - geography
   - plannedprocess
+  - financial
 
 classes:
 
-  EngineeringSpecification:
-    is_a: Procedure
-
-  RawMaterial:
-    is_a: PhysicalEntity
-
-  EngineeringProcess:
-    is_a: Event
+  EconomicSystem:
+    is_a: PhysicalSystem
     attributes:
-      follows_procedure:
-        range: EngineeringSpecification
-      part_of:
-        range: EngineeringProcess
-
-  EngineeringMaterialProcessing:
-    is_a: MaterialProcessing
-
-  Equipment:
-    is_a: PhysicalEntity
+      economy_of_place:
+        range: Place
 

@@ -53,7 +53,7 @@ classes:
     class_uri: schema:Intangible
     is_a: Entity
 
-  NamedThing:
+  PhysicalEntity:
     is_a: Entity
     mixins:
       - Identified
@@ -80,7 +80,7 @@ classes:
       - describes
 
   PhysicalDevice:
-    is_a: NamedThing
+    is_a: PhysicalEntity
 
 
   StructuredValue:
@@ -101,7 +101,24 @@ classes:
     abstract: true
     close_mappings:
       - rdfs:Statement
+    attributes:
+      subject:
+        range: Entity
+      predicate:
+        range: Concept
+      object:
+        range: Entity
 
+  PhysicalSystem:
+    is_a: PhysicalEntity
+    attributes:
+      components:
+        range: PhysicalEntity
+        multivalued: true
+      events:
+        # range: Event
+        range: Entity  ## TODO: modules
+        multivalued: true
 
   Location:
     abstract: true
@@ -145,6 +162,8 @@ slots:
   name:
     slot_uri: schema:name
     description: A human-readable name for a thing
+    exact_mappings:
+      - rdfs:label
   description:
     slot_uri: schema:description
     description: A human-readable description for a thing
@@ -162,6 +181,8 @@ slots:
   ontology_types:
     range: Concept
     multivalued: true
+    description: A collection of concepts that help to classify the thing, using concepts
+       from an ontolology,  thesaurus, or taxonomy.
   describes:
     slot_uri: schema:describes
     range: Any

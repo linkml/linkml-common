@@ -1,13 +1,3 @@
-// Represents an Agent
-message Agent
- {
-  string type = 0
-  concept classification = 0
- repeated  concept ontologyTypes = 0
-  string description = 0
-  uriorcurie id = 0
-  string name = 0
- }
 message AggregatePrediction
  {
   string type = 0
@@ -22,6 +12,18 @@ message AggregatePrediction
   float precision = 0
   float f1Score = 0
   float accuracy = 0
+ }
+message AstronomicalBody
+ {
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  uriorcurie id = 0
+  string name = 0
+  postalAddress address = 0
+  geoPointLocation geolocation = 0
+  geoBoxLocation boundingCoordinates = 0
  }
 // Represents an Automated Agent
 message AutomatedAgent
@@ -67,6 +69,22 @@ message BuiltSystem
   uriorcurie id = 0
   string name = 0
  }
+message Climate
+ {
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  uriorcurie id = 0
+  string name = 0
+ repeated  physicalEntity components = 0
+ repeated  entity events = 0
+ }
+message ClimateModel
+ {
+  string type = 0
+  climate models = 0
+ }
 // A group of patients who share a common set of characteristics
 message ClinicalCohort
  {
@@ -101,11 +119,26 @@ message ClinicalCohortEnrollment
   patient patient = 0
   clinicalCohort cohort = 0
  }
+message ClinicalHistory
+ {
+  string type = 0
+ repeated  event events = 0
+  temporalInterval overInterval = 0
+ repeated  observation observations = 0
+ repeated  measurement measurements = 0
+ repeated  observation interpretations = 0
+  person subject = 0
+ }
 message CompositeFoodType
  {
   string type = 0
   uriorcurie id = 0
   string name = 0
+ }
+message ComputationalModel
+ {
+  string type = 0
+  entity models = 0
  }
 // Application of a mathematical operation to one or more inputs to produce one or more outputs
 message ComputationalPlannedProcess
@@ -145,9 +178,9 @@ message CreativeWork
   string title = 0
   string abstract = 0
   string rights = 0
- repeated  agent creators = 0
- repeated  agent contributors = 0
- repeated  agent contacts = 0
+ repeated  physicalEntity creators = 0
+ repeated  physicalEntity contributors = 0
+ repeated  physicalEntity contacts = 0
  repeated  string keywords = 0
  }
 // A currency
@@ -183,20 +216,37 @@ message Dataset
   string title = 0
   string abstract = 0
   string rights = 0
- repeated  agent creators = 0
- repeated  agent contributors = 0
- repeated  agent contacts = 0
+ repeated  physicalEntity creators = 0
+ repeated  physicalEntity contributors = 0
+ repeated  physicalEntity contacts = 0
  repeated  string keywords = 0
  }
 message DataStructure
  {
   string type = 0
  }
+message DigitalTwin
+ {
+  string type = 0
+  entity models = 0
+ }
 // A length of time
 message Duration
  {
   string type = 0
   quantityKind hasQuantityKind = 0
+ }
+message EconomicSystem
+ {
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  uriorcurie id = 0
+  string name = 0
+ repeated  physicalEntity components = 0
+ repeated  entity events = 0
+  place economyOfPlace = 0
  }
 // A network of electrical transmission lines
 message ElectricalGrid
@@ -263,6 +313,17 @@ message EnvironmentalSite
   postalAddress address = 0
   geoPointLocation geolocation = 0
   geoBoxLocation boundingCoordinates = 0
+ }
+message EnvironmentalSystem
+ {
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  uriorcurie id = 0
+  string name = 0
+ repeated  physicalEntity components = 0
+ repeated  entity events = 0
  }
 message Equipment
  {
@@ -370,6 +431,7 @@ message FinancialOrganization
   uriorcurie id = 0
   string name = 0
  repeated  service providesServices = 0
+ repeated  personInRole hasPersonRoles = 0
  }
 // A product or service offered by a bank whereby one may deposit, withdraw or transfer money and in some cases be paid interest.
 message FinancialProduct
@@ -380,6 +442,21 @@ message FoodIngredient
  {
   string type = 0
   quantityKind hasQuantityKind = 0
+ }
+message FoodPreparation
+ {
+  string type = 0
+  timePoint startsAt = 0
+  timePoint endsAt = 0
+  timePoint happensAt = 0
+  temporalInterval hasInterval = 0
+  duration hasDuration = 0
+  timePoint isOngoingAsOf = 0
+  uriorcurie id = 0
+  string name = 0
+  physicalDevice usesPhysicalDevice = 0
+  plannedProcessConfiguration usesConfiguration = 0
+  foodRecipe followsProcedure = 0
  }
 message FoodProcessing
  {
@@ -486,6 +563,7 @@ message HealthcareOrganization
   uriorcurie id = 0
   string name = 0
  repeated  service providesServices = 0
+ repeated  personInRole hasPersonRoles = 0
  }
 message HealthcareProvider
  {
@@ -531,6 +609,15 @@ message HydroelectricPlant
   moneyQuantity opex = 0
   landform dam = 0
  }
+message IndividualOrganism
+ {
+  string type = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  uriorcurie id = 0
+  string name = 0
+  concept classification = 0
+ }
 // An entity that describes some information
 message InformationEntity
  {
@@ -557,6 +644,9 @@ message Investigation
   string name = 0
   string objectives = 0
  repeated  variable variables = 0
+  studyHypothesis hypothesis = 0
+  studyDesign design = 0
+ repeated  studyResult results = 0
  }
 message InvestigativeProcess
  {
@@ -587,7 +677,6 @@ message InvestigativeProtocol
 message Landform
  {
   string type = 0
-  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   uriorcurie id = 0
@@ -595,6 +684,7 @@ message Landform
   postalAddress address = 0
   geoBoxLocation boundingCoordinates = 0
   geoPointLocation geolocation = 0
+  concept classification = 0
  }
 message LifeEvent
  {
@@ -682,15 +772,6 @@ message MoneyQuantity
   float value = 0
   currencyConcept unit = 0
  }
-message NamedThing
- {
-  string type = 0
-  concept classification = 0
- repeated  concept ontologyTypes = 0
-  string description = 0
-  uriorcurie id = 0
-  string name = 0
- }
 // A nuclear power plant
 message NuclearPlant
  {
@@ -726,6 +807,13 @@ message Observation
   variable variableMeasured = 0
   physicalDevice measuredUsing = 0
  }
+message OrganismalRelationship
+ {
+  string type = 0
+  entity subject = 0
+  concept predicate = 0
+  entity object = 0
+ }
 // Represents an Organization
 message Organization
  {
@@ -736,6 +824,27 @@ message Organization
   uriorcurie id = 0
   string name = 0
  repeated  service providesServices = 0
+ repeated  personInRole hasPersonRoles = 0
+ }
+message OrganizationalRole
+ {
+  string type = 0
+ }
+message OrganizationPersonnelRelationship
+ {
+  string type = 0
+  string subject = 0
+  string predicate = 0
+  string object = 0
+ }
+message OrgChart
+ {
+  string type = 0
+  any describes = 0
+  uriorcurie id = 0
+  string name = 0
+  organization forOrganization = 0
+  organizationPersonnelRelationship relationships = 0
  }
 message Patient
  {
@@ -746,15 +855,24 @@ message Patient
 message Person
  {
   string type = 0
-  concept classification = 0
  repeated  concept ontologyTypes = 0
   string description = 0
   uriorcurie id = 0
   string name = 0
+  concept classification = 0
   string primaryEmail = 0
   date birthDate = 0
   integer ageInYears = 0
   personStatus vitalStatus = 0
+ }
+message PersonInRole
+ {
+  string type = 0
+  entity subject = 0
+  concept predicate = 0
+  entity object = 0
+  person subjectPerson = 0
+  organizationalRole personRole = 0
  }
 message PhysicalDevice
  {
@@ -764,6 +882,26 @@ message PhysicalDevice
   string description = 0
   uriorcurie id = 0
   string name = 0
+ }
+message PhysicalEntity
+ {
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  uriorcurie id = 0
+  string name = 0
+ }
+message PhysicalSystem
+ {
+  string type = 0
+  concept classification = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  uriorcurie id = 0
+  string name = 0
+ repeated  physicalEntity components = 0
+ repeated  entity events = 0
  }
 // Entities that have a somewhat fixed, physical extension.
 message Place
@@ -978,7 +1116,7 @@ message SampleCollectionProcess
   investigativeProtocol followsProcedure = 0
   investigation partOf = 0
   sampleMaterial materialCollected = 0
-  namedThing collectedFrom = 0
+  physicalEntity collectedFrom = 0
  }
 message SampleMaterial
  {
@@ -1009,6 +1147,12 @@ message Service
  {
   string type = 0
  }
+message SetOfObservations
+ {
+  string type = 0
+  entity observationSubject = 0
+  observation observations = 0
+ }
 message SimplePrediction
  {
   string type = 0
@@ -1024,6 +1168,11 @@ message SimpleQuantity
   quantityKind hasQuantityKind = 0
   float value = 0
   unitConcept unit = 0
+ }
+message Simulation
+ {
+  string type = 0
+  entity models = 0
  }
 // A solar power plant
 message SolarPlant
@@ -1065,6 +1214,39 @@ message StudyDesign
   string name = 0
   concept classification = 0
  }
+message StudyHypothesis
+ {
+  string type = 0
+  any describes = 0
+  uriorcurie id = 0
+  string name = 0
+ }
+message StudyResult
+ {
+  string type = 0
+  any describes = 0
+  uriorcurie id = 0
+  string name = 0
+  studyHypothesis hypothesis = 0
+  string result = 0
+ }
+message SubjectHistory
+ {
+  string type = 0
+  physicalEntity subject = 0
+ repeated  event events = 0
+  temporalInterval overInterval = 0
+ }
+message SubjectObservationHistory
+ {
+  string type = 0
+  physicalEntity subject = 0
+ repeated  event events = 0
+  temporalInterval overInterval = 0
+ repeated  observation observations = 0
+ repeated  measurement measurements = 0
+ repeated  observation interpretations = 0
+ }
 // A period of time
 message TemporalInterval
  {
@@ -1076,6 +1258,8 @@ message TemporalInterval
 message TemporalRelationship
  {
   string type = 0
+  entity subject = 0
+  entity object = 0
   relativeTimeEnum predicate = 0
   entity relativeTo = 0
  }
@@ -1108,6 +1292,15 @@ message Variable
  {
   string type = 0
  repeated  unitConcept allowedUnits = 0
+ }
+message VeterinaryAnimal
+ {
+  string type = 0
+ repeated  concept ontologyTypes = 0
+  string description = 0
+  uriorcurie id = 0
+  string name = 0
+  concept classification = 0
  }
 // A facility where fluid resources (e.g., oil, gas, water) are extracted from the earth
 message WellFacility

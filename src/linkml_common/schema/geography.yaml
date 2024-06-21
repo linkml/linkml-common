@@ -28,7 +28,7 @@ classes:
 
   Place:
     class_uri: schema:Place
-    is_a: NamedThing
+    is_a: PhysicalEntity
     description: Entities that have a somewhat fixed, physical extension.
     slots:
       - address
@@ -40,11 +40,19 @@ classes:
     description: >-
       A natural feature of the solid surface of the Earth or other planetary body
     exact_mappings:
-      - ENVO:00000083
+      - ENVO:01000813
       - fhir:Location
     slot_usage:
       geolocation:
         recommended: true
+      classification:
+        annotations:
+          recommended_value_set_bindings: linkml_common:LandformEnum
+
+  AstronomicalBody:
+    is_a: Place
+    exact_mappings:
+      - ENVO:01000799
 
   PostalAddress:
     class_uri: schema:PostalAddress
@@ -113,3 +121,13 @@ slots:
   bounding_coordinates:
     range: GeoBoxLocation
     description: The bounding coordinates of the place
+
+enums:
+
+  LandformEnum:
+    reachable_from:
+      source_nodes:
+        - ENVO:01000813
+      is_direct: false
+      relationship_types:
+        - rdfs:subClassOf

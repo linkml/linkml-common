@@ -23,6 +23,7 @@ imports:
   - core
   - geography
   - social
+  - measurements
 
 classes:
 
@@ -78,6 +79,11 @@ classes:
   Patient:
     is_a: HealthcareRole
 
+  ClinicalHistory:
+    is_a: SubjectObservationHistory
+    attributes:
+      subject:
+        range: Person
 
 enums:
   HealthcareEncounterClassification:

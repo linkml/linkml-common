@@ -1,6 +1,6 @@
-id: https://w3id.org/linkml-common/computational
-name: linkml-common-computational
-title: linkml-common-computational
+id: https://w3id.org/linkml-common/biodiversity
+name: linkml-common-biodiversity
+title: linkml-common-biodiversity
 description: |-
   Common Data Model Elements
 license: MIT
@@ -12,18 +12,19 @@ prefixes:
   linkml: https://w3id.org/linkml/
   biolink: https://w3id.org/biolink/
   schema: http://schema.org/
-  PATO: http://purl.obolibrary.org/obo/PATO_
+  OBI: http://purl.obolibrary.org/obo/OBI_
   fhir: http://hl7.org/fhir/
 default_prefix: linkml_common
 default_range: string
 
 imports:
   - linkml:types
-  - core
+  - measurements
+  - investigations
 
 classes:
 
-  DataStructure:
-    is_a: Intangible
+  OrganismObservation:
+    is_a: Observation
 
 

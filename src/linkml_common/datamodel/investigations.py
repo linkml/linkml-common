@@ -105,6 +105,9 @@ class Observation(Event):
     """
     A statement about the state of something
     """
+    observation_subject: Optional[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]] = Field(None)
+    variable_measured: Optional[Variable] = Field(None, description="""The variable being measured""")
+    measured_using: Optional[str] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
@@ -118,7 +121,9 @@ class Observation(Event):
 
 class Measurement(Observation):
     quantity_measured: Optional[Union[Quantity,Duration,SimpleQuantity,Ratio]] = Field(None, description="""The quantity being measured""")
+    observation_subject: Optional[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]] = Field(None)
     variable_measured: Optional[Variable] = Field(None, description="""The variable being measured""")
+    measured_using: Optional[str] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
@@ -130,11 +135,49 @@ class Measurement(Observation):
     type: Literal["Measurement"] = Field("Measurement", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
+class QualitativeObservation(Observation):
+    observation_subject: Optional[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]] = Field(None)
+    variable_measured: Optional[Variable] = Field(None, description="""The variable being measured""")
+    measured_using: Optional[str] = Field(None)
+    starts_at: Optional[TimePoint] = Field(None)
+    ends_at: Optional[TimePoint] = Field(None)
+    happens_at: Optional[TimePoint] = Field(None)
+    has_interval: Optional[TemporalInterval] = Field(None)
+    has_duration: Optional[Duration] = Field(None)
+    is_ongoing_as_of: Optional[TimePoint] = Field(None)
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["QualitativeObservation"] = Field("QualitativeObservation", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class SubjectHistory(Entity):
+    subject: str = Field(...)
+    events: Optional[List[str]] = Field(default_factory=list)
+    over_interval: Optional[TemporalInterval] = Field(None)
+    type: Literal["SubjectHistory"] = Field("SubjectHistory", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class SubjectObservationHistory(SubjectHistory):
+    observations: Optional[List[Union[Observation,Measurement,QualitativeObservation]]] = Field(default_factory=list)
+    measurements: Optional[List[Measurement]] = Field(default_factory=list)
+    interpretations: Optional[List[Union[Observation,Measurement,QualitativeObservation]]] = Field(default_factory=list)
+    subject: str = Field(...)
+    events: Optional[List[str]] = Field(default_factory=list)
+    over_interval: Optional[TemporalInterval] = Field(None)
+    type: Literal["SubjectObservationHistory"] = Field("SubjectObservationHistory", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
 class Intangible(Entity):
     """
     An entity that is not a physical object, process, or information
     """
     type: Literal["Intangible"] = Field("Intangible", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class SetOfObservations(Intangible):
+    observation_subject: Optional[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]] = Field(None)
+    observations: Optional[Union[Observation,Measurement,QualitativeObservation]] = Field(None)
+    type: Literal["SetOfObservations"] = Field("SetOfObservations", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class Variable(Intangible):
@@ -214,13 +257,13 @@ class QuantityRange(Intangible):
     type: Literal["QuantityRange"] = Field("QuantityRange", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class NamedThing(Entity, Identified):
+class PhysicalEntity(Entity, Identified):
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
+    ontology_types: Optional[List[str]] = Field(default_factory=list, description="""A collection of concepts that help to classify the thing, using concepts from an ontolology,  thesaurus, or taxonomy.""")
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["NamedThing"] = Field("NamedThing", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+    type: Literal["PhysicalEntity"] = Field("PhysicalEntity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class Concept(Intangible, Identified):
@@ -251,9 +294,9 @@ class InformationEntity(Intangible, Identified):
     type: Literal["InformationEntity"] = Field("InformationEntity", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class PhysicalDevice(NamedThing):
+class PhysicalDevice(PhysicalEntity):
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
+    ontology_types: Optional[List[str]] = Field(default_factory=list, description="""A collection of concepts that help to classify the thing, using concepts from an ontolology,  thesaurus, or taxonomy.""")
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
@@ -272,6 +315,9 @@ class Role(Intangible):
 
 
 class Relationship(Intangible):
+    subject: Optional[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]] = Field(None)
+    predicate: Optional[str] = Field(None)
+    object: Optional[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]] = Field(None)
     type: Literal["Relationship"] = Field("Relationship", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
@@ -281,7 +327,20 @@ class TemporalRelationship(Relationship):
     """
     predicate: Optional[RelativeTimeEnum] = Field(None, description="""The relationship between the two time points""")
     relative_to: Optional[Union[TemporalInterval, TimePoint, str]] = Field(None)
+    subject: Optional[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]] = Field(None)
+    object: Optional[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]] = Field(None)
     type: Literal["TemporalRelationship"] = Field("TemporalRelationship", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class PhysicalSystem(PhysicalEntity):
+    components: Optional[List[str]] = Field(default_factory=list)
+    events: Optional[List[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]]] = Field(default_factory=list)
+    classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
+    ontology_types: Optional[List[str]] = Field(default_factory=list, description="""A collection of concepts that help to classify the thing, using concepts from an ontolology,  thesaurus, or taxonomy.""")
+    description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["PhysicalSystem"] = Field("PhysicalSystem", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class Location(StructuredValue):
@@ -316,7 +375,7 @@ class EntitySet(Intangible):
     """
     A group of things. The collection may be heterogeneous or homogeneous.
     """
-    members: Optional[List[Union[Entity,Event,Intangible,NamedThing,PhysicalDevice,SampleMaterial,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,TemporalRelationship,Location,PointLocation,Specification,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,MathematicalOperationExecution,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement]]] = Field(default_factory=list, description="""The members of the collection""")
+    members: Optional[List[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]]] = Field(default_factory=list, description="""The members of the collection""")
     type: Literal["EntitySet"] = Field("EntitySet", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
@@ -332,12 +391,17 @@ class ExecutionOfProcedure(Event):
     type: Literal["ExecutionOfProcedure"] = Field("ExecutionOfProcedure", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
+class PlannedProcessConfiguration(Intangible):
+    type: Literal["PlannedProcessConfiguration"] = Field("PlannedProcessConfiguration", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
 class PlannedProcess(ExecutionOfProcedure):
     """
     A process that follows a defined procedure or plan
     """
     follows_procedure: Optional[str] = Field(None)
     uses_physical_device: Optional[str] = Field(None)
+    uses_configuration: Optional[PlannedProcessConfiguration] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
@@ -349,7 +413,7 @@ class PlannedProcess(ExecutionOfProcedure):
     type: Literal["PlannedProcess"] = Field("PlannedProcess", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class MathematicalOperationExecution(PlannedProcess):
+class ComputationalPlannedProcess(PlannedProcess):
     """
     Application of a mathematical operation to one or more inputs to produce one or more outputs
     """
@@ -359,6 +423,7 @@ class MathematicalOperationExecution(PlannedProcess):
     immediate_preceding_steps: Optional[List[str]] = Field(default_factory=list, description="""The steps that immediately precede this step""")
     follows_procedure: Optional[str] = Field(None)
     uses_physical_device: Optional[str] = Field(None)
+    uses_configuration: Optional[PlannedProcessConfiguration] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
@@ -367,12 +432,13 @@ class MathematicalOperationExecution(PlannedProcess):
     is_ongoing_as_of: Optional[TimePoint] = Field(None)
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
-    type: Literal["MathematicalOperationExecution"] = Field("MathematicalOperationExecution", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+    type: Literal["ComputationalPlannedProcess"] = Field("ComputationalPlannedProcess", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
 class MaterialCollection(PlannedProcess):
     follows_procedure: Optional[str] = Field(None)
     uses_physical_device: Optional[str] = Field(None)
+    uses_configuration: Optional[PlannedProcessConfiguration] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
@@ -387,6 +453,7 @@ class MaterialCollection(PlannedProcess):
 class MaterialProcessing(PlannedProcess):
     follows_procedure: Optional[str] = Field(None)
     uses_physical_device: Optional[str] = Field(None)
+    uses_configuration: Optional[PlannedProcessConfiguration] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
@@ -401,6 +468,9 @@ class MaterialProcessing(PlannedProcess):
 class Investigation(Event):
     objectives: Optional[str] = Field(None)
     variables: Optional[List[Variable]] = Field(default_factory=list)
+    hypothesis: Optional[str] = Field(None)
+    design: Optional[str] = Field(None)
+    results: Optional[List[str]] = Field(default_factory=list)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
@@ -420,6 +490,13 @@ class InvestigativeProtocol(Procedure):
     type: Literal["InvestigativeProtocol"] = Field("InvestigativeProtocol", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
+class StudyHypothesis(InformationEntity):
+    describes: Optional[Any] = Field(None, description="""The thing that is being described""")
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["StudyHypothesis"] = Field("StudyHypothesis", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
 class StudyDesign(Procedure):
     describes: Optional[Any] = Field(None, description="""The thing that is being described""")
     id: str = Field(..., description="""A unique identifier for a thing""")
@@ -427,9 +504,18 @@ class StudyDesign(Procedure):
     type: Literal["StudyDesign"] = Field("StudyDesign", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
-class SampleMaterial(NamedThing):
+class StudyResult(InformationEntity):
+    hypothesis: Optional[str] = Field(None)
+    result: Optional[str] = Field(None)
+    describes: Optional[Any] = Field(None, description="""The thing that is being described""")
+    id: str = Field(..., description="""A unique identifier for a thing""")
+    name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
+    type: Literal["StudyResult"] = Field("StudyResult", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class SampleMaterial(PhysicalEntity):
     classification: Optional[str] = Field(None, description="""A precise classification of the thing, using a concept from an ontology, controlled vocabulary, thesaurus, or taxonomy. Some schema classes may choose to restrict the range of values which this slot can take, using `values_from`, or bindings.""")
-    ontology_types: Optional[List[str]] = Field(default_factory=list)
+    ontology_types: Optional[List[str]] = Field(default_factory=list, description="""A collection of concepts that help to classify the thing, using concepts from an ontolology,  thesaurus, or taxonomy.""")
     description: Optional[str] = Field(None, description="""A human-readable description for a thing""")
     id: str = Field(..., description="""A unique identifier for a thing""")
     name: Optional[str] = Field(None, description="""A human-readable name for a thing""")
@@ -440,6 +526,7 @@ class InvestigativeProcess(PlannedProcess):
     follows_procedure: Optional[str] = Field(None)
     part_of: Optional[str] = Field(None)
     uses_physical_device: Optional[str] = Field(None)
+    uses_configuration: Optional[PlannedProcessConfiguration] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
@@ -457,6 +544,7 @@ class SampleCollectionProcess(InvestigativeProcess):
     follows_procedure: Optional[str] = Field(None)
     part_of: Optional[str] = Field(None)
     uses_physical_device: Optional[str] = Field(None)
+    uses_configuration: Optional[PlannedProcessConfiguration] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
@@ -471,6 +559,7 @@ class SampleCollectionProcess(InvestigativeProcess):
 class SampleProcessing(MaterialProcessing):
     follows_procedure: Optional[str] = Field(None)
     uses_physical_device: Optional[str] = Field(None)
+    uses_configuration: Optional[PlannedProcessConfiguration] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
@@ -486,6 +575,7 @@ class DataGenerationFromSample(InvestigativeProcess):
     follows_procedure: Optional[str] = Field(None)
     part_of: Optional[str] = Field(None)
     uses_physical_device: Optional[str] = Field(None)
+    uses_configuration: Optional[PlannedProcessConfiguration] = Field(None)
     starts_at: Optional[TimePoint] = Field(None)
     ends_at: Optional[TimePoint] = Field(None)
     happens_at: Optional[TimePoint] = Field(None)
@@ -497,6 +587,25 @@ class DataGenerationFromSample(InvestigativeProcess):
     type: Literal["DataGenerationFromSample"] = Field("DataGenerationFromSample", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
 
 
+class Model(ConfiguredBaseModel):
+    models: Optional[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]] = Field(None)
+
+
+class ComputationalModel(Model, Intangible):
+    models: Optional[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]] = Field(None)
+    type: Literal["ComputationalModel"] = Field("ComputationalModel", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class Simulation(ComputationalModel):
+    models: Optional[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]] = Field(None)
+    type: Literal["Simulation"] = Field("Simulation", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
+class DigitalTwin(ComputationalModel):
+    models: Optional[Union[Entity,Event,SubjectHistory,Intangible,PhysicalEntity,PhysicalDevice,PhysicalSystem,SampleMaterial,SetOfObservations,Variable,TimePointOrTemporalInterval,Quantity,QuantityRange,Concept,InformationEntity,StructuredValue,Role,Relationship,EntitySet,PlannedProcessConfiguration,ComputationalModel,Simulation,DigitalTwin,TemporalRelationship,Location,PointLocation,Specification,StudyHypothesis,StudyResult,Procedure,InvestigativeProtocol,StudyDesign,QuantityKind,UnitConcept,Duration,SimpleQuantity,Ratio,TemporalInterval,TimePoint,SubjectObservationHistory,Observation,ExecutionOfProcedure,Investigation,PlannedProcess,ComputationalPlannedProcess,MaterialCollection,MaterialProcessing,InvestigativeProcess,SampleCollectionProcess,DataGenerationFromSample,SampleProcessing,Measurement,QualitativeObservation]] = Field(None)
+    type: Literal["DigitalTwin"] = Field("DigitalTwin", description="""A type for a thing. The range of this should be a class within the schema. It is intended for schema-based classification. Anything beneath the shoreline of the schema should use `classification`.""")
+
+
 # Update forward refs
 # see https://pydantic-docs.helpmanual.io/usage/postponed_annotations/
 Identified.update_forward_refs()
@@ -505,7 +614,11 @@ Entity.update_forward_refs()
 Event.update_forward_refs()
 Observation.update_forward_refs()
 Measurement.update_forward_refs()
+QualitativeObservation.update_forward_refs()
+SubjectHistory.update_forward_refs()
+SubjectObservationHistory.update_forward_refs()
 Intangible.update_forward_refs()
+SetOfObservations.update_forward_refs()
 Variable.update_forward_refs()
 TimePointOrTemporalInterval.update_forward_refs()
 TemporalInterval.update_forward_refs()
@@ -515,7 +628,7 @@ Duration.update_forward_refs()
 SimpleQuantity.update_forward_refs()
 Ratio.update_forward_refs()
 QuantityRange.update_forward_refs()
-NamedThing.update_forward_refs()
+PhysicalEntity.update_forward_refs()
 Concept.update_forward_refs()
 QuantityKind.update_forward_refs()
 UnitConcept.update_forward_refs()
@@ -525,22 +638,30 @@ StructuredValue.update_forward_refs()
 Role.update_forward_refs()
 Relationship.update_forward_refs()
 TemporalRelationship.update_forward_refs()
+PhysicalSystem.update_forward_refs()
 Location.update_forward_refs()
 PointLocation.update_forward_refs()
 Specification.update_forward_refs()
 Procedure.update_forward_refs()
 EntitySet.update_forward_refs()
 ExecutionOfProcedure.update_forward_refs()
+PlannedProcessConfiguration.update_forward_refs()
 PlannedProcess.update_forward_refs()
-MathematicalOperationExecution.update_forward_refs()
+ComputationalPlannedProcess.update_forward_refs()
 MaterialCollection.update_forward_refs()
 MaterialProcessing.update_forward_refs()
 Investigation.update_forward_refs()
 InvestigativeProtocol.update_forward_refs()
+StudyHypothesis.update_forward_refs()
 StudyDesign.update_forward_refs()
+StudyResult.update_forward_refs()
 SampleMaterial.update_forward_refs()
 InvestigativeProcess.update_forward_refs()
 SampleCollectionProcess.update_forward_refs()
 SampleProcessing.update_forward_refs()
 DataGenerationFromSample.update_forward_refs()
+Model.update_forward_refs()
+ComputationalModel.update_forward_refs()
+Simulation.update_forward_refs()
+DigitalTwin.update_forward_refs()
 

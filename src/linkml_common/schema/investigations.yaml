@@ -37,6 +37,13 @@ classes:
       variables:
         range: Variable
         multivalued: true
+      hypothesis:
+        range: StudyHypothesis
+      design:
+        range: StudyDesign
+      results:
+        range: StudyResult
+        multivalued: true
 
   InvestigativeProtocol:
     is_a: Procedure
@@ -48,6 +55,9 @@ classes:
         annotations:
           recommended_value_set_bindings: linkml_common:InvestigativeProtocolEnum
 
+  StudyHypothesis:
+    is_a: InformationEntity
+
   StudyDesign:
     is_a: Procedure
     slot_usage:
@@ -55,8 +65,16 @@ classes:
         annotations:
           recommended_value_set_bindings: linkml_common:StudyDesignEnum
 
+  StudyResult:
+    is_a: InformationEntity
+    attributes:
+      hypothesis:
+        range: StudyHypothesis
+      result:
+        range: string
+
   SampleMaterial:
-    is_a: NamedThing
+    is_a: PhysicalEntity
 
   InvestigativeProcess:
     is_a: PlannedProcess
@@ -72,7 +90,7 @@ classes:
       material_collected:
         range: SampleMaterial
       collected_from:
-        range: NamedThing
+        range: PhysicalEntity
     exact_mappings:
       - nmdcschema:CollectingBiosamplesFromSite
 
@@ -81,6 +99,23 @@ classes:
 
   DataGenerationFromSample:
     is_a: InvestigativeProcess
+
+  Model:
+    mixin: true
+    attributes:
+      models:
+        range: Entity
+
+  ComputationalModel:
+    is_a: Intangible
+    mixins:
+      - Model
+
+  Simulation:
+    is_a: ComputationalModel
+
+  DigitalTwin:
+    is_a: ComputationalModel
 
 enums:
 

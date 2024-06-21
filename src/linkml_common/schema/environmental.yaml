@@ -22,12 +22,25 @@ imports:
   - core
   - quantities
   - geography
+  - investigations
 
 classes:
 
   EnvironmentalSite:
     description: A location or site that is the subject of environmental monitoring
     is_a: Place
+
+  EnvironmentalSystem:
+    is_a: PhysicalSystem
+
+  Climate:
+    is_a: EnvironmentalSystem
+
+  ClimateModel:
+    is_a: Simulation
+    slot_usage:
+      models:
+        range: Climate
 
   #EnvironmentalProcess:
   #  comments:
