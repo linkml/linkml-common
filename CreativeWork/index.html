@@ -447,11 +447,11 @@ attributes:
     description: The person or organization who created the work
     from_schema: https://w3id.org/linkml-common/social
     slot_uri: dcterms:creator
-    multivalued: true
     domain_of:
     - CreationMetadata
     - CreativeWork
     range: PhysicalEntity
+    multivalued: true
     any_of:
     - range: Person
     - range: Organization
@@ -461,11 +461,11 @@ attributes:
       work
     from_schema: https://w3id.org/linkml-common/social
     slot_uri: dcterms:contributor
-    multivalued: true
     domain_of:
     - CreationMetadata
     - CreativeWork
     range: PhysicalEntity
+    multivalued: true
     any_of:
     - range: Person
     - range: Organization
@@ -474,21 +474,21 @@ attributes:
     description: A contact point for a person or organization
     from_schema: https://w3id.org/linkml-common/social
     slot_uri: schema:contactPoint
-    multivalued: true
     domain_of:
     - CreationMetadata
     - CreativeWork
     range: PhysicalEntity
+    multivalued: true
   keywords:
     name: keywords
     description: Keywords or tags used to describe this item
     from_schema: https://w3id.org/linkml-common/social
     slot_uri: schema:keywords
-    multivalued: true
     domain_of:
     - CreationMetadata
     - CreativeWork
     range: string
+    multivalued: true
 
 </code></pre>
 </details>
@@ -541,13 +541,13 @@ attributes:
     description: The person or organization who created the work
     from_schema: https://w3id.org/linkml-common/social
     slot_uri: dcterms:creator
-    multivalued: true
     alias: creators
     owner: CreativeWork
     domain_of:
     - CreationMetadata
     - CreativeWork
     range: PhysicalEntity
+    multivalued: true
     any_of:
     - range: Person
     - range: Organization
@@ -557,13 +557,13 @@ attributes:
       work
     from_schema: https://w3id.org/linkml-common/social
     slot_uri: dcterms:contributor
-    multivalued: true
     alias: contributors
     owner: CreativeWork
     domain_of:
     - CreationMetadata
     - CreativeWork
     range: PhysicalEntity
+    multivalued: true
     any_of:
     - range: Person
     - range: Organization
@@ -572,25 +572,25 @@ attributes:
     description: A contact point for a person or organization
     from_schema: https://w3id.org/linkml-common/social
     slot_uri: schema:contactPoint
-    multivalued: true
     alias: contacts
     owner: CreativeWork
     domain_of:
     - CreationMetadata
     - CreativeWork
     range: PhysicalEntity
+    multivalued: true
   keywords:
     name: keywords
     description: Keywords or tags used to describe this item
     from_schema: https://w3id.org/linkml-common/social
     slot_uri: schema:keywords
-    multivalued: true
     alias: keywords
     owner: CreativeWork
     domain_of:
     - CreationMetadata
     - CreativeWork
     range: string
+    multivalued: true
   classification:
     name: classification
     description: A precise classification of the thing, using a concept from an ontology,
@@ -610,12 +610,12 @@ attributes:
       from an ontolology,  thesaurus, or taxonomy.
     from_schema: https://w3id.org/linkml/linkml-common
     rank: 1000
-    multivalued: true
     alias: ontology_types
     owner: CreativeWork
     domain_of:
     - PhysicalEntity
     range: Concept
+    multivalued: true
   description:
     name: description
     description: A human-readable description for a thing
@@ -695,5 +695,6 @@ attributes:
 </div>
 <script id="__config" type="application/json">{"base": "..", "features": ["content.tabs.link"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
 <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
-<script src="https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"></script><script>mermaid.initialize({});</script></body>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script></body>
 </html>

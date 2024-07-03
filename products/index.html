@@ -290,6 +290,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#mappings" class="md-nav__link">
+    Mappings
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#linkml-source" class="md-nav__link">
     LinkML Source
   </a>
@@ -331,13 +338,13 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../WellFacility/">WellFacility</a></td>
-<td>A facility where fluid resources (e</td>
+<td><a href="../MiningFacility/">MiningFacility</a></td>
+<td>A facility where mineral resources are extracted from the earth</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../MiningFacility/">MiningFacility</a></td>
-<td>A facility where mineral resources are extracted from the earth</td>
+<td><a href="../QuarryFacility/">QuarryFacility</a></td>
+<td>A facility where stone, sand, or gravel are extracted from the earth</td>
 <td>no</td>
 </tr>
 <tr>
@@ -346,8 +353,8 @@
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../QuarryFacility/">QuarryFacility</a></td>
-<td>A facility where stone, sand, or gravel are extracted from the earth</td>
+<td><a href="../WellFacility/">WellFacility</a></td>
+<td>A facility where fluid resources (e</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -366,18 +373,37 @@
 <ul>
 <li>from schema: https://w3id.org/linkml/linkml-common</li>
 </ul>
+<h2 id="mappings">Mappings</h2>
+<table>
+<thead>
+<tr>
+<th>Mapping Type</th>
+<th>Mapped Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td>linkml_common:products</td>
+</tr>
+<tr>
+<td>native</td>
+<td>linkml_common:products</td>
+</tr>
+</tbody>
+</table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
 <pre><code class="language-yaml">name: products
 from_schema: https://w3id.org/linkml/linkml-common
 rank: 1000
-multivalued: true
 alias: products
 owner: ExtractiveIndustryFacility
 domain_of:
 - ExtractiveIndustryFacility
 range: ExtractiveIndustryProduct
+multivalued: true
 inlined: true
 inlined_as_list: true
 

@@ -290,6 +290,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#mappings" class="md-nav__link">
+    Mappings
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#linkml-source" class="md-nav__link">
     LinkML Source
   </a>
@@ -331,27 +338,12 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../QualitativeObservation/">QualitativeObservation</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../PlannedProcess/">PlannedProcess</a></td>
 <td>A process that follows a defined procedure or plan</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../TimePoint/">TimePoint</a></td>
-<td>A point in time</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../ExecutionOfProcedure/">ExecutionOfProcedure</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../LifeEvent/">LifeEvent</a></td>
+<td><a href="../SampleProcessing/">SampleProcessing</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -361,17 +353,12 @@
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../Observation/">Observation</a></td>
-<td>A statement about the state of something</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../HealthcareConditionOccurrence/">HealthcareConditionOccurrence</a></td>
+<td><a href="../FoodProcessing/">FoodProcessing</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../FoodPreparation/">FoodPreparation</a></td>
+<td><a href="../LifeEvent/">LifeEvent</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -381,22 +368,17 @@
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../ComputationalPlannedProcess/">ComputationalPlannedProcess</a></td>
-<td>Application of a mathematical operation to one or more inputs to produce one ...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Event/">Event</a></td>
-<td>A thing that happens</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../SampleProcessing/">SampleProcessing</a></td>
+<td><a href="../FoodPreparation/">FoodPreparation</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../MaterialCollection/">MaterialCollection</a></td>
+<td><a href="../HealthcareEncounter/">HealthcareEncounter</a></td>
+<td>An interaction between a patient and one or more healthcare providers</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -406,12 +388,37 @@
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../TimePointOrTemporalInterval/">TimePointOrTemporalInterval</a></td>
+<td><a href="../Investigation/">Investigation</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
+<td><a href="../Event/">Event</a></td>
+<td>A thing that happens</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Observation/">Observation</a></td>
+<td>A statement about the state of something</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../QualitativeObservation/">QualitativeObservation</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../HealthcareConditionOccurrence/">HealthcareConditionOccurrence</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../TimePoint/">TimePoint</a></td>
+<td>A point in time</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
 <td></td>
 <td>no</td>
 </tr>
@@ -421,13 +428,13 @@
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../Measurement/">Measurement</a></td>
+<td><a href="../ExecutionOfProcedure/">ExecutionOfProcedure</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../Investigation/">Investigation</a></td>
-<td></td>
+<td><a href="../ComputationalPlannedProcess/">ComputationalPlannedProcess</a></td>
+<td>Application of a mathematical operation to one or more inputs to produce one ...</td>
 <td>no</td>
 </tr>
 <tr>
@@ -436,23 +443,23 @@
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../FoodProcessing/">FoodProcessing</a></td>
+<td><a href="../MaterialProcessing/">MaterialProcessing</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../EngineeringProcess/">EngineeringProcess</a></td>
+<td><a href="../MaterialCollection/">MaterialCollection</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Measurement/">Measurement</a></td>
 <td></td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../InvestigativeProcess/">InvestigativeProcess</a></td>
 <td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../HealthcareEncounter/">HealthcareEncounter</a></td>
-<td>An interaction between a patient and one or more healthcare providers</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -466,6 +473,25 @@
 <ul>
 <li>from schema: https://w3id.org/linkml/linkml-common</li>
 </ul>
+<h2 id="mappings">Mappings</h2>
+<table>
+<thead>
+<tr>
+<th>Mapping Type</th>
+<th>Mapped Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td>linkml_common:starts_at</td>
+</tr>
+<tr>
+<td>native</td>
+<td>linkml_common:starts_at</td>
+</tr>
+</tbody>
+</table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 

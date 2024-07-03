@@ -373,31 +373,31 @@ attributes:
   observations:
     name: observations
     from_schema: https://w3id.org/linkml-common/meaurements
-    multivalued: true
     domain_of:
     - SetOfObservations
     - SubjectObservationHistory
     range: Observation
+    multivalued: true
     inlined: true
     inlined_as_list: true
   measurements:
     name: measurements
     from_schema: https://w3id.org/linkml-common/meaurements
     rank: 1000
-    multivalued: true
     domain_of:
     - SubjectObservationHistory
     range: Measurement
+    multivalued: true
     inlined: true
     inlined_as_list: true
   interpretations:
     name: interpretations
     from_schema: https://w3id.org/linkml-common/meaurements
     rank: 1000
-    multivalued: true
     domain_of:
     - SubjectObservationHistory
     range: Observation
+    multivalued: true
     inlined: true
     inlined_as_list: true
 
@@ -412,37 +412,37 @@ attributes:
   observations:
     name: observations
     from_schema: https://w3id.org/linkml-common/meaurements
-    multivalued: true
     alias: observations
     owner: SubjectObservationHistory
     domain_of:
     - SetOfObservations
     - SubjectObservationHistory
     range: Observation
+    multivalued: true
     inlined: true
     inlined_as_list: true
   measurements:
     name: measurements
     from_schema: https://w3id.org/linkml-common/meaurements
     rank: 1000
-    multivalued: true
     alias: measurements
     owner: SubjectObservationHistory
     domain_of:
     - SubjectObservationHistory
     range: Measurement
+    multivalued: true
     inlined: true
     inlined_as_list: true
   interpretations:
     name: interpretations
     from_schema: https://w3id.org/linkml-common/meaurements
     rank: 1000
-    multivalued: true
     alias: interpretations
     owner: SubjectObservationHistory
     domain_of:
     - SubjectObservationHistory
     range: Observation
+    multivalued: true
     inlined: true
     inlined_as_list: true
   subject:
@@ -460,13 +460,13 @@ attributes:
   events:
     name: events
     from_schema: https://w3id.org/linkml-common/time
-    multivalued: true
     alias: events
     owner: SubjectObservationHistory
     domain_of:
     - PhysicalSystem
     - SubjectHistory
     range: Event
+    multivalued: true
   over_interval:
     name: over_interval
     from_schema: https://w3id.org/linkml-common/time
@@ -517,5 +517,6 @@ attributes:
 </div>
 <script id="__config" type="application/json">{"base": "..", "features": ["content.tabs.link"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
 <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
-<script src="https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"></script><script>mermaid.initialize({});</script></body>
+<script type="module">import mermaid from "https://unpkg.com/mermaid@10.4.0/dist/mermaid.esm.min.mjs";
+mermaid.initialize({});</script></body>
 </html>
