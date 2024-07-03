@@ -9,12 +9,12 @@ include = ["README.md", "src/linkml_common/schema", "project"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-linkml-runtime = "^1.6.3"
+linkml-runtime = ">=1.8.0"
 neo4j = "^5.14.1"
 linkml-transformer = "^0.2.2"
 
 [tool.poetry.group.dev.dependencies]
-linkml = "^1.7.6"
+linkml = ">=1.8.0"
 schema-automator = "^0.4.0"
 
 [tool.poetry-dynamic-versioning]
@@ -25,7 +25,7 @@ style = "pep440"
 [tool.poetry.dev-dependencies]
 linkml = "^1.3.5"
 mkdocs-material = "^8.2.8"
-mkdocs-mermaid2-plugin = "^0.6.0"
+mkdocs-mermaid2-plugin = ">=1.1.1"
 schemasheets = "^0.1.14"
 
 [build-system]

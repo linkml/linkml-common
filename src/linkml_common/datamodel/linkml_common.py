@@ -1,5 +1,5 @@
 # Auto generated from linkml_common.yaml by pythongen.py version: 0.0.1
-# Generation date: 2024-06-20T18:35:56
+# Generation date: 2024-07-03T10:12:22
 # Schema: linkml-common
 #
 # id: https://w3id.org/linkml/linkml-common

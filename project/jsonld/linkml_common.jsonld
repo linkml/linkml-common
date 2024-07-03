@@ -815,12 +815,12 @@
       "description": "A collection of concepts that help to classify the thing, using concepts from an ontolology,  thesaurus, or taxonomy.",
       "from_schema": "https://w3id.org/linkml-common/core",
       "slot_uri": "https://w3id.org/linkml-common/ontology_types",
-      "multivalued": true,
       "owner": "PhysicalEntity",
       "domain_of": [
         "PhysicalEntity"
       ],
       "range": "Concept",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -984,12 +984,12 @@
       "definition_uri": "https://w3id.org/linkml-common/provides_services",
       "from_schema": "https://w3id.org/linkml-common/social",
       "slot_uri": "https://w3id.org/linkml-common/provides_services",
-      "multivalued": true,
       "owner": "Organization",
       "domain_of": [
         "Organization"
       ],
       "range": "Service",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -1182,26 +1182,26 @@
       "name": "physicalSystem__components",
       "from_schema": "https://w3id.org/linkml-common/core",
       "slot_uri": "https://w3id.org/linkml-common/components",
-      "multivalued": true,
       "alias": "components",
       "owner": "PhysicalSystem",
       "domain_of": [
         "PhysicalSystem"
       ],
       "range": "PhysicalEntity",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
       "name": "physicalSystem__events",
       "from_schema": "https://w3id.org/linkml-common/core",
       "slot_uri": "https://w3id.org/linkml-common/events",
-      "multivalued": true,
       "alias": "events",
       "owner": "PhysicalSystem",
       "domain_of": [
         "PhysicalSystem"
       ],
       "range": "Entity",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -1210,13 +1210,13 @@
       "description": "The members of the collection",
       "from_schema": "https://w3id.org/linkml-common/core",
       "slot_uri": "https://w3id.org/linkml-common/members",
-      "multivalued": true,
       "alias": "members",
       "owner": "EntitySet",
       "domain_of": [
         "EntitySet"
       ],
       "range": "Entity",
+      "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
@@ -1225,13 +1225,13 @@
       "name": "dataset__collected_as_part_of",
       "from_schema": "https://w3id.org/linkml-common/datasets",
       "slot_uri": "https://w3id.org/linkml-common/collected_as_part_of",
-      "multivalued": true,
       "alias": "collected_as_part_of",
       "owner": "Dataset",
       "domain_of": [
         "Dataset"
       ],
       "range": "Investigation",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1437,13 +1437,13 @@
       "name": "electricalGrid__plants",
       "from_schema": "https://w3id.org/linkml-common/energytechnology",
       "slot_uri": "https://w3id.org/linkml-common/plants",
-      "multivalued": true,
       "alias": "plants",
       "owner": "ElectricalGrid",
       "domain_of": [
         "ElectricalGrid"
       ],
       "range": "PowerPlant",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -1474,13 +1474,13 @@
       "name": "extractiveIndustryFacility__products",
       "from_schema": "https://w3id.org/linkml-common/extractiveindustry",
       "slot_uri": "https://w3id.org/linkml-common/products",
-      "multivalued": true,
       "alias": "products",
       "owner": "ExtractiveIndustryFacility",
       "domain_of": [
         "ExtractiveIndustryFacility"
       ],
       "range": "ExtractiveIndustryProduct",
+      "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
@@ -1694,13 +1694,13 @@
       "name": "foodRecipe__ingredients",
       "from_schema": "https://w3id.org/linkml-common/foods",
       "slot_uri": "https://w3id.org/linkml-common/ingredients",
-      "multivalued": true,
       "alias": "ingredients",
       "owner": "FoodRecipe",
       "domain_of": [
         "FoodRecipe"
       ],
       "range": "FoodIngredient",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -1708,13 +1708,13 @@
       "name": "foodRecipe__steps",
       "from_schema": "https://w3id.org/linkml-common/foods",
       "slot_uri": "https://w3id.org/linkml-common/steps",
-      "multivalued": true,
       "alias": "steps",
       "owner": "FoodRecipe",
       "domain_of": [
         "FoodRecipe"
       ],
       "range": "FoodProcessing",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2013,13 +2013,13 @@
       "name": "investigation__variables",
       "from_schema": "https://w3id.org/linkml-common/investigations",
       "slot_uri": "https://w3id.org/linkml-common/variables",
-      "multivalued": true,
       "alias": "variables",
       "owner": "Investigation",
       "domain_of": [
         "Investigation"
       ],
       "range": "Variable",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -2051,13 +2051,13 @@
       "name": "investigation__results",
       "from_schema": "https://w3id.org/linkml-common/investigations",
       "slot_uri": "https://w3id.org/linkml-common/results",
-      "multivalued": true,
       "alias": "results",
       "owner": "Investigation",
       "domain_of": [
         "Investigation"
       ],
       "range": "StudyResult",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2227,13 +2227,13 @@
       "name": "subjectObservationHistory__observations",
       "from_schema": "https://w3id.org/linkml-common/meaurements",
       "slot_uri": "https://w3id.org/linkml-common/observations",
-      "multivalued": true,
       "alias": "observations",
       "owner": "SubjectObservationHistory",
       "domain_of": [
         "SubjectObservationHistory"
       ],
       "range": "Observation",
+      "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
@@ -2242,13 +2242,13 @@
       "name": "subjectObservationHistory__measurements",
       "from_schema": "https://w3id.org/linkml-common/meaurements",
       "slot_uri": "https://w3id.org/linkml-common/measurements",
-      "multivalued": true,
       "alias": "measurements",
       "owner": "SubjectObservationHistory",
       "domain_of": [
         "SubjectObservationHistory"
       ],
       "range": "Measurement",
+      "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
@@ -2257,13 +2257,13 @@
       "name": "subjectObservationHistory__interpretations",
       "from_schema": "https://w3id.org/linkml-common/meaurements",
       "slot_uri": "https://w3id.org/linkml-common/interpretations",
-      "multivalued": true,
       "alias": "interpretations",
       "owner": "SubjectObservationHistory",
       "domain_of": [
         "SubjectObservationHistory"
       ],
       "range": "Observation",
+      "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
@@ -2287,13 +2287,13 @@
       "description": "The units that are allowed for this variable",
       "from_schema": "https://w3id.org/linkml-common/meaurements",
       "slot_uri": "https://w3id.org/linkml-common/allowed_units",
-      "multivalued": true,
       "alias": "allowed_units",
       "owner": "Variable",
       "domain_of": [
         "Variable"
       ],
       "range": "UnitConcept",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2398,13 +2398,13 @@
       "name": "organization__has_person_roles",
       "from_schema": "https://w3id.org/linkml-common/social",
       "slot_uri": "https://w3id.org/linkml-common/has_person_roles",
-      "multivalued": true,
       "alias": "has_person_roles",
       "owner": "Organization",
       "domain_of": [
         "Organization"
       ],
       "range": "PersonInRole",
+      "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
@@ -2554,13 +2554,13 @@
         "http://purl.org/dc/terms/creator"
       ],
       "slot_uri": "http://purl.org/dc/terms/creator",
-      "multivalued": true,
       "alias": "creators",
       "owner": "CreationMetadata",
       "domain_of": [
         "CreationMetadata"
       ],
       "range": "PhysicalEntity",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2571,13 +2571,13 @@
         "http://purl.org/dc/terms/contributor"
       ],
       "slot_uri": "http://purl.org/dc/terms/contributor",
-      "multivalued": true,
       "alias": "contributors",
       "owner": "CreationMetadata",
       "domain_of": [
         "CreationMetadata"
       ],
       "range": "PhysicalEntity",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2588,13 +2588,13 @@
         "http://schema.org/contactPoint"
       ],
       "slot_uri": "http://schema.org/contactPoint",
-      "multivalued": true,
       "alias": "contacts",
       "owner": "CreationMetadata",
       "domain_of": [
         "CreationMetadata"
       ],
       "range": "PhysicalEntity",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2605,13 +2605,13 @@
         "http://schema.org/keywords"
       ],
       "slot_uri": "http://schema.org/keywords",
-      "multivalued": true,
       "alias": "keywords",
       "owner": "CreationMetadata",
       "domain_of": [
         "CreationMetadata"
       ],
       "range": "string",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2664,13 +2664,13 @@
         "http://purl.org/dc/terms/creator"
       ],
       "slot_uri": "http://purl.org/dc/terms/creator",
-      "multivalued": true,
       "alias": "creators",
       "owner": "CreativeWork",
       "domain_of": [
         "CreativeWork"
       ],
       "range": "PhysicalEntity",
+      "multivalued": true,
       "any_of": [
         {
           "range": "Person",
@@ -2691,13 +2691,13 @@
         "http://purl.org/dc/terms/contributor"
       ],
       "slot_uri": "http://purl.org/dc/terms/contributor",
-      "multivalued": true,
       "alias": "contributors",
       "owner": "CreativeWork",
       "domain_of": [
         "CreativeWork"
       ],
       "range": "PhysicalEntity",
+      "multivalued": true,
       "any_of": [
         {
           "range": "Person",
@@ -2718,13 +2718,13 @@
         "http://schema.org/contactPoint"
       ],
       "slot_uri": "http://schema.org/contactPoint",
-      "multivalued": true,
       "alias": "contacts",
       "owner": "CreativeWork",
       "domain_of": [
         "CreativeWork"
       ],
       "range": "PhysicalEntity",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2735,13 +2735,13 @@
         "http://schema.org/keywords"
       ],
       "slot_uri": "http://schema.org/keywords",
-      "multivalued": true,
       "alias": "keywords",
       "owner": "CreativeWork",
       "domain_of": [
         "CreativeWork"
       ],
       "range": "string",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -2825,13 +2825,13 @@
       "name": "predictionSummaryStatistics__predictions",
       "from_schema": "https://w3id.org/linkml-common/statistics",
       "slot_uri": "https://w3id.org/linkml-common/predictions",
-      "multivalued": true,
       "alias": "predictions",
       "owner": "PredictionSummaryStatistics",
       "domain_of": [
         "PredictionSummaryStatistics"
       ],
       "range": "Prediction",
+      "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
       "@type": "SlotDefinition"
@@ -3013,13 +3013,13 @@
       "name": "subjectHistory__events",
       "from_schema": "https://w3id.org/linkml-common/time",
       "slot_uri": "https://w3id.org/linkml-common/events",
-      "multivalued": true,
       "alias": "events",
       "owner": "SubjectHistory",
       "domain_of": [
         "SubjectHistory"
       ],
       "range": "Event",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3077,13 +3077,13 @@
       "description": "The inputs to the operation",
       "from_schema": "https://w3id.org/linkml-common/plannedprocess",
       "slot_uri": "https://w3id.org/linkml-common/inputs",
-      "multivalued": true,
       "alias": "inputs",
       "owner": "ComputationalPlannedProcess",
       "domain_of": [
         "ComputationalPlannedProcess"
       ],
       "range": "Any",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -3092,13 +3092,13 @@
       "description": "The outputs of the operation",
       "from_schema": "https://w3id.org/linkml-common/plannedprocess",
       "slot_uri": "https://w3id.org/linkml-common/outputs",
-      "multivalued": true,
       "alias": "outputs",
       "owner": "ComputationalPlannedProcess",
       "domain_of": [
         "ComputationalPlannedProcess"
       ],
       "range": "Any",
+      "multivalued": true,
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -3107,13 +3107,13 @@
       "description": "The parts of the process",
       "from_schema": "https://w3id.org/linkml-common/plannedprocess",
       "slot_uri": "https://w3id.org/linkml-common/parts",
-      "multivalued": true,
       "alias": "parts",
       "owner": "ComputationalPlannedProcess",
       "domain_of": [
         "ComputationalPlannedProcess"
       ],
       "range": "ComputationalPlannedProcess",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3121,13 +3121,13 @@
       "description": "The steps that immediately precede this step",
       "from_schema": "https://w3id.org/linkml-common/plannedprocess",
       "slot_uri": "https://w3id.org/linkml-common/immediate_preceding_steps",
-      "multivalued": true,
       "alias": "immediate_preceding_steps",
       "owner": "ComputationalPlannedProcess",
       "domain_of": [
         "ComputationalPlannedProcess"
       ],
       "range": "ComputationalPlannedProcess",
+      "multivalued": true,
       "@type": "SlotDefinition"
     },
     {
@@ -3558,14 +3558,14 @@
       "attributes": [
         {
           "name": "components",
-          "multivalued": true,
           "range": "PhysicalEntity",
+          "multivalued": true,
           "@type": "SlotDefinition"
         },
         {
           "name": "events",
-          "multivalued": true,
           "range": "Entity",
+          "multivalued": true,
           "@type": "SlotDefinition"
         }
       ],
@@ -3650,8 +3650,8 @@
         {
           "name": "members",
           "description": "The members of the collection",
-          "multivalued": true,
           "range": "Entity",
+          "multivalued": true,
           "inlined_as_list": true,
           "@type": "SlotDefinition"
         }
@@ -3711,8 +3711,8 @@
       "attributes": [
         {
           "name": "collected_as_part_of",
-          "multivalued": true,
           "range": "Investigation",
+          "multivalued": true,
           "@type": "SlotDefinition"
         }
       ],
@@ -4301,8 +4301,8 @@
       "attributes": [
         {
           "name": "plants",
-          "multivalued": true,
           "range": "PowerPlant",
+          "multivalued": true,
           "@type": "SlotDefinition"
         }
       ],
@@ -4344,8 +4344,8 @@
         },
         {
           "name": "products",
-          "multivalued": true,
           "range": "ExtractiveIndustryProduct",
+          "multivalued": true,
           "inlined_as_list": true,
           "@type": "SlotDefinition"
         },
@@ -4766,14 +4766,14 @@
       "attributes": [
         {
           "name": "ingredients",
-          "multivalued": true,
           "range": "FoodIngredient",
+          "multivalued": true,
           "@type": "SlotDefinition"
         },
         {
           "name": "steps",
-          "multivalued": true,
           "range": "FoodProcessing",
+          "multivalued": true,
           "@type": "SlotDefinition"
         }
       ],
@@ -5339,8 +5339,8 @@
         },
         {
           "name": "variables",
-          "multivalued": true,
           "range": "Variable",
+          "multivalued": true,
           "@type": "SlotDefinition"
         },
         {
@@ -5355,8 +5355,8 @@
         },
         {
           "name": "results",
-          "multivalued": true,
           "range": "StudyResult",
+          "multivalued": true,
           "@type": "SlotDefinition"
         }
       ],
@@ -5736,22 +5736,22 @@
       "attributes": [
         {
           "name": "observations",
-          "multivalued": true,
           "range": "Observation",
+          "multivalued": true,
           "inlined_as_list": true,
           "@type": "SlotDefinition"
         },
         {
           "name": "measurements",
-          "multivalued": true,
           "range": "Measurement",
+          "multivalued": true,
           "inlined_as_list": true,
           "@type": "SlotDefinition"
         },
         {
           "name": "interpretations",
-          "multivalued": true,
           "range": "Observation",
+          "multivalued": true,
           "inlined_as_list": true,
           "@type": "SlotDefinition"
         }
@@ -5828,8 +5828,8 @@
         {
           "name": "allowed_units",
           "description": "The units that are allowed for this variable",
-          "multivalued": true,
           "range": "UnitConcept",
+          "multivalued": true,
           "@type": "SlotDefinition"
         }
       ],
@@ -6094,8 +6094,8 @@
       "attributes": [
         {
           "name": "has_person_roles",
-          "multivalued": true,
           "range": "PersonInRole",
+          "multivalued": true,
           "inlined_as_list": true,
           "@type": "SlotDefinition"
         }
@@ -6293,32 +6293,32 @@
           "name": "creators",
           "description": "The person or organization who created the work",
           "slot_uri": "dcterms:creator",
-          "multivalued": true,
           "range": "PhysicalEntity",
+          "multivalued": true,
           "@type": "SlotDefinition"
         },
         {
           "name": "contributors",
           "description": "A person or organization that contributed to the creation of the work",
           "slot_uri": "dcterms:contributor",
-          "multivalued": true,
           "range": "PhysicalEntity",
+          "multivalued": true,
           "@type": "SlotDefinition"
         },
         {
           "name": "contacts",
           "description": "A contact point for a person or organization",
           "slot_uri": "schema:contactPoint",
-          "multivalued": true,
           "range": "PhysicalEntity",
+          "multivalued": true,
           "@type": "SlotDefinition"
         },
         {
           "name": "keywords",
           "description": "Keywords or tags used to describe this item",
           "slot_uri": "schema:keywords",
-          "multivalued": true,
           "range": "string",
+          "multivalued": true,
           "@type": "SlotDefinition"
         }
       ],
@@ -6379,8 +6379,8 @@
           "name": "creators",
           "description": "The person or organization who created the work",
           "slot_uri": "dcterms:creator",
-          "multivalued": true,
           "range": "PhysicalEntity",
+          "multivalued": true,
           "any_of": [
             {
               "range": "Person",
@@ -6397,8 +6397,8 @@
           "name": "contributors",
           "description": "A person or organization that contributed to the creation of the work",
           "slot_uri": "dcterms:contributor",
-          "multivalued": true,
           "range": "PhysicalEntity",
+          "multivalued": true,
           "any_of": [
             {
               "range": "Person",
@@ -6415,16 +6415,16 @@
           "name": "contacts",
           "description": "A contact point for a person or organization",
           "slot_uri": "schema:contactPoint",
-          "multivalued": true,
           "range": "PhysicalEntity",
+          "multivalued": true,
           "@type": "SlotDefinition"
         },
         {
           "name": "keywords",
           "description": "Keywords or tags used to describe this item",
           "slot_uri": "schema:keywords",
-          "multivalued": true,
           "range": "string",
+          "multivalued": true,
           "@type": "SlotDefinition"
         }
       ],
@@ -6576,8 +6576,8 @@
       "attributes": [
         {
           "name": "predictions",
-          "multivalued": true,
           "range": "Prediction",
+          "multivalued": true,
           "inlined_as_list": true,
           "@type": "SlotDefinition"
         },
@@ -6820,8 +6820,8 @@
         },
         {
           "name": "events",
-          "multivalued": true,
           "range": "Event",
+          "multivalued": true,
           "@type": "SlotDefinition"
         },
         {
@@ -6938,29 +6938,29 @@
         {
           "name": "inputs",
           "description": "The inputs to the operation",
-          "multivalued": true,
           "range": "Any",
+          "multivalued": true,
           "@type": "SlotDefinition"
         },
         {
           "name": "outputs",
           "description": "The outputs of the operation",
-          "multivalued": true,
           "range": "Any",
+          "multivalued": true,
           "@type": "SlotDefinition"
         },
         {
           "name": "parts",
           "description": "The parts of the process",
-          "multivalued": true,
           "range": "ComputationalPlannedProcess",
+          "multivalued": true,
           "@type": "SlotDefinition"
         },
         {
           "name": "immediate_preceding_steps",
           "description": "The steps that immediately precede this step",
-          "multivalued": true,
           "range": "ComputationalPlannedProcess",
+          "multivalued": true,
           "@type": "SlotDefinition"
         }
       ],
@@ -7050,7 +7050,7 @@
   "source_file": "linkml_common.yaml",
   "source_file_date": "2024-06-13T22:58:32",
   "source_file_size": 842,
-  "generation_date": "2024-06-20T18:35:53",
+  "generation_date": "2024-07-03T10:12:19",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/linkml_common.context.jsonld",
