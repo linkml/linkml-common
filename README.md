@@ -32,7 +32,7 @@ These are largely not modeled to any great extent in COMET, and the idea is that
 
 ## Can I adapt it?
 
-Yes! If you don't like our modeling, the idea is to use [LinkML-Transformer](https://github.com/linkml/linkml-transformer)
+Yes! If you don't like our modeling, the idea is to use [LinkML-Map](https://github.com/linkml/linkml-map)
 to profile, extend, and adapt the modeling elements here.
 
 Note that like COMET, LinkML-Transformer is not yet mature and is under active development.
